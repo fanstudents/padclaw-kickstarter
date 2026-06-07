@@ -99,22 +99,9 @@
       <!-- LEFT COL -->
       <div class="project-left">
 
-        <!-- Video placeholder -->
-        <div class="media-placeholder" id="video-placeholder">
-          <div class="placeholder-inner">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <p class="ph-title">Campaign Video</p>
-            <div class="design-brief">
-              <div class="brief-specs">16:9 | 1920×1080 | 90–120 sec</div>
-              <div class="brief-notes">
-                <strong>Storyboard:</strong> Open with a person waking up, glancing at PadClaw on nightstand. Cut to kitchen scene — PadClaw on counter showing weather + health reminders. Quick montage of 4 agents in use (language conversation, astrology chart, weather alert, medication reminder). Close with product hero shot + CTA.
-              </div>
-              <div class="brief-prompt">
-                <span class="brief-label">Thumbnail prompt:</span>
-                A sleek black Android tablet standing on a modern kitchen counter, glowing green UI showing AI assistant interface, morning sunlight, shallow depth of field, premium product photography, clean minimalist background
-              </div>
-            </div>
-          </div>
+        <!-- Hero image -->
+        <div class="media-hero" id="video-placeholder">
+          <img src="hero-padclaw.jpg" alt="PadClaw AI Tablet on kitchen counter showing agent dashboard" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
         </div>
 
         <!-- Anti-friction trust badges -->
@@ -170,8 +157,16 @@
                   <strong>Composition:</strong> PadClaw tablet at 3/4 angle, screen on showing the agent launcher home screen. Subtle floating UI elements around the device hinting at the 4 agents. Clean, premium feel — think Apple product page hero.
                 </div>
                 <div class="brief-prompt">
-                  <span class="brief-label">AI prompt:</span>
-                  Product hero shot of a modern 10-inch Android tablet with thin bezels, matte black frame, screen displaying a clean dashboard with four colorful app cards, floating on a pure white background with soft shadow beneath, studio lighting, photorealistic, 8K render
+                  <span class="brief-label">Version A (Category-First) prompt:</span>
+                  Product hero shot of a modern 10-inch Android tablet, matte black, screen showing 4 colorful AI agent cards on a dark UI, floating on pure white background with soft shadow, studio lighting, photorealistic, 8K — emphasis on the DEVICE as a new category, clean and futuristic
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version B (Trust-First) prompt:</span>
+                  Same tablet at 3/4 angle sitting on a real wooden desk, screen showing the agent dashboard, a hand reaching toward it naturally, warm natural lighting from a window, shallow depth of field — emphasis on REAL, TANGIBLE, trustworthy hardware that exists today
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version C (Outcome-Driven) prompt:</span>
+                  The tablet on a kitchen counter next to a coffee mug and fruit bowl, morning golden hour light, screen showing "Good Morning" with weather and health reminders, cozy domestic setting — emphasis on LIFESTYLE and emotional warmth, the device blends into daily life
                 </div>
               </div>
             </div>
@@ -232,8 +227,16 @@
                   <strong>Content:</strong> 4 side-by-side UI screenshots of each agent running on the PadClaw tablet — Language (conversation with speech bubble), Astrology (natal chart visualization), Weather (daily forecast with clothing suggestion), Health (medication schedule with family profiles). Each in a device mockup frame.
                 </div>
                 <div class="brief-prompt">
-                  <span class="brief-label">AI prompt:</span>
-                  Four tablet screens arranged in a 2x2 grid showing different AI assistant interfaces: language learning chat, astrology natal chart with zodiac wheel, weather forecast with outfit recommendation, family health dashboard with medication schedule, modern flat UI design, green accent color #05CE78, dark and light theme mix, professional UI mockup
+                  <span class="brief-label">Version A prompt:</span>
+                  Four tablet screens in a clean 2×2 grid, each showing a DIFFERENT AI agent interface: language chat, astrology chart, weather forecast, health dashboard. Dark backgrounds, neon green (#05CE78) accents, minimal flat UI, floating on white — TECHNICAL, showing the breadth of the platform as a new device category
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version B prompt:</span>
+                  Four real-world SCENARIOS side by side: (1) a person talking to the language agent with speech bubbles visible, (2) a natal chart with today's transit overlay, (3) weather screen with "Grab an umbrella" alert, (4) medication list with checkmarks. Each in a device frame with subtle background context — DIRECT, showing exactly what each agent does, no ambiguity
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version C prompt:</span>
+                  Storyboard-style horizontal scroll: a MOM checking weather in the morning → a TEENAGER practicing Spanish after school → a GRANDPARENT reviewing medication schedule → a YOUNG WOMAN reading her horoscope at night. Each scene shows the tablet in its REAL CONTEXT — emphasis on PEOPLE using it, not the UI itself
                 </div>
               </div>
             </div>
@@ -278,8 +281,16 @@
                   <strong>Content:</strong> Flat-lay photo showing all box contents neatly arranged: PadClaw tablet, protective case, USB-C cable + adapter, magnetic stand, quick start card, and the box itself. Clean white or light gray background. Each item should be clearly identifiable. Add subtle labels/callouts if needed.
                 </div>
                 <div class="brief-prompt">
-                  <span class="brief-label">AI prompt:</span>
-                  Top-down flat lay product photography, a 10-inch tablet in matte black, protective case, USB-C cable, wall charger, magnetic stand, quick start card, all neatly arranged on a clean white surface, soft even studio lighting, premium unboxing aesthetic, Apple-style product layout
+                  <span class="brief-label">Version A prompt:</span>
+                  Top-down flat lay on pure white: tablet, case, cable, charger, stand, quick-start card, all with precise spacing and alignment. Clean Apple-style product layout. Add subtle label callouts for each item — TECHNICAL PRECISION, emphasizing completeness and quality of what you get
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version B prompt:</span>
+                  Angled unboxing shot: the box is open and items are partially revealed, as if someone just received it. Hands visible pulling the tablet out. Kraft-textured box interior. Conveys the REAL unboxing experience — AUTHENTIC, this isn't a render, this is what actually ships to your door
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version C prompt:</span>
+                  Lifestyle flat lay on a warm wooden table: tablet, case, stand, cable arranged casually alongside a coffee cup, a book, and reading glasses. Soft natural light from the side — GIFT-WORTHY aesthetic, this looks like something you'd be excited to give or receive
                 </div>
               </div>
             </div>
@@ -313,8 +324,16 @@
                   <strong>Content:</strong> Exploded or annotated diagram showing key hardware components: 10.1" IPS display, octa-core processor, 6GB RAM, 128GB storage, 7000mAh battery, dual speakers, dual mics, Wi-Fi 6/BT 5.3 antenna, USB-C port, front camera. Use callout lines pointing to each component. Dark background with green (#05CE78) accent lines preferred.
                 </div>
                 <div class="brief-prompt">
-                  <span class="brief-label">AI prompt:</span>
-                  Technical exploded view diagram of a modern tablet, showing internal components separated vertically: display panel, circuit board with processor, RAM chips, battery cell, speaker modules, antenna array, all floating with subtle green neon annotation lines on dark charcoal background, clean technical illustration style, isometric 3D render
+                  <span class="brief-label">Version A prompt:</span>
+                  Technical exploded isometric 3D render: display panel, circuit board, RAM, battery, speakers, antenna — all floating vertically separated with green neon (#05CE78) annotation lines on dark charcoal background. Clean engineering diagram aesthetic — for the SPEC-DRIVEN backer who wants to see the engineering
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version B prompt:</span>
+                  Side-by-side comparison layout: LEFT = PadClaw internal diagram (simple, labeled), RIGHT = a generic tablet for comparison. Highlight what's DIFFERENT: dual mics, dual speakers, 7000mAh battery, Wi-Fi 6. Use green checkmarks vs gray X marks — for the SKEPTICAL backer who needs proof this isn't just a cheap tablet
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version C prompt:</span>
+                  Infographic style: the tablet silhouette in the center with friendly illustrated icons radiating outward — battery icon with "All-day battery", speaker icon with "Crystal clear audio", Wi-Fi icon with "Blazing fast connection", screen icon with "10.1 inch display". Warm pastel accent colors — for the NON-TECHNICAL backer who needs specs translated into benefits
                 </div>
               </div>
             </div>
@@ -338,8 +357,16 @@
                   <strong>Concept C — Split:</strong> Left half = team in office, right half = factory floor. Shows both brains and production muscle.
                 </div>
                 <div class="brief-prompt">
-                  <span class="brief-label">AI prompt (for concept reference only — real photos preferred):</span>
-                  A small tech startup team of 6 people standing together in a modern bright office in Taipei, holding prototype tablets, smiling, casual professional attire, natural window light, electronics workbench and screens visible in background, editorial photography style
+                  <span class="brief-label">Version A prompt:</span>
+                  Team photo in a modern Taipei office/lab: 6 people around a workbench covered in prototype tablets and PCBs. Serious but approachable. Screens showing code and schematics in background — CREDIBILITY focus, we are engineers building real hardware
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version B prompt:</span>
+                  Split photo: LEFT = team in office holding prototypes, RIGHT = factory floor with SMT assembly lines running. A banner or overlay showing "4-year factory partnership" — TRANSPARENCY focus, showing both the brains AND the manufacturing partner, nothing is hidden
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">Version C prompt:</span>
+                  Candid behind-the-scenes montage: team member testing the tablet with a real family in a living room, another team member at a user research session with elderly participants, a third packing prototypes in the office — HUMAN focus, we build WITH our users, not just FOR them
                 </div>
               </div>
             </div>
