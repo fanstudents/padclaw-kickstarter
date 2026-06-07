@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadClaw — The World's First AI Agent Tablet | Kickstarter</title>
+  <meta name="description" content="PadClaw is a dedicated Android tablet with purpose-built AI agents. No prompts, no setup — intelligent assistants for language learning, health, daily planning, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== VERSION SWITCHER ===== -->
+  <div class="version-switcher" id="version-switcher">
+    <div class="vs-header">
+      <span class="vs-label">Copy Version</span>
+      <button class="vs-collapse" id="vs-collapse" title="Collapse">&#x25BC;</button>
+    </div>
+    <div class="vs-body" id="vs-body">
+      <div class="vs-lang-row">
+        <button class="vs-lang active" data-lang="en">EN</button>
+        <button class="vs-lang" data-lang="zh">中文</button>
+      </div>
+      <div class="vs-buttons" id="vs-buttons"></div>
+      <div class="vs-desc" id="vs-desc"></div>
+      <label class="vs-highlight-toggle">
+        <input type="checkbox" id="vs-highlight" checked>
+        <span>Highlight changes</span>
+      </label>
+      <button class="vs-compare-btn" id="vs-compare-btn">Compare All Versions</button>
+    </div>
+  </div>
+
+  <!-- ===== COMPARE OVERLAY ===== -->
+  <div class="compare-overlay" id="compare-overlay">
+    <div class="compare-toolbar">
+      <h2 class="compare-title">Side-by-Side Comparison</h2>
+      <div class="compare-controls">
+        <div class="compare-lang-row">
+          <button class="compare-lang active" data-clang="en">EN</button>
+          <button class="compare-lang" data-clang="zh">中文</button>
+        </div>
+        <button class="compare-close" id="compare-close">&times; Close</button>
+      </div>
+    </div>
+    <div class="compare-scroll" id="compare-scroll">
+      <div class="compare-headers" id="compare-headers"></div>
+      <div class="compare-grid" id="compare-grid"></div>
+    </div>
+    <div class="compare-action-bar">
+      <div class="compare-selection-count" id="compare-count">Click the circles to pick the best copy for each section</div>
+      <button class="compare-generate-btn" id="compare-generate" disabled>Generate Version D — Best Of</button>
+    </div>
+  </div>
+
+  <!-- ===== TOP NAV ===== -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a href="#" class="nav-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="14" fill="#05CE78"/>
+            <text x="7" y="19" font-size="14" fill="#fff" font-weight="700">K</text>
+          </svg>
+        </a>
+        <a href="#" class="nav-link" data-ui="nav_explore">Explore</a>
+        <a href="#" class="nav-link" data-ui="nav_start">Start a project</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" data-ui="nav_search" placeholder="Search projects">
+        </div>
+        <a href="#" class="nav-link hide-mobile" data-ui="nav_login">Log in</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="#" data-ui="bc_cat">Technology</a>
+      <span class="sep">›</span>
+      <a href="#" data-ui="bc_sub">Hardware</a>
+    </div>
+  </div>
+
+  <!-- ===== PROJECT HEADER ===== -->
+  <main class="project-wrap">
+    <div class="project-header">
+      <h1 id="project-title" data-copy="title">PadClaw — The World's First AI Agent Tablet</h1>
+      <p class="project-subtitle" data-copy="subtitle">A dedicated Android tablet with purpose-built AI agents for your daily life. No prompts. No learning curve. Just turn it on.</p>
+    </div>
+
+    <div class="project-content">
+
+      <!-- LEFT COL -->
+      <div class="project-left">
+
+        <!-- Video placeholder -->
+        <div class="media-placeholder" id="video-placeholder">
+          <div class="placeholder-inner">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <p class="ph-title">Campaign Video</p>
+            <div class="design-brief">
+              <div class="brief-specs">16:9 | 1920×1080 | 90–120 sec</div>
+              <div class="brief-notes">
+                <strong>Storyboard:</strong> Open with a person waking up, glancing at PadClaw on nightstand. Cut to kitchen scene — PadClaw on counter showing weather + health reminders. Quick montage of 4 agents in use (language conversation, astrology chart, weather alert, medication reminder). Close with product hero shot + CTA.
+              </div>
+              <div class="brief-prompt">
+                <span class="brief-label">Thumbnail prompt:</span>
+                A sleek black Android tablet standing on a modern kitchen counter, glowing green UI showing AI assistant interface, morning sunlight, shallow depth of field, premium product photography, clean minimalist background
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Anti-friction trust badges -->
+        <div class="trust-badges-row">
+          <div class="trust-badge" data-copy="trust1">No Subscriptions Required</div>
+          <div class="trust-badge" data-copy="trust2">Your Data Stays On-Device</div>
+          <div class="trust-badge" data-copy="trust3">Full Android — Install Any App</div>
+          <div class="trust-badge" data-copy="trust4">Ships Worldwide</div>
+        </div>
+
+        <!-- Creator row -->
+        <div class="creator-row">
+          <div class="creator-avatar">PC</div>
+          <div class="creator-info">
+            <span class="creator-label" data-ui="creator_by">By</span>
+            <a href="#" class="creator-name">PadClaw Team</a>
+          </div>
+          <div class="creator-badges">
+            <span class="badge" data-ui="badge_first">First created</span>
+            <span class="badge location-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Taipei, Taiwan
+            </span>
+          </div>
+        </div>
+
+        <!-- ===== TABS ===== -->
+        <div class="tabs-bar" id="tabs-bar">
+          <button class="tab active" data-tab="story" data-ui="tab_story">Story</button>
+          <button class="tab" data-tab="faq" data-ui="tab_faq">FAQ</button>
+          <button class="tab" data-tab="updates">Updates <span class="tab-count">0</span></button>
+          <button class="tab" data-tab="comments">Comments <span class="tab-count">0</span></button>
+        </div>
+
+        <!-- TAB: Story -->
+        <section class="tab-content active" id="tab-story">
+
+          <!-- S1: Category definition -->
+          <div class="story-section">
+            <h2 data-copy="s1_heading">What is PadClaw?</h2>
+            <div data-copy="s1_body">
+              <p>Loading...</p>
+            </div>
+          </div>
+
+          <div class="image-placeholder">
+            <div class="placeholder-inner">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p class="ph-title">IMG-01: Product Hero Shot</p>
+              <div class="design-brief">
+                <div class="brief-specs">1400×800px | JPG/PNG | Transparent or lifestyle BG</div>
+                <div class="brief-notes">
+                  <strong>Composition:</strong> PadClaw tablet at 3/4 angle, screen on showing the agent launcher home screen. Subtle floating UI elements around the device hinting at the 4 agents. Clean, premium feel — think Apple product page hero.
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">AI prompt:</span>
+                  Product hero shot of a modern 10-inch Android tablet with thin bezels, matte black frame, screen displaying a clean dashboard with four colorful app cards, floating on a pure white background with soft shadow beneath, studio lighting, photorealistic, 8K render
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- S2: Problem / Solution -->
+          <div class="story-section">
+            <h2 data-copy="s2_heading">The Problem We're Solving</h2>
+            <div data-copy="s2_body">
+              <p>Loading...</p>
+            </div>
+            <ul class="feature-list" data-copy="s2_features">
+              <li>Loading...</li>
+            </ul>
+          </div>
+
+          <!-- S3: Agents intro -->
+          <div class="story-section">
+            <h2 data-copy="s3_heading">Meet the Agents</h2>
+            <p data-copy="s3_intro">Loading...</p>
+          </div>
+
+          <!-- Agent cards -->
+          <div class="scenario-grid">
+            <div class="scenario-card">
+              <div class="scenario-icon-text" data-copy="agent1_label">Language</div>
+              <h3 data-copy="agent1_title">Language Tutor</h3>
+              <p data-copy="agent1_desc">Loading...</p>
+              <div class="scenario-tags" data-copy="agent1_tags"><span>-</span></div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-icon-text" data-copy="agent2_label">Astrology</div>
+              <h3 data-copy="agent2_title">Astrology</h3>
+              <p data-copy="agent2_desc">Loading...</p>
+              <div class="scenario-tags" data-copy="agent2_tags"><span>-</span></div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-icon-text" data-copy="agent3_label">Weather</div>
+              <h3 data-copy="agent3_title">Weather</h3>
+              <p data-copy="agent3_desc">Loading...</p>
+              <div class="scenario-tags" data-copy="agent3_tags"><span>-</span></div>
+            </div>
+            <div class="scenario-card">
+              <div class="scenario-icon-text" data-copy="agent4_label">Health</div>
+              <h3 data-copy="agent4_title">Health</h3>
+              <p data-copy="agent4_desc">Loading...</p>
+              <div class="scenario-tags" data-copy="agent4_tags"><span>-</span></div>
+            </div>
+          </div>
+
+          <div class="image-placeholder">
+            <div class="placeholder-inner">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p class="ph-title">IMG-02: Four Agents UI Showcase</p>
+              <div class="design-brief">
+                <div class="brief-specs">1400×900px | 4-panel grid or horizontal scroll</div>
+                <div class="brief-notes">
+                  <strong>Content:</strong> 4 side-by-side UI screenshots of each agent running on the PadClaw tablet — Language (conversation with speech bubble), Astrology (natal chart visualization), Weather (daily forecast with clothing suggestion), Health (medication schedule with family profiles). Each in a device mockup frame.
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">AI prompt:</span>
+                  Four tablet screens arranged in a 2x2 grid showing different AI assistant interfaces: language learning chat, astrology natal chart with zodiac wheel, weather forecast with outfit recommendation, family health dashboard with medication schedule, modern flat UI design, green accent color #05CE78, dark and light theme mix, professional UI mockup
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- S4: Upcoming -->
+          <div class="story-section">
+            <h2 data-copy="s4_heading">Coming Next</h2>
+            <div class="upcoming-list">
+              <div class="upcoming-item">
+                <span class="upcoming-icon-text" data-copy="up1_label">Recipe</span>
+                <div><strong data-copy="up1_title">Recipe</strong><p data-copy="up1_desc">Loading...</p></div>
+              </div>
+              <div class="upcoming-item">
+                <span class="upcoming-icon-text" data-copy="up2_label">Stories</span>
+                <div><strong data-copy="up2_title">Stories</strong><p data-copy="up2_desc">Loading...</p></div>
+              </div>
+              <div class="upcoming-item">
+                <span class="upcoming-icon-text" data-copy="up3_label">Finance</span>
+                <div><strong data-copy="up3_title">Finance</strong><p data-copy="up3_desc">Loading...</p></div>
+              </div>
+              <div class="upcoming-item">
+                <span class="upcoming-icon-text" data-copy="up4_label">Fitness</span>
+                <div><strong data-copy="up4_title">Fitness</strong><p data-copy="up4_desc">Loading...</p></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- S5: What's in the box -->
+          <div class="story-section">
+            <h2 data-copy="s5_heading">What's in the Box</h2>
+            <div data-copy="s5_body"><p>Loading...</p></div>
+          </div>
+
+          <div class="image-placeholder">
+            <div class="placeholder-inner">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p class="ph-title">IMG-03: What's in the Box — Unboxing Layout</p>
+              <div class="design-brief">
+                <div class="brief-specs">1400×700px | Flat lay or angled arrangement</div>
+                <div class="brief-notes">
+                  <strong>Content:</strong> Flat-lay photo showing all box contents neatly arranged: PadClaw tablet, protective case, USB-C cable + adapter, magnetic stand, quick start card, and the box itself. Clean white or light gray background. Each item should be clearly identifiable. Add subtle labels/callouts if needed.
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">AI prompt:</span>
+                  Top-down flat lay product photography, a 10-inch tablet in matte black, protective case, USB-C cable, wall charger, magnetic stand, quick start card, all neatly arranged on a clean white surface, soft even studio lighting, premium unboxing aesthetic, Apple-style product layout
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- S6: Specs (shared across versions) -->
+          <div class="story-section">
+            <h2 data-copy="s6_heading">Technical Specifications</h2>
+            <table class="spec-table" id="spec-table">
+              <tbody>
+                <tr><td data-ui="spec_display">Display</td><td>10.1" IPS fully laminated touchscreen</td></tr>
+                <tr><td data-ui="spec_cpu">Processor</td><td>Octa-core ARM processor</td></tr>
+                <tr><td data-ui="spec_ram">Memory</td><td>6 GB RAM</td></tr>
+                <tr><td data-ui="spec_storage">Storage</td><td>128 GB (microSD expandable)</td></tr>
+                <tr><td data-ui="spec_os">OS</td><td>Android 14 + PadClaw Launcher</td></tr>
+                <tr><td data-ui="spec_conn">Connectivity</td><td>Wi-Fi 6 / Bluetooth 5.3 / 4G LTE (optional)</td></tr>
+                <tr><td data-ui="spec_batt">Battery</td><td>7,000 mAh</td></tr>
+                <tr><td data-ui="spec_audio">Audio</td><td>Dual speakers + dual-mic array</td></tr>
+                <tr><td data-ui="spec_other">Other</td><td>5 MP front camera / USB-C / 3.5 mm jack</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="image-placeholder">
+            <div class="placeholder-inner">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p class="ph-title">IMG-04: Hardware Specs Exploded View</p>
+              <div class="design-brief">
+                <div class="brief-specs">1400×800px | Technical illustration or 3D render</div>
+                <div class="brief-notes">
+                  <strong>Content:</strong> Exploded or annotated diagram showing key hardware components: 10.1" IPS display, octa-core processor, 6GB RAM, 128GB storage, 7000mAh battery, dual speakers, dual mics, Wi-Fi 6/BT 5.3 antenna, USB-C port, front camera. Use callout lines pointing to each component. Dark background with green (#05CE78) accent lines preferred.
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">AI prompt:</span>
+                  Technical exploded view diagram of a modern tablet, showing internal components separated vertically: display panel, circuit board with processor, RAM chips, battery cell, speaker modules, antenna array, all floating with subtle green neon annotation lines on dark charcoal background, clean technical illustration style, isometric 3D render
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- S7: Trust / Team -->
+          <div class="story-section">
+            <h2 data-copy="s7_heading">Why Trust Us</h2>
+            <div data-copy="s7_body"><p>Loading...</p></div>
+          </div>
+
+          <div class="image-placeholder">
+            <div class="placeholder-inner">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p class="ph-title">IMG-05: Team + Factory Trust Photo</p>
+              <div class="design-brief">
+                <div class="brief-specs">1400×600px | Real photography strongly preferred</div>
+                <div class="brief-notes">
+                  <strong>Concept A — Team:</strong> Candid group photo of the PadClaw team in their Taipei office/lab, working on prototypes. Natural lighting, casual but professional. Show real hardware on desks.<br>
+                  <strong>Concept B — Factory:</strong> Team visiting the manufacturing partner, standing on the factory floor next to SMT lines or assembly stations. Conveys real manufacturing capability.<br>
+                  <strong>Concept C — Split:</strong> Left half = team in office, right half = factory floor. Shows both brains and production muscle.
+                </div>
+                <div class="brief-prompt">
+                  <span class="brief-label">AI prompt (for concept reference only — real photos preferred):</span>
+                  A small tech startup team of 6 people standing together in a modern bright office in Taipei, holding prototype tablets, smiling, casual professional attire, natural window light, electronics workbench and screens visible in background, editorial photography style
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- S8: Timeline (shared) -->
+          <div class="story-section">
+            <h2 data-copy="s8_heading">Project Timeline</h2>
+            <div class="timeline">
+              <div class="timeline-item"><div class="timeline-dot active"></div><div class="timeline-content"><strong>Q3 2025</strong><p data-ui="tl1">Kickstarter campaign launch</p></div></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Q4 2025</strong><p data-ui="tl2">Engineering Validation Test (EVT)</p></div></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Q1 2026</strong><p data-ui="tl3">Design Validation Test (DVT) + software beta</p></div></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Q2 2026</strong><p data-ui="tl4">Production Validation Test (PVT)</p></div></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Q3 2026</strong><p data-ui="tl5">First units ship to backers</p></div></div>
+            </div>
+          </div>
+
+          <!-- S9: Shipping -->
+          <div class="story-section">
+            <h2 data-copy="s9_heading">Shipping &amp; Fulfillment</h2>
+            <div data-copy="s9_body"><p>Loading...</p></div>
+          </div>
+
+          <!-- S10: Risks -->
+          <div class="story-section">
+            <h2 data-copy="s10_heading">Risks and Challenges</h2>
+            <div data-copy="s10_body"><p>Loading...</p></div>
+          </div>
+
+        </section>
+
+        <!-- TAB: FAQ -->
+        <section class="tab-content" id="tab-faq">
+          <div class="faq-list">
+            <div class="faq-item"><button class="faq-q" data-copy="faq1_q">Do the AI agents require a subscription?</button><div class="faq-a"><p data-copy="faq1_a">Loading...</p></div></div>
+            <div class="faq-item"><button class="faq-q" data-copy="faq2_q">Where does my data go?</button><div class="faq-a"><p data-copy="faq2_a">Loading...</p></div></div>
+            <div class="faq-item"><button class="faq-q" data-copy="faq3_q">Can I install apps from Google Play?</button><div class="faq-a"><p data-copy="faq3_a">Loading...</p></div></div>
+            <div class="faq-item"><button class="faq-q" data-copy="faq4_q">Do you ship internationally?</button><div class="faq-a"><p data-copy="faq4_a">Loading...</p></div></div>
+            <div class="faq-item"><button class="faq-q" data-copy="faq5_q">Will there be more agents after launch?</button><div class="faq-a"><p data-copy="faq5_a">Loading...</p></div></div>
+            <div class="faq-item"><button class="faq-q" data-copy="faq6_q">What if there are delays?</button><div class="faq-a"><p data-copy="faq6_a">Loading...</p></div></div>
+          </div>
+        </section>
+
+        <section class="tab-content" id="tab-updates"><div class="empty-state"><p data-ui="empty_updates">No updates yet</p></div></section>
+        <section class="tab-content" id="tab-comments"><div class="empty-state"><p data-ui="empty_comments">No comments yet</p></div></section>
+
+      </div>
+
+      <!-- RIGHT COL: Sidebar -->
+      <aside class="project-sidebar" id="project-sidebar">
+        <div class="funding-stats">
+          <div class="stat-block">
+            <span class="stat-value" id="stat-pledged">$0</span>
+            <span class="stat-label" data-ui="stat_goal">pledged of $100,000 goal</span>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-block"><span class="stat-value" id="stat-backers">0</span><span class="stat-label" data-ui="stat_backers">backers</span></div>
+            <div class="stat-block"><span class="stat-value" id="stat-days">35</span><span class="stat-label" data-ui="stat_days">days to go</span></div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btn-back" data-ui="btn_back">Back this project</button>
+        <button class="btn-secondary" id="btn-remind">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+          <span data-ui="btn_remind">Remind me</span>
+        </button>
+
+        <!-- Reward tiers -->
+        <div class="reward-tiers">
+
+          <!-- R1: Supporter -->
+          <div class="reward-card" id="reward-1">
+            <div class="reward-header">
+              <span class="reward-price">$10</span>
+              <span class="reward-shipping" data-ui="free_ship">Free shipping</span>
+            </div>
+            <h4 data-copy="r1_title">The Believer</h4>
+            <p data-copy="r1_desc">Loading...</p>
+            <div class="reward-meta"><span data-ui="r1_delivery">Est. delivery: Mar 2026</span></div>
+            <div class="reward-backers" data-ui="r1_backers">24 backers</div>
+            <button class="btn-reward" data-ui="btn_select">Select this reward</button>
+          </div>
+
+          <!-- R2: Super Early Bird -->
+          <div class="reward-card featured" id="reward-2">
+            <div class="reward-badge" data-ui="badge_limited">Limited</div>
+            <div class="reward-header">
+              <span class="reward-price">$599</span>
+              <span class="reward-discount"><span data-ui="r2_save">Save $400 — 40% off</span> <s class="reward-msrp">$999</s></span>
+            </div>
+            <h4 data-copy="r2_title">Super Early Bird — PadClaw</h4>
+            <p data-copy="r2_desc">Loading...</p>
+            <div class="reward-includes">
+              <div class="reward-include-title" data-ui="includes_label">Includes</div>
+              <ul>
+                <li>PadClaw AI Tablet × 1</li>
+                <li data-ui="r_case">Protective case × 1</li>
+                <li data-ui="r_cable">USB-C charging cable × 1</li>
+                <li data-ui="r_sub">1-year AI agent access included</li>
+              </ul>
+            </div>
+            <div class="reward-meta">
+              <span data-ui="r2_delivery">Est. delivery: Jul 2026</span>
+              <span data-ui="r2_limit">Limited — 200 of 200 remaining</span>
+            </div>
+            <div class="reward-backers" data-ui="r2_backers">0 backers</div>
+            <button class="btn-reward" data-ui="btn_select">Select this reward</button>
+          </div>
+
+          <!-- R3: Early Bird -->
+          <div class="reward-card featured" id="reward-3">
+            <div class="reward-badge" data-ui="badge_popular">Most popular</div>
+            <div class="reward-header">
+              <span class="reward-price">$699</span>
+              <span class="reward-discount"><span data-ui="r3_save">Save $300 — 30% off</span> <s class="reward-msrp">$999</s></span>
+            </div>
+            <h4 data-copy="r3_title">Early Bird — PadClaw</h4>
+            <p data-copy="r3_desc">Loading...</p>
+            <div class="reward-includes">
+              <div class="reward-include-title" data-ui="includes_label">Includes</div>
+              <ul>
+                <li>PadClaw AI Tablet × 1</li>
+                <li data-ui="r_case">Protective case × 1</li>
+                <li data-ui="r_cable">USB-C charging cable × 1</li>
+                <li data-ui="r_stand">Magnetic desktop stand × 1</li>
+                <li data-ui="r_sub">1-year AI agent access included</li>
+              </ul>
+            </div>
+            <div class="reward-meta">
+              <span data-ui="r3_delivery">Est. delivery: Jul 2026</span>
+              <span data-ui="r3_limit">Limited — 500 of 500 remaining</span>
+            </div>
+            <div class="reward-backers" data-ui="r3_backers">0 backers</div>
+            <button class="btn-reward" data-ui="btn_select">Select this reward</button>
+          </div>
+
+          <!-- R4: Standard -->
+          <div class="reward-card" id="reward-4">
+            <div class="reward-header">
+              <span class="reward-price">$799</span>
+              <span class="reward-discount"><span data-ui="r4_save">Save $200 — 20% off</span> <s class="reward-msrp">$999</s></span>
+            </div>
+            <h4 data-copy="r4_title">Kickstarter Special — PadClaw</h4>
+            <p data-copy="r4_desc">Loading...</p>
+            <div class="reward-includes">
+              <div class="reward-include-title" data-ui="includes_label">Includes</div>
+              <ul>
+                <li>PadClaw AI Tablet × 1</li>
+                <li data-ui="r_case">Protective case × 1</li>
+                <li data-ui="r_cable">USB-C charging cable × 1</li>
+                <li data-ui="r_stand">Magnetic desktop stand × 1</li>
+                <li data-ui="r_sub">1-year AI agent access included</li>
+              </ul>
+            </div>
+            <div class="reward-meta"><span data-ui="r4_delivery">Est. delivery: Jul 2026</span></div>
+            <div class="reward-backers" data-ui="r4_backers">0 backers</div>
+            <button class="btn-reward" data-ui="btn_select">Select this reward</button>
+          </div>
+
+          <!-- R5: Duo -->
+          <div class="reward-card" id="reward-5">
+            <div class="reward-header">
+              <span class="reward-price">$1,299</span>
+              <span class="reward-discount"><span data-ui="r5_save">Save $699</span></span>
+            </div>
+            <h4 data-copy="r5_title">Duo Pack — Two PadClaws</h4>
+            <p data-copy="r5_desc">Loading...</p>
+            <div class="reward-meta"><span data-ui="r5_delivery">Est. delivery: Jul 2026</span></div>
+            <div class="reward-backers" data-ui="r5_backers">0 backers</div>
+            <button class="btn-reward" data-ui="btn_select">Select this reward</button>
+          </div>
+
+          <!-- R6: Enterprise -->
+          <div class="reward-card" id="reward-6">
+            <div class="reward-header"><span class="reward-price">$2,999</span></div>
+            <h4 data-copy="r6_title">Enterprise — Five PadClaws</h4>
+            <p data-copy="r6_desc">Loading...</p>
+            <div class="reward-meta">
+              <span data-ui="r6_delivery">Est. delivery: Aug 2026</span>
+              <span data-ui="r6_limit">Limited — 50 remaining</span>
+            </div>
+            <div class="reward-backers" data-ui="r6_backers">0 backers</div>
+            <button class="btn-reward" data-ui="btn_select">Select this reward</button>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col"><h5 data-ui="ft_about">About</h5><a href="#">About us</a><a href="#">Our charter</a><a href="#">Stats</a><a href="#">Careers</a></div>
+      <div class="footer-col"><h5 data-ui="ft_support">Support</h5><a href="#">Help center</a><a href="#">Terms of use</a><a href="#">Privacy policy</a><a href="#">Cookie policy</a></div>
+      <div class="footer-col"><h5 data-ui="ft_more">More</h5><a href="#">Newsletter</a><a href="#">Blog</a><a href="#">App Store</a><a href="#">Google Play</a></div>
+      <div class="footer-col"><h5 data-ui="ft_connect">Connect</h5><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Twitter</a><a href="#">YouTube</a></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 PadClaw Demo. This is a demonstration page.</p></div>
+  </footer>
+
+  <script src="versions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
