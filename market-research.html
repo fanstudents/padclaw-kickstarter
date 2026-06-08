@@ -3,125 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>市場研究 — PadClaw AI Tablet | Internal Proposal</title>
+<title>PadClaw — 市場研究報告</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
     --green: #05CE78;
-    --green-light: #e6faf0;
-    --green-dark: #04a862;
-    --dark: #1a1a2e;
-    --dark-secondary: #16213e;
-    --red: #FF4757;
-    --red-light: #fff0f1;
-    --yellow: #FFA502;
-    --yellow-light: #fff8e6;
-    --blue: #3742fa;
-    --blue-light: #eef0ff;
-    --gray-50: #f8f9fa;
-    --gray-100: #f1f3f5;
-    --gray-200: #e9ecef;
-    --gray-300: #dee2e6;
-    --gray-400: #ced4da;
-    --gray-500: #adb5bd;
-    --gray-600: #868e96;
-    --gray-700: #495057;
-    --gray-800: #343a40;
-    --gray-900: #212529;
+    --green-dim: rgba(5,206,120,.12);
+    --green-text: #04a862;
+    --bg: #0c0f14;
+    --card: #151921;
+    --card-border: #1e2530;
+    --surface: #1a1f2a;
+    --text: #e8ecf1;
+    --muted: #8a93a6;
+    --dim: #5a6276;
+    --danger: #e74c3c;
+    --danger-dim: rgba(231,76,60,.12);
+    --amber: #e6a030;
+    --amber-dim: rgba(230,160,48,.12);
+    --blue: #4a8fe7;
+    --blue-dim: rgba(74,143,231,.12);
+    --purple: #9176e0;
+    --purple-dim: rgba(145,118,224,.12);
     --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
-    --shadow-md: 0 4px 12px rgba(0,0,0,.08);
-    --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,.5);
     --radius: 12px;
     --radius-sm: 8px;
   }
 
   body {
     font-family: var(--font);
-    background: var(--gray-50);
-    color: var(--gray-800);
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ── Navigation ── */
-  nav {
-    background: var(--dark);
+  /* ── Header ── */
+  .site-header {
+    background: #111319;
     padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
+    height: 56px;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 3px solid var(--green);
+    border-bottom: 2px solid var(--green);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 
   .nav-brand {
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: #fff;
     letter-spacing: -0.5px;
+    text-decoration: none;
   }
 
   .nav-brand span { color: var(--green); }
 
-  .nav-links {
+  .header-nav {
     display: flex;
-    gap: .5rem;
-    list-style: none;
+    gap: 16px;
   }
 
-  .nav-links a {
-    color: rgba(255,255,255,.65);
+  .header-nav a {
+    color: var(--muted);
     text-decoration: none;
-    font-size: .85rem;
+    font-size: .82rem;
     font-weight: 500;
-    padding: .45rem 1rem;
-    border-radius: 6px;
-    transition: all .2s;
+    transition: color .2s;
   }
 
-  .nav-links a:hover { color: #fff; background: rgba(255,255,255,.08); }
-  .nav-links a.active { color: #fff; background: var(--green); }
+  .header-nav a:hover { color: var(--text); }
 
-  /* ── Hero / Header ── */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .doc-badge {
+    font-size: .68rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: .04em;
+    border: 1px solid var(--card-border);
+    padding: .25rem .65rem;
+    border-radius: 4px;
+  }
+
+  /* ── Hero ── */
   .hero {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 100%);
+    background: #111319;
     color: #fff;
     padding: 3.5rem 2rem 3rem;
     text-align: center;
+    border-bottom: 1px solid var(--card-border);
   }
 
   .hero-label {
     display: inline-block;
-    background: rgba(5,206,120,.15);
+    background: var(--green-dim);
     color: var(--green);
-    font-size: .75rem;
+    font-size: .72rem;
     font-weight: 700;
     padding: .3rem .9rem;
     border-radius: 20px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
+    letter-spacing: .06em;
     margin-bottom: 1rem;
   }
 
   .hero h1 {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: 800;
     letter-spacing: -1px;
     margin-bottom: .75rem;
+    color: var(--text);
   }
 
   .hero p {
     max-width: 720px;
     margin: 0 auto;
-    color: rgba(255,255,255,.72);
-    font-size: 1.05rem;
-    line-height: 1.7;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.75;
   }
 
   /* ── Container ── */
@@ -142,33 +159,34 @@
   }
 
   .metric-card {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
     padding: 1.75rem;
     text-align: center;
-    box-shadow: var(--shadow-lg);
-    border-top: 4px solid var(--green);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--card-border);
+    border-top: 3px solid var(--green);
   }
 
   .metric-card .value {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--text);
     letter-spacing: -1px;
   }
 
   .metric-card .label {
-    font-size: .8rem;
+    font-size: .78rem;
     font-weight: 600;
-    color: var(--gray-600);
+    color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: .05em;
     margin-top: .35rem;
   }
 
   .metric-card .sub {
-    font-size: .78rem;
-    color: var(--gray-500);
+    font-size: .75rem;
+    color: var(--dim);
     margin-top: .25rem;
   }
 
@@ -183,35 +201,28 @@
     gap: .75rem;
     margin-bottom: 1.75rem;
     padding-bottom: .75rem;
-    border-bottom: 2px solid var(--gray-200);
+    border-bottom: 1px solid var(--card-border);
   }
 
   .section-number {
-    background: var(--dark);
+    background: var(--green);
     color: #fff;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: .85rem;
+    font-size: .82rem;
     flex-shrink: 0;
   }
 
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--text);
     letter-spacing: -0.5px;
-  }
-
-  .section-title small {
-    font-weight: 500;
-    color: var(--gray-500);
-    font-size: .85rem;
-    margin-left: .5rem;
   }
 
   /* ── Funnel ── */
@@ -224,55 +235,54 @@
   }
 
   .funnel-step {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
     padding: 1.5rem 2rem;
     text-align: center;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
     position: relative;
     transition: transform .2s;
   }
 
   .funnel-step:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-  .funnel-step.tam { width: 100%; border-left: 5px solid var(--green); }
-  .funnel-step.sam { width: 75%; border-left: 5px solid #3498db; }
-  .funnel-step.som { width: 50%; border-left: 5px solid var(--yellow); }
+  .funnel-step.tam { width: 100%; border-left: 4px solid var(--green); }
+  .funnel-step.sam { width: 75%; border-left: 4px solid var(--blue); }
+  .funnel-step.som { width: 50%; border-left: 4px solid var(--amber); }
 
   .funnel-step .funnel-label {
     font-size: .7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .1em;
-    margin-bottom: .25rem;
   }
 
   .funnel-step.tam .funnel-label { color: var(--green); }
-  .funnel-step.sam .funnel-label { color: #3498db; }
-  .funnel-step.som .funnel-label { color: var(--yellow); }
+  .funnel-step.sam .funnel-label { color: var(--blue); }
+  .funnel-step.som .funnel-label { color: var(--amber); }
 
   .funnel-step .funnel-value {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--text);
     letter-spacing: -1px;
   }
 
   .funnel-step .funnel-desc {
     font-size: .85rem;
-    color: var(--gray-600);
+    color: var(--muted);
     margin-top: .25rem;
   }
 
   .funnel-arrow {
-    color: var(--gray-400);
-    font-size: 1.2rem;
+    color: var(--dim);
+    font-size: 1rem;
   }
 
   .funnel-source {
     font-size: .75rem;
-    color: var(--gray-500);
+    color: var(--dim);
     margin-top: 1rem;
     text-align: center;
     font-style: italic;
@@ -286,44 +296,45 @@
   }
 
   .driver-card {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
     padding: 1.5rem;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
     display: flex;
     gap: 1rem;
   }
 
   .driver-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
     flex-shrink: 0;
-    background: var(--green-light);
+    background: var(--green-dim);
   }
 
-  .driver-card:nth-child(2) .driver-icon { background: var(--blue-light); }
-  .driver-card:nth-child(3) .driver-icon { background: var(--yellow-light); }
-  .driver-card:nth-child(4) .driver-icon { background: var(--red-light); }
-  .driver-card:nth-child(5) .driver-icon { background: #f0e6ff; }
-  .driver-card:nth-child(6) .driver-icon { background: #e6f7ff; }
+  .driver-icon svg { width: 20px; height: 20px; }
+
+  .driver-card:nth-child(2) .driver-icon { background: var(--blue-dim); }
+  .driver-card:nth-child(3) .driver-icon { background: var(--amber-dim); }
+  .driver-card:nth-child(4) .driver-icon { background: var(--danger-dim); }
+  .driver-card:nth-child(5) .driver-icon { background: var(--purple-dim); }
+  .driver-card:nth-child(6) .driver-icon { background: var(--blue-dim); }
 
   .driver-content h4 {
-    font-size: .95rem;
+    font-size: .92rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--text);
     margin-bottom: .25rem;
   }
 
   .driver-content p {
-    font-size: .82rem;
-    color: var(--gray-600);
-    line-height: 1.5;
+    font-size: .8rem;
+    color: var(--muted);
+    line-height: 1.55;
   }
 
   .driver-stat {
@@ -335,29 +346,29 @@
 
   .driver-bar-track {
     flex: 1;
-    height: 8px;
-    background: var(--gray-100);
-    border-radius: 4px;
+    height: 6px;
+    background: var(--surface);
+    border-radius: 3px;
     overflow: hidden;
   }
 
   .driver-bar-fill {
     height: 100%;
-    border-radius: 4px;
+    border-radius: 3px;
     background: var(--green);
     transition: width .6s ease;
   }
 
   .driver-card:nth-child(2) .driver-bar-fill { background: var(--blue); }
-  .driver-card:nth-child(3) .driver-bar-fill { background: var(--yellow); }
-  .driver-card:nth-child(4) .driver-bar-fill { background: var(--red); }
-  .driver-card:nth-child(5) .driver-bar-fill { background: #7c3aed; }
-  .driver-card:nth-child(6) .driver-bar-fill { background: #0ea5e9; }
+  .driver-card:nth-child(3) .driver-bar-fill { background: var(--amber); }
+  .driver-card:nth-child(4) .driver-bar-fill { background: var(--danger); }
+  .driver-card:nth-child(5) .driver-bar-fill { background: var(--purple); }
+  .driver-card:nth-child(6) .driver-bar-fill { background: var(--blue); }
 
   .driver-stat-label {
-    font-size: .72rem;
+    font-size: .7rem;
     font-weight: 700;
-    color: var(--gray-700);
+    color: var(--muted);
     white-space: nowrap;
   }
 
@@ -370,38 +381,38 @@
   }
 
   .cf-stat-card {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius-sm);
     padding: 1.25rem;
     text-align: center;
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
   }
 
   .cf-stat-card .cf-val {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--text);
   }
 
   .cf-stat-card .cf-label {
     font-size: .72rem;
-    color: var(--gray-600);
+    color: var(--muted);
     font-weight: 500;
     margin-top: .2rem;
   }
 
   /* ── Bar Chart ── */
   .bar-chart {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
     padding: 2rem;
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
   }
 
   .bar-chart h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--text);
     margin-bottom: 1.25rem;
   }
 
@@ -412,17 +423,17 @@
   }
 
   .bar-label {
-    width: 130px;
-    font-size: .8rem;
+    width: 140px;
+    font-size: .78rem;
     font-weight: 600;
-    color: var(--gray-700);
+    color: var(--muted);
     flex-shrink: 0;
   }
 
   .bar-track {
     flex: 1;
-    height: 32px;
-    background: var(--gray-100);
+    height: 30px;
+    background: var(--surface);
     border-radius: 6px;
     overflow: hidden;
     position: relative;
@@ -434,64 +445,61 @@
     display: flex;
     align-items: center;
     padding-left: .75rem;
-    font-size: .78rem;
+    font-size: .76rem;
     font-weight: 700;
     color: #fff;
     transition: width .6s ease;
   }
 
-  .bar-row:nth-child(2) .bar-fill { background: var(--green); }
-  .bar-row:nth-child(3) .bar-fill { background: #3498db; }
-  .bar-row:nth-child(4) .bar-fill { background: var(--yellow); }
-  .bar-row:nth-child(5) .bar-fill { background: #e67e22; }
-  .bar-row:nth-child(6) .bar-fill { background: var(--red); }
-
   .bar-row.highlight .bar-fill {
     background: var(--green) !important;
-    box-shadow: 0 0 0 3px rgba(5,206,120,.25);
+    box-shadow: 0 0 0 2px rgba(5,206,120,.2);
   }
 
   .bar-row.highlight .bar-label {
-    color: var(--green-dark);
+    color: var(--green);
     font-weight: 700;
   }
 
   .sweet-spot-note {
     margin-top: 1.25rem;
-    background: var(--green-light);
-    border-left: 4px solid var(--green);
+    background: var(--green-dim);
+    border-left: 3px solid var(--green);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     padding: 1rem 1.25rem;
-    font-size: .85rem;
-    color: var(--gray-800);
+    font-size: .82rem;
+    color: var(--text);
     display: flex;
     align-items: flex-start;
-    gap: .5rem;
+    gap: .6rem;
   }
 
-  .sweet-spot-note strong { color: var(--green-dark); }
+  .sweet-spot-note strong { color: var(--green); }
+
+  .sweet-spot-note svg { flex-shrink: 0; margin-top: 2px; }
 
   /* ── Best Launch Months ── */
   .launch-months {
     display: flex;
-    gap: .75rem;
+    gap: .5rem;
     margin-top: 1rem;
     flex-wrap: wrap;
   }
 
   .month-tag {
-    background: var(--gray-100);
+    background: var(--surface);
     border-radius: 6px;
-    padding: .4rem .9rem;
-    font-size: .78rem;
+    padding: .35rem .75rem;
+    font-size: .75rem;
     font-weight: 600;
-    color: var(--gray-700);
+    color: var(--dim);
+    border: 1px solid transparent;
   }
 
   .month-tag.recommended {
-    background: var(--green-light);
-    color: var(--green-dark);
-    border: 1px solid var(--green);
+    background: var(--green-dim);
+    color: var(--green);
+    border-color: rgba(5,206,120,.25);
   }
 
   /* ── Segments ── */
@@ -502,10 +510,10 @@
   }
 
   .segment-card {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
     padding: 1.75rem;
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
     box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;
@@ -517,13 +525,13 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 3px;
   }
 
   .segment-card:nth-child(1)::before { background: var(--green); }
-  .segment-card:nth-child(2)::before { background: #3498db; }
-  .segment-card:nth-child(3)::before { background: #9b59b6; }
-  .segment-card:nth-child(4)::before { background: var(--yellow); }
+  .segment-card:nth-child(2)::before { background: var(--blue); }
+  .segment-card:nth-child(3)::before { background: var(--purple); }
+  .segment-card:nth-child(4)::before { background: var(--amber); }
 
   .segment-header {
     display: flex;
@@ -533,51 +541,48 @@
   }
 
   .segment-name {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--text);
   }
 
   .segment-pct {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 800;
   }
 
   .segment-card:nth-child(1) .segment-pct { color: var(--green); }
-  .segment-card:nth-child(2) .segment-pct { color: #3498db; }
-  .segment-card:nth-child(3) .segment-pct { color: #9b59b6; }
-  .segment-card:nth-child(4) .segment-pct { color: var(--yellow); }
+  .segment-card:nth-child(2) .segment-pct { color: var(--blue); }
+  .segment-card:nth-child(3) .segment-pct { color: var(--purple); }
+  .segment-card:nth-child(4) .segment-pct { color: var(--amber); }
 
   .segment-en {
-    font-size: .75rem;
+    font-size: .72rem;
     font-weight: 500;
-    color: var(--gray-500);
+    color: var(--dim);
     margin-bottom: .5rem;
   }
 
   .segment-desc {
-    font-size: .83rem;
-    color: var(--gray-600);
-    line-height: 1.55;
+    font-size: .82rem;
+    color: var(--muted);
+    line-height: 1.6;
   }
 
   .segment-bar-bg {
-    height: 6px;
-    background: var(--gray-100);
-    border-radius: 3px;
+    height: 4px;
+    background: var(--surface);
+    border-radius: 2px;
     margin-top: 1rem;
     overflow: hidden;
   }
 
-  .segment-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-  }
+  .segment-bar-fill { height: 100%; border-radius: 2px; }
 
   .segment-card:nth-child(1) .segment-bar-fill { background: var(--green); width: 35%; }
-  .segment-card:nth-child(2) .segment-bar-fill { background: #3498db; width: 25%; }
-  .segment-card:nth-child(3) .segment-bar-fill { background: #9b59b6; width: 20%; }
-  .segment-card:nth-child(4) .segment-bar-fill { background: var(--yellow); width: 20%; }
+  .segment-card:nth-child(2) .segment-bar-fill { background: var(--blue); width: 25%; }
+  .segment-card:nth-child(3) .segment-bar-fill { background: var(--purple); width: 20%; }
+  .segment-card:nth-child(4) .segment-bar-fill { background: var(--amber); width: 20%; }
 
   /* ── Pie Chart (CSS) ── */
   .pie-container {
@@ -589,24 +594,23 @@
   }
 
   .css-pie {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     background: conic-gradient(
       var(--green) 0deg 126deg,
-      #3498db 126deg 216deg,
-      #9b59b6 216deg 288deg,
-      var(--yellow) 288deg 360deg
+      var(--blue) 126deg 216deg,
+      var(--purple) 216deg 288deg,
+      var(--amber) 288deg 360deg
     );
     position: relative;
-    box-shadow: var(--shadow-md);
   }
 
   .css-pie::after {
     content: '';
     position: absolute;
-    inset: 40px;
-    background: var(--gray-50);
+    inset: 42px;
+    background: var(--bg);
     border-radius: 50%;
   }
 
@@ -621,97 +625,99 @@
     align-items: center;
     gap: .6rem;
     font-size: .82rem;
-    color: var(--gray-700);
+    color: var(--muted);
   }
 
+  .legend-item strong { color: var(--text); }
+
   .legend-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
     flex-shrink: 0;
   }
 
   .legend-item:nth-child(1) .legend-dot { background: var(--green); }
-  .legend-item:nth-child(2) .legend-dot { background: #3498db; }
-  .legend-item:nth-child(3) .legend-dot { background: #9b59b6; }
-  .legend-item:nth-child(4) .legend-dot { background: var(--yellow); }
+  .legend-item:nth-child(2) .legend-dot { background: var(--blue); }
+  .legend-item:nth-child(3) .legend-dot { background: var(--purple); }
+  .legend-item:nth-child(4) .legend-dot { background: var(--amber); }
 
   /* ── Comparison Table ── */
   .table-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--card-border);
   }
 
   .comp-table {
     width: 100%;
     border-collapse: collapse;
     font-size: .82rem;
-    background: #fff;
+    background: var(--card);
   }
 
   .comp-table thead {
-    background: var(--dark);
-    color: #fff;
+    background: #111319;
   }
 
   .comp-table th {
-    padding: .9rem 1rem;
+    padding: .85rem 1rem;
     text-align: left;
     font-weight: 700;
-    font-size: .75rem;
+    font-size: .72rem;
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: .05em;
     white-space: nowrap;
+    color: var(--muted);
+    border-bottom: 1px solid var(--card-border);
   }
 
   .comp-table td {
-    padding: .8rem 1rem;
-    border-bottom: 1px solid var(--gray-100);
-    color: var(--gray-700);
+    padding: .75rem 1rem;
+    border-bottom: 1px solid var(--card-border);
+    color: var(--muted);
   }
 
-  .comp-table tbody tr:hover { background: var(--gray-50); }
+  .comp-table tbody tr:hover { background: var(--surface); }
 
   .comp-table .highlight-col {
-    background: var(--green-light) !important;
+    background: rgba(5,206,120,.06) !important;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--text);
   }
 
   .comp-table thead .highlight-col {
-    background: var(--green) !important;
-    color: #fff;
+    background: rgba(5,206,120,.15) !important;
+    color: var(--green);
   }
 
   .badge-green {
     display: inline-block;
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: .72rem;
+    background: var(--green-dim);
+    color: var(--green);
+    font-size: .7rem;
     font-weight: 700;
-    padding: .2rem .5rem;
-    border-radius: 4px;
+    padding: .15rem .45rem;
+    border-radius: 3px;
   }
 
   .badge-red {
     display: inline-block;
-    background: var(--red-light);
-    color: var(--red);
-    font-size: .72rem;
+    background: var(--danger-dim);
+    color: var(--danger);
+    font-size: .7rem;
     font-weight: 700;
-    padding: .2rem .5rem;
-    border-radius: 4px;
+    padding: .15rem .45rem;
+    border-radius: 3px;
   }
 
   .value-highlight {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
     padding: 1.5rem;
     margin-top: 1.5rem;
-    border: 2px solid var(--green);
+    border: 1px solid var(--green);
     display: flex;
     gap: 2rem;
     align-items: center;
@@ -721,18 +727,18 @@
   .vh-item {
     text-align: center;
     flex: 1;
-    min-width: 140px;
+    min-width: 130px;
   }
 
   .vh-item .vh-val {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    color: var(--green-dark);
+    color: var(--green);
   }
 
   .vh-item .vh-label {
-    font-size: .72rem;
-    color: var(--gray-600);
+    font-size: .7rem;
+    color: var(--muted);
     font-weight: 500;
     margin-top: .15rem;
   }
@@ -744,18 +750,18 @@
     grid-template-rows: auto 1fr 1fr;
     gap: 0;
     margin: 1.5rem 0;
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
     overflow: hidden;
   }
 
   .risk-axis-label {
-    font-size: .7rem;
+    font-size: .68rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .08em;
-    color: var(--gray-600);
+    color: var(--dim);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -765,88 +771,84 @@
   .risk-axis-y {
     writing-mode: vertical-lr;
     transform: rotate(180deg);
-    background: var(--gray-50);
+    background: var(--surface);
     grid-row: 2 / 4;
     grid-column: 1;
   }
 
   .risk-corner {
-    background: var(--gray-100);
+    background: var(--surface);
     grid-row: 1;
     grid-column: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: .65rem;
+    font-size: .62rem;
     font-weight: 600;
-    color: var(--gray-500);
+    color: var(--dim);
     padding: .5rem;
   }
 
   .risk-col-header {
-    background: var(--gray-100);
+    background: var(--surface);
     grid-row: 1;
     padding: .75rem;
-    font-size: .72rem;
+    font-size: .7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--gray-600);
+    letter-spacing: .05em;
+    color: var(--dim);
     text-align: center;
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--card-border);
   }
 
   .risk-cell {
     padding: 1.25rem;
-    border: 1px solid var(--gray-100);
+    border: 1px solid var(--card-border);
     min-height: 140px;
   }
 
-  .risk-cell.high-high { background: #fff0f1; }
-  .risk-cell.high-low { background: #fff8e6; }
-  .risk-cell.low-high { background: #fff8e6; }
-  .risk-cell.low-low { background: #f0faf5; }
+  .risk-cell.high-high { background: rgba(231,76,60,.06); }
+  .risk-cell.high-low { background: rgba(230,160,48,.06); }
+  .risk-cell.low-high { background: rgba(230,160,48,.06); }
+  .risk-cell.low-low { background: rgba(5,206,120,.06); }
 
   .risk-tag {
     display: inline-block;
-    font-size: .7rem;
+    font-size: .68rem;
     font-weight: 700;
-    padding: .2rem .5rem;
-    border-radius: 4px;
+    padding: .15rem .45rem;
+    border-radius: 3px;
     margin-bottom: .5rem;
   }
 
-  .risk-tag.critical { background: var(--red); color: #fff; }
-  .risk-tag.warning { background: var(--yellow); color: #fff; }
+  .risk-tag.critical { background: var(--danger); color: #fff; }
+  .risk-tag.warning { background: var(--amber); color: #fff; }
   .risk-tag.low { background: var(--green); color: #fff; }
 
-  .risk-item {
-    margin-bottom: .75rem;
-  }
+  .risk-item { margin-bottom: .75rem; }
 
   .risk-item h5 {
-    font-size: .8rem;
+    font-size: .78rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--text);
     margin-bottom: .2rem;
   }
 
   .risk-item p {
     font-size: .72rem;
-    color: var(--gray-600);
-    line-height: 1.45;
+    color: var(--muted);
+    line-height: 1.5;
   }
 
   .risk-mitigation {
     font-size: .72rem;
-    color: var(--green-dark);
+    color: var(--green);
     margin-top: .2rem;
     font-weight: 500;
   }
 
-  .risk-mitigation::before {
-    content: '→ ';
-  }
+  .risk-mitigation::before { content: '-> '; }
 
   /* ── Conclusions ── */
   .conclusions-grid {
@@ -856,54 +858,45 @@
   }
 
   .conclusion-card {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius);
     padding: 1.35rem 1.5rem;
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
     display: flex;
     gap: 1rem;
     align-items: flex-start;
     box-shadow: var(--shadow-sm);
   }
 
-  .conclusion-card.recommend {
-    border-left: 4px solid var(--green);
-  }
-
-  .conclusion-card.risk {
-    border-left: 4px solid var(--yellow);
-  }
+  .conclusion-card.recommend { border-left: 3px solid var(--green); }
+  .conclusion-card.risk { border-left: 3px solid var(--amber); }
 
   .conclusion-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
     flex-shrink: 0;
   }
 
-  .recommend .conclusion-icon {
-    background: var(--green-light);
-  }
+  .conclusion-icon svg { width: 18px; height: 18px; }
 
-  .risk .conclusion-icon {
-    background: var(--yellow-light);
-  }
+  .recommend .conclusion-icon { background: var(--green-dim); }
+  .risk .conclusion-icon { background: var(--amber-dim); }
 
   .conclusion-card h4 {
     font-size: .88rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--text);
     margin-bottom: .25rem;
   }
 
   .conclusion-card p {
     font-size: .8rem;
-    color: var(--gray-600);
-    line-height: 1.5;
+    color: var(--muted);
+    line-height: 1.55;
   }
 
   /* ── Success Factors ── */
@@ -915,38 +908,43 @@
   }
 
   .sf-item {
-    background: #fff;
+    background: var(--card);
     border-radius: var(--radius-sm);
     padding: 1rem 1.25rem;
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--card-border);
     text-align: center;
   }
 
   .sf-item .sf-icon {
-    font-size: 1.5rem;
     margin-bottom: .4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+  .sf-item .sf-icon svg { width: 24px; height: 24px; }
 
   .sf-item .sf-label {
     font-size: .78rem;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--text);
   }
 
   .sf-item .sf-desc {
     font-size: .7rem;
-    color: var(--gray-500);
+    color: var(--dim);
     margin-top: .15rem;
   }
 
   /* ── Footer ── */
   footer {
-    background: var(--dark);
-    color: rgba(255,255,255,.45);
+    background: #111319;
+    color: var(--dim);
     text-align: center;
     padding: 2rem;
     font-size: .75rem;
     margin-top: 3rem;
+    border-top: 1px solid var(--card-border);
   }
 
   footer strong { color: var(--green); }
@@ -962,17 +960,18 @@
     .pie-container { flex-direction: column; }
     .hero h1 { font-size: 1.6rem; }
     .value-highlight { flex-direction: column; gap: 1rem; }
-    nav { padding: 0 1rem; }
-    .nav-links a { font-size: .75rem; padding: .35rem .6rem; }
+    .site-header { padding: 0 1rem; }
+    .header-nav a { font-size: .72rem; }
     .risk-matrix { font-size: .75rem; }
+    .header-left { gap: 1rem; }
   }
 
   /* ── Print ── */
   @media print {
-    nav { position: static; }
+    .site-header { position: static; }
     .hero { padding: 2rem; }
     .section { break-inside: avoid; }
-    body { background: #fff; }
+    body { background: #fff; color: #333; }
   }
 
   /* ── Layout helpers ── */
@@ -990,22 +989,27 @@
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-  <div class="nav-brand">Pad<span>Claw</span> Kickstarter</div>
-  <ul class="nav-links">
-    <li><a href="index.html">文案頁面</a></li>
-    <li><a href="personas.html">用戶輪廓</a></li>
-    <li><a href="market-research.html" class="active">市場研究</a></li>
-    <li><a href="competitors.html">競品分析</a></li>
-  </ul>
-</nav>
+<!-- Header -->
+<header class="site-header">
+  <div class="header-left">
+    <a class="nav-brand" href="index.html">Pad<span>Claw</span></a>
+    <nav class="header-nav" style="display:flex;gap:16px;">
+      <a href="index.html">文案頁面</a>
+      <a href="personas.html">用戶輪廓</a>
+      <a href="market-research.html" style="color:var(--green)">市場研究</a>
+      <a href="competitors.html">競品分析</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <span class="doc-badge">內部提案文件</span>
+  </div>
+</header>
 
 <!-- Hero -->
 <div class="hero">
-  <div class="hero-label">Internal Proposal · Market Research</div>
-  <h1>市場研究 Market Research</h1>
-  <p>The AI-powered dedicated home tablet market is at an inflection point. Consumer appetite for AI agents is proven (300M+ ChatGPT users), but no hardware player owns the "AI hub for the home" category. PadClaw's $599 Kickstarter entry point, on-device privacy story, and multi-agent architecture position it to define — and capture — this emerging segment.</p>
+  <div class="hero-label">內部提案 · 市場研究</div>
+  <h1>市場研究報告</h1>
+  <p>AI 驅動的專用家庭平板市場正處於轉折點。消費者對 AI 代理的需求已獲驗證（ChatGPT 突破 3 億週活躍用戶），但尚無硬體廠商真正佔據「家庭 AI 中樞」品類。PadClaw 以 $599 Kickstarter 進入價格、裝置端隱私保護敘事及多代理架構，具備定義並搶佔此新興市場區隔的條件。</p>
 </div>
 
 <!-- Key Metrics -->
@@ -1013,126 +1017,142 @@
   <div class="metrics-row">
     <div class="metric-card">
       <div class="value">$163B</div>
-      <div class="label">Total Addressable Market</div>
-      <div class="sub">Global Smart Home Devices, 2025</div>
+      <div class="label">總可觸及市場</div>
+      <div class="sub">全球智慧家居裝置，2025 年</div>
     </div>
     <div class="metric-card">
       <div class="value">15.7%</div>
-      <div class="label">Expected CAGR</div>
-      <div class="sub">Smart Home Market 2025–2030</div>
+      <div class="label">預期年複合成長率</div>
+      <div class="sub">智慧家居市場 2025–2030 CAGR</div>
     </div>
     <div class="metric-card">
       <div class="value">Q3 2026</div>
-      <div class="label">Target Launch Window</div>
-      <div class="sub">Sep–Oct KS Campaign, Feb Ship</div>
+      <div class="label">目標上線時段</div>
+      <div class="sub">九至十月 KS 募資，二月出貨</div>
     </div>
   </div>
 
-  <!-- Section 1: Market Sizing -->
+  <!-- Section 1: Executive Summary / Market Sizing -->
   <div class="section">
     <div class="section-header">
       <div class="section-number">1</div>
-      <h2 class="section-title">市場規模 <small>Market Sizing</small></h2>
+      <h2 class="section-title">市場規模</h2>
     </div>
 
     <div class="funnel-container">
       <div class="funnel-step tam">
-        <div class="funnel-label">TAM · Total Addressable Market</div>
+        <div class="funnel-label">TAM · 總可觸及市場</div>
         <div class="funnel-value">$163B → $338B</div>
-        <div class="funnel-desc">Global smart home device market · 2025 → 2030 projected</div>
+        <div class="funnel-desc">全球智慧家居裝置市場 · 2025 年現況 → 2030 年預測</div>
       </div>
-      <div class="funnel-arrow">▼</div>
+      <div class="funnel-arrow">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
       <div class="funnel-step sam">
-        <div class="funnel-label">SAM · Serviceable Addressable Market</div>
+        <div class="funnel-label">SAM · 可服務市場</div>
         <div class="funnel-value">$12.4B</div>
-        <div class="funnel-desc">AI-powered smart displays & specialty tablets</div>
+        <div class="funnel-desc">AI 驅動智慧顯示器與專用平板</div>
       </div>
-      <div class="funnel-arrow">▼</div>
+      <div class="funnel-arrow">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
       <div class="funnel-step som">
-        <div class="funnel-label">SOM · Serviceable Obtainable Market</div>
+        <div class="funnel-label">SOM · 可獲得市場</div>
         <div class="funnel-value">$890M</div>
-        <div class="funnel-desc">US crowdfunding tech hardware backers willing to pay $500+</div>
+        <div class="funnel-desc">美國群募科技硬體贊助者（願付 $500 以上）</div>
       </div>
     </div>
-    <p class="funnel-source">Sources: Statista, Grand View Research, Kickstarter Internal Data</p>
+    <p class="funnel-source">資料來源：Statista、Grand View Research、Kickstarter 內部數據</p>
   </div>
 
   <!-- Section 2: Growth Drivers -->
   <div class="section">
     <div class="section-header">
       <div class="section-number">2</div>
-      <h2 class="section-title">成長動力 <small>Growth Drivers</small></h2>
+      <h2 class="section-title">成長動力</h2>
     </div>
 
     <div class="drivers-grid">
       <div class="driver-card">
-        <div class="driver-icon">🤖</div>
+        <div class="driver-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01M9 15c1 1 5 1 6 0"/></svg>
+        </div>
         <div class="driver-content">
-          <h4>AI Agent Adoption Surge</h4>
-          <p>ChatGPT reached 300M weekly active users. Consumer appetite for AI-first experiences is no longer speculative — it's mainstream.</p>
+          <h4>AI 代理採用激增</h4>
+          <p>ChatGPT 突破 3 億週活躍用戶。消費者對 AI 優先體驗的需求已不再是推測——而是主流趨勢。</p>
           <div class="driver-stat">
             <div class="driver-bar-track"><div class="driver-bar-fill" style="width:92%"></div></div>
-            <span class="driver-stat-label">300M Users</span>
+            <span class="driver-stat-label">3 億用戶</span>
           </div>
         </div>
       </div>
 
       <div class="driver-card">
-        <div class="driver-icon">🏠</div>
+        <div class="driver-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
         <div class="driver-content">
-          <h4>Smart Home Penetration</h4>
-          <p>69% of US households own at least one smart device. The installed base is ready for a unifying AI control hub.</p>
+          <h4>智慧家居滲透率</h4>
+          <p>69% 的美國家庭擁有至少一台智慧裝置。現有裝機基礎已準備好迎接統一的 AI 控制中樞。</p>
           <div class="driver-stat">
             <div class="driver-bar-track"><div class="driver-bar-fill" style="width:69%"></div></div>
-            <span class="driver-stat-label">69% of Homes</span>
+            <span class="driver-stat-label">69% 家庭</span>
           </div>
         </div>
       </div>
 
       <div class="driver-card">
-        <div class="driver-icon">📱</div>
+        <div class="driver-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
         <div class="driver-content">
-          <h4>Screen Fatigue & Dedicated Devices</h4>
-          <p>Consumers increasingly seek purpose-built devices over multipurpose. The Kindle, reMarkable, and Rabbit R1 prove dedicated-device demand.</p>
+          <h4>螢幕疲勞與專用裝置趨勢</h4>
+          <p>消費者越來越傾向選擇專用裝置，而非多用途設備。Kindle、reMarkable 與 Rabbit R1 證實了專用裝置的市場需求。</p>
           <div class="driver-stat">
             <div class="driver-bar-track"><div class="driver-bar-fill" style="width:65%"></div></div>
-            <span class="driver-stat-label">65% Prefer</span>
+            <span class="driver-stat-label">65% 偏好</span>
           </div>
         </div>
       </div>
 
       <div class="driver-card">
-        <div class="driver-icon">👴</div>
+        <div class="driver-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
         <div class="driver-content">
-          <h4>Aging Population</h4>
-          <p>65+ population growing at 3.2% annually. This demographic needs simpler, more accessible tech — not another app.</p>
+          <h4>人口高齡化</h4>
+          <p>65 歲以上人口年增 3.2%。這個族群需要更簡單、更易用的科技產品——而不是再多一個 App。</p>
           <div class="driver-stat">
             <div class="driver-bar-track"><div class="driver-bar-fill" style="width:45%"></div></div>
-            <span class="driver-stat-label">3.2% Annual</span>
+            <span class="driver-stat-label">年增 3.2%</span>
           </div>
         </div>
       </div>
 
       <div class="driver-card">
-        <div class="driver-icon">🚀</div>
+        <div class="driver-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
         <div class="driver-content">
-          <h4>Crowdfunding Renaissance</h4>
-          <p>KS/IGG hardware campaigns up 34% YoY. Backers are actively seeking innovative hardware post-pandemic.</p>
+          <h4>群眾募資復興</h4>
+          <p>Kickstarter / Indiegogo 硬體專案年增 34%。後疫情時代，贊助者積極尋找創新硬體產品。</p>
           <div class="driver-stat">
             <div class="driver-bar-track"><div class="driver-bar-fill" style="width:72%"></div></div>
-            <span class="driver-stat-label">+34% YoY</span>
+            <span class="driver-stat-label">年增 +34%</span>
           </div>
         </div>
       </div>
 
       <div class="driver-card">
-        <div class="driver-icon">🔒</div>
+        <div class="driver-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
         <div class="driver-content">
-          <h4>Privacy Consciousness</h4>
-          <p>78% of consumers are concerned about cloud AI data collection. On-device processing is a growing buying criterion.</p>
+          <h4>隱私意識抬頭</h4>
+          <p>78% 的消費者擔憂雲端 AI 的資料收集行為。裝置端處理正成為日益重要的購買考量因素。</p>
           <div class="driver-stat">
             <div class="driver-bar-track"><div class="driver-bar-fill" style="width:78%"></div></div>
-            <span class="driver-stat-label">78% Concerned</span>
+            <span class="driver-stat-label">78% 關注</span>
           </div>
         </div>
       </div>
@@ -1143,45 +1163,45 @@
   <div class="section">
     <div class="section-header">
       <div class="section-number">3</div>
-      <h2 class="section-title">群眾募資市場 <small>Crowdfunding Landscape</small></h2>
+      <h2 class="section-title">群眾募資市場概況</h2>
     </div>
 
     <div class="cf-stats-grid">
       <div class="cf-stat-card">
         <div class="cf-val">$127K</div>
-        <div class="cf-label">Avg. Successful HW Campaign</div>
+        <div class="cf-label">成功硬體專案平均募資額</div>
       </div>
       <div class="cf-stat-card">
         <div class="cf-val">$500K+</div>
-        <div class="cf-label">Top 10% Campaigns</div>
+        <div class="cf-label">前 10% 專案募資額</div>
       </div>
       <div class="cf-stat-card">
         <div class="cf-val">28%</div>
-        <div class="cf-label">Tech/Gadget Share of KS Revenue</div>
+        <div class="cf-label">科技類佔 KS 營收比重</div>
       </div>
       <div class="cf-stat-card">
         <div class="cf-val">+34%</div>
-        <div class="cf-label">HW Campaign Growth YoY</div>
+        <div class="cf-label">硬體專案年成長率</div>
       </div>
     </div>
 
     <div class="two-col">
       <div class="bar-chart">
-        <h4>KS Hardware Success Rate by Price Tier</h4>
+        <h4>Kickstarter 硬體專案成功率（依價格區間）</h4>
         <div class="bar-row">
-          <div class="bar-label">Under $100</div>
+          <div class="bar-label">$100 以下</div>
           <div class="bar-track"><div class="bar-fill" style="width:42%; background:var(--green)">42%</div></div>
         </div>
         <div class="bar-row">
           <div class="bar-label">$100–$299</div>
-          <div class="bar-track"><div class="bar-fill" style="width:35%; background:#3498db">35%</div></div>
+          <div class="bar-track"><div class="bar-fill" style="width:35%; background:var(--blue)">35%</div></div>
         </div>
         <div class="bar-row">
           <div class="bar-label">$300–$599</div>
-          <div class="bar-track"><div class="bar-fill" style="width:24%; background:var(--yellow)">24%</div></div>
+          <div class="bar-track"><div class="bar-fill" style="width:24%; background:var(--amber)">24%</div></div>
         </div>
         <div class="bar-row highlight">
-          <div class="bar-label">▶ $599 PadClaw</div>
+          <div class="bar-label">PadClaw $599</div>
           <div class="bar-track"><div class="bar-fill" style="width:24%; background:var(--green)">~24%</div></div>
         </div>
         <div class="bar-row">
@@ -1190,53 +1210,59 @@
         </div>
         <div class="bar-row">
           <div class="bar-label">$1,000+</div>
-          <div class="bar-track"><div class="bar-fill" style="width:12%; background:var(--red)">12%</div></div>
+          <div class="bar-track"><div class="bar-fill" style="width:12%; background:var(--danger)">12%</div></div>
         </div>
 
         <div class="sweet-spot-note">
-          <span>💡</span>
-          <div><strong>Sweet Spot Analysis:</strong> PadClaw's $599 KS price sits at the top of the $300–$599 tier (24% success rate) — significantly better odds than the $600–$999 tier (18%). Pricing at $599 instead of $649 keeps us in the higher-conversion bracket while maximizing revenue per unit.</div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div><strong>甜蜜點分析：</strong>PadClaw 的 $599 KS 定價位於 $300–$599 區間的頂端（24% 成功率），明顯優於 $600–$999 區間（18%）。定價 $599 而非 $649 使我們留在高轉換率區間，同時最大化每單位營收。</div>
         </div>
       </div>
 
       <div>
         <div class="bar-chart" style="margin-bottom:1.25rem">
-          <h4>Best Launch Months for KS Hardware</h4>
-          <p style="font-size:.82rem; color:var(--gray-600); margin-bottom:1rem;">Based on analysis of 2,400+ funded hardware campaigns</p>
+          <h4>KS 硬體專案最佳上線月份</h4>
+          <p style="font-size:.82rem; color:var(--muted); margin-bottom:1rem;">基於 2,400+ 成功募資硬體專案分析</p>
           <div class="launch-months">
-            <span class="month-tag">Jan</span>
-            <span class="month-tag">Feb</span>
-            <span class="month-tag">Mar</span>
-            <span class="month-tag">Apr</span>
-            <span class="month-tag">May</span>
-            <span class="month-tag">Jun</span>
-            <span class="month-tag">Jul</span>
-            <span class="month-tag">Aug</span>
-            <span class="month-tag recommended">✦ Sep</span>
-            <span class="month-tag recommended">✦ Oct</span>
-            <span class="month-tag">Nov</span>
-            <span class="month-tag">Dec</span>
+            <span class="month-tag">一月</span>
+            <span class="month-tag">二月</span>
+            <span class="month-tag">三月</span>
+            <span class="month-tag">四月</span>
+            <span class="month-tag">五月</span>
+            <span class="month-tag">六月</span>
+            <span class="month-tag">七月</span>
+            <span class="month-tag">八月</span>
+            <span class="month-tag recommended">九月</span>
+            <span class="month-tag recommended">十月</span>
+            <span class="month-tag">十一月</span>
+            <span class="month-tag">十二月</span>
           </div>
-          <p style="font-size:.75rem; color:var(--gray-500); margin-top:.75rem">Sep/Oct campaigns benefit from holiday gift-buying intent and media coverage cycles.</p>
+          <p style="font-size:.75rem; color:var(--dim); margin-top:.75rem">九月與十月的專案可受惠於節日送禮購買意圖及媒體報導週期。</p>
         </div>
 
         <div class="bar-chart">
-          <h4>Key Campaign Success Factors</h4>
+          <h4>關鍵募資成功要素</h4>
           <div class="success-factors" style="margin-top:.75rem">
             <div class="sf-item">
-              <div class="sf-icon">🎬</div>
-              <div class="sf-label">Video Quality</div>
-              <div class="sf-desc">Pro-grade product demo</div>
+              <div class="sf-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+              <div class="sf-label">影片品質</div>
+              <div class="sf-desc">專業級產品展示影片</div>
             </div>
             <div class="sf-item">
-              <div class="sf-icon">🏷️</div>
-              <div class="sf-label">Early Bird Pricing</div>
-              <div class="sf-desc">40%+ off MSRP drives urgency</div>
+              <div class="sf-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              </div>
+              <div class="sf-label">早鳥定價</div>
+              <div class="sf-desc">建議零售價 40% 以上折扣製造緊迫感</div>
             </div>
             <div class="sf-item">
-              <div class="sf-icon">📦</div>
-              <div class="sf-label">Shipping Clarity</div>
-              <div class="sf-desc">Realistic timeline + updates</div>
+              <div class="sf-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              </div>
+              <div class="sf-label">出貨透明度</div>
+              <div class="sf-desc">切合實際的時程與持續更新</div>
             </div>
           </div>
         </div>
@@ -1248,16 +1274,16 @@
   <div class="section">
     <div class="section-header">
       <div class="section-number">4</div>
-      <h2 class="section-title">目標市場區隔 <small>Target Market Segments</small></h2>
+      <h2 class="section-title">目標市場區隔</h2>
     </div>
 
     <div class="pie-container">
       <div class="css-pie"></div>
       <div class="pie-legend">
-        <div class="legend-item"><div class="legend-dot"></div><strong>35%</strong>&nbsp; Tech-Forward Families</div>
-        <div class="legend-item"><div class="legend-dot"></div><strong>25%</strong>&nbsp; Wellness & Health Conscious</div>
-        <div class="legend-item"><div class="legend-dot"></div><strong>20%</strong>&nbsp; Lifestyle & Spirituality</div>
-        <div class="legend-item"><div class="legend-dot"></div><strong>20%</strong>&nbsp; Language & Education</div>
+        <div class="legend-item"><div class="legend-dot"></div><strong>35%</strong>&nbsp; 科技先驅家庭</div>
+        <div class="legend-item"><div class="legend-dot"></div><strong>25%</strong>&nbsp; 健康養生族群</div>
+        <div class="legend-item"><div class="legend-dot"></div><strong>20%</strong>&nbsp; 身心靈生活風格</div>
+        <div class="legend-item"><div class="legend-dot"></div><strong>20%</strong>&nbsp; 語言學習與教育</div>
       </div>
     </div>
 
@@ -1270,7 +1296,7 @@
           </div>
           <div class="segment-pct">35%</div>
         </div>
-        <div class="segment-desc">Parents who want seamless smart home integration, family calendar management, and a kid-safe AI assistant. They already own 3+ smart devices and are looking for a unifying hub.</div>
+        <div class="segment-desc">追求無縫智慧家居整合、家庭行事曆管理及兒童安全 AI 助理的家長。他們通常已擁有 3 台以上智慧裝置，正在尋找統一的控制中樞。</div>
         <div class="segment-bar-bg"><div class="segment-bar-fill"></div></div>
       </div>
 
@@ -1278,11 +1304,11 @@
         <div class="segment-header">
           <div>
             <div class="segment-name">健康養生族群</div>
-            <div class="segment-en">Wellness & Health Conscious</div>
+            <div class="segment-en">Wellness &amp; Health Conscious</div>
           </div>
           <div class="segment-pct">25%</div>
         </div>
-        <div class="segment-desc">Seniors and health-conscious adults seeking medication management, health metric tracking, and simplified daily routines. Value large screens and voice-first interactions.</div>
+        <div class="segment-desc">需要用藥管理、健康指標追蹤及簡化日常流程的年長者與健康意識族群。偏好大螢幕與語音優先互動方式。</div>
         <div class="segment-bar-bg"><div class="segment-bar-fill"></div></div>
       </div>
 
@@ -1290,11 +1316,11 @@
         <div class="segment-header">
           <div>
             <div class="segment-name">身心靈生活風格</div>
-            <div class="segment-en">Lifestyle & Spirituality</div>
+            <div class="segment-en">Lifestyle &amp; Spirituality</div>
           </div>
           <div class="segment-pct">20%</div>
         </div>
-        <div class="segment-desc">Astrology enthusiasts, mindfulness practitioners, and daily ritual seekers. They want a dedicated device for tarot, meditation timers, affirmations, and spiritual guidance.</div>
+        <div class="segment-desc">星座愛好者、冥想練習者及日常儀式追求者。他們需要一台專用裝置來進行塔羅牌、冥想計時、正念肯定語及靈性指引。</div>
         <div class="segment-bar-bg"><div class="segment-bar-fill"></div></div>
       </div>
 
@@ -1302,11 +1328,11 @@
         <div class="segment-header">
           <div>
             <div class="segment-name">語言學習與教育</div>
-            <div class="segment-en">Language & Education</div>
+            <div class="segment-en">Language &amp; Education</div>
           </div>
           <div class="segment-pct">20%</div>
         </div>
-        <div class="segment-desc">Language learners, immigrant families, and ESL students. Need real-time translation, pronunciation coaching, and bilingual home support without subscription apps.</div>
+        <div class="segment-desc">語言學習者、移民家庭及英語學習學生。需要即時翻譯、發音指導及雙語家庭支援，無需額外訂閱制 App。</div>
         <div class="segment-bar-bg"><div class="segment-bar-fill"></div></div>
       </div>
     </div>
@@ -1316,14 +1342,14 @@
   <div class="section">
     <div class="section-header">
       <div class="section-number">5</div>
-      <h2 class="section-title">定價策略分析 <small>Pricing Strategy</small></h2>
+      <h2 class="section-title">定價策略分析</h2>
     </div>
 
     <div class="table-wrap">
       <table class="comp-table">
         <thead>
           <tr>
-            <th>Metric</th>
+            <th>比較指標</th>
             <th class="highlight-col">PadClaw</th>
             <th>Echo Show 15</th>
             <th>iPad 10th Gen</th>
@@ -1333,7 +1359,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>MSRP</strong></td>
+            <td><strong>建議售價</strong></td>
             <td class="highlight-col">$999</td>
             <td>$279</td>
             <td>$449</td>
@@ -1341,44 +1367,44 @@
             <td>$449</td>
           </tr>
           <tr>
-            <td><strong>KS Price</strong></td>
-            <td class="highlight-col"><span class="badge-green">$599 (40% off)</span></td>
-            <td>N/A</td>
-            <td>N/A</td>
-            <td>N/A</td>
-            <td>N/A</td>
+            <td><strong>KS 早鳥價</strong></td>
+            <td class="highlight-col"><span class="badge-green">$599（省 40%）</span></td>
+            <td>不適用</td>
+            <td>不適用</td>
+            <td>不適用</td>
+            <td>不適用</td>
           </tr>
           <tr>
-            <td><strong>AI Agents</strong></td>
-            <td class="highlight-col"><span class="badge-green">4+ Agents</span></td>
-            <td>Alexa only</td>
-            <td>None native</td>
-            <td>1 Agent</td>
-            <td>None</td>
+            <td><strong>AI 代理</strong></td>
+            <td class="highlight-col"><span class="badge-green">4 個以上</span></td>
+            <td>僅 Alexa</td>
+            <td>無內建</td>
+            <td>1 個代理</td>
+            <td>無</td>
           </tr>
           <tr>
-            <td><strong>Subscription</strong></td>
-            <td class="highlight-col"><span class="badge-green">None Required</span></td>
-            <td>Optional</td>
-            <td>No</td>
-            <td>$24/yr</td>
-            <td>$7.99/mo</td>
+            <td><strong>訂閱制</strong></td>
+            <td class="highlight-col"><span class="badge-green">免訂閱</span></td>
+            <td>可選</td>
+            <td>無</td>
+            <td>$24/年</td>
+            <td>$7.99/月</td>
           </tr>
           <tr>
-            <td><strong>Offline AI</strong></td>
-            <td class="highlight-col"><span class="badge-green">Yes</span></td>
-            <td><span class="badge-red">No</span></td>
-            <td><span class="badge-red">No</span></td>
-            <td><span class="badge-red">No</span></td>
-            <td>N/A</td>
+            <td><strong>離線 AI</strong></td>
+            <td class="highlight-col"><span class="badge-green">支援</span></td>
+            <td><span class="badge-red">不支援</span></td>
+            <td><span class="badge-red">不支援</span></td>
+            <td><span class="badge-red">不支援</span></td>
+            <td>不適用</td>
           </tr>
           <tr>
-            <td><strong>Privacy Model</strong></td>
-            <td class="highlight-col"><span class="badge-green">On-Device</span></td>
-            <td><span class="badge-red">Cloud</span></td>
-            <td><span class="badge-red">Cloud</span></td>
-            <td><span class="badge-red">Cloud</span></td>
-            <td>Local</td>
+            <td><strong>隱私模式</strong></td>
+            <td class="highlight-col"><span class="badge-green">裝置端處理</span></td>
+            <td><span class="badge-red">雲端</span></td>
+            <td><span class="badge-red">雲端</span></td>
+            <td><span class="badge-red">雲端</span></td>
+            <td>本地端</td>
           </tr>
         </tbody>
       </table>
@@ -1386,20 +1412,20 @@
 
     <div class="value-highlight">
       <div class="vh-item">
-        <div class="vh-val">40% OFF</div>
-        <div class="vh-label">KS vs. MSRP Discount</div>
+        <div class="vh-val">省 40%</div>
+        <div class="vh-label">KS 相對建議售價折扣</div>
       </div>
       <div class="vh-item">
-        <div class="vh-val">$0/mo</div>
-        <div class="vh-label">No Subscription Ever</div>
+        <div class="vh-val">$0/月</div>
+        <div class="vh-label">永久免訂閱</div>
       </div>
       <div class="vh-item">
-        <div class="vh-val">4+ Agents</div>
-        <div class="vh-label">Multi-Agent Architecture</div>
+        <div class="vh-val">4+ 代理</div>
+        <div class="vh-label">多代理架構</div>
       </div>
       <div class="vh-item">
         <div class="vh-val">100%</div>
-        <div class="vh-label">On-Device Privacy</div>
+        <div class="vh-label">裝置端隱私</div>
       </div>
     </div>
   </div>
@@ -1408,61 +1434,61 @@
   <div class="section">
     <div class="section-header">
       <div class="section-number">6</div>
-      <h2 class="section-title">風險評估 <small>Risk Assessment</small></h2>
+      <h2 class="section-title">風險評估</h2>
     </div>
 
     <div class="risk-matrix">
       <!-- Corner -->
-      <div class="risk-corner">Impact ↑<br>Prob →</div>
+      <div class="risk-corner">影響 ↑<br>機率 →</div>
       <!-- Column Headers -->
-      <div class="risk-col-header">High Probability</div>
-      <div class="risk-col-header">Low Probability</div>
+      <div class="risk-col-header">高發生機率</div>
+      <div class="risk-col-header">低發生機率</div>
 
       <!-- Y-axis -->
-      <div class="risk-axis-label risk-axis-y">IMPACT</div>
+      <div class="risk-axis-label risk-axis-y">影響程度</div>
 
       <!-- High Impact, High Probability -->
       <div class="risk-cell high-high">
-        <span class="risk-tag critical">CRITICAL</span>
+        <span class="risk-tag critical">嚴重</span>
         <div class="risk-item">
-          <h5>Manufacturing Delays</h5>
-          <p>Component shortages or factory scheduling conflicts push ship dates 2–4 months.</p>
-          <div class="risk-mitigation">Mitigation: 4-year factory relationship + pre-negotiated production slots for Q4</div>
+          <h5>製造延遲</h5>
+          <p>零件短缺或工廠排程衝突可能導致出貨時間延後 2–4 個月。</p>
+          <div class="risk-mitigation">緩解措施：與工廠合作 4 年 + 已預先談妥 Q4 生產排程</div>
         </div>
         <div class="risk-item">
-          <h5>Shipping Cost Increases</h5>
-          <p>Freight rates volatile; could erode 8–15% of margin per unit.</p>
-          <div class="risk-mitigation">Mitigation: Bake $35 shipping buffer into unit economics; negotiate volume rates early</div>
+          <h5>運費成本上漲</h5>
+          <p>運費波動劇烈，可能侵蝕每台 8–15% 的利潤。</p>
+          <div class="risk-mitigation">緩解措施：於單位經濟模型中預留 $35 運費緩衝；提前協議量價</div>
         </div>
       </div>
 
       <!-- High Impact, Low Probability -->
       <div class="risk-cell high-low">
-        <span class="risk-tag warning">MONITOR</span>
+        <span class="risk-tag warning">監控</span>
         <div class="risk-item">
-          <h5>Major Competitor Launch</h5>
-          <p>Apple, Google, or Amazon launches a dedicated AI home tablet at similar price point.</p>
-          <div class="risk-mitigation">Mitigation: First-mover advantage + community moat; big tech unlikely to match "no subscription" model</div>
+          <h5>主要競爭對手推出同類產品</h5>
+          <p>Apple、Google 或 Amazon 以類似價位推出專用 AI 家庭平板。</p>
+          <div class="risk-mitigation">緩解措施：先行者優勢 + 社群護城河；科技巨頭不太可能匹配「免訂閱」模式</div>
         </div>
       </div>
 
       <!-- Low Impact, High Probability -->
       <div class="risk-cell low-high">
-        <span class="risk-tag warning">WATCH</span>
+        <span class="risk-tag warning">觀察</span>
         <div class="risk-item">
-          <h5>Component Price Fluctuations</h5>
-          <p>Memory, display panel, and NPU chip prices fluctuate ±5–10% quarterly.</p>
-          <div class="risk-mitigation">Mitigation: Lock BOM pricing 6 months ahead; maintain 2 alternate suppliers for key components</div>
+          <h5>零件價格波動</h5>
+          <p>記憶體、顯示面板及 NPU 晶片價格每季波動 ±5–10%。</p>
+          <div class="risk-mitigation">緩解措施：提前 6 個月鎖定 BOM 價格；關鍵零件維持 2 家備選供應商</div>
         </div>
       </div>
 
       <!-- Low Impact, Low Probability -->
       <div class="risk-cell low-low">
-        <span class="risk-tag low">ACCEPT</span>
+        <span class="risk-tag low">接受</span>
         <div class="risk-item">
-          <h5>Platform Policy Changes</h5>
-          <p>KS/IGG changes fee structure or fulfillment requirements.</p>
-          <div class="risk-mitigation">Mitigation: Maintain direct pre-order channel as backup; fee changes typically grandfathered</div>
+          <h5>平台政策變更</h5>
+          <p>Kickstarter / Indiegogo 調整費用結構或履約要求。</p>
+          <div class="risk-mitigation">緩解措施：維持自營預購管道作為備案；費用變更通常適用「既有條款保護」</div>
         </div>
       </div>
     </div>
@@ -1472,55 +1498,67 @@
   <div class="section">
     <div class="section-header">
       <div class="section-number">7</div>
-      <h2 class="section-title">結論與建議 <small>Conclusions & Recommendations</small></h2>
+      <h2 class="section-title">結論與建議</h2>
     </div>
 
     <div class="conclusions-grid">
       <div class="conclusion-card recommend">
-        <div class="conclusion-icon">✅</div>
+        <div class="conclusion-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
         <div>
-          <h4>$599 Price Point is Optimal</h4>
-          <p>The $599 KS price sits at the top of the highest-converting $300–$599 bracket (24% success rate), avoiding the steep drop-off at $600+ (18%). This is the maximum revenue per unit within the high-conversion zone.</p>
+          <h4>$599 定價為最佳甜蜜點</h4>
+          <p>$599 KS 定價位於轉換率最高的 $300–$599 區間頂端（24% 成功率），避開了 $600 以上的成功率驟降（18%）。這是高轉換率區間內每單位最大營收的定價。</p>
         </div>
       </div>
 
       <div class="conclusion-card recommend">
-        <div class="conclusion-icon">✅</div>
+        <div class="conclusion-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
         <div>
-          <h4>"No Subscription" is the #1 Differentiator</h4>
-          <p>Every competitor is moving toward subscription models. PadClaw's zero-subscription promise is a contrarian, powerful positioning — especially as subscription fatigue reaches all-time highs.</p>
+          <h4>「免訂閱」是核心差異化優勢</h4>
+          <p>所有競爭對手都在走向訂閱制。PadClaw 的零訂閱承諾是一個逆向但強而有力的定位——尤其在訂閱疲勞達到歷史新高的當下。</p>
         </div>
       </div>
 
       <div class="conclusion-card recommend">
-        <div class="conclusion-icon">✅</div>
+        <div class="conclusion-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
         <div>
-          <h4>Sep/Oct Launch Window</h4>
-          <p>September–October KS launch aligns with holiday gift-buying intent, media coverage cycles, and historically highest-performing campaign months. Target Feb fulfillment for Valentine's gifting wave.</p>
+          <h4>建議九月至十月上線</h4>
+          <p>九月至十月的 KS 上線時程契合節日送禮購買意圖、媒體報導週期，以及歷史上表現最佳的募資月份。目標二月出貨以搭上情人節送禮潮。</p>
         </div>
       </div>
 
       <div class="conclusion-card recommend">
-        <div class="conclusion-icon">✅</div>
+        <div class="conclusion-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
         <div>
-          <h4>Privacy Story Resonates</h4>
-          <p>On-device AI processing directly addresses the 78% of consumers concerned about cloud AI data collection. This isn't a feature — it's a market positioning weapon.</p>
+          <h4>隱私敘事深具共鳴</h4>
+          <p>裝置端 AI 處理直接回應 78% 消費者對雲端 AI 資料收集的疑慮。這不僅是功能——更是市場定位的戰略武器。</p>
         </div>
       </div>
 
       <div class="conclusion-card recommend">
-        <div class="conclusion-icon">✅</div>
+        <div class="conclusion-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
         <div>
-          <h4>Dual Persona Revenue Strategy</h4>
-          <p>Lead with Tech-Forward Families (35% of TAM, highest volume), then upsell with Duo Pack bundles for couples/multigenerational households to maximize revenue per backer.</p>
+          <h4>雙人格營收策略</h4>
+          <p>以科技先驅家庭（佔 TAM 35%，最高量體）作為主打，再透過 Duo Pack 雙機組合方案鎖定伴侶與多世代家庭，最大化每位贊助者的營收。</p>
         </div>
       </div>
 
       <div class="conclusion-card risk">
-        <div class="conclusion-icon">⚠️</div>
+        <div class="conclusion-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
         <div>
-          <h4>Risk is Manageable</h4>
-          <p>Primary risks (manufacturing delays, shipping costs) are mitigated by an existing 4-year factory relationship with pre-negotiated production slots. No unknowns in the supply chain.</p>
+          <h4>風險在可控範圍內</h4>
+          <p>主要風險（製造延遲、運費成本）可透過既有的 4 年工廠合作關係與預先談妥的生產排程加以緩解。供應鏈中沒有未知變數。</p>
         </div>
       </div>
     </div>
@@ -1530,8 +1568,8 @@
 
 <!-- Footer -->
 <footer>
-  <strong>PadClaw AI Tablet</strong> · Internal Proposal · Market Research<br>
-  Confidential — For Internal Use Only · Last Updated June 2026
+  <strong>PadClaw AI Tablet</strong> · 內部提案 · 市場研究報告<br>
+  機密文件 — 僅供內部使用 · 最後更新：2026 年 6 月
 </footer>
 
 </body>

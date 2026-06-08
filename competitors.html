@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PadClaw — Competitive Analysis | 競品分析</title>
+  <title>PadClaw — 競品分析報告</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -28,10 +28,6 @@
       --red: #ff4d6a;
       --orange: #ff9f43;
       --blue: #4facfe;
-      --purple: #a855f7;
-      --pink: #f472b6;
-      --cyan: #22d3ee;
-      --yellow: #fbbf24;
       --radius: 16px;
       --radius-sm: 10px;
       --radius-xs: 6px;
@@ -122,7 +118,6 @@
       font-weight: 700;
       padding: 4px 12px;
       border-radius: 20px;
-      text-transform: uppercase;
       letter-spacing: 0.5px;
       border: 1px solid rgba(5,206,120,0.2);
     }
@@ -236,7 +231,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--green), var(--cyan));
+      background: var(--green);
       opacity: 0;
       transition: opacity 0.3s;
     }
@@ -249,7 +244,6 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 14px;
-      font-size: 20px;
     }
     .summary-card .sc-value {
       font-size: 32px;
@@ -292,13 +286,13 @@
     }
     .map-quadrant.q-tl {
       top: 0; left: 0; width: 50%; height: 50%;
-      background: rgba(168,85,247,0.03);
+      background: rgba(5,206,120,0.02);
       border-bottom: 1px dashed var(--border);
       border-right: 1px dashed var(--border);
     }
     .map-quadrant.q-tr {
       top: 0; right: 0; width: 50%; height: 50%;
-      background: rgba(5,206,120,0.03);
+      background: rgba(5,206,120,0.04);
       border-bottom: 1px dashed var(--border);
     }
     .map-quadrant.q-bl {
@@ -595,7 +589,6 @@
     }
     .comp-advantage-icon {
       color: var(--green);
-      font-size: 16px;
       flex-shrink: 0;
       margin-top: 1px;
     }
@@ -702,7 +695,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
     }
     .insight-list {
       list-style: none;
@@ -768,7 +760,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--green), var(--cyan));
+      background: var(--green);
     }
     .moat-icon {
       width: 52px;
@@ -779,7 +771,6 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 16px;
-      font-size: 24px;
     }
     .moat-card h4 {
       font-size: 15px;
@@ -802,7 +793,7 @@
       margin-bottom: 48px;
     }
     .conclusions-header {
-      background: linear-gradient(135deg, rgba(5,206,120,0.1), rgba(34,211,238,0.05));
+      background: linear-gradient(135deg, rgba(5,206,120,0.1), rgba(5,206,120,0.03));
       border-bottom: 1px solid var(--border);
       padding: 28px 32px;
     }
@@ -1001,39 +992,39 @@
           <div class="logo-mark">P</div>
           PadClaw
         </a>
-        <nav class="header-nav">
+        <nav class="header-nav" style="display:flex;gap:16px;">
           <a href="index.html">文案頁面</a>
           <a href="personas.html">用戶輪廓</a>
           <a href="market-research.html">市場研究</a>
-          <a href="competitors.html" class="active">競品分析</a>
+          <a href="competitors.html" class="active" style="color:var(--green)">競品分析</a>
         </nav>
       </div>
       <div class="header-right">
-        <span class="doc-badge">Internal — Competitive Analysis</span>
+        <span class="doc-badge">內部提案文件</span>
       </div>
     </div>
   </header>
 
   <!-- ===== PAGE HERO ===== -->
   <section class="page-hero">
-    <h1>Competitive <span>Landscape</span></h1>
-    <p>Comprehensive analysis of direct competitors, their page design strategies, and actionable insights for PadClaw's Kickstarter positioning.</p>
+    <h1>競品<span>分析報告</span></h1>
+    <p>針對直接競爭者的全面分析，涵蓋其頁面設計策略及可執行洞察，為 PadClaw Kickstarter 定位提供決策依據。</p>
     <div class="meta-line">
       <span class="meta-tag">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Updated June 2026
+        更新於 2026 年 6 月
       </span>
       <span class="meta-tag">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-        7 Products Analyzed
+        分析 7 項產品
       </span>
       <span class="meta-tag">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
-        $199 – $699 Price Range
+        價格區間 $199 – $699
       </span>
       <span class="meta-tag">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        6 Strategic Moats
+        識別 6 項防禦護城河
       </span>
     </div>
   </section>
@@ -1044,28 +1035,36 @@
     <!-- ===== SUMMARY DASHBOARD ===== -->
     <div class="summary-grid" style="margin-top: 48px;">
       <div class="summary-card">
-        <div class="sc-icon" style="background: var(--green-glow);">🎯</div>
+        <div class="sc-icon" style="background: var(--green-glow);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
         <div class="sc-value">7</div>
-        <div class="sc-label">Direct & Adjacent Competitors</div>
-        <div class="sc-sub">AI hardware, smart displays,<br>and paper tablets</div>
+        <div class="sc-label">直接與相鄰競爭者</div>
+        <div class="sc-sub">涵蓋 AI 硬體、智慧顯示器<br>與電子紙平板</div>
       </div>
       <div class="summary-card">
-        <div class="sc-icon" style="background: rgba(79,172,254,0.12);">💲</div>
+        <div class="sc-icon" style="background: rgba(79,172,254,0.12);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
         <div class="sc-value">$0</div>
-        <div class="sc-label">Competitors w/ No Subscription</div>
-        <div class="sc-sub">PadClaw is the ONLY AI device<br>with zero recurring cost</div>
+        <div class="sc-label">無訂閱制的競品數</div>
+        <div class="sc-sub">PadClaw 是唯一零月費的<br>AI 裝置</div>
       </div>
       <div class="summary-card">
-        <div class="sc-icon" style="background: rgba(168,85,247,0.12);">🛡️</div>
+        <div class="sc-icon" style="background: rgba(5,206,120,0.12);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <div class="sc-value">6</div>
-        <div class="sc-label">Defensive Moats Identified</div>
-        <div class="sc-sub">No-sub, on-device AI, full Android,<br>4 agents, factory, pricing</div>
+        <div class="sc-label">已識別防禦護城河</div>
+        <div class="sc-sub">無訂閱、本地 AI、完整 Android、<br>4 代理、工廠、定價</div>
       </div>
       <div class="summary-card">
-        <div class="sc-icon" style="background: rgba(255,159,67,0.12);">⚡</div>
+        <div class="sc-icon" style="background: rgba(255,159,67,0.12);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
         <div class="sc-value">40%</div>
-        <div class="sc-label">KS Price vs MSRP Savings</div>
-        <div class="sc-sub">$599 vs $999 MSRP<br>Maximum perceived value</div>
+        <div class="sc-label">KS 價格 vs 建議售價折扣</div>
+        <div class="sc-sub">$599 vs $999 建議售價<br>最大感知價值</div>
       </div>
     </div>
 
@@ -1073,11 +1072,11 @@
     <div class="section-header">
       <h2>競爭格局概覽</h2>
       <div class="section-line"></div>
-      <span class="section-tag">Positioning Map</span>
+      <span class="section-tag">定位圖</span>
     </div>
 
     <div class="positioning-map">
-      <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 8px;">Product positioning by <strong style="color: var(--white);">Price</strong> vs <strong style="color: var(--white);">AI Capability</strong></div>
+      <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 8px;">依據<strong style="color: var(--white);">價格</strong>與<strong style="color: var(--white);">AI 能力</strong>進行產品定位</div>
       <div class="map-container">
         <!-- Quadrants -->
         <div class="map-quadrant q-tl"></div>
@@ -1086,20 +1085,20 @@
         <div class="map-quadrant q-br"></div>
 
         <!-- Quadrant labels -->
-        <span class="map-quadrant-label tl">Advanced AI<br>Low Price</span>
-        <span class="map-quadrant-label tr">Advanced AI<br>High Price</span>
-        <span class="map-quadrant-label bl">Basic AI<br>Low Price</span>
-        <span class="map-quadrant-label br">Basic AI<br>High Price</span>
+        <span class="map-quadrant-label tl">進階 AI<br>低價</span>
+        <span class="map-quadrant-label tr">進階 AI<br>高價</span>
+        <span class="map-quadrant-label bl">基礎 AI<br>低價</span>
+        <span class="map-quadrant-label br">基礎 AI<br>高價</span>
 
         <!-- Axis labels -->
-        <span class="axis-arrow x-low" style="font-size: 10px; font-weight: 600;">← LOW</span>
-        <span class="axis-label x-label">PRICE</span>
-        <span class="axis-arrow x-high" style="font-size: 10px; font-weight: 600;">HIGH →</span>
-        <span class="axis-arrow y-low" style="font-size: 10px; font-weight: 600;">BASIC</span>
-        <span class="axis-label y-label">AI CAPABILITY</span>
-        <span class="axis-arrow y-high" style="font-size: 10px; font-weight: 600;">ADV</span>
+        <span class="axis-arrow x-low" style="font-size: 10px; font-weight: 600;">← 低</span>
+        <span class="axis-label x-label">價格</span>
+        <span class="axis-arrow x-high" style="font-size: 10px; font-weight: 600;">高 →</span>
+        <span class="axis-arrow y-low" style="font-size: 10px; font-weight: 600;">基礎</span>
+        <span class="axis-label y-label">AI 能力</span>
+        <span class="axis-arrow y-high" style="font-size: 10px; font-weight: 600;">進階</span>
 
-        <!-- Rabbit R1: $199, High AI → low price (left), high AI (top) → ~20%, ~25% -->
+        <!-- Rabbit R1 -->
         <div class="map-dot" style="left: 18%; top: 22%;">
           <div class="dot-circle" style="background: #ff6600;">
             R1
@@ -1108,11 +1107,11 @@
           <div class="dot-tooltip">
             <div class="tt-name">Rabbit R1</div>
             <div class="tt-price">$199</div>
-            <div class="tt-cat">AI Companion Device</div>
+            <div class="tt-cat">AI 伴侶裝置</div>
           </div>
         </div>
 
-        <!-- Google Nest Hub Max: $229, Medium AI → ~25%, ~55% -->
+        <!-- Google Nest Hub Max -->
         <div class="map-dot" style="left: 22%; top: 55%;">
           <div class="dot-circle" style="background: #4285f4;">
             NH
@@ -1121,11 +1120,11 @@
           <div class="dot-tooltip">
             <div class="tt-name">Google Nest Hub Max</div>
             <div class="tt-price">$229</div>
-            <div class="tt-cat">Smart Display</div>
+            <div class="tt-cat">智慧顯示器</div>
           </div>
         </div>
 
-        <!-- Echo Show 15: $279, Medium AI → ~32%, ~55% -->
+        <!-- Echo Show 15 -->
         <div class="map-dot" style="left: 32%; top: 52%;">
           <div class="dot-circle" style="background: #00a8e1;">
             ES
@@ -1134,11 +1133,11 @@
           <div class="dot-tooltip">
             <div class="tt-name">Amazon Echo Show 15</div>
             <div class="tt-price">$279</div>
-            <div class="tt-cat">Smart Display</div>
+            <div class="tt-cat">智慧顯示器</div>
           </div>
         </div>
 
-        <!-- reMarkable 2: $449, No AI → ~55%, ~85% -->
+        <!-- reMarkable 2 -->
         <div class="map-dot" style="left: 55%; top: 85%;">
           <div class="dot-circle" style="background: #555;">
             rM
@@ -1147,11 +1146,11 @@
           <div class="dot-tooltip">
             <div class="tt-name">reMarkable 2</div>
             <div class="tt-price">$449 + $7.99/mo</div>
-            <div class="tt-cat">Paper Tablet</div>
+            <div class="tt-cat">電子紙平板</div>
           </div>
         </div>
 
-        <!-- iPad 10th Gen: $449, Low AI → ~55%, ~72% -->
+        <!-- iPad 10th Gen -->
         <div class="map-dot" style="left: 55%; top: 70%;">
           <div class="dot-circle" style="background: #a2aaad;">
             iP
@@ -1160,24 +1159,24 @@
           <div class="dot-tooltip">
             <div class="tt-name">iPad 10th Gen</div>
             <div class="tt-price">$449</div>
-            <div class="tt-cat">General Tablet</div>
+            <div class="tt-cat">通用平板</div>
           </div>
         </div>
 
-        <!-- PadClaw: $599, High AI → ~70%, ~18% -->
+        <!-- PadClaw -->
         <div class="map-dot" style="left: 70%; top: 15%;">
           <div class="dot-circle padclaw" style="background: rgba(5,206,120,0.2);">
             <span style="color: var(--green);">PC</span>
             <span class="dot-name">PadClaw $599</span>
           </div>
           <div class="dot-tooltip">
-            <div class="tt-name">🟢 PadClaw AI Tablet</div>
+            <div class="tt-name">PadClaw AI Tablet</div>
             <div class="tt-price">$599 KS / $999 MSRP</div>
-            <div class="tt-cat">AI Agent Tablet — No Subscription</div>
+            <div class="tt-cat">AI 代理平板 — 無訂閱制</div>
           </div>
         </div>
 
-        <!-- Otto AI: $TBD, High AI → ~62%, ~12% -->
+        <!-- Otto AI -->
         <div class="map-dot" style="left: 62%; top: 20%;">
           <div class="dot-circle" style="background: #2d3436;">
             OT
@@ -1185,12 +1184,12 @@
           </div>
           <div class="dot-tooltip">
             <div class="tt-name">Otto AI</div>
-            <div class="tt-price">$TBD (Pre-sale)</div>
-            <div class="tt-cat">AI Smart Home Tablet</div>
+            <div class="tt-price">$TBD（預售中）</div>
+            <div class="tt-cat">AI 智慧家庭平板</div>
           </div>
         </div>
 
-        <!-- Humane AI Pin: $699, High AI → ~85%, ~20% -->
+        <!-- Humane AI Pin -->
         <div class="map-dot" style="left: 85%; top: 18%;">
           <div class="dot-circle" style="background: #1a1a1a; border-color: rgba(255,255,255,0.3);">
             HP
@@ -1199,7 +1198,7 @@
           <div class="dot-tooltip">
             <div class="tt-name">Humane AI Pin</div>
             <div class="tt-price">$699 + $24/mo</div>
-            <div class="tt-cat">Wearable AI</div>
+            <div class="tt-cat">穿戴式 AI</div>
           </div>
         </div>
       </div>
@@ -1208,7 +1207,7 @@
       <div class="map-legend">
         <div class="legend-item padclaw-legend">
           <div class="legend-dot" style="background: var(--green); box-shadow: 0 0 8px rgba(5,206,120,0.5);"></div>
-          PadClaw (Target Position)
+          PadClaw（目標定位）
         </div>
         <div class="legend-item">
           <div class="legend-dot" style="background: #ff6600;"></div>
@@ -1245,7 +1244,7 @@
     <div class="section-header">
       <h2>直接競品深度分析</h2>
       <div class="section-line"></div>
-      <span class="section-tag">Deep Dive</span>
+      <span class="section-tag">深度剖析</span>
     </div>
 
     <div class="competitor-cards">
@@ -1257,49 +1256,51 @@
           <div class="comp-header-info">
             <h3>Otto AI</h3>
             <div class="comp-header-meta">
-              <span class="comp-cat">AI Smart Home Tablet — myotto.ai</span>
-              <span class="comp-price-badge" style="background: rgba(255,159,67,0.12); color: var(--orange);">$TBD (Pre-sale)</span>
+              <span class="comp-cat">AI 智慧家庭平板 — myotto.ai</span>
+              <span class="comp-price-badge" style="background: rgba(255,159,67,0.12); color: var(--orange);">$TBD（預售中）</span>
             </div>
           </div>
         </div>
         <div class="comp-card-body">
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>頁面設計策略</div>
               <ul class="comp-detail-list strategy">
-                <li><strong>Hero:</strong> Bold claim — "The first AI-native home device"</li>
-                <li><strong>Flow:</strong> Problem → Solution → Features → Social proof</li>
-                <li><strong>Visual:</strong> Clean, Apple-inspired, lots of whitespace</li>
-                <li><strong>Key hooks:</strong> "Purpose-built", "Always-on", "60-second deploy"</li>
-                <li><strong>Trust:</strong> Team photos, partnership logos, beta user testimonials</li>
+                <li><strong>主視覺：</strong>大膽宣言 — 「The first AI-native home device」</li>
+                <li><strong>頁面流程：</strong>問題 → 解決方案 → 功能特色 → 社會認同</li>
+                <li><strong>視覺風格：</strong>簡潔、Apple 風格、大量留白</li>
+                <li><strong>關鍵鉤子：</strong>「Purpose-built」、「Always-on」、「60-second deploy」</li>
+                <li><strong>信任信號：</strong>團隊照片、合作夥伴標誌、Beta 用戶評價</li>
               </ul>
             </div>
           </div>
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>優勢</div>
               <ul class="comp-detail-list strengths">
-                <li>Strong category framing ("AI-native home device")</li>
-                <li>Premium visual feel, Apple-level polish</li>
-                <li>Clear problem-solution narrative</li>
+                <li>強而有力的品類定義（「AI-native home device」）</li>
+                <li>高品質視覺觀感，達到 Apple 級別的精緻度</li>
+                <li>清晰的問題—解決方案敘事架構</li>
               </ul>
             </div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>弱點</div>
               <ul class="comp-detail-list weaknesses">
-                <li>No price transparency — creates friction</li>
-                <li>No shipping date announced</li>
-                <li>Waitlist-only, no clear conversion path</li>
+                <li>未公開定價 — 造成用戶轉換摩擦</li>
+                <li>未公布出貨日期</li>
+                <li>僅提供候補名單，缺乏明確的購買路徑</li>
               </ul>
             </div>
           </div>
         </div>
         <div class="comp-card-footer">
           <div class="comp-advantage">
-            <span class="comp-advantage-icon">✦</span>
+            <span class="comp-advantage-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--green)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
             <div>
-              <div class="comp-advantage-label">PadClaw Advantage</div>
-              <div class="comp-advantage-text">Real pricing ($599 KS), working prototype, established 4-year factory relationship — Otto has none of these trust signals.</div>
+              <div class="comp-advantage-label">PadClaw 的優勢</div>
+              <div class="comp-advantage-text">明確定價（$599 KS）、可運作的原型機、已建立 4 年的工廠合作關係 — Otto 目前缺乏這些信任信號。</div>
             </div>
           </div>
         </div>
@@ -1312,7 +1313,7 @@
           <div class="comp-header-info">
             <h3>Rabbit R1</h3>
             <div class="comp-header-meta">
-              <span class="comp-cat">AI Companion Device — rabbit.tech</span>
+              <span class="comp-cat">AI 伴侶裝置 — rabbit.tech</span>
               <span class="comp-price-badge" style="background: rgba(5,206,120,0.12); color: var(--green);">$199</span>
             </div>
           </div>
@@ -1320,41 +1321,43 @@
         <div class="comp-card-body">
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>頁面設計策略</div>
               <ul class="comp-detail-list strategy">
-                <li><strong>Hero:</strong> "Your AI companion" with bright orange device</li>
-                <li><strong>Flow:</strong> Demo video → Use cases → Specs → Pre-order</li>
-                <li><strong>Visual:</strong> Bold colors (orange), playful, Gen-Z aesthetic</li>
-                <li><strong>Key hooks:</strong> "No apps needed", "Just talk"</li>
-                <li><strong>Trust:</strong> Teenage Engineering design partnership</li>
+                <li><strong>主視覺：</strong>「Your AI companion」搭配亮橙色裝置</li>
+                <li><strong>頁面流程：</strong>Demo 影片 → 使用場景 → 規格 → 預購</li>
+                <li><strong>視覺風格：</strong>鮮豔色彩（橙色）、玩味、Gen-Z 美學</li>
+                <li><strong>關鍵鉤子：</strong>「No apps needed」、「Just talk」</li>
+                <li><strong>信任信號：</strong>Teenage Engineering 設計合作</li>
               </ul>
             </div>
           </div>
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>優勢</div>
               <ul class="comp-detail-list strengths">
-                <li>Viral marketing execution</li>
-                <li>Lowest price point in AI hardware</li>
-                <li>Teenage Engineering design credibility</li>
+                <li>病毒式行銷執行力極強</li>
+                <li>AI 硬體中最低價格帶</li>
+                <li>Teenage Engineering 設計背書帶來可信度</li>
               </ul>
             </div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>弱點</div>
               <ul class="comp-detail-list weaknesses">
-                <li>Limited functionality — most tasks still need phone</li>
-                <li>Devastating post-launch reviews</li>
-                <li>Phone-dependent, not standalone</li>
+                <li>功能有限 — 多數任務仍需依賴手機</li>
+                <li>上市後評測遭到毀滅性差評</li>
+                <li>需搭配手機使用，非獨立運作</li>
               </ul>
             </div>
           </div>
         </div>
         <div class="comp-card-footer">
           <div class="comp-advantage">
-            <span class="comp-advantage-icon">✦</span>
+            <span class="comp-advantage-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--green)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
             <div>
-              <div class="comp-advantage-label">PadClaw Advantage</div>
-              <div class="comp-advantage-text">Full tablet capability, 4 specialized AI agents (not a general chatbot), no phone dependency — PadClaw is a complete device, not an accessory.</div>
+              <div class="comp-advantage-label">PadClaw 的優勢</div>
+              <div class="comp-advantage-text">完整平板功能、4 個專業 AI 代理（非通用聊天機器人）、無需手機依賴 — PadClaw 是完整裝置，而非配件。</div>
             </div>
           </div>
         </div>
@@ -1367,7 +1370,7 @@
           <div class="comp-header-info">
             <h3>reMarkable 2</h3>
             <div class="comp-header-meta">
-              <span class="comp-cat">Paper Tablet — remarkable.com</span>
+              <span class="comp-cat">電子紙平板 — remarkable.com</span>
               <span class="comp-price-badge" style="background: rgba(255,77,106,0.12); color: var(--red);">$449 + $7.99/mo</span>
             </div>
           </div>
@@ -1375,41 +1378,43 @@
         <div class="comp-card-body">
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>頁面設計策略</div>
               <ul class="comp-detail-list strategy">
-                <li><strong>Hero:</strong> "The paper tablet" — category creation headline</li>
-                <li><strong>Flow:</strong> Writing demo → Distraction-free → Specs → Plans</li>
-                <li><strong>Visual:</strong> Minimalist black/white, focus on writing experience</li>
-                <li><strong>Key hooks:</strong> "Replace your paper notebooks", "Zero distractions"</li>
-                <li><strong>Trust:</strong> 100K+ reviews, NYT and Wired media quotes</li>
+                <li><strong>主視覺：</strong>「The paper tablet」— 品類創建式標題</li>
+                <li><strong>頁面流程：</strong>書寫演示 → 無干擾 → 規格 → 方案</li>
+                <li><strong>視覺風格：</strong>極簡黑白，聚焦書寫體驗</li>
+                <li><strong>關鍵鉤子：</strong>「Replace your paper notebooks」、「Zero distractions」</li>
+                <li><strong>信任信號：</strong>超過 10 萬則評論、NYT 和 Wired 媒體引用</li>
               </ul>
             </div>
           </div>
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>優勢</div>
               <ul class="comp-detail-list strengths">
-                <li>Category ownership — "paper tablet" = reMarkable</li>
-                <li>Beautiful minimalist design language</li>
-                <li>Strong media coverage (NYT, Wired, Verge)</li>
+                <li>品類壟斷 — 「paper tablet」= reMarkable</li>
+                <li>精美的極簡設計語言</li>
+                <li>強勢媒體曝光（NYT、Wired、Verge）</li>
               </ul>
             </div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>弱點</div>
               <ul class="comp-detail-list weaknesses">
-                <li>Subscription model backlash from users</li>
-                <li>Very limited use case — writing only</li>
-                <li>No AI capabilities at all</li>
+                <li>訂閱制模式引發用戶強烈反彈</li>
+                <li>使用場景極度單一 — 僅限書寫</li>
+                <li>完全不具備 AI 能力</li>
               </ul>
             </div>
           </div>
         </div>
         <div class="comp-card-footer">
           <div class="comp-advantage">
-            <span class="comp-advantage-icon">✦</span>
+            <span class="comp-advantage-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--green)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
             <div>
-              <div class="comp-advantage-label">PadClaw Advantage</div>
-              <div class="comp-advantage-text">Multi-purpose AI agents, no subscription fees ever, full Android OS — PadClaw does everything reMarkable does plus AI intelligence.</div>
+              <div class="comp-advantage-label">PadClaw 的優勢</div>
+              <div class="comp-advantage-text">多用途 AI 代理、永遠免訂閱費、完整 Android OS — PadClaw 能做到 reMarkable 所有功能，同時具備 AI 智慧。</div>
             </div>
           </div>
         </div>
@@ -1422,7 +1427,7 @@
           <div class="comp-header-info">
             <h3>Amazon Echo Show 15</h3>
             <div class="comp-header-meta">
-              <span class="comp-cat">Smart Display — amazon.com</span>
+              <span class="comp-cat">智慧顯示器 — amazon.com</span>
               <span class="comp-price-badge" style="background: rgba(5,206,120,0.12); color: var(--green);">$279</span>
             </div>
           </div>
@@ -1430,41 +1435,43 @@
         <div class="comp-card-body">
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>頁面設計策略</div>
               <ul class="comp-detail-list strategy">
-                <li><strong>Hero:</strong> Family using it on the wall — lifestyle-first</li>
-                <li><strong>Flow:</strong> Alexa features → Smart home → Entertainment → Specs</li>
-                <li><strong>Visual:</strong> Warm, family-oriented, lifestyle photography</li>
-                <li><strong>Key hooks:</strong> "Your family's hub", "Alexa built in"</li>
-                <li><strong>Trust:</strong> Amazon brand, millions of reviews, ecosystem</li>
+                <li><strong>主視覺：</strong>家庭使用壁掛情境 — 生活方式優先</li>
+                <li><strong>頁面流程：</strong>Alexa 功能 → 智慧家庭 → 娛樂 → 規格</li>
+                <li><strong>視覺風格：</strong>溫馨、家庭導向、生活攝影</li>
+                <li><strong>關鍵鉤子：</strong>「Your family's hub」、「Alexa built in」</li>
+                <li><strong>信任信號：</strong>Amazon 品牌、數百萬則評論、生態系統</li>
               </ul>
             </div>
           </div>
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>優勢</div>
               <ul class="comp-detail-list strengths">
-                <li>Massive brand trust — Amazon ecosystem</li>
-                <li>Lowest price point for smart display category</li>
-                <li>Huge existing content/skills library</li>
+                <li>強大的品牌信任度 — Amazon 生態系統</li>
+                <li>智慧顯示器品類中最低價格帶</li>
+                <li>龐大的既有內容與技能庫</li>
               </ul>
             </div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>弱點</div>
               <ul class="comp-detail-list weaknesses">
-                <li>Significant privacy concerns (always listening)</li>
-                <li>100% cloud-dependent — no offline capability</li>
-                <li>Limited customization, walled garden</li>
+                <li>嚴重的隱私疑慮（持續監聽）</li>
+                <li>100% 雲端依賴 — 無離線功能</li>
+                <li>客製化受限，封閉式花園生態</li>
               </ul>
             </div>
           </div>
         </div>
         <div class="comp-card-footer">
           <div class="comp-advantage">
-            <span class="comp-advantage-icon">✦</span>
+            <span class="comp-advantage-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--green)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
             <div>
-              <div class="comp-advantage-label">PadClaw Advantage</div>
-              <div class="comp-advantage-text">On-device AI processing (no cloud dependency), privacy by design, 4 specialized agents vs generic Alexa, full Android customization.</div>
+              <div class="comp-advantage-label">PadClaw 的優勢</div>
+              <div class="comp-advantage-text">本地端 AI 運算（不依賴雲端）、隱私優先設計、4 個專業代理 vs 通用 Alexa、完整 Android 客製化。</div>
             </div>
           </div>
         </div>
@@ -1477,7 +1484,7 @@
           <div class="comp-header-info">
             <h3>Humane AI Pin</h3>
             <div class="comp-header-meta">
-              <span class="comp-cat">Wearable AI — humane.com</span>
+              <span class="comp-cat">穿戴式 AI — humane.com</span>
               <span class="comp-price-badge" style="background: rgba(255,77,106,0.12); color: var(--red);">$699 + $24/mo</span>
             </div>
           </div>
@@ -1485,41 +1492,43 @@
         <div class="comp-card-body">
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>頁面設計策略</div>
               <ul class="comp-detail-list strategy">
-                <li><strong>Hero:</strong> "The end of the smartphone era" — vision statement</li>
-                <li><strong>Flow:</strong> Vision → Demo → Technology → Team</li>
-                <li><strong>Visual:</strong> Ultra-premium, dark theme, Apple-level photography</li>
-                <li><strong>Key hooks:</strong> "Ambient computing", "Screenless by design"</li>
-                <li><strong>Trust:</strong> Ex-Apple team, $230M funding, media coverage</li>
+                <li><strong>主視覺：</strong>「The end of the smartphone era」— 願景宣言</li>
+                <li><strong>頁面流程：</strong>願景 → Demo → 技術 → 團隊</li>
+                <li><strong>視覺風格：</strong>超高端、暗色主題、Apple 級別攝影</li>
+                <li><strong>關鍵鉤子：</strong>「Ambient computing」、「Screenless by design」</li>
+                <li><strong>信任信號：</strong>前 Apple 團隊、$230M 融資、媒體報導</li>
               </ul>
             </div>
           </div>
           <div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>優勢</div>
               <ul class="comp-detail-list strengths">
-                <li>Premium positioning & brand identity</li>
-                <li>Strong team narrative (ex-Apple engineers)</li>
-                <li>$230M funding = credibility signal</li>
+                <li>頂級定位與品牌識別度</li>
+                <li>強勢的團隊敘事（前 Apple 工程師）</li>
+                <li>$230M 融資 = 強力可信度信號</li>
               </ul>
             </div>
             <div class="comp-section">
-              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>弱點</div>
               <ul class="comp-detail-list weaknesses">
-                <li>$24/mo mandatory subscription</li>
-                <li>Devastating reviews (The Verge: 4/10)</li>
-                <li>Screenless = unusable for most tasks</li>
+                <li>$24/mo 強制性月費訂閱</li>
+                <li>毀滅性評測（The Verge: 4/10）</li>
+                <li>無螢幕設計 = 多數任務無法使用</li>
               </ul>
             </div>
           </div>
         </div>
         <div class="comp-card-footer">
           <div class="comp-advantage">
-            <span class="comp-advantage-icon">✦</span>
+            <span class="comp-advantage-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--green)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
             <div>
-              <div class="comp-advantage-label">PadClaw Advantage</div>
-              <div class="comp-advantage-text">Screen-based UX (proven, familiar), zero subscription cost, practical daily utility — PadClaw delivers on the promise Humane couldn't.</div>
+              <div class="comp-advantage-label">PadClaw 的優勢</div>
+              <div class="comp-advantage-text">螢幕式 UX（經驗證、熟悉的介面）、零訂閱費、實際日常實用性 — PadClaw 實現了 Humane 未能兌現的承諾。</div>
             </div>
           </div>
         </div>
@@ -1529,9 +1538,9 @@
 
     <!-- ===== SECTION 3: PAGE DESIGN PATTERN TABLE ===== -->
     <div class="section-header">
-      <h2>頁面設計模式分析</h2>
+      <h2>頁面設計模式比較</h2>
       <div class="section-line"></div>
-      <span class="section-tag">Design Patterns</span>
+      <span class="section-tag">設計模式</span>
     </div>
 
     <div class="table-wrap">
@@ -1539,87 +1548,87 @@
         <table class="comp-table">
           <thead>
             <tr>
-              <th>Element</th>
+              <th>比較項目</th>
               <th>Otto</th>
               <th>Rabbit</th>
               <th>reMarkable</th>
               <th>Echo Show</th>
               <th>Humane</th>
-              <th class="padclaw-col">PadClaw ✦</th>
+              <th class="padclaw-col">PadClaw</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="row-label">Hero Type</td>
-              <td>Bold claim</td>
-              <td>Product shot</td>
-              <td>Category definition</td>
-              <td>Lifestyle</td>
-              <td>Vision statement</td>
-              <td class="padclaw-col">Lifestyle + Category</td>
+              <td class="row-label">主視覺類型</td>
+              <td>大膽宣言</td>
+              <td>產品照片</td>
+              <td>品類定義</td>
+              <td>生活方式</td>
+              <td>願景宣言</td>
+              <td class="padclaw-col">生活方式 + 品類</td>
             </tr>
             <tr>
-              <td class="row-label">Video</td>
-              <td>Yes</td>
-              <td>Yes</td>
-              <td>Yes</td>
-              <td>No</td>
-              <td>Yes</td>
-              <td class="padclaw-col">Planned ✓</td>
+              <td class="row-label">影片</td>
+              <td>有</td>
+              <td>有</td>
+              <td>有</td>
+              <td>無</td>
+              <td>有</td>
+              <td class="padclaw-col">規劃中</td>
             </tr>
             <tr>
-              <td class="row-label">Page Flow</td>
-              <td>Problem → Solution</td>
-              <td>Demo → Use cases</td>
-              <td>Demo → Features</td>
-              <td>Features → Specs</td>
-              <td>Vision → Tech</td>
-              <td class="padclaw-col">Problem → Agents → Trust</td>
+              <td class="row-label">頁面流程</td>
+              <td>問題 → 解法</td>
+              <td>Demo → 場景</td>
+              <td>Demo → 功能</td>
+              <td>功能 → 規格</td>
+              <td>願景 → 技術</td>
+              <td class="padclaw-col">問題 → 代理 → 信任</td>
             </tr>
             <tr>
-              <td class="row-label">Social Proof</td>
-              <td>Beta users</td>
-              <td>Design partner</td>
-              <td>Media quotes</td>
-              <td>Amazon reviews</td>
-              <td>Team / funding</td>
-              <td class="padclaw-col">Factory + Team + Proto</td>
+              <td class="row-label">社會認同</td>
+              <td>Beta 用戶</td>
+              <td>設計合作</td>
+              <td>媒體引用</td>
+              <td>Amazon 評論</td>
+              <td>團隊 / 融資</td>
+              <td class="padclaw-col">工廠 + 團隊 + 原型</td>
             </tr>
             <tr>
-              <td class="row-label">Pricing</td>
-              <td style="color: var(--red);">Hidden ✗</td>
-              <td>Visible</td>
-              <td>Tiered + sub</td>
-              <td>Visible</td>
-              <td>Visible + $24/mo</td>
-              <td class="padclaw-col">KS tiers, no sub</td>
+              <td class="row-label">定價策略</td>
+              <td style="color: var(--red);">隱藏</td>
+              <td>公開</td>
+              <td>分層 + 月費</td>
+              <td>公開</td>
+              <td>公開 + $24/mo</td>
+              <td class="padclaw-col">KS 分層，無月費</td>
             </tr>
             <tr>
-              <td class="row-label">CTA Style</td>
-              <td>Waitlist</td>
-              <td>Pre-order</td>
-              <td>Buy now</td>
-              <td>Buy now</td>
-              <td>Buy now</td>
-              <td class="padclaw-col">Back this project</td>
+              <td class="row-label">行動呼籲風格</td>
+              <td>候補名單</td>
+              <td>預購</td>
+              <td>立即購買</td>
+              <td>立即購買</td>
+              <td>立即購買</td>
+              <td class="padclaw-col">支持此專案</td>
             </tr>
             <tr>
-              <td class="row-label">Trust Level</td>
-              <td style="color: var(--orange);">Low</td>
-              <td>Medium</td>
-              <td style="color: var(--green);">High</td>
-              <td style="color: var(--green);">Very High</td>
-              <td>High</td>
-              <td class="padclaw-col">Medium → Build ↑</td>
+              <td class="row-label">信任等級</td>
+              <td style="color: var(--orange);">低</td>
+              <td>中</td>
+              <td style="color: var(--green);">高</td>
+              <td style="color: var(--green);">極高</td>
+              <td>高</td>
+              <td class="padclaw-col">中 → 持續提升</td>
             </tr>
             <tr>
-              <td class="row-label">Subscription</td>
-              <td>Unknown</td>
-              <td>None</td>
+              <td class="row-label">訂閱制</td>
+              <td>未知</td>
+              <td>無</td>
               <td style="color: var(--red);">$7.99/mo</td>
-              <td>None*</td>
+              <td>無*</td>
               <td style="color: var(--red);">$24/mo</td>
-              <td class="padclaw-col">None — EVER ✓</td>
+              <td class="padclaw-col">永遠免費</td>
             </tr>
           </tbody>
         </table>
@@ -1630,35 +1639,39 @@
     <div class="section-header">
       <h2>頁面設計關鍵洞察</h2>
       <div class="section-line"></div>
-      <span class="section-tag">Key Insights</span>
+      <span class="section-tag">關鍵洞察</span>
     </div>
 
     <div class="insights-grid">
       <div class="insight-card">
         <h3>
-          <span class="ic-icon" style="background: var(--green-glow);">✅</span>
-          What Works Best in Crowdfunding
+          <span class="ic-icon" style="background: var(--green-glow);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          群眾募資中的成功設計模式
         </h3>
         <ol class="insight-list works">
-          <li><strong>Category creation headline</strong> — reMarkable's "The paper tablet" defined a new category and owned it completely</li>
-          <li><strong>Problem-first storytelling</strong> — Otto's "Your phone wasn't built for this" immediately resonates with frustrated users</li>
-          <li><strong>Transparent pricing with clear savings</strong> — Show KS price vs MSRP with exact $ saved and % off</li>
-          <li><strong>Real product imagery (not renders)</strong> — Actual photos build 3× more trust than CGI renders on crowdfunding</li>
-          <li><strong>Video within first viewport</strong> — 85% of successful hardware KS campaigns have video above the fold</li>
-          <li><strong>Social proof variety</strong> — Combine team, factory, media quotes, and user testimonials for maximum credibility</li>
-          <li><strong>FAQ section</strong> — Address shipping, refund, warranty, and subscription questions proactively</li>
+          <li><strong>品類創建式標題</strong> — reMarkable 的「The paper tablet」定義了一個新品類並完全佔領它</li>
+          <li><strong>問題導向敘事</strong> — Otto 的「Your phone wasn't built for this」立即引起挫折用戶的共鳴</li>
+          <li><strong>透明定價搭配明確折扣</strong> — 展示 KS 價格 vs 建議售價，標明具體省下的金額與折扣百分比</li>
+          <li><strong>實際產品影像（非渲染圖）</strong> — 實際照片在群眾募資中建立的信任度是 CGI 渲染圖的 3 倍</li>
+          <li><strong>首屏即有影片</strong> — 85% 成功的硬體 KS 專案在首屏就放置影片</li>
+          <li><strong>多元社會認同</strong> — 結合團隊、工廠、媒體引用和用戶評價，達到最大可信度</li>
+          <li><strong>FAQ 區塊</strong> — 主動回應出貨、退款、保固與訂閱相關問題</li>
         </ol>
       </div>
       <div class="insight-card">
         <h3>
-          <span class="ic-icon" style="background: rgba(255,77,106,0.12);">⚠️</span>
-          Common Mistakes to Avoid
+          <span class="ic-icon" style="background: rgba(255,77,106,0.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </span>
+          應避免的常見錯誤
         </h3>
         <ol class="insight-list avoid">
-          <li><strong>Hidden pricing (Otto)</strong> — Creates immediate friction and reduces conversion; KS backers demand transparency</li>
-          <li><strong>Subscription model on hardware (Humane, reMarkable)</strong> — Kickstarter backers strongly resist recurring costs; community backlash is severe</li>
-          <li><strong>Over-promising AI capabilities (Rabbit, Humane)</strong> — Both faced devastating reviews for failing to deliver; set realistic expectations</li>
-          <li><strong>No shipping date</strong> — Creates uncertainty and reduces pledge confidence; always provide a timeline even with caveats</li>
+          <li><strong>隱藏定價（Otto）</strong> — 立即產生摩擦並降低轉換率；KS 贊助者要求透明度</li>
+          <li><strong>硬體搭配訂閱制（Humane、reMarkable）</strong> — Kickstarter 贊助者強烈抵制經常性費用；社群反彈非常嚴重</li>
+          <li><strong>過度承諾 AI 能力（Rabbit、Humane）</strong> — 兩者都因未能兌現而遭到毀滅性評測；務必設定合理預期</li>
+          <li><strong>不提供出貨日期</strong> — 增加不確定性並降低贊助信心；即使附帶但書也應提供時程</li>
         </ol>
       </div>
     </div>
@@ -1667,39 +1680,51 @@
     <div class="section-header">
       <h2>PadClaw 的競爭護城河</h2>
       <div class="section-line"></div>
-      <span class="section-tag">Competitive Moat</span>
+      <span class="section-tag">護城河</span>
     </div>
 
     <div class="moat-grid">
       <div class="moat-card">
-        <div class="moat-icon">🚫</div>
-        <h4>No Subscription</h4>
-        <p>The <strong>only</strong> AI tablet with zero recurring costs. While Humane charges $24/mo and reMarkable $7.99/mo, PadClaw is one-time purchase — forever.</p>
+        <div class="moat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        </div>
+        <h4>零訂閱費</h4>
+        <p><strong>唯一</strong>零經常性費用的 AI 平板。Humane 收取 $24/mo、reMarkable 收取 $7.99/mo，PadClaw 一次購買 — 永久擁有。</p>
       </div>
       <div class="moat-card">
-        <div class="moat-icon">🔒</div>
-        <h4>On-Device Processing</h4>
-        <p>Privacy by design. AI runs locally — no cloud dependency, works fully offline. Unlike Echo Show and Nest Hub, your data never leaves the device.</p>
+        <div class="moat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <h4>本地端 AI 運算</h4>
+        <p>隱私優先設計。AI 於本地執行 — 無雲端依賴，完全離線可用。不像 Echo Show 和 Nest Hub，資料永遠不會離開裝置。</p>
       </div>
       <div class="moat-card">
-        <div class="moat-icon">🤖</div>
-        <h4>4 Specialized Agents</h4>
-        <p>Not a general assistant. Purpose-built agents for Language, Astrology, Weather, and Health — with more coming. Each agent is a domain expert.</p>
+        <div class="moat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M12 2a4 4 0 014 4v2H8V6a4 4 0 014-4z"/><rect x="4" y="10" width="16" height="12" rx="2"/><circle cx="12" cy="16" r="2"/></svg>
+        </div>
+        <h4>4 個專業 AI 代理</h4>
+        <p>非通用助理。專為語言、星座、天氣和健康打造的代理 — 未來將持續擴增。每個代理都是領域專家。</p>
       </div>
       <div class="moat-card">
-        <div class="moat-icon">📱</div>
-        <h4>Full Android</h4>
-        <p>Install any app from Google Play. Not a walled garden like Echo Show or a single-purpose device like reMarkable. Full tablet + AI agents.</p>
+        <div class="moat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h4>完整 Android 系統</h4>
+        <p>可從 Google Play 安裝任何應用程式。不像 Echo Show 的封閉花園或 reMarkable 的單一用途裝置。完整平板 + AI 代理。</p>
       </div>
       <div class="moat-card">
-        <div class="moat-icon">🏭</div>
-        <h4>4-Year Factory Relationship</h4>
-        <p>De-risked manufacturing. Established partnership with proven OEM — no scrambling for production capacity. Real factory, real timeline.</p>
+        <div class="moat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-6h6v6"/></svg>
+        </div>
+        <h4>4 年工廠合作關係</h4>
+        <p>降低製造風險。與經驗證的 OEM 建立長期合作夥伴關係 — 無需臨時搶產能。真正的工廠、真正的時程。</p>
       </div>
       <div class="moat-card">
-        <div class="moat-icon">💰</div>
-        <h4>$599 Entry Point</h4>
-        <p>40% below $999 MSRP on Kickstarter. Maximum perceived value. Cheaper than Humane AI Pin ($699+sub) with 10× the capability.</p>
+        <div class="moat-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h4>$599 入門價格</h4>
+        <p>Kickstarter 價格低於 $999 建議售價 40%。最大感知價值。比 Humane AI Pin（$699 + 月費）更便宜，能力卻是 10 倍。</p>
       </div>
     </div>
 
@@ -1707,70 +1732,70 @@
     <div class="section-header">
       <h2>結論與策略建議</h2>
       <div class="section-line"></div>
-      <span class="section-tag">Conclusions</span>
+      <span class="section-tag">結論</span>
     </div>
 
     <div class="conclusions-section">
       <div class="conclusions-header">
         <h2>
-          <span style="color: var(--green);">◆</span>
-          Strategic Recommendations
+          <span style="color: var(--green);">&#9670;</span>
+          策略建議
         </h2>
       </div>
       <div class="conclusions-body">
 
         <!-- Positioning Strategy -->
         <div class="conclusion-block">
-          <h3><span class="cb-dot"></span>Positioning Strategy 定位策略</h3>
+          <h3><span class="cb-dot"></span>定位策略</h3>
           <div class="strategy-cards">
             <div class="strategy-card">
-              <div class="strat-keyword">Lead With</div>
-              <div class="strat-title">Category Creation</div>
-              <div class="strat-detail">"The first AI Agent Tablet" — own the category before Otto or anyone else claims it. reMarkable proved category creation wins.</div>
+              <div class="strat-keyword">以此領銜</div>
+              <div class="strat-title">品類創建</div>
+              <div class="strat-detail">「The first AI Agent Tablet」— 在 Otto 或其他競品搶先前佔領品類定義權。reMarkable 已證明品類創建是致勝策略。</div>
             </div>
             <div class="strategy-card">
-              <div class="strat-keyword">Support With</div>
-              <div class="strat-title">Anti-Subscription</div>
-              <div class="strat-detail">"AI that works for you, not a monthly fee" — directly contrast Humane ($24/mo) and reMarkable ($7.99/mo). This is PadClaw's killer differentiator.</div>
+              <div class="strat-keyword">以此支撐</div>
+              <div class="strat-title">反訂閱制宣言</div>
+              <div class="strat-detail">「AI 為你工作，不是為月費工作」— 直接對比 Humane（$24/mo）和 reMarkable（$7.99/mo）。這是 PadClaw 的殺手級差異化。</div>
             </div>
             <div class="strategy-card">
-              <div class="strat-keyword">Close With</div>
-              <div class="strat-title">Trust Signals</div>
-              <div class="strat-detail">Real team photos, real factory visit, real working prototypes — surpass all competitors on authenticity. KS backers reward transparency.</div>
+              <div class="strat-keyword">以此收尾</div>
+              <div class="strat-title">信任信號</div>
+              <div class="strat-detail">真實的團隊照片、真實的工廠參訪、真正可運作的原型 — 在真實性上超越所有競品。KS 贊助者獎勵透明度。</div>
             </div>
           </div>
         </div>
 
         <!-- Page Design Recommendations -->
         <div class="conclusion-block">
-          <h3><span class="cb-dot"></span>Page Design Recommendations 頁面設計建議</h3>
+          <h3><span class="cb-dot"></span>頁面設計建議</h3>
           <ol class="rec-list">
-            <li>Adopt <strong>reMarkable's category-first headline</strong> approach — "The AI Agent Tablet" in hero, not feature bullets</li>
-            <li>Use <strong>Otto's problem-solution flow</strong> structure — "Your phone/tablet wasn't designed for AI" → PadClaw is</li>
-            <li>Match <strong>Rabbit's bold visual energy</strong> but with PadClaw's premium feel — colorful but not childish</li>
-            <li>Surpass <strong>all competitors on trust signals</strong> — real photos of team, factory visit, prototype demos (not renders)</li>
-            <li>Make <strong>pricing the most transparent</strong> in the category — clear tiers, exact savings, no hidden costs, no subscription asterisks</li>
+            <li>採用 <strong>reMarkable 的品類優先標題</strong>手法 — 主視覺使用「The AI Agent Tablet」，而非功能條列</li>
+            <li>使用 <strong>Otto 的問題—解決方案流程</strong>架構 — 「Your phone/tablet wasn't designed for AI」→ PadClaw 是</li>
+            <li>呼應 <strong>Rabbit 的大膽視覺能量</strong>但保持 PadClaw 的高端質感 — 豐富色彩但不幼稚</li>
+            <li>在<strong>信任信號方面超越所有競品</strong> — 真實的團隊照片、工廠參訪紀錄、原型演示（非渲染圖）</li>
+            <li>使<strong>定價成為品類中最透明的</strong> — 清晰分層、精確折扣、無隱藏費用、無訂閱附加條款</li>
           </ol>
         </div>
 
         <!-- Top 3 Takeaways -->
         <div class="conclusion-block">
-          <h3><span class="cb-dot"></span>Top 3 Takeaways 三大結論</h3>
+          <h3><span class="cb-dot"></span>三大核心結論</h3>
           <div class="takeaway-grid">
             <div class="takeaway-card">
               <div class="ta-number">#1</div>
-              <div class="ta-text">PadClaw is the ONLY no-subscription AI hardware in the market</div>
-              <div class="ta-sub">Every competitor either charges monthly or hasn't disclosed pricing yet</div>
+              <div class="ta-text">PadClaw 是市場上唯一無訂閱制的 AI 硬體</div>
+              <div class="ta-sub">所有競品不是收月費就是尚未公布定價</div>
             </div>
             <div class="takeaway-card">
               <div class="ta-number">#2</div>
-              <div class="ta-text">$599 KS price = maximum value perception vs $999 MSRP</div>
-              <div class="ta-sub">40% off creates urgency + positions below Humane AI Pin ($699+sub)</div>
+              <div class="ta-text">$599 KS 價格 = 相對 $999 建議售價的最大感知價值</div>
+              <div class="ta-sub">40% 折扣創造急迫感 + 定位低於 Humane AI Pin（$699 + 月費）</div>
             </div>
             <div class="takeaway-card">
               <div class="ta-number">#3</div>
-              <div class="ta-text">Real images + team + factory = unmatched trust for crowdfunding</div>
-              <div class="ta-sub">No competitor has all three trust pillars — PadClaw can own credibility</div>
+              <div class="ta-text">實拍影像 + 團隊 + 工廠 = 群眾募資中無可匹敵的信任度</div>
+              <div class="ta-sub">沒有任何競品同時擁有這三大信任支柱 — PadClaw 可壟斷可信度</div>
             </div>
           </div>
         </div>
@@ -1783,10 +1808,10 @@
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-text">
-      <strong>PadClaw</strong> — Internal Competitive Analysis Document &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; June 2026<br>
-      <a href="index.html">文案頁面</a> &nbsp;·&nbsp;
-      <a href="personas.html">用戶輪廓</a> &nbsp;·&nbsp;
-      <a href="market-research.html">市場研究</a> &nbsp;·&nbsp;
+      <strong>PadClaw</strong> — 內部競品分析文件 &nbsp;&middot;&nbsp; 機密 &nbsp;&middot;&nbsp; 2026 年 6 月<br>
+      <a href="index.html">文案頁面</a> &nbsp;&middot;&nbsp;
+      <a href="personas.html">用戶輪廓</a> &nbsp;&middot;&nbsp;
+      <a href="market-research.html">市場研究</a> &nbsp;&middot;&nbsp;
       <a href="competitors.html">競品分析</a>
     </div>
   </footer>
