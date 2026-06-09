@@ -40,6 +40,25 @@
 }
 .pnav-link:hover{color:#fff;background:rgba(255,255,255,.06)}
 .pnav-link.pnav-active{color:#05CE78;background:rgba(5,206,120,.1);font-weight:600}
+
+/* Image version toggle */
+.img-version-toggle{
+  display:flex;align-items:center;gap:6px;margin-left:auto;
+}
+.ivt-label{
+  font-size:11px;color:#888;letter-spacing:.03em;font-weight:500;
+}
+.ivt-btn{
+  width:28px;height:28px;border-radius:6px;border:1.5px solid #555;
+  background:transparent;color:#aaa;font-size:12px;font-weight:700;
+  cursor:pointer;transition:all .15s ease;display:flex;align-items:center;
+  justify-content:center;
+}
+.ivt-btn:hover{border-color:#05CE78;color:#05CE78}
+.ivt-btn.ivt-active{
+  background:#05CE78;border-color:#05CE78;color:#fff;
+}
+.img-switchable img{transition:opacity .3s ease}
 html{scroll-behavior:smooth;font-size:16px}
 body{
   font-family:var(--font-main);
