@@ -890,6 +890,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .img-id{font-size:11px;color:#ccc;margin-top:8px}
 
+/* ===== TABLET CASES ===== */
+.cases-section{
+  padding:48px 24px;background:#fff;
+}
+.cases-inner{max-width:var(--ks-max-w);margin:0 auto}
+
 /* ===== OPENCLAW SECTION ===== */
 .openclaw-section{
   background:linear-gradient(165deg,#1a1a2e 0%,#16213e 40%,#1a1a2e 100%);
