@@ -855,6 +855,22 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .compat-item span{font-size:13px;color:var(--ks-text-secondary);line-height:1.5}
 
+/* ===== IMAGE PLACEHOLDERS ===== */
+.img-placeholder{
+  background:#f0f0f0;border:2px dashed #ccc;
+  border-radius:var(--ks-radius-lg);
+  padding:48px 24px;text-align:center;margin:24px 0;
+  min-height:280px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  transition:border-color .2s ease;
+}
+.img-placeholder:hover{border-color:#aaa}
+.img-prompt{
+  font-size:13px;color:#999;line-height:1.6;
+  max-width:480px;font-style:italic;
+}
+.img-id{font-size:11px;color:#ccc;margin-top:8px}
+
 /* ===== OPENCLAW SECTION ===== */
 .openclaw-section{
   background:linear-gradient(165deg,#1a1a2e 0%,#16213e 40%,#1a1a2e 100%);
