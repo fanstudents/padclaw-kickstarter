@@ -57,6 +57,14 @@
     @media(max-width:760px){.landscape-cards{grid-template-columns:1fr}}
 
     .faq-item.open .faq-a{max-height:600px}
+
+    .photo-ui-pair{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:center;margin:24px 0}
+    .photo-ui-pair .pu-photo img{width:100%;border-radius:var(--ks-radius-lg);display:block}
+    .pu-screen{display:flex;flex-direction:column;gap:10px}
+    .pu-frame{background:#1a1d22;border-radius:16px;padding:10px;box-shadow:var(--shadow-md)}
+    .pu-frame img{width:100%;border-radius:8px;display:block}
+    .pu-caption{font-size:12.5px;color:var(--ks-text-secondary);text-align:center}
+    @media(max-width:760px){.photo-ui-pair{grid-template-columns:1fr}}
     .btn-reward[disabled]{opacity:.45;cursor:not-allowed}
     .sold-out-note{font-size:12px;font-weight:700;color:#c0392b;letter-spacing:.04em;text-transform:uppercase}
   </style>
@@ -503,8 +511,16 @@
             <p>PadClaw's entire setup is one sentence: <strong>plug it in, say hello.</strong> No accounts, no passwords, no app store. And with the Duo Pack, their device is linked to yours before it even ships — the Health channel starts reporting to your phone on day one.</p>
           </div>
 
-          <div class="image-actual">
-            <img loading="lazy" src="web-us-gift.jpg" alt="Three generations unboxing PadClaw — setup is one sentence: plug in, say hello" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          <div class="photo-ui-pair">
+            <div class="pu-photo">
+              <img loading="lazy" src="web-us-gift.jpg" alt="Three generations unboxing PadClaw together in the living room">
+            </div>
+            <div class="pu-screen">
+              <div class="pu-frame">
+                <img loading="lazy" src="web-ui-welcome.jpg" alt="The first screen Barbara sees: 'Hi, Barbara!' and one button — Say hello to begin">
+              </div>
+              <span class="pu-caption">The first — and only — setup screen. That's the whole thing.</span>
+            </div>
           </div>
           <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">The Duo Pack exists because of this exact moment.</p>
 
