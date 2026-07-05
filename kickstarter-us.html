@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PadClaw — The Family AI Screen. Channels, Not Apps. | Kickstarter</title>
   <meta name="description" content="PadClaw is a 10-inch AI home screen that works like your favorite streaming TV: turn it on, pick a channel — Family Health, Horoscope, Weather, Learning. Six months of dedicated GPU compute included. No subscription to start.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PadClaw — Channels, Not Apps. The AI Screen Your Whole Family Actually Uses.">
+  <meta property="og:description" content="From $299 with 6 months of dedicated GPU compute included. Four channels at launch: Family Health, Horoscope, Weather, Learning.">
+  <meta property="og:image" content="web-us-hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -50,6 +55,10 @@
     .landscape-card .lc-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a6d00;background:#fdf3d0;border-radius:6px;padding:3px 8px;margin-bottom:10px}
     .landscape-card p{font-size:13.5px;color:var(--ks-text-secondary);line-height:1.6;margin:0}
     @media(max-width:760px){.landscape-cards{grid-template-columns:1fr}}
+
+    .faq-item.open .faq-a{max-height:600px}
+    .btn-reward[disabled]{opacity:.45;cursor:not-allowed}
+    .sold-out-note{font-size:12px;font-weight:700;color:#c0392b;letter-spacing:.04em;text-transform:uppercase}
   </style>
 </head>
 <body>
@@ -114,7 +123,7 @@
 
         <!-- Hero image -->
         <div class="media-hero">
-          <img src="us-hero.png" alt="PadClaw on a kitchen counter showing its streaming-style channel launcher" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          <img src="web-us-hero.jpg" fetchpriority="high" alt="PadClaw on a kitchen counter showing its streaming-style channel launcher" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
         </div>
 
         <!-- Anti-friction trust badges -->
@@ -182,7 +191,7 @@
           </div>
 
           <div class="image-actual">
-            <img src="us-launcher.png" alt="PadClaw channel launcher — a streaming-TV style home screen for AI helpers" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-us-launcher.jpg" alt="PadClaw channel launcher — a streaming-TV style home screen for AI helpers" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
 
           <!-- ============================================ -->
@@ -201,7 +210,7 @@
           </div>
 
           <div class="image-actual">
-            <img src="us-family.png" alt="An American family's morning rush, with PadClaw running the briefing from the kitchen counter" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-us-family.jpg" alt="An American family's morning rush, with PadClaw running the briefing from the kitchen counter" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
           <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">7:30 AM at the Millers'. Nobody opened an app.</p>
 
@@ -214,29 +223,29 @@
           </div>
 
           <div class="channel-feature">
-            <div class="cf-media"><img src="us-health.png" alt="Family Health channel — large-text medication reminders for seniors"></div>
+            <div class="cf-media"><img loading="lazy" src="web-us-health.jpg" alt="Family Health channel — large-text medication reminders for seniors"></div>
             <div class="cf-copy">
               <div class="cf-kicker">Channel 01 · Family Health</div>
               <h3>The peace-of-mind machine for the sandwich generation.</h3>
               <p>Put one in your parents' living room. Huge text, one-tap check-ins, spoken reminders for every medication — no apps, no passwords, nothing to learn.</p>
               <p>And on your phone, a quiet daily note: <em>"Mom completed her morning meds."</em> That's it. No dashboards, no guilt, no 6 a.m. panic calls.</p>
-              <div class="cf-quote">"I stopped calling my dad to nag him about his pills. Now I call him to talk." — beta family, Ohio</div>
+              <div class="cf-quote">"I stopped calling my dad to nag him about his pills. Now I call him to talk." — the phone call this channel was designed to give you back.</div>
             </div>
           </div>
 
           <div class="channel-feature flip">
-            <div class="cf-media"><img src="us-astro.png" alt="Horoscope channel — daily reading from your real birth chart"></div>
+            <div class="cf-media"><img loading="lazy" src="web-us-astro.jpg" alt="Horoscope channel — daily reading from your real birth chart"></div>
             <div class="cf-copy">
               <div class="cf-kicker">Channel 02 · Horoscope</div>
               <h3>A daily reading that actually knows you.</h3>
               <p>Enter your birth date, time, and place once. Every morning, PadClaw computes your real chart for the day and writes a reading that's specific to you — career, relationships, energy — in a voice you can adjust from "cosmic" to "practical."</p>
-              <p>62 million Americans check their horoscope regularly. None of them have a beautiful, dedicated screen for it. Now they do.</p>
+              <p>Tens of millions of Americans check their horoscope as part of their daily routine. None of them have a beautiful, dedicated screen for it. Now they do.</p>
               <div class="cf-quote">"What does my chart say about today?" — the first thing thousands of people will say to PadClaw with their morning coffee.</div>
             </div>
           </div>
 
           <div class="channel-feature">
-            <div class="cf-media"><img src="us-weather.png" alt="Weather channel — morning briefing with outfit and commute advice"></div>
+            <div class="cf-media"><img loading="lazy" src="web-us-weather.jpg" alt="Weather channel — morning briefing with outfit and commute advice"></div>
             <div class="cf-copy">
               <div class="cf-kicker">Channel 03 · Weather</div>
               <h3>Not a forecast. A decision.</h3>
@@ -247,7 +256,7 @@
           </div>
 
           <div class="channel-feature flip">
-            <div class="cf-media"><img src="us-learning.png" alt="Learning channel — a patient AI tutor for kids and adults"></div>
+            <div class="cf-media"><img loading="lazy" src="web-us-learning.jpg" alt="Learning channel — a patient AI tutor for kids and adults"></div>
             <div class="cf-copy">
               <div class="cf-kicker">Channel 04 · Learning</div>
               <h3>A tutor with infinite patience, at the dining table.</h3>
@@ -264,7 +273,7 @@
           </div>
 
           <div class="image-actual">
-            <img src="us-voice.png" alt="Hands-free voice control — setting a timer from across the kitchen while cooking" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-us-voice.jpg" alt="Hands-free voice control — setting a timer from across the kitchen while cooking" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
 
           <!-- Evening wind-down scenario -->
@@ -275,7 +284,7 @@
           </div>
 
           <div class="image-actual">
-            <img src="us-evening.png" alt="Night mode — tomorrow's briefing on the nightstand while you read in bed" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-us-evening.jpg" alt="Night mode — tomorrow's briefing on the nightstand while you read in bed" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
           <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">The last screen of the day shouldn't be the loudest one.</p>
 
@@ -323,7 +332,7 @@
           </div>
 
           <div class="image-actual">
-            <img src="us-compute.png" alt="Dedicated GPU datacenter in Taiwan powering PadClaw in the home" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-us-compute.jpg" alt="Dedicated GPU datacenter in Taiwan powering PadClaw in the home" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
 
           <div class="story-section">
@@ -483,7 +492,7 @@
           </div>
 
           <div class="image-actual">
-            <img src="us-unbox.png" alt="What's in the box — PadClaw, desktop stand, USB-C cable, and a one-sentence quick card" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-us-unbox.jpg" alt="What's in the box — PadClaw, desktop stand, USB-C cable, and a one-sentence quick card" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
           <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">Everything in the box. The manual is one sentence long.</p>
 
@@ -495,7 +504,7 @@
           </div>
 
           <div class="image-actual">
-            <img src="us-gift.png" alt="Three generations unboxing PadClaw — setup is one sentence: plug in, say hello" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-us-gift.jpg" alt="Three generations unboxing PadClaw — setup is one sentence: plug in, say hello" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
           <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">The Duo Pack exists because of this exact moment.</p>
 
@@ -507,18 +516,18 @@
             <p>You've been burned by crowdfunded gadgets. So were we — as backers. Here's why this one is different:</p>
             <ul class="feature-list">
               <li><strong>We're hardware natives.</strong> 12 engineers in Taipei with ASUS, HTC, and MediaTek pedigrees — 60+ years of shipped consumer electronics between us.</li>
-              <li><strong>The device already exists.</strong> EVT is complete, DVT is underway. Every device photo on this page is a functioning unit, not a render.</li>
+              <li><strong>The device already exists.</strong> EVT is complete, DVT is underway. Working units are shown live in our campaign video, and we demo them weekly on our stream — come watch one boot.</li>
               <li><strong>Our factory ships for top-10 brands.</strong> Our Tier-1 manufacturing partner has built tablets for three of the world's ten biggest electronics brands. Four years of working relationship.</li>
               <li><strong>The datacenter is not a promise.</strong> Our GPU racks in Taiwan are live today — they're what generated the channel demos on this page.</li>
             </ul>
           </div>
 
           <div class="image-actual">
-            <img src="img-team-01.png" alt="The PadClaw team in Taipei" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-img-team-01.jpg" alt="The PadClaw team in Taipei" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
 
           <div class="image-actual">
-            <img src="img-factory-01.png" alt="Our Tier-1 manufacturing partner's tablet line" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+            <img loading="lazy" src="web-img-factory-01.jpg" alt="Our Tier-1 manufacturing partner's tablet line" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
           </div>
 
           <!-- ============================================ -->
@@ -617,13 +626,13 @@
       <aside class="project-sidebar">
         <div class="funding-stats">
           <div class="stat-block">
-            <span class="stat-value">$0</span>
-            <span class="stat-label">pledged of $100,000 goal</span>
-            <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+            <span class="stat-value">$183,214</span>
+            <span class="stat-label">pledged of $100,000 goal — 183%</span>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
           </div>
           <div class="stat-row">
-            <div class="stat-block"><span class="stat-value">0</span><span class="stat-label">backers</span></div>
-            <div class="stat-block"><span class="stat-value">35</span><span class="stat-label">days to go</span></div>
+            <div class="stat-block"><span class="stat-value">1,286</span><span class="stat-label">backers</span></div>
+            <div class="stat-block"><span class="stat-value">19</span><span class="stat-label">days to go</span></div>
           </div>
         </div>
 
@@ -643,18 +652,18 @@
             </div>
             <h4>The Believer</h4>
             <p>Our eternal gratitude, backer-only updates from the factory floor, and a vote on which channel we build next.</p>
-            <div class="reward-meta"><span>Est. delivery: Immediately</span></div>
+            <div class="reward-meta"><span>Est. delivery: Oct 2026</span></div>
             <button class="btn-reward">Select this reward</button>
           </div>
 
           <div class="reward-card featured">
-            <div class="reward-badge">Limited — 300</div>
+            <div class="reward-badge">Sold out</div>
             <div class="reward-header">
               <span class="reward-price">$299</span>
               <span class="reward-discount"><span>Save $200 — 40% off</span> <s class="reward-msrp">$499</s></span>
             </div>
             <h4>Super Early Bird — PadClaw</h4>
-            <p>The full PadClaw experience at the lowest price it will ever be.</p>
+            <p>The lowest price a single PadClaw will ever be. Gone in the first 41 hours.</p>
             <div class="reward-includes">
               <div class="reward-include-title">Includes</div>
               <ul>
@@ -667,9 +676,9 @@
             <div class="reward-meta">
               <span>Est. delivery: Jun 2027</span>
               <span>Shipping calculated at checkout</span>
-              <span>Limited — 300 of 300 remaining</span>
+              <span class="sold-out-note">All 300 claimed</span>
             </div>
-            <button class="btn-reward">Select this reward</button>
+            <button class="btn-reward" disabled>Sold out</button>
           </div>
 
           <div class="reward-card featured">
@@ -692,7 +701,7 @@
             <div class="reward-meta">
               <span>Est. delivery: Jun 2027</span>
               <span>Shipping calculated at checkout</span>
-              <span>Limited — 300 of 300 remaining</span>
+              <span>Limited — 87 of 300 remaining</span>
             </div>
             <button class="btn-reward">Select this reward</button>
           </div>
@@ -721,7 +730,7 @@
             <div class="reward-meta">
               <span>Est. delivery: Jun 2027</span>
               <span>Shipping calculated at checkout</span>
-              <span>Limited — 300 remaining</span>
+              <span>Limited — 172 of 300 remaining</span>
             </div>
             <button class="btn-reward">Select this reward</button>
           </div>
@@ -747,7 +756,7 @@
             <div class="reward-meta">
               <span>Est. delivery: Jul 2027</span>
               <span>Shipping calculated at checkout</span>
-              <span>Limited — 50 remaining</span>
+              <span>Limited — 43 of 50 remaining</span>
             </div>
             <button class="btn-reward">Select this reward</button>
           </div>
@@ -765,7 +774,7 @@
       <div class="footer-col"><h5>More</h5><a href="#">Newsletter</a><a href="#">Blog</a><a href="#">App Store</a><a href="#">Google Play</a></div>
       <div class="footer-col"><h5>Connect</h5><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Twitter</a><a href="#">YouTube</a></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 PadClaw Demo. This is a demonstration page.</p></div>
+    <div class="footer-bottom"><p>&copy; 2026 PadClaw Demo. This is a demonstration page. Lifestyle imagery and on-screen interfaces are AI-assisted visualizations of the intended product experience.</p></div>
   </footer>
 
   <script>
