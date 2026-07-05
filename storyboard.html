@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadClaw — 影片分鏡表</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0c0f14;--card:#151921;--border:#1e2530;
+      --text:#e8ecf1;--muted:#8a93a6;--green:#05CE78;
+      --font:'Inter',system-ui,sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6}
+
+    /* Nav */
+    .pnav{
+      position:sticky;top:0;z-index:100;
+      background:rgba(12,15,20,.92);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:12px 24px;
+    }
+    .pnav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .pnav-label{font-weight:700;font-size:14px;color:var(--green)}
+    .pnav-links{display:flex;gap:4px}
+    .pnav-links a{
+      font-size:12px;padding:6px 12px;border-radius:6px;
+      color:var(--muted);text-decoration:none;transition:.15s;
+    }
+    .pnav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+    .pnav-links a.active{color:var(--green);background:rgba(5,206,120,.1);font-weight:600}
+
+    /* Header */
+    .page-header{
+      max-width:1100px;margin:0 auto;padding:48px 24px 24px;
+    }
+    .page-header h1{font-size:32px;font-weight:800;margin-bottom:8px}
+    .page-header .sub{color:var(--muted);font-size:15px}
+    .meta-bar{
+      display:flex;gap:24px;margin-top:16px;flex-wrap:wrap;
+    }
+    .meta-item{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:8px;padding:12px 20px;
+    }
+    .meta-item .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+    .meta-item .value{font-size:18px;font-weight:700;margin-top:2px}
+
+    /* Act divider */
+    .act-divider{
+      max-width:1100px;margin:48px auto 24px;padding:0 24px;
+    }
+    .act-divider h2{
+      font-size:13px;font-weight:700;text-transform:uppercase;
+      letter-spacing:2px;color:var(--green);
+      padding-bottom:12px;border-bottom:2px solid var(--green);
+      display:inline-block;
+    }
+    .act-divider .act-desc{color:var(--muted);font-size:14px;margin-top:8px}
+
+    /* Shot card */
+    .shots-container{max-width:1100px;margin:0 auto;padding:0 24px 48px}
+    .shot-card{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:16px;margin-bottom:32px;overflow:hidden;
+      transition:border-color .2s;
+    }
+    .shot-card:hover{border-color:rgba(5,206,120,.3)}
+    .shot-header{
+      display:flex;align-items:center;gap:12px;
+      padding:16px 24px;border-bottom:1px solid var(--border);
+    }
+    .shot-number{
+      background:var(--green);color:#fff;font-weight:800;
+      font-size:13px;width:36px;height:36px;border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;
+    }
+    .shot-title{font-weight:700;font-size:16px}
+    .shot-duration{
+      margin-left:auto;font-size:12px;color:var(--muted);
+      background:rgba(255,255,255,.05);padding:4px 10px;border-radius:4px;
+    }
+    .shot-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .shot-image{
+      position:relative;background:#1a1e28;
+      display:flex;align-items:center;justify-content:center;
+      min-height:280px;
+    }
+    .shot-image img{width:100%;height:100%;object-fit:cover;display:block}
+    .shot-image .placeholder{
+      color:var(--muted);font-size:13px;font-style:italic;
+      text-align:center;padding:24px;
+    }
+    .shot-details{padding:24px;display:flex;flex-direction:column;gap:16px}
+    .detail-block{}
+    .detail-label{
+      font-size:10px;font-weight:700;text-transform:uppercase;
+      letter-spacing:1px;color:var(--green);margin-bottom:6px;
+    }
+    .detail-text{font-size:13px;color:var(--text);line-height:1.7}
+    .detail-text.muted{color:var(--muted)}
+    .vo-text{
+      font-style:italic;padding:12px 16px;
+      background:rgba(5,206,120,.06);border-left:3px solid var(--green);
+      border-radius:0 8px 8px 0;font-size:13px;
+    }
+    .camera-tag{
+      display:inline-block;font-size:11px;padding:3px 8px;
+      background:rgba(255,255,255,.06);border-radius:4px;
+      color:var(--muted);margin-right:6px;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .shot-body{grid-template-columns:1fr}
+      .meta-bar{gap:12px}
+      .meta-item{flex:1;min-width:120px}
+      .page-header h1{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <div class="pnav">
+    <div class="pnav-inner">
+      <span class="pnav-label">PadClaw 提案文件</span>
+      <nav class="pnav-links">
+        <a href="index.html">文案頁面</a>
+        <a href="personas.html">用戶輪廓</a>
+        <a href="market-research.html">市場研究</a>
+        <a href="competitors.html">競品分析</a>
+        <a href="storyboard.html" class="active">影片分鏡</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Kickstarter 影片分鏡表</h1>
+    <p class="sub">16 個鏡頭 / 4 幕結構 / 90-120 秒 — 每個鏡頭含 AI 圖片提示詞與動態指令</p>
+    <div class="meta-bar">
+      <div class="meta-item"><div class="label">總長度</div><div class="value">90–120 sec</div></div>
+      <div class="meta-item"><div class="label">鏡頭數</div><div class="value">16 shots</div></div>
+      <div class="meta-item"><div class="label">製作方式</div><div class="value">圖生影片</div></div>
+      <div class="meta-item"><div class="label">風格</div><div class="value">Cinematic</div></div>
+    </div>
+  </div>
+
+  <!-- ============ ACT 1 ============ -->
+  <div class="act-divider">
+    <h2>ACT 1 — The Hook</h2>
+    <p class="act-desc">0:00–0:15 ｜ 抓住注意力，定義品類</p>
+  </div>
+  <div class="shots-container">
+
+    <!-- Shot 01 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">01</div>
+        <div class="shot-title">混亂的早晨</div>
+        <div class="shot-duration">3 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-01-chaos.png" alt="Shot 01" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Kitchen counter in morning chaos. Smartphone with 47 notifications. Scattered pill bottles, forgotten coffee, child's homework. Phone buzzes repeatedly.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Your phone has 147 apps. And it still can't remind your dad to take his medication."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">俯拍</span><span class="camera-tag">緩慢推進</span> Camera slowly pushes in toward the phone. Phone screen flickers with notifications.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 02 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">02</div>
+        <div class="shot-title">PadClaw 登場</div>
+        <div class="shot-duration">3 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-02-arrive.png" alt="Shot 02" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Same kitchen, now clean. Hands place PadClaw on stand. Screen lights up: "Good Morning, Sarah" with weather, medication reminder, daily schedule.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Meet PadClaw."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">中景</span><span class="camera-tag">定格</span> Hands place tablet down. Screen illuminates. Rack focus from hands to screen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 03 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">03</div>
+        <div class="shot-title">品類定義 — 四大 Agent</div>
+        <div class="shot-duration">4 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-03-agents.png" alt="Shot 03" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Close-up of screen: 4-agent selection grid — Language Coach, Astrology Guide, Weather & Outfit, Health Companion. Finger taps Health card.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"The world's first AI Agent Tablet. Four agents. Zero prompts. No subscriptions."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">特寫</span> Cards animate in one by one. Finger taps Health card → card expands.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 04 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">04</div>
+        <div class="shot-title">文字打擊</div>
+        <div class="shot-duration">3 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-04-text.png" alt="Shot 04" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Black background. Bold white text: "NOT a chatbot. NOT a voice assistant. A DIGITAL WORKER with a screen." — "screen" glows green.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">（無旁白 — 畫面文字即訊息）</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">黑底排版</span><span class="camera-tag">動態文字</span> Text lines appear sequentially with snap animation. "screen" flashes green.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ ACT 2 ============ -->
+  <div class="act-divider">
+    <h2>ACT 2 — The Agents</h2>
+    <p class="act-desc">0:15–0:55 ｜ 四大 Agent 場景展示 + 競品對比</p>
+  </div>
+  <div class="shots-container">
+
+    <!-- Shot 05 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">05</div>
+        <div class="shot-title">Health Companion 場景</div>
+        <div class="shot-duration">5 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-05-health.png" alt="Shot 05" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Elderly man waking up. PadClaw on bedside table shows medication checklist: 3 items, morning light. He taps the first checkbox.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Dad's medication. Three pills, every morning. PadClaw doesn't just remind him — it shows him exactly what to take, tracks what he's taken, and tells you if he missed one."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">中景→特寫</span> Man reaches for tablet. Finger taps checkbox. Green checkmark animation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 06 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">06</div>
+        <div class="shot-title">Language Coach 場景</div>
+        <div class="shot-duration">5 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-06-language.png" alt="Shot 06" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Young man in café holding PadClaw. Screen: Spanish conversation with AI tutor. Pronunciation score: 92%. He's speaking, smiling.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Marcus practices Spanish every morning. Not with flashcards — with real conversation. PadClaw scores his pronunciation and adapts the difficulty."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">過肩</span> Man speaks. Waveform on screen. Score animates 0→92%.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 07 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">07</div>
+        <div class="shot-title">Astrology Guide 場景</div>
+        <div class="shot-duration">5 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-07-astro.png" alt="Shot 07" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Moody flat-lay. PadClaw on dark desk: natal chart + transit overlay. Candles, crystals, journal. Woman's hand scrolls daily reading.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Jasmine's birth chart — not a generic horoscope. Real transits, real aspects, personalized to her exact birth time."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">俯拍 flat-lay</span> Chart slowly rotates. Transit lines pulse. Hand scrolls.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 08 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">08</div>
+        <div class="shot-title">Weather & Outfit 場景</div>
+        <div class="shot-duration">5 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-08-weather.png" alt="Shot 08" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Entryway. PadClaw mounted on wall: weather + outfit suggestion. Woman grabs jacket & umbrella as suggested, heading out.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Before Sarah leaves — one glance. Jacket, umbrella, leave by 8:15. Done."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">中景</span> Woman walks to door, glances at tablet, grabs jacket. Door opens.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 09 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">09</div>
+        <div class="shot-title">競品對比 — 為什麼他們失敗了</div>
+        <div class="shot-duration">5 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-09-compare.png" alt="Shot 09" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Split screen: LEFT — desaturated failed AI devices (AI Pin, Rabbit R1, smart speaker) dusty on shelf. RIGHT — PadClaw in full color, alive.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Humane AI Pin: discontinued. Rabbit R1: refund wave. They had no screen. No browser. No way to actually DO anything. PadClaw has all three."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">分割畫面</span> Red X stamps left. Green checkmark stamps right. Left dims.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ ACT 3 ============ -->
+  <div class="act-divider">
+    <h2>ACT 3 — Proof & Trust</h2>
+    <p class="act-desc">0:55–1:20 ｜ 硬體展示、開箱、團隊信任</p>
+  </div>
+  <div class="shots-container">
+
+    <!-- Shot 10 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">10</div>
+        <div class="shot-title">硬體 360° 展示</div>
+        <div class="shot-duration">4 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-10-hardware.png" alt="Shot 10" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">PadClaw floating on dark background, slowly rotating. Spec callouts animate in: 10.1" IPS, Octa-core, 7000mAh, Dual Speakers.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"10.1-inch IPS display. Octa-core processor. 7,000 mAh battery. Dual speakers with dual-mic array. Full Android."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">360° 慢轉</span> Tablet rotates. Specs animate in with green callout lines.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 11 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">11</div>
+        <div class="shot-title">開箱展示</div>
+        <div class="shot-duration">3 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-11-unbox.png" alt="Shot 11" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Overhead unboxing flat-lay. Tablet + accessories arranged neatly: stand, cable, adapter, quick-start card, case. Hands lift tablet.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Everything you need. In the box. Ready in three minutes."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">俯拍</span> Hands lift tablet upward. Items gleam with light catch.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 12 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">12</div>
+        <div class="shot-title">團隊 & 工廠</div>
+        <div class="shot-duration">4 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image">
+          <img src="sb-12a-team.png" alt="Shot 12A" style="width:50%;height:100%;object-fit:cover;display:inline-block;vertical-align:top" onerror="this.style.display='none'">
+          <img src="sb-12b-factory.png" alt="Shot 12B" style="width:50%;height:100%;object-fit:cover;display:inline-block;vertical-align:top" onerror="this.style.display='none'">
+        </div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">快速蒙太奇：(A) Taipei 辦公室團隊討論原型機 → (B) 工廠自動化組裝線 → (C) 特寫雙手組裝平板</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Built in Taipei. By a team of ASUS, HTC, and MediaTek veterans. With a Tier-1 factory partner we've worked with for four years."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">快速剪接</span> 1.5s team → 1.5s factory → 1s hands. Cuts sync with V.O. beat.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 13 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">13</div>
+        <div class="shot-title">保護殼展示</div>
+        <div class="shot-duration">3 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-13-cases.png" alt="Shot 13" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Four cases side by side: CozyHome (green), BubbleBuddy (blue), Lobster Tail Stand (red), EasyView Senior (navy).</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Four case styles. Kid-friendly. Senior-friendly. And yes — a lobster."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">產品排列</span> Cases slide in one by one. Lobster case gets a wiggle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ ACT 4 ============ -->
+  <div class="act-divider">
+    <h2>ACT 4 — Call to Action</h2>
+    <p class="act-desc">1:20–1:35 ｜ 隱私、定價、收尾</p>
+  </div>
+  <div class="shots-container">
+
+    <!-- Shot 14 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">14</div>
+        <div class="shot-title">隱私宣言</div>
+        <div class="shot-duration">3 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-14-privacy.png" alt="Shot 14" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Shield icon protecting tablet. Data streams flow INTO device but blocked from reaching cloud. Cloud fades. Shield pulses green.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Your data stays on your device. No cloud. No collection. No exceptions."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">概念動畫</span> Data particles flow L→R. Hit barrier at cloud, scatter. Shield pulses.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 15 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">15</div>
+        <div class="shot-title">定價 & CTA</div>
+        <div class="shot-duration">4 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-15-pricing.png" alt="Shot 15" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">PadClaw on left. Right: $599 (crossed out $999). "Super Early Bird — Limited." "No subscription. No hidden fees. Forever."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"Super Early Bird: $599. No subscription. No hidden fees. Back us on Kickstarter today."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">黑底排版</span> Price animates in. $999 strikethrough. $599 scales up green. CTA pulses.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shot 16 -->
+    <div class="shot-card">
+      <div class="shot-header">
+        <div class="shot-number">16</div>
+        <div class="shot-title">結尾 — 回到廚房</div>
+        <div class="shot-duration">5 sec</div>
+      </div>
+      <div class="shot-body">
+        <div class="shot-image"><img src="sb-16-ending.png" alt="Shot 16" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>圖片生成中...</div>'"></div>
+        <div class="shot-details">
+          <div class="detail-block">
+            <div class="detail-label">畫面描述</div>
+            <div class="detail-text">Same kitchen from Shot 01, now clean & calm. PadClaw on counter: "Have a great day, Sarah." Woman walks past with coffee, smiling. Camera pulls back. End card: logo + KS badge.</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">旁白</div>
+            <div class="vo-text">"PadClaw. The AI that actually does things."</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">鏡頭 & 動態</div>
+            <div class="detail-text muted"><span class="camera-tag">廣角</span><span class="camera-tag">緩慢拉遠</span> Camera pulls back. Woman exits frame. Fade to black. Logo appears.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

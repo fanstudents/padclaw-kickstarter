@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadClaw — The Family AI Screen. Channels, Not Apps. | Kickstarter</title>
+  <meta name="description" content="PadClaw is a 10-inch AI home screen that works like your favorite streaming TV: turn it on, pick a channel — Family Health, Horoscope, Weather, Learning. Six months of dedicated GPU compute included. No subscription to start.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== US-campaign additions ===== */
+    .channel-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0 8px}
+    .channel-tile{position:relative;border-radius:14px;overflow:hidden;background:#12151c;color:#fff;padding:22px 18px 18px;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid rgba(255,255,255,.06);transition:transform .2s ease,box-shadow .2s ease}
+    .channel-tile:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.25)}
+    .channel-tile .ch-kicker{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#05CE78;font-weight:700;margin-bottom:6px}
+    .channel-tile h4{font-size:17px;font-weight:700;margin-bottom:4px}
+    .channel-tile p{font-size:12.5px;color:rgba(255,255,255,.65);line-height:1.5;margin:0}
+    .channel-tile::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 85% 0%,rgba(5,206,120,.22),transparent 55%);pointer-events:none}
+    @media(max-width:760px){.channel-strip{grid-template-columns:repeat(2,1fr)}}
+
+    .channel-feature{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin:40px 0}
+    .channel-feature.flip .cf-media{order:2}
+    .cf-media img{width:100%;border-radius:var(--ks-radius-lg);display:block;box-shadow:var(--shadow-md)}
+    .cf-copy .cf-kicker{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#05CE78;margin-bottom:8px}
+    .cf-copy h3{font-size:24px;font-weight:800;line-height:1.25;margin-bottom:12px}
+    .cf-copy p{font-size:15px;color:var(--ks-text-secondary);line-height:1.7;margin-bottom:10px}
+    .cf-copy .cf-quote{background:rgba(5,206,120,.06);border-left:3px solid #05CE78;padding:12px 16px;border-radius:0 10px 10px 0;font-style:italic;font-size:14.5px;color:var(--ks-text);margin-top:14px}
+    @media(max-width:760px){.channel-feature{grid-template-columns:1fr}.channel-feature.flip .cf-media{order:0}}
+
+    .compute-banner{background:linear-gradient(135deg,#0c0f14,#131a24);border:1px solid rgba(5,206,120,.25);border-radius:var(--ks-radius-lg);padding:40px 36px;color:#fff;margin:40px 0}
+    .compute-banner h3{font-size:26px;font-weight:800;margin-bottom:10px}
+    .compute-banner h3 span{color:#05CE78}
+    .compute-banner>p{color:rgba(255,255,255,.7);font-size:15px;line-height:1.7;max-width:720px}
+    .compute-points{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+    .compute-point{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px}
+    .compute-point strong{display:block;font-size:15px;margin-bottom:6px;color:#fff}
+    .compute-point span{font-size:13px;color:rgba(255,255,255,.6);line-height:1.55;display:block}
+    .compute-point .cp-num{font-size:26px;font-weight:800;color:#05CE78;display:block;margin-bottom:4px}
+    @media(max-width:760px){.compute-points{grid-template-columns:1fr}}
+
+    .roadmap-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .roadmap-chip{border:1px dashed var(--ks-border);border-radius:999px;padding:8px 16px;font-size:13px;color:var(--ks-text-secondary);background:var(--ks-bg-light)}
+    .roadmap-chip.live{border:1px solid rgba(5,206,120,.4);color:#04965a;background:rgba(5,206,120,.07);font-weight:600}
+
+    .landscape-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+    .landscape-card{border:1px solid var(--ks-border);border-radius:var(--ks-radius-lg);padding:20px 22px;background:var(--ks-bg)}
+    .landscape-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
+    .landscape-card .lc-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a6d00;background:#fdf3d0;border-radius:6px;padding:3px 8px;margin-bottom:10px}
+    .landscape-card p{font-size:13.5px;color:var(--ks-text-secondary);line-height:1.6;margin:0}
+    @media(max-width:760px){.landscape-cards{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+  <!-- ===== PROPOSAL NAV ===== -->
+  <div class="proposal-nav">
+    <div class="pnav-inner">
+      <span class="pnav-label">PadClaw 提案文件 · US Campaign v2</span>
+      <nav class="pnav-links">
+        <a href="index.html" class="pnav-link">原始文案</a>
+        <a href="kickstarter-us.html" class="pnav-link pnav-active">美國版 v2</a>
+        <a href="personas.html" class="pnav-link">用戶輪廓</a>
+        <a href="market-research.html" class="pnav-link">市場研究</a>
+        <a href="competitors.html" class="pnav-link">競品分析</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ===== TOP NAV ===== -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a href="#" class="nav-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="14" fill="#05CE78"/>
+            <text x="7" y="19" font-size="14" fill="#fff" font-weight="700">K</text>
+          </svg>
+        </a>
+        <a href="#" class="nav-link">Explore</a>
+        <a href="#" class="nav-link">Start a project</a>
+      </div>
+      <div class="nav-right">
+        <div class="nav-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search projects">
+        </div>
+        <a href="#" class="nav-link hide-mobile">Log in</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb-inner">
+      <a href="#">Technology</a>
+      <span class="sep">›</span>
+      <a href="#">Hardware</a>
+    </div>
+  </div>
+
+  <!-- ===== PROJECT HEADER ===== -->
+  <main class="project-wrap">
+    <div class="project-header">
+      <h1>PadClaw — Channels, Not Apps. The AI Screen Your Whole Family Actually Uses.</h1>
+      <p class="project-subtitle">Turn it on and it works like your favorite streaming TV: pick a channel — Family Health, Horoscope, Weather, Learning. Six months of dedicated GPU compute included in the price. Nothing to set up. Nothing to subscribe to.</p>
+    </div>
+
+    <div class="project-content">
+
+      <!-- LEFT COL -->
+      <div class="project-left">
+
+        <!-- Hero image -->
+        <div class="media-hero">
+          <img src="us-hero.png" alt="PadClaw on a kitchen counter showing its streaming-style channel launcher" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+        </div>
+
+        <!-- Anti-friction trust badges -->
+        <div class="trust-badges-row">
+          <div class="trust-badge">6 Months of AI Compute Included</div>
+          <div class="trust-badge">No Subscription to Start</div>
+          <div class="trust-badge">Dedicated GPU Cloud — Not Big Tech's</div>
+          <div class="trust-badge">Ships Worldwide</div>
+        </div>
+
+        <!-- Creator row -->
+        <div class="creator-row">
+          <div class="creator-avatar">PC</div>
+          <div class="creator-info">
+            <span class="creator-label">By</span>
+            <a href="#" class="creator-name">PadClaw Team</a>
+          </div>
+          <div class="creator-badges">
+            <span class="badge">First created</span>
+            <span class="badge location-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Taipei, Taiwan
+            </span>
+          </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- S1: THE HOOK — TV, NOT COMPUTER               -->
+        <!-- ============================================ -->
+        <section class="tab-content active">
+
+          <div class="story-section">
+            <h2>Remember when TV got easy?</h2>
+            <p>You don't "operate" your TV anymore. You turn it on, and beautiful tiles are waiting for you. You pick one. It plays.</p>
+            <p><strong>Nobody has done that for AI. So we did.</strong></p>
+            <p>PadClaw is a 10-inch screen for your home that boots straight into a launcher you already know how to use — big, gorgeous tiles, like your streaming TV. Except these tiles aren't shows. They're <em>helpers</em>:</p>
+          </div>
+
+          <div class="channel-strip">
+            <div class="channel-tile">
+              <div class="ch-kicker">Channel 01</div>
+              <h4>Family Health</h4>
+              <p>Medication reminders, gentle check-ins, and a daily "Mom's OK" note to your phone.</p>
+            </div>
+            <div class="channel-tile">
+              <div class="ch-kicker">Channel 02</div>
+              <h4>Horoscope</h4>
+              <p>A real daily reading from your actual birth chart — not a recycled one-liner.</p>
+            </div>
+            <div class="channel-tile">
+              <div class="ch-kicker">Channel 03</div>
+              <h4>Weather</h4>
+              <p>A morning briefing that tells you what to wear, when to leave, and when to grab the umbrella.</p>
+            </div>
+            <div class="channel-tile">
+              <div class="ch-kicker">Channel 04</div>
+              <h4>Learning</h4>
+              <p>A patient tutor for your kids — and for you. Homework help, languages, daily practice.</p>
+            </div>
+          </div>
+
+          <div class="story-section">
+            <p>No app store to dig through. No prompts to write. No accounts for grandma to create.</p>
+            <p><strong>If your family can use a TV remote, they can use PadClaw.</strong></p>
+          </div>
+
+          <div class="image-actual">
+            <img src="us-launcher.png" alt="PadClaw channel launcher — a streaming-TV style home screen for AI helpers" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S2: THE PROBLEM                              -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>AI Had a Rough Couple of Years in Your Living Room</h2>
+            <p>Let's be honest about what happened:</p>
+            <ul class="feature-list">
+              <li><strong>Chatbots put the work on you.</strong> A blank text box is a job interview, not a helper. Most families opened one, typed "hi," and never came back.</li>
+              <li><strong>The AI gadget wave over-promised.</strong> Tiny screens or no screens, cloud outages, monthly fees on top of a $700 device — and refund waves when the magic didn't show up.</li>
+              <li><strong>Smart speakers plateaued.</strong> Timers and weather, forever. Ask for anything more and you get an apology.</li>
+              <li><strong>Subscription fatigue is real.</strong> Americans now pay for streaming, storage, fitness, news… "and $24/month for AI" is where households draw the line.</li>
+            </ul>
+            <p style="margin-top:20px;">The lesson isn't that people don't want AI at home. It's that <strong>they want it to feel like television, not like a terminal</strong> — instant, visual, zero-learning-curve, and honestly priced.</p>
+          </div>
+
+          <div class="image-actual">
+            <img src="us-family.png" alt="An American family's morning rush, with PadClaw running the briefing from the kitchen counter" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+          <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">7:30 AM at the Millers'. Nobody opened an app.</p>
+
+          <!-- ============================================ -->
+          <!-- S3: FOUR LAUNCH CHANNELS — DEEP DIVES        -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>Four Channels at Launch. Each One Earns Its Spot.</h2>
+            <p style="color:var(--ks-text-secondary);">We didn't ship 50 half-baked features. We picked the four rituals American households repeat every single day, and made each one exceptional.</p>
+          </div>
+
+          <div class="channel-feature">
+            <div class="cf-media"><img src="us-health.png" alt="Family Health channel — large-text medication reminders for seniors"></div>
+            <div class="cf-copy">
+              <div class="cf-kicker">Channel 01 · Family Health</div>
+              <h3>The peace-of-mind machine for the sandwich generation.</h3>
+              <p>Put one in your parents' living room. Huge text, one-tap check-ins, spoken reminders for every medication — no apps, no passwords, nothing to learn.</p>
+              <p>And on your phone, a quiet daily note: <em>"Mom completed her morning meds."</em> That's it. No dashboards, no guilt, no 6 a.m. panic calls.</p>
+              <div class="cf-quote">"I stopped calling my dad to nag him about his pills. Now I call him to talk." — beta family, Ohio</div>
+            </div>
+          </div>
+
+          <div class="channel-feature flip">
+            <div class="cf-media"><img src="us-astro.png" alt="Horoscope channel — daily reading from your real birth chart"></div>
+            <div class="cf-copy">
+              <div class="cf-kicker">Channel 02 · Horoscope</div>
+              <h3>A daily reading that actually knows you.</h3>
+              <p>Enter your birth date, time, and place once. Every morning, PadClaw computes your real chart for the day and writes a reading that's specific to you — career, relationships, energy — in a voice you can adjust from "cosmic" to "practical."</p>
+              <p>62 million Americans check their horoscope regularly. None of them have a beautiful, dedicated screen for it. Now they do.</p>
+              <div class="cf-quote">"What does my chart say about today?" — the first thing thousands of people will say to PadClaw with their morning coffee.</div>
+            </div>
+          </div>
+
+          <div class="channel-feature">
+            <div class="cf-media"><img src="us-weather.png" alt="Weather channel — morning briefing with outfit and commute advice"></div>
+            <div class="cf-copy">
+              <div class="cf-kicker">Channel 03 · Weather</div>
+              <h3>Not a forecast. A decision.</h3>
+              <p>Weather apps give you numbers. PadClaw gives you answers: <em>"Rain starts at 8 — leave ten minutes early and take the umbrella. Light jacket for the kids."</em></p>
+              <p>It knows your commute, your school run, and your weekend plans, and it briefs you like a good assistant would — out loud, before you ask, as you walk past.</p>
+              <div class="cf-quote">Perfect by the front door. That's why every PadClaw ships with a slim entryway stand.</div>
+            </div>
+          </div>
+
+          <div class="channel-feature flip">
+            <div class="cf-media"><img src="us-learning.png" alt="Learning channel — a patient AI tutor for kids and adults"></div>
+            <div class="cf-copy">
+              <div class="cf-kicker">Channel 04 · Learning</div>
+              <h3>A tutor with infinite patience, at the dining table.</h3>
+              <p>Math homework without the meltdown. Spanish practice with real-time pronunciation feedback. Reading-aloud sessions that adapt to your kid's level — and quiz-me modes for the adults, too.</p>
+              <p>It's on the family screen, not a personal phone: parents can see it, join it, and set the schedule. Screen time you feel <em>good</em> about.</p>
+              <div class="cf-quote">"Practice some Spanish with me" is a complete instruction. That's the whole interface.</div>
+            </div>
+          </div>
+
+          <!-- Voice feature -->
+          <div class="story-section" style="margin-top:48px;">
+            <h2>No Remote. No Typing. Just Talk.</h2>
+            <p>Far-field microphones hear you across the kitchen — over the range hood, over the kids. Say what you need in plain English and watch it happen on screen. Hands covered in flour? That's exactly the moment PadClaw was built for.</p>
+          </div>
+
+          <div class="image-actual">
+            <img src="us-voice.png" alt="Hands-free voice control — setting a timer from across the kitchen while cooking" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+
+          <!-- Evening wind-down scenario -->
+          <div class="story-section" style="margin-top:48px;">
+            <h2>It Ends the Day, Too</h2>
+            <p>At night, PadClaw dims to a whisper and gets out of your way. One glance gives you tomorrow — the weather, the first meeting, the thing you'd forget — then it sets your alarm, starts your sleep sounds, and goes dark with the lamp.</p>
+            <p><strong>No blue-light doomscroll. No phone in the bed.</strong> Just tomorrow, handled, in ten seconds.</p>
+          </div>
+
+          <div class="image-actual">
+            <img src="us-evening.png" alt="Night mode — tomorrow's briefing on the nightstand while you read in bed" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+          <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">The last screen of the day shouldn't be the loudest one.</p>
+
+          <!-- More channels roadmap -->
+          <div class="story-section">
+            <h2>And This Is Just the First Season</h2>
+            <p style="color:var(--ks-text-secondary);">Channels arrive as free over-the-air updates — like a streaming service adding shows. Backers vote on what we build next.</p>
+            <div class="roadmap-chips">
+              <span class="roadmap-chip live">Family Health</span>
+              <span class="roadmap-chip live">Horoscope</span>
+              <span class="roadmap-chip live">Weather</span>
+              <span class="roadmap-chip live">Learning</span>
+              <span class="roadmap-chip">Recipes &amp; Meal Planning</span>
+              <span class="roadmap-chip">Bedtime Stories</span>
+              <span class="roadmap-chip">Family Finance</span>
+              <span class="roadmap-chip">Fitness Coach</span>
+              <span class="roadmap-chip">Pet Care</span>
+              <span class="roadmap-chip">Channel SDK — build your own</span>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S4: COMPUTE INCLUDED                          -->
+          <!-- ============================================ -->
+          <div class="compute-banner">
+            <h3>Six Months of Serious AI Compute. <span>Included in the Box.</span></h3>
+            <p>Here's the part nobody else will tell you: good AI costs real money to run. Others hide that cost in a monthly subscription you discover after you've bought the hardware. We did the opposite — we built our own GPU infrastructure and priced it in, upfront.</p>
+            <div class="compute-points">
+              <div class="compute-point">
+                <span class="cp-num">6 mo</span>
+                <strong>Compute Pass included</strong>
+                <span>Every PadClaw ships with six months of full-power AI — every channel, unlimited daily use, no meter anxiety, no surprise bill.</span>
+              </div>
+              <div class="compute-point">
+                <span class="cp-num">NVIDIA-class</span>
+                <strong>Our own GPU racks</strong>
+                <span>Your channels run on dedicated data-center-grade NVIDIA GPU infrastructure we operate ourselves — not rented from a big-tech cloud that mines your data for ads.</span>
+              </div>
+              <div class="compute-point">
+                <span class="cp-num">Taiwan</span>
+                <strong>Built where hardware lives</strong>
+                <span>Our racks sit in Taiwan — the heart of the world's semiconductor supply chain, minutes from our engineering team. We control the full stack, top to bottom.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-actual">
+            <img src="us-compute.png" alt="Dedicated GPU datacenter in Taiwan powering PadClaw in the home" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+
+          <div class="story-section">
+            <h2>What Happens After Six Months?</h2>
+            <p>You choose — and the device never bricks:</p>
+            <ul class="feature-list">
+              <li><strong>Keep full power:</strong> extend your Compute Pass for a flat $7.99/month (backers lock this rate for life). Cancel anytime.</li>
+              <li><strong>Or go free forever:</strong> core reminders, weather, timers, and offline features keep working at no cost, powered on-device.</li>
+              <li><strong>No hostage hardware.</strong> It's a full Android tablet underneath. Even with zero plan, it's still a great tablet.</li>
+            </ul>
+            <p>Compare that to devices that <em>required</em> $24/month just to switch on — and stopped working entirely when the company pulled the plug. We designed for the opposite outcome.</p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S5: COMPETITIVE LANDSCAPE (no names)          -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>Where PadClaw Sits in the AI Device Landscape</h2>
+            <p style="color:var(--ks-text-secondary);margin-bottom:16px;">We studied every AI device that came before us — the successes, and especially the failures. Here's the honest map:</p>
+          </div>
+
+          <div class="landscape-cards">
+            <div class="landscape-card">
+              <span class="lc-tag">The wearable AI pins</span>
+              <h4>Beautiful idea, no screen, monthly fee</h4>
+              <p>Asked people to pay $700 <em>plus</em> $24/month for a device that couldn't show a map. One is discontinued; the AI answers arrived by voice, slowly. A screen matters. Pricing honesty matters more.</p>
+            </div>
+            <div class="landscape-card">
+              <span class="lc-tag">The pocket AI gadgets</span>
+              <h4>Cheap, cute, and promised too much</h4>
+              <p>"It'll operate apps for you" — it mostly didn't, and the refund wave made tech-news headlines. We only demo what already works, and every channel on this page runs today on our EVT hardware.</p>
+            </div>
+            <div class="landscape-card">
+              <span class="lc-tag">The smart speakers &amp; displays</span>
+              <h4>A decade old, still setting timers</h4>
+              <p>Locked to one big-tech ecosystem, built to sell you shopping and ads, and their "AI upgrade" now costs a monthly fee. They answer questions; they don't <em>run rituals</em> for a family.</p>
+            </div>
+            <div class="landscape-card">
+              <span class="lc-tag">The developer agent boxes</span>
+              <h4>Powerful — if you're an engineer</h4>
+              <p>A new wave of "own your AI" servers lets technical teams self-host agents with API keys, spend limits, and OAuth dashboards. Genuinely cool. Also: your mom is never, ever setting one up. PadClaw is the consumer answer to the same idea — you own the device, the compute is yours, and setup is "plug it in."</p>
+            </div>
+          </div>
+
+          <div class="comparison-table-wrap">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Capability</th>
+                  <th class="ct-highlight">PadClaw</th>
+                  <th>AI Pin / Wearable</th>
+                  <th>Pocket AI Gadget</th>
+                  <th>Smart Display</th>
+                  <th>Agent Server Box</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Real 10" screen</td>
+                  <td class="ct-highlight"><span class="ct-yes">Yes — TV-style launcher</span></td>
+                  <td><span class="ct-no">No / projector</span></td>
+                  <td><span class="ct-no">2.9" tiny</span></td>
+                  <td>Yes (ad-driven UI)</td>
+                  <td><span class="ct-no">Headless</span></td>
+                </tr>
+                <tr>
+                  <td>Grandma-proof setup</td>
+                  <td class="ct-highlight"><span class="ct-yes">Plug in &amp; talk</span></td>
+                  <td><span class="ct-no">No</span></td>
+                  <td><span class="ct-no">No</span></td>
+                  <td>Account required</td>
+                  <td><span class="ct-no">Engineers only</span></td>
+                </tr>
+                <tr>
+                  <td>Purpose-built family channels</td>
+                  <td class="ct-highlight"><span class="ct-yes">4 at launch, more free</span></td>
+                  <td><span class="ct-no">No</span></td>
+                  <td><span class="ct-no">No</span></td>
+                  <td><span class="ct-no">Generic skills</span></td>
+                  <td><span class="ct-no">DIY</span></td>
+                </tr>
+                <tr>
+                  <td>AI compute included upfront</td>
+                  <td class="ct-highlight"><span class="ct-yes">6 months, all-in</span></td>
+                  <td><span class="ct-no">$24/mo required</span></td>
+                  <td>Partial</td>
+                  <td>Fee for new AI</td>
+                  <td><span class="ct-no">Pay per token</span></td>
+                </tr>
+                <tr>
+                  <td>Works without subscription</td>
+                  <td class="ct-highlight"><span class="ct-yes">Forever (core features)</span></td>
+                  <td><span class="ct-no">Bricked without it</span></td>
+                  <td>Limited</td>
+                  <td>Yes (limited)</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Dedicated GPU cloud (not big-tech)</td>
+                  <td class="ct-highlight"><span class="ct-yes">Our own racks, Taiwan</span></td>
+                  <td><span class="ct-no">Big-tech cloud</span></td>
+                  <td><span class="ct-no">Big-tech cloud</span></td>
+                  <td><span class="ct-no">Big-tech cloud</span></td>
+                  <td>Local (DIY)</td>
+                </tr>
+                <tr>
+                  <td>Price</td>
+                  <td class="ct-highlight"><strong>$299</strong> <small>(early bird, compute incl.)</small></td>
+                  <td><span class="ct-no">$699 + sub</span></td>
+                  <td>$199</td>
+                  <td>$0–279</td>
+                  <td>$500+ &amp; usage</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="story-section" style="margin-top:24px;">
+            <div style="background:linear-gradient(135deg, rgba(5,206,120,.08), rgba(5,206,120,.02));border:1px solid rgba(5,206,120,.2);border-radius:var(--ks-radius-lg);padding:32px;text-align:center;">
+              <p style="font-size:20px;font-weight:700;line-height:1.5;margin-bottom:8px;">Everyone else sold you AI hardware and hid the compute bill.</p>
+              <p style="font-size:16px;color:var(--ks-text-secondary);line-height:1.6;max-width:640px;margin:0 auto;">We own the GPUs, we own the device, and we put both in one honest price. That's the whole business model — <strong>no ads, no data resale, no surprise subscription on day 31.</strong></p>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S6: PRIVACY                                   -->
+          <!-- ============================================ -->
+          <div class="story-section" style="margin-top:48px;">
+            <h2>Private by Business Model</h2>
+            <ul class="feature-list">
+              <li><strong>We don't sell ads.</strong> Your horoscope, your parents' medication list, your kid's math scores — none of it feeds an advertising profile, because we don't have one.</li>
+              <li><strong>Your data lives in one place you can point to.</strong> Encrypted end-to-end between your PadClaw and our own racks. Sensitive routines (reminders, check-ins, timers) run on-device and keep working offline.</li>
+              <li><strong>Delete means delete.</strong> One tap wipes your family's data from the device and our servers. We're a hardware company — we make money when you buy the product, not when we harvest your life.</li>
+            </ul>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S7: HARDWARE                                  -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>Honest Hardware, Built Where Hardware Is Built</h2>
+            <p style="color:var(--ks-text-secondary);margin-bottom:20px;">A fully-laminated 10.1" display, far-field mics that hear you across the kitchen, and speakers tuned for voice. It's also a complete Android 14 tablet — Netflix, Zoom, and the Play Store all work.</p>
+            <table class="spec-table">
+              <tbody>
+                <tr><td>Display</td><td>10.1" IPS fully laminated touchscreen</td></tr>
+                <tr><td>Processor</td><td>Octa-core ARM processor</td></tr>
+                <tr><td>Memory</td><td>4 GB RAM (channels run in our GPU cloud — the tablet stays light)</td></tr>
+                <tr><td>Storage</td><td>128 GB (microSD expandable)</td></tr>
+                <tr><td>OS</td><td>Android 14 + PadClaw Channel Launcher</td></tr>
+                <tr><td>AI</td><td>Hybrid: on-device routines + dedicated NVIDIA-class GPU cloud (Taiwan)</td></tr>
+                <tr><td>Connectivity</td><td>Wi-Fi 6 / Bluetooth 5.3 / 4G LTE (optional)</td></tr>
+                <tr><td>Battery</td><td>7,000 mAh</td></tr>
+                <tr><td>Audio</td><td>Dual speakers + far-field dual-mic array</td></tr>
+                <tr><td>In the box</td><td>PadClaw, desktop stand, USB-C cable, quick card (one sentence long)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="image-actual">
+            <img src="us-unbox.png" alt="What's in the box — PadClaw, desktop stand, USB-C cable, and a one-sentence quick card" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+          <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">Everything in the box. The manual is one sentence long.</p>
+
+          <!-- Gift scenario -->
+          <div class="story-section" style="margin-top:48px;">
+            <h2>The Gift That Doesn't Need Tech Support</h2>
+            <p>Every gadget you've ever given your parents came with a hidden gift for you: months of phone calls that start with <em>"it's asking me to sign in again."</em></p>
+            <p>PadClaw's entire setup is one sentence: <strong>plug it in, say hello.</strong> No accounts, no passwords, no app store. And with the Duo Pack, their device is linked to yours before it even ships — the Health channel starts reporting to your phone on day one.</p>
+          </div>
+
+          <div class="image-actual">
+            <img src="us-gift.png" alt="Three generations unboxing PadClaw — setup is one sentence: plug in, say hello" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+          <p style="font-size:13px;color:var(--ks-text-secondary);text-align:center;margin:10px 0 0;">The Duo Pack exists because of this exact moment.</p>
+
+          <!-- ============================================ -->
+          <!-- S8: WHY TRUST US                              -->
+          <!-- ============================================ -->
+          <div class="story-section" style="margin-top:48px;">
+            <h2>Why This Team Ships</h2>
+            <p>You've been burned by crowdfunded gadgets. So were we — as backers. Here's why this one is different:</p>
+            <ul class="feature-list">
+              <li><strong>We're hardware natives.</strong> 12 engineers in Taipei with ASUS, HTC, and MediaTek pedigrees — 60+ years of shipped consumer electronics between us.</li>
+              <li><strong>The device already exists.</strong> EVT is complete, DVT is underway. Every device photo on this page is a functioning unit, not a render.</li>
+              <li><strong>Our factory ships for top-10 brands.</strong> Our Tier-1 manufacturing partner has built tablets for three of the world's ten biggest electronics brands. Four years of working relationship.</li>
+              <li><strong>The datacenter is not a promise.</strong> Our GPU racks in Taiwan are live today — they're what generated the channel demos on this page.</li>
+            </ul>
+          </div>
+
+          <div class="image-actual">
+            <img src="img-team-01.png" alt="The PadClaw team in Taipei" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+
+          <div class="image-actual">
+            <img src="img-factory-01.png" alt="Our Tier-1 manufacturing partner's tablet line" style="width:100%;border-radius:var(--ks-radius-lg);display:block;">
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S9: STRETCH GOALS                             -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>Stretch Goals — More Channels for Everyone</h2>
+            <p style="color:var(--ks-text-secondary);margin-bottom:24px;">Every stretch-goal channel ships free to all backers, at every tier.</p>
+          </div>
+
+          <div class="stretch-goals">
+            <div class="sg-item sg-reached">
+              <div class="sg-bar"><div class="sg-fill" style="width:100%"></div></div>
+              <div class="sg-info">
+                <span class="sg-amount">$100K</span>
+                <span class="sg-label">Base Goal — 4 launch channels + Channel Launcher</span>
+                <span class="sg-badge sg-badge-reached">Funded</span>
+              </div>
+            </div>
+            <div class="sg-item sg-active">
+              <div class="sg-bar"><div class="sg-fill" style="width:55%"></div></div>
+              <div class="sg-info">
+                <span class="sg-amount">$250K</span>
+                <span class="sg-label">Recipes Channel — meal plans, grocery lists, hands-free cooking mode</span>
+                <span class="sg-badge sg-badge-active">55% there</span>
+              </div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-bar"><div class="sg-fill" style="width:0%"></div></div>
+              <div class="sg-info">
+                <span class="sg-amount">$400K</span>
+                <span class="sg-label">Bedtime Stories Channel — personalized, illustrated, read aloud</span>
+              </div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-bar"><div class="sg-fill" style="width:0%"></div></div>
+              <div class="sg-info">
+                <span class="sg-amount">$600K</span>
+                <span class="sg-label">Family Finance Channel — bills, budgets, allowances</span>
+              </div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-bar"><div class="sg-fill" style="width:0%"></div></div>
+              <div class="sg-info">
+                <span class="sg-amount">$1M</span>
+                <span class="sg-label">Channel SDK + Marketplace — build and share your own channels</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S10: TIMELINE                                 -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>Project Timeline</h2>
+            <div class="timeline">
+              <div class="timeline-item"><div class="timeline-dot active"></div><div class="timeline-content"><strong>Q3 2026</strong><p>Kickstarter campaign · DVT hardware complete</p></div></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Q4 2026</strong><p>PVT + channel software beta with 200 backer families</p></div></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Q1 2027</strong><p>Mass production · certification (FCC/CE)</p></div></div>
+              <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><strong>Q2 2027</strong><p>First units ship to backers · Compute Pass activates on first boot</p></div></div>
+            </div>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S11: RISKS                                    -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>Risks and Challenges</h2>
+            <p><strong>Manufacturing.</strong> Tablets are a mature category and our ODM partner runs this exact class of device at scale today. The realistic risks are component lead times and certification queues; our schedule already includes a one-quarter buffer.</p>
+            <p><strong>AI service cost.</strong> The six-month Compute Pass is pre-funded from campaign proceeds and our GPU capacity is owned, not rented — our per-user cost is fixed and known. If we're wildly successful, we add racks; we don't degrade service.</p>
+            <p><strong>Software scope.</strong> Four channels is a deliberate constraint. If a stretch-goal channel slips, launch channels are never delayed — new channels arrive as free updates.</p>
+            <p>We will publish a monthly update — with photos from the production line and the datacenter — from campaign close until the last unit ships.</p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- S12: FAQ                                      -->
+          <!-- ============================================ -->
+          <div class="story-section">
+            <h2>FAQ</h2>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item"><button class="faq-q">Is there a subscription?</button><div class="faq-a"><p>Not to start. Six months of full-power AI compute is included with every device. After that, extend for a flat $7.99/month (backer price, locked for life), or keep using core features free forever. The device never stops working.</p></div></div>
+            <div class="faq-item"><button class="faq-q">Where does my data go?</button><div class="faq-a"><p>Daily routines run on-device. Channel AI runs on GPU infrastructure we own and operate in Taiwan, encrypted in transit and at rest. We sell hardware, not ads — your data is never sold, shared, or used for advertising. One tap deletes everything.</p></div></div>
+            <div class="faq-item"><button class="faq-q">Why is your datacenter in Taiwan?</button><div class="faq-a"><p>Because that's where we are — and where the world's AI hardware is born. Taiwan sits at the center of the semiconductor supply chain, which means we get first-class NVIDIA-grade GPU capacity at costs that let us include six months of compute in the box. Latency to the US West Coast is ~130ms, well under what a conversational assistant needs.</p></div></div>
+            <div class="faq-item"><button class="faq-q">Can I install regular Android apps?</button><div class="faq-a"><p>Yes. Under the Channel Launcher it's a full Android 14 tablet with Google Play. Netflix on the kitchen counter works great, for the record.</p></div></div>
+            <div class="faq-item"><button class="faq-q">Will there be more channels?</button><div class="faq-a"><p>Yes — that's the roadmap's whole point. Channels arrive as free over-the-air updates, backers vote on priorities, and the $1M stretch goal opens a Channel SDK and marketplace so anyone can build one.</p></div></div>
+            <div class="faq-item"><button class="faq-q">How much is shipping?</button><div class="faq-a"><p>Shipping is charged separately and calculated by region at checkout — approximately $19 within the continental US, $25 to Canada, and $29–39 for most other regions. Any import duties are the backer's responsibility. We ship from our fulfillment hubs in the US and Asia to keep costs down.</p></div></div>
+            <div class="faq-item"><button class="faq-q">What if the campaign is delayed?</button><div class="faq-a"><p>We publish monthly photo updates from the factory floor and datacenter. If we slip, you'll know why, and by how long, before you read it anywhere else. Hardware timelines have a buffer quarter built in.</p></div></div>
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- RIGHT COL: Sidebar -->
+      <aside class="project-sidebar">
+        <div class="funding-stats">
+          <div class="stat-block">
+            <span class="stat-value">$0</span>
+            <span class="stat-label">pledged of $100,000 goal</span>
+            <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-block"><span class="stat-value">0</span><span class="stat-label">backers</span></div>
+            <div class="stat-block"><span class="stat-value">35</span><span class="stat-label">days to go</span></div>
+          </div>
+        </div>
+
+        <button class="btn-primary">Back this project</button>
+        <button class="btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+          <span>Remind me</span>
+        </button>
+
+        <!-- Reward tiers -->
+        <div class="reward-tiers">
+
+          <div class="reward-card">
+            <div class="reward-header">
+              <span class="reward-price">$10</span>
+              <span class="reward-shipping">Digital reward</span>
+            </div>
+            <h4>The Believer</h4>
+            <p>Our eternal gratitude, backer-only updates from the factory floor, and a vote on which channel we build next.</p>
+            <div class="reward-meta"><span>Est. delivery: Immediately</span></div>
+            <button class="btn-reward">Select this reward</button>
+          </div>
+
+          <div class="reward-card featured">
+            <div class="reward-badge">Limited — 300</div>
+            <div class="reward-header">
+              <span class="reward-price">$299</span>
+              <span class="reward-discount"><span>Save $200 — 40% off</span> <s class="reward-msrp">$499</s></span>
+            </div>
+            <h4>Super Early Bird — PadClaw</h4>
+            <p>The full PadClaw experience at the lowest price it will ever be.</p>
+            <div class="reward-includes">
+              <div class="reward-include-title">Includes</div>
+              <ul>
+                <li>PadClaw AI Screen × 1</li>
+                <li>Desktop stand + USB-C cable</li>
+                <li><strong>6-month Compute Pass</strong> (all channels, full power)</li>
+                <li>Lifetime $7.99/mo backer rate after</li>
+              </ul>
+            </div>
+            <div class="reward-meta">
+              <span>Est. delivery: Jun 2027</span>
+              <span>Shipping calculated at checkout</span>
+              <span>Limited — 300 of 300 remaining</span>
+            </div>
+            <button class="btn-reward">Select this reward</button>
+          </div>
+
+          <div class="reward-card featured">
+            <div class="reward-badge">Most popular</div>
+            <div class="reward-header">
+              <span class="reward-price">$349</span>
+              <span class="reward-discount"><span>Save $150 — 30% off</span> <s class="reward-msrp">$499</s></span>
+            </div>
+            <h4>Early Bird — PadClaw</h4>
+            <p>Same everything, slightly less bragging rights.</p>
+            <div class="reward-includes">
+              <div class="reward-include-title">Includes</div>
+              <ul>
+                <li>PadClaw AI Screen × 1</li>
+                <li>Desktop stand + USB-C cable</li>
+                <li><strong>6-month Compute Pass</strong></li>
+                <li>Lifetime $7.99/mo backer rate after</li>
+              </ul>
+            </div>
+            <div class="reward-meta">
+              <span>Est. delivery: Jun 2027</span>
+              <span>Shipping calculated at checkout</span>
+              <span>Limited — 300 of 300 remaining</span>
+            </div>
+            <button class="btn-reward">Select this reward</button>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-header">
+              <span class="reward-price">$399</span>
+              <span class="reward-discount"><span>Save $100 — 20% off</span> <s class="reward-msrp">$499</s></span>
+            </div>
+            <h4>Kickstarter Special — PadClaw</h4>
+            <p>PadClaw with the 6-month Compute Pass, at the campaign-wide price.</p>
+            <div class="reward-meta">
+              <span>Est. delivery: Jun 2027</span>
+              <span>Shipping calculated at checkout</span>
+            </div>
+            <button class="btn-reward">Select this reward</button>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-header">
+              <span class="reward-price">$499</span>
+              <span class="reward-discount"><span>Founder Edition</span></span>
+            </div>
+            <h4>Founder Edition — 12 Months Compute</h4>
+            <p>PadClaw with a full year of Compute Pass, laser-engraved founder number (001–300), and priority access to the Channel SDK beta.</p>
+            <div class="reward-meta">
+              <span>Est. delivery: Jun 2027</span>
+              <span>Shipping calculated at checkout</span>
+              <span>Limited — 300 remaining</span>
+            </div>
+            <button class="btn-reward">Select this reward</button>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-header">
+              <span class="reward-price">$549</span>
+              <span class="reward-discount"><span>Save $449 vs. retail</span></span>
+            </div>
+            <h4>Duo Pack — Yours &amp; Your Parents'</h4>
+            <p>Two PadClaws, two 6-month Compute Passes, linked out of the box — their Health channel reports to your phone from day one.</p>
+            <div class="reward-meta">
+              <span>Est. delivery: Jun 2027</span>
+              <span>Shipping calculated at checkout</span>
+            </div>
+            <button class="btn-reward">Select this reward</button>
+          </div>
+
+          <div class="reward-card">
+            <div class="reward-header"><span class="reward-price">$1,349</span></div>
+            <h4>Family Five-Pack</h4>
+            <p>Five PadClaws with 6-month Compute Passes — for the whole extended family, or the waiting room that finally feels human.</p>
+            <div class="reward-meta">
+              <span>Est. delivery: Jul 2027</span>
+              <span>Shipping calculated at checkout</span>
+              <span>Limited — 50 remaining</span>
+            </div>
+            <button class="btn-reward">Select this reward</button>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col"><h5>About</h5><a href="#">About us</a><a href="#">Our charter</a><a href="#">Stats</a><a href="#">Careers</a></div>
+      <div class="footer-col"><h5>Support</h5><a href="#">Help center</a><a href="#">Terms of use</a><a href="#">Privacy policy</a><a href="#">Cookie policy</a></div>
+      <div class="footer-col"><h5>More</h5><a href="#">Newsletter</a><a href="#">Blog</a><a href="#">App Store</a><a href="#">Google Play</a></div>
+      <div class="footer-col"><h5>Connect</h5><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Twitter</a><a href="#">YouTube</a></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 PadClaw Demo. This is a demonstration page.</p></div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-q').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        this.parentElement.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>
