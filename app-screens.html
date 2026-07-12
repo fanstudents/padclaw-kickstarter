@@ -22,6 +22,19 @@
     .sect-head h2{font-size:21px;font-weight:800}
     .sect-desc{color:#8a919c;font-size:13.5px;margin-bottom:24px;max-width:780px}
 
+    .ds{background:#12161d;border:1px solid #222a35;border-radius:16px;padding:26px;margin-bottom:52px}
+    .ds h2{font-size:18px;font-weight:800;margin-bottom:4px}
+    .ds .ds-sub{color:#8a919c;font-size:13px;margin-bottom:20px}
+    .ds-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .ds-card{background:#0e1218;border:1px solid #1e2631;border-radius:12px;padding:16px 18px}
+    .ds-card h4{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#05CE78;margin-bottom:10px}
+    .ds-card table{width:100%;border-collapse:collapse;font-size:12.5px}
+    .ds-card td{padding:5px 0;color:#aab2bd;border-bottom:1px solid #171d26;vertical-align:top}
+    .ds-card td:first-child{color:#e8eaed;font-weight:600;width:44%;padding-right:10px}
+    .ds-card td code{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;background:#161b23;border-radius:4px;padding:1px 6px;color:#9fd8bc}
+    .swatch{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(255,255,255,.15)}
+    @media(max-width:860px){.ds-grid{grid-template-columns:1fr}}
+
     .screen{display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:center;background:#12161d;border:1px solid #222a35;border-radius:16px;padding:24px;margin-bottom:18px}
     .screen.flip .scr-media{order:2}
     .scr-media .frame{background:#1a1d22;border-radius:18px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
@@ -40,11 +53,64 @@
   <h1>APP 介面與功能細節總覽</h1>
   <p class="sub">PadClaw 裝置端軟體的 <strong>14 個核心畫面</strong>，以純 UI mockup 呈現（規劃中軟體 · planned software）。設計語言：深炭底 <strong>#111418</strong>、品牌綠 <strong>#05CE78</strong>、超大字級與大型觸控目標（senior-friendly）、每個畫面只做一件事。</p>
   <div class="toc">
+    <a href="#s-ds">設計規範</a>
     <a href="#s-core">01 系統核心</a>
     <a href="#s-health">02 Family Health</a>
     <a href="#s-astro">03 Horoscope</a>
     <a href="#s-weather">04 Weather</a>
     <a href="#s-learning">05 Learning</a>
+  </div>
+
+  <!-- ============ DESIGN SYSTEM ============ -->
+  <div class="ds" id="s-ds">
+    <h2>設計規範 · Design Tokens（UI 設計師交接用）</h2>
+    <p class="ds-sub">所有畫面依此系統繪製。設計師可直接以此為 Figma variables 起點；示意圖為 AI 輔助草稿，最終以本規範為準。</p>
+    <div class="ds-grid">
+      <div class="ds-card">
+        <h4>Color</h4>
+        <table>
+          <tr><td><span class="swatch" style="background:#0E1116"></span>bg / base</td><td><code>#0E1116 → #14181F</code> 縱向微漸層</td></tr>
+          <tr><td><span class="swatch" style="background:#1A1F27"></span>surface / card</td><td><code>#1A1F27</code>＋1px <code>rgba(255,255,255,.07)</code> hairline</td></tr>
+          <tr><td><span class="swatch" style="background:#05CE78"></span>accent / primary</td><td><code>#05CE78</code>（每畫面僅一個主要動作）· pressed <code>#04AE66</code></td></tr>
+          <tr><td><span class="swatch" style="background:#F2F4F7"></span>text / primary</td><td><code>#F2F4F7</code></td></tr>
+          <tr><td><span class="swatch" style="background:#98A2B3"></span>text / secondary</td><td><code>#98A2B3</code> · disabled <code>#5B6472</code></td></tr>
+          <tr><td>對比要求</td><td>本文層級 ≥ 7:1（senior-friendly，超過 WCAG AA）</td></tr>
+        </table>
+      </div>
+      <div class="ds-card">
+        <h4>Typography（Inter / 等價 grotesque）</h4>
+        <table>
+          <tr><td>Display 數字</td><td>96–160px · semibold · tabular lining（溫度、題目、姓名）</td></tr>
+          <tr><td>H1 / H2</td><td>40–44px / 26–34px · semibold · 緊排</td></tr>
+          <tr><td>Body</td><td>≥ 22px（senior 畫面 ≥ 24px），行高 1.4</td></tr>
+          <tr><td>Micro-label</td><td>12–14px · ALL-CAPS · +8% 字距 · <code>#98A2B3</code></td></tr>
+          <tr><td>Caption / link</td><td>16–18px · 連結加底線（長輩辨識）</td></tr>
+        </table>
+      </div>
+      <div class="ds-card">
+        <h4>Layout &amp; Components</h4>
+        <table>
+          <tr><td>Grid</td><td>8pt 間距系統 · 外邊距 48px · 卡片間距 16–24px</td></tr>
+          <tr><td>圓角</td><td>卡片 20px · 按鈕全圓 pill · 縮圖 12px</td></tr>
+          <tr><td>主按鈕</td><td>綠底白字 pill，高 64px（senior 畫面 88–160px）＋8% 頂部亮邊</td></tr>
+          <tr><td>次按鈕</td><td>1.5px <code>#2A313C</code> 外框 pill</td></tr>
+          <tr><td>Checkbox</td><td>56–64px 圓角方塊 · 3px 框 · 勾選轉綠底白勾</td></tr>
+          <tr><td>Progress</td><td>8px 全圓角 · 軌道 <code>#262D38</code> · 填色 accent</td></tr>
+          <tr><td>Icon</td><td>幾何線性圖標 · 2px 圓頭描邊 · 24px 網格 · 禁用 emoji（歡迎頁揮手除外）</td></tr>
+          <tr><td>Status bar</td><td>左 PadClaw 字標 15px · 右 9:41 AM＋Wi-Fi＋電量 · 高 48px</td></tr>
+        </table>
+      </div>
+      <div class="ds-card">
+        <h4>Principles</h4>
+        <table>
+          <tr><td>一屏一事</td><td>每畫面只有一個主要動作；永不出現第二層選單</td></tr>
+          <tr><td>克制的綠</td><td>accent 僅用於主要動作、焦點環、正向狀態</td></tr>
+          <tr><td>夜間模式</td><td>整體降至 30% 亮度、白色偏琥珀、禁用純白</td></tr>
+          <tr><td>可及性</td><td>觸控目標 ≥ 56px；所有狀態同時以圖標＋文字表達（不依賴顏色）</td></tr>
+          <tr><td>語氣</td><td>介面文案對人說話（"Emily will see this"），不用系統腔（"Sharing enabled"）</td></tr>
+        </table>
+      </div>
+    </div>
   </div>
 
   <!-- ============ 01 CORE ============ -->
