@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadClaw — AI 影片製作腳本 × 3 版本</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter','PingFang TC',system-ui,sans-serif;background:#0c0f14;color:#e8eaed;padding:40px 24px 80px;line-height:1.6}
+    .wrap{max-width:1080px;margin:0 auto}
+    h1{font-size:26px;font-weight:800;margin-bottom:8px}
+    .sub{color:#8a919c;font-size:14px;margin-bottom:28px;line-height:1.7}
+    .sub strong{color:#05CE78}
+    .toc{display:flex;gap:12px;margin-bottom:36px;flex-wrap:wrap}
+    .toc a{font-size:13px;font-weight:600;color:#e8eaed;text-decoration:none;background:#161b23;border:1px solid #232b36;border-radius:999px;padding:9px 18px}
+    .toc a:hover{border-color:#05CE78}
+
+    .script{background:#12161d;border:1px solid #222a35;border-radius:16px;padding:30px;margin-bottom:40px}
+    .script-head{margin-bottom:6px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+    .script-tag{font-size:11px;font-weight:800;letter-spacing:.1em;padding:4px 10px;border-radius:6px}
+    .tag-a{background:rgba(5,206,120,.15);color:#3ddc97}
+    .tag-b{background:rgba(94,155,255,.15);color:#7fb0ff}
+    .tag-c{background:rgba(255,158,94,.15);color:#ffb27f}
+    .script-head h2{font-size:20px;font-weight:800}
+    .script-meta{color:#8a919c;font-size:13px;margin-bottom:18px}
+    .tone-box{background:#0e1218;border:1px solid #1e2631;border-radius:10px;padding:16px 18px;font-size:13px;color:#aab2bd;margin-bottom:22px;line-height:1.7}
+    .tone-box strong{color:#e8eaed}
+
+    .shot{border:1px solid #1e2631;border-radius:12px;padding:18px 20px;margin-bottom:14px;background:#0e1218}
+    .shot-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+    .shot-tc{font-size:12px;font-weight:800;color:#05CE78;font-variant-numeric:tabular-nums}
+    .shot-head h3{font-size:14.5px;font-weight:700}
+    .shot-cam{font-size:11px;color:#666e79;background:#161b23;border-radius:5px;padding:2px 8px}
+    .shot dl{display:grid;grid-template-columns:64px 1fr;gap:6px 12px;font-size:13px}
+    .shot dt{color:#666e79;font-weight:600;font-size:12px}
+    .shot dd{color:#c6ccd4}
+    .shot dd.vo{color:#e8eaed;font-style:italic}
+    .shot dd.vo .zh{display:block;font-style:normal;color:#8a919c;font-size:12px;margin-top:2px}
+    .prompt{background:#0a0d11;border:1px solid #1a222c;border-left:3px solid #05CE78;border-radius:0 8px 8px 0;padding:10px 14px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;color:#9fd8bc;line-height:1.65;margin-top:4px;white-space:pre-wrap}
+    .prod-notes{background:rgba(5,206,120,.05);border:1px solid rgba(5,206,120,.2);border-radius:12px;padding:18px 22px;margin-top:20px;font-size:13px;color:#aab2bd;line-height:1.8}
+    .prod-notes strong{color:#e8eaed}
+    .global-notes{background:#12161d;border:1px solid #222a35;border-radius:16px;padding:26px 30px;font-size:13.5px;color:#aab2bd;line-height:1.9}
+    .global-notes h2{font-size:17px;font-weight:800;color:#e8eaed;margin-bottom:10px}
+    .global-notes strong{color:#e8eaed}
+    code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#161b23;border-radius:4px;padding:1px 6px;color:#9fd8bc}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>AI 影片製作腳本 × 3 版本</h1>
+  <p class="sub">每支約 <strong>75–90 秒</strong>，對應三個 campaign 版本的主軸。每顆鏡頭附：分鏡描述、運鏡、旁白（EN 為成片用、中文為對照）、畫面字卡，以及可直接貼入 <strong>Veo 3 / Runway Gen-4 / Kling 2.x</strong> 的英文提示詞。片尾有共用製作規範。</p>
+  <div class="toc">
+    <a href="#script-a">A · Channels, Not Apps（產品發表型）</a>
+    <a href="#script-b">B · The Calm Screen（氛圍敘事型）</a>
+    <a href="#script-c">C · Peace of Mind（情感紀實型）</a>
+  </div>
+
+  <!-- ============ SCRIPT A ============ -->
+  <div class="script" id="script-a">
+    <div class="script-head"><span class="script-tag tag-a">版本 A</span><h2>「Channels, Not Apps」— 產品發表型</h2></div>
+    <p class="script-meta">總長約 80 秒 · 13 鏡 · 節奏：明快自信，前 10 秒必須讓人懂產品</p>
+    <div class="tone-box"><strong>調性：</strong>Apple 發表會 × Netflix 片頭的混血。剪接乾淨俐落，音樂是輕快的 electronic pop（參考 Vulfpeck 式律動），每個頻道 demo 都「快進快出」。旁白男聲或中性女聲，語速偏快、帶一點幽默。<br><strong>核心論述：</strong>會用電視就會用 PadClaw → 四個頻道 → 半年算力全包 → CTA。</div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:00–0:06</span><h3>冷開場 — 遙控器的隱喻</h3><span class="shot-cam">固定鏡頭 → 快速推軌</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>黑畫面。「喀」一聲，電視遙控器按下的極特寫。切到一家人窩在沙發上看電視大笑——每個人都會用電視。突然畫面凍結。</dd>
+        <dt>旁白</dt><dd class="vo">"Everyone knows how to use a TV. Nobody taught you. You just... clicked."<span class="zh">每個人都會用電視。沒人教過你，你就是……按下去了。</span></dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Extreme close-up of a thumb pressing a minimalist TV remote button with a satisfying click, shallow depth of field, warm living room bokeh background, then cut to a cozy wide shot of an American family of four laughing on a couch watching TV at dusk, warm lamplight, cinematic 35mm film look, natural skin tones, gentle camera push-in. Photorealistic, 4K, no brand logos visible.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:06–0:14</span><h3>問題陳述 — AI 好難用</h3><span class="shot-cam">手持感快切 × 3</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>三個快切：①有人盯著聊天機器人的空白輸入框發呆，游標閃爍；②有人對智慧音箱說話，音箱回「Sorry, I can't do that」；③長輩滑平板滿螢幕 app 一臉困惑。</dd>
+        <dt>旁白</dt><dd class="vo">"So why does AI still feel like a job interview? Blank boxes. Sorry-I-can't. A hundred and forty-seven apps."<span class="zh">那為什麼 AI 用起來還像在面試？空白框、抱歉我做不到、147 個 app。</span></dd>
+        <dt>字卡</dt><dd>快閃小字：<code>Prompt engineering ≠ a hobby</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Three quick handheld shots, muted desaturated color grade: (1) a man staring blankly at a laptop screen showing an empty chat input box with a blinking cursor, late night; (2) a woman speaking to a generic smart speaker on a kitchen counter, then rolling her eyes in mild frustration; (3) an elderly man squinting at a tablet screen crowded with dozens of colorful generic app icons, confused. Documentary realism, slight camera shake, no real brand logos. 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:14–0:22</span><h3>產品亮相 — 開機即頻道</h3><span class="shot-cam">緩慢環繞 180°</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>色彩回歸飽和。晨光廚房，PadClaw 立在中島上開機——直接亮出四張頻道大磁貼（Health／Horoscope／Weather／Learning），像串流平台首頁。鏡頭繞產品半圈。</dd>
+        <dt>旁白</dt><dd class="vo">"This is PadClaw. Turn it on, and it works like your TV: four channels. Pick one."<span class="zh">這是 PadClaw。打開它，就像打開電視：四個頻道，選一個。</span></dd>
+        <dt>字卡</dt><dd><code>Channels, Not Apps.</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Slow 180-degree orbital camera move around a modern 10.1-inch tablet with slim silver-grey bezels on a fabric-and-aluminum desktop stand, placed on a light oak kitchen island in bright morning sunlight. The screen powers on to a dark cinematic launcher with four large glossy channel tiles labeled 'Health', 'Horoscope', 'Weather', 'Learning', green accent color #05CE78, small white wordmark 'PadClaw' top-left. Steam rises from a coffee mug nearby. Premium product commercial style, crisp screen content, photorealistic, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:22–0:30</span><h3>頻道 Demo ① 健康</h3><span class="shot-cam">中景 → 手機插入鏡頭</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>奶奶在客廳輕點大按鈕完成晨間簽到，螢幕大字打勾。切半秒：女兒手機跳出「Mom finished her morning check-in ✓」。</dd>
+        <dt>旁白</dt><dd class="vo">"Health — grandma taps once, you stop worrying."<span class="zh">健康頻道——奶奶按一下，你不用再擔心。</span></dd>
+        <dt>字卡</dt><dd><code>CH 01 · Family Health</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">A cheerful silver-haired American woman in her 70s in a bright cozy living room taps a huge rounded green button labeled "I'm OK today" on a 10-inch tablet on a side table; the screen shows a large friendly checkmark animation. Quick insert shot: a smartphone screen lights up with a notification "Mom finished her morning check-in ✓ 9:02 AM". Warm natural light, heartwarming commercial tone, photorealistic, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:30–0:37</span><h3>頻道 Demo ② 星座</h3><span class="shot-cam">俯角特寫 → 拉遠</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>年輕女子端咖啡入座，說「What does my chart say today?」，螢幕展開金色星盤動畫與「Today for Leo」。她邊看邊微笑啜咖啡。</dd>
+        <dt>旁白</dt><dd class="vo">"Horoscope — a real reading from your real birth chart, with your morning coffee."<span class="zh">星座頻道——用你真正的星盤算的每日運勢，配你的早晨咖啡。</span></dd>
+        <dt>字卡</dt><dd><code>CH 02 · Horoscope</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">A young American woman in her 20s with a coffee mug sits at a sunlit window table and speaks casually to a 10-inch tablet on a stand; the dark screen elegantly animates a fine golden zodiac wheel and constellation lines with the heading "Today for Leo", midnight-blue UI with gold and green accents. She smiles and sips coffee while reading. Soft dreamy morning light, lifestyle commercial, photorealistic, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:37–0:44</span><h3>頻道 Demo ③ 天氣</h3><span class="shot-cam">跟拍出門動線</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>玄關。男子邊穿外套邊經過 PadClaw，螢幕顯示大雨傘圖示與「Rain at 8 — take an umbrella」。他抽走傘架上的傘，出門。一鏡到底。</dd>
+        <dt>旁白</dt><dd class="vo">"Weather — not a forecast. A decision."<span class="zh">天氣頻道——不是預報，是決定。</span></dd>
+        <dt>字卡</dt><dd><code>CH 03 · Weather</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Tracking shot following an American man in his 30s through a home entryway on a rainy morning: he grabs his jacket, glances at a 10-inch tablet on the console table showing a bold weather screen with a large green umbrella icon and text "Rain at 8 — take an umbrella", picks an umbrella from the stand and exits the front door. One continuous smooth gimbal move, grey rainy window light, photorealistic, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:44–0:51</span><h3>頻道 Demo ④ 學習</h3><span class="shot-cam">餐桌雙人中景</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>晚餐後餐桌，父女對著 PadClaw 玩數學問答，女兒搶答按下「72」，螢幕彩帶動畫，兩人擊掌。</dd>
+        <dt>旁白</dt><dd class="vo">"Learning — a tutor with infinite patience, at the dinner table."<span class="zh">學習頻道——一位有無限耐心的家教，就在餐桌上。</span></dd>
+        <dt>字卡</dt><dd><code>CH 04 · Learning</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Warm evening scene: an American father and his 8-year-old daughter at a dining table lean toward a 10-inch tablet showing a math quiz "24 × 3 = ?" with four big answer buttons; the girl excitedly taps "72", the screen bursts with a subtle confetti animation, father and daughter high-five, both laughing. Cozy lamp light, genuine joy, commercial lifestyle realism, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:51–0:58</span><h3>殺手鐧 — 半年算力全包</h3><span class="shot-cam">機房推軌 → 光束轉場</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>切到台灣機房：一排排伺服器綠色狀態燈呼吸。一道綠光從機架飛出、越過海洋地平線、落進美國客廳裡的 PadClaw。</dd>
+        <dt>旁白</dt><dd class="vo">"And here's the twist: six months of serious GPU compute — included in the box. No subscription to start."<span class="zh">而且反轉來了：半年份的 GPU 算力，直接包含在盒子裡。開始不用訂閱。</span></dd>
+        <dt>字卡</dt><dd><code>6 Months of Compute. Included.</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Cinematic dolly through a pristine dark datacenter aisle with tall server racks glowing with soft green status lights; a single elegant beam of green light launches from a rack, arcs over a stylized night ocean horizon, and lands gently into a warm American living room where a 10-inch tablet on a shelf glows to life. Epic but clean, premium tech commercial, photorealistic with subtle VFX, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:58–1:05</span><h3>信任 — 團隊與工廠</h3><span class="shot-cam">紀實快切 × 3</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>台北辦公室工程師調試真實原型機（強調「實機」）；產線機械臂；工程師手上轉著裸板。</dd>
+        <dt>旁白</dt><dd class="vo">"Built by twelve hardware veterans in Taipei. Real prototypes. Real factory. Real racks."<span class="zh">由台北十二位硬體老兵打造。真原型、真工廠、真機房。</span></dd>
+        <dt>字卡</dt><dd><code>EVT complete · DVT underway</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Documentary-style quick cuts: engineers in a Taipei hardware lab testing a bare-board tablet prototype with probes and cables, oscilloscope traces on monitors; a clean electronics factory line with robotic arms placing components; close-up of hands rotating an exposed circuit board under task lighting. Authentic, slightly desaturated documentary grade, shallow DOF, 4K, no brand logos.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">1:05–1:13</span><h3>生活蒙太奇 — 一天四刻</h3><span class="shot-cam">節奏快切 × 4</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>同一台 PadClaw 的一天：晨（天氣）→ 午後（奶奶簽到）→ 傍晚（作業）→ 夜（明日簡報微光）。音樂收束。</dd>
+        <dt>旁白</dt><dd class="vo">"One screen. Four channels. Zero learning curve."<span class="zh">一塊螢幕、四個頻道、零學習曲線。</span></dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Rhythmic montage of the same 10-inch tablet in one home across a day: bright morning weather briefing in the kitchen; afternoon check-in tap by a senior woman; early evening math quiz with a child; night mode dim "Tomorrow" card on a nightstand as lights go out. Consistent device and interior, changing natural light temperature from cool morning to warm night, elegant match cuts, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">1:13–1:20</span><h3>結尾 CTA</h3><span class="shot-cam">正面定機</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>純色深底、產品正面置中，launcher 亮著。Logo 與標語浮現，Kickstarter 綠色按鈕元素。</dd>
+        <dt>旁白</dt><dd class="vo">"PadClaw. Channels, not apps. Back us on Kickstarter — early birds start at $299."<span class="zh">PadClaw，頻道，而非 App。上 Kickstarter 支持我們——早鳥 299 美元起。</span></dd>
+        <dt>字卡</dt><dd><code>PadClaw — Channels, Not Apps.</code><br><code>Early bird $299 · 6 months compute included</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Clean end-card shot: the tablet perfectly centered facing camera on a seamless dark charcoal studio background, launcher screen glowing with four channel tiles, soft green rim light, generous negative space above for title text. Slow subtle push-in, premium minimalist product commercial, photorealistic, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="prod-notes"><strong>A 版製作備註：</strong>BGM 建議 90–100 BPM funk-pop，頻道 demo 段每 7 秒一個「音樂重拍＝換頻道」；旁白與字卡雙語擇一（美國市場用 EN）；0:51 算力段是全片唯一 VFX 鏡頭，若 AI 生成光束不穩，可改用機房鏡頭＋字卡動畫達成。Kickstarter 規範：0:58 信任段必須使用「真實原型機」實拍素材替換 AI 生成版本後才能上架（AI 版僅供 pitch 用）。</div>
+  </div>
+
+  <!-- ============ SCRIPT B ============ -->
+  <div class="script" id="script-b">
+    <div class="script-head"><span class="script-tag tag-b">版本 B</span><h2>「The Calm Screen」— 氛圍敘事型</h2></div>
+    <p class="script-meta">總長約 85 秒 · 11 鏡 · 節奏：前 25 秒壓抑緊繃，之後全面舒展</p>
+    <div class="tone-box"><strong>調性：</strong>前段是焦慮的（快切、手持、通知音效疊加到刺耳）；0:25 一個深呼吸之後，運鏡全部改為緩慢定機與慢推軌，聲音只剩環境音與極簡鋼琴。這支片的說服力來自「體感對比」，不是資訊量。<br><strong>核心論述：</strong>你的手機在偷你的時間 → 平靜是一種設計 → 三個承諾 → 半年算力 → CTA。</div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:00–0:08</span><h3>焦慮開場 — 6:47 AM</h3><span class="shot-cam">手持特寫快切</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>鬧鐘響。手在黑暗中摸到手機。臉被藍光照亮。拇指開始滑。通知音「叮、叮、叮」越疊越密。時鐘特寫：6:47 → 7:12。她揉眼睛，嘆氣。</dd>
+        <dt>旁白</dt><dd class="vo">"You picked it up to check the weather. That was twenty-five minutes ago."<span class="zh">你拿起手機只是想看天氣。那是 25 分鐘前的事了。</span></dd>
+        <dt>字卡</dt><dd>左下小字時間跳動 <code>6:47 → 7:12</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Anxious handheld sequence in a dark bedroom at dawn: an alarm clock rings, a hand fumbles for a smartphone on the nightstand, a woman's face lit harshly by cold blue screen light as her thumb scrolls endlessly, notification bubbles reflecting in her tired eyes, quick cut to a digital clock jumping from 6:47 to 7:12, she rubs her eyes and sighs. Cold desaturated blue grade, claustrophobic close-ups, slight camera shake, cinematic realism, 4K, no brand logos.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:08–0:16</span><h3>問題升級 — 全家都在滑</h3><span class="shot-cam">緩慢橫移</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>早餐桌橫移長鏡頭：爸爸滑手機、媽媽滑手機、小孩盯平板，桌上麥片沒人吃，彼此零交流。通知音持續、輕微失真。</dd>
+        <dt>旁白</dt><dd class="vo">"Every screen in your house was engineered for one thing: more of your attention."<span class="zh">你家裡的每一塊螢幕，都是為了同一件事而設計的：拿走你更多注意力。</span></dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Slow lateral dolly across a family breakfast table in the morning: father scrolling his phone, mother scrolling hers, a child staring into a tablet, cereal bowls untouched, nobody speaking, each face lit by their own screen glow. Muted cold color grade, cinematic social-commentary tone, shallow depth of field, 4K, no brand logos.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:16–0:25</span><h3>轉折 — 把手機收起來</h3><span class="shot-cam">特寫 → 靜止</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>她把手機面朝下放進抽屜、關上。所有通知音瞬間靜止。兩秒完全的安靜與黑畫面。然後：一聲清脆的木質音符。</dd>
+        <dt>旁白</dt><dd class="vo">（無旁白——只有聲音設計）</dd>
+        <dt>字卡</dt><dd>黑畫面浮現：<code>What if a screen could be calm?</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Close-up of a woman's hand placing a smartphone face-down into a wooden drawer and sliding it shut with quiet finality, warm morning light, then two seconds of held stillness on the closed drawer. Cinematic, deliberate, the visual equivalent of an exhale. Photorealistic, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:25–0:34</span><h3>產品亮相 — 平靜的樣子</h3><span class="shot-cam">極慢推軌</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>色調轉暖。破曉廚房，PadClaw 是畫面唯一光源，安靜顯示「Good morning」與一張簡報卡。蒸氣從旁邊的水壺升起。運鏡從此全片變慢。</dd>
+        <dt>旁白</dt><dd class="vo">"This is PadClaw. A screen with nothing to scroll."<span class="zh">這是 PadClaw。一塊沒有東西可滑的螢幕。</span></dd>
+        <dt>字卡</dt><dd><code>The Calm Screen</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Very slow cinematic push-in on a 10-inch tablet on a fabric-and-aluminum stand on a kitchen counter in deep blue pre-dawn light; its screen glows softly and warmly as the only light source, showing a minimal dark page with 'Good morning' and one briefing card '58° · Rain at 8 — umbrella today', green accent #05CE78, wordmark 'PadClaw' top-left. Steam rises from a kettle beside it. Serene, meditative, premium, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:34–0:46</span><h3>三個承諾</h3><span class="shot-cam">三段定機，每段 4 秒</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>三個靜謐畫面配三行字卡：①螢幕上「就是沒有」動態消息（顯示一張卡後歸於黑）；②沒有任何角標與數字（乾淨 UI 特寫）；③沒有廣告（畫面只有天氣與時間）。</dd>
+        <dt>旁白</dt><dd class="vo">"No infinite feed. No red badges. No ads — ever. Not features we removed. Things we never built."<span class="zh">沒有無限滑動、沒有紅色角標、永遠沒有廣告。不是我們拿掉了它們——是我們從沒打算做。</span></dd>
+        <dt>字卡</dt><dd><code>No feed · No badges · No ads</code>（逐項浮現）</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Three serene static shots of a 10-inch tablet screen in elegant dark UI, each held 4 seconds: (1) a single briefing card fading gently to a near-black idle screen with just the time; (2) extreme close-up of clean interface corners with visibly no notification badges or counters; (3) a minimal weather page with vast empty dark space. Zen-like composition, soft warm room light, macro lens feel, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:46–0:56</span><h3>一天的呼吸</h3><span class="shot-cam">三段慢鏡蒙太奇</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>①晨：她捧茶望窗，平板在背景待命；②午後：小孩在餐桌十分鐘練習，計時結束螢幕自己說再見；③夜：床頭夜間模式一張「Tomorrow」卡，燈滅、螢幕同步熄滅。</dd>
+        <dt>旁白</dt><dd class="vo">"It briefs you in ten seconds. Tutors your kid for ten minutes. Then it does the most radical thing a screen can do — it goes dark."<span class="zh">它用十秒鐘替你簡報、用十分鐘陪孩子練習，然後做出一塊螢幕能做的最激進的事——它自己暗下來。</span></dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Three slow meditative vignettes: (1) a woman holding a warm mug gazing out a bright window, the tablet glowing quietly in the soft-focus background; (2) a child finishing a short quiz at a dining table as the tablet screen shows a friendly 'See you tomorrow!' and dims itself; (3) a nightstand at bedtime, the tablet in whisper-dim night mode showing one 'Tomorrow' card, then fading to black as the lamp turns off. Warm hopeful grade, slow camera drifts, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:56–1:04</span><h3>為什麼沒人做 — 商業模式</h3><span class="shot-cam">機房定機 → 疊化</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>安靜的機房，綠燈規律呼吸。疊化到客廳裡發著同樣綠光的 PadClaw。視覺語言：同一種平靜，從機房到客廳。</dd>
+        <dt>旁白</dt><dd class="vo">"Calm doesn't monetize — unless the product is the device itself. Six months of our own GPU compute, included. No ads to serve. No feed to grow."<span class="zh">平靜無法變現——除非產品就是裝置本身。半年份自有 GPU 算力，直接內含。沒有廣告要投放，沒有動態要餵養。</span></dd>
+        <dt>字卡</dt><dd><code>6 months of compute. Included.</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Tranquil static shot inside a dark datacenter aisle, rows of server racks with slowly pulsing soft green status lights, almost meditative; slow crossfade to a warm living room at dusk where a 10-inch tablet on a shelf glows with the same gentle green. Visual rhyme between the two spaces, minimal, premium, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">1:04–1:12</span><h3>對照收束 — 同一個早晨，重來一次</h3><span class="shot-cam">與開場鏡位完全相同</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>復刻 0:00 的鬧鐘鏡位——但這次她沒拿手機：瞄一眼床頭 PadClaw 的一張卡（天氣＋第一個行程），起身拉開窗簾。時鐘：6:47 → 6:48。只花了一分鐘。</dd>
+        <dt>旁白</dt><dd class="vo">"Same morning. One minute. The rest is yours again."<span class="zh">同一個早晨，只花一分鐘。剩下的時間，重新屬於你。</span></dd>
+        <dt>字卡</dt><dd><code>6:47 → 6:48</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Mirror of an earlier dawn bedroom shot but warm and hopeful: the alarm rings, a woman glances at a 10-inch tablet on the nightstand showing one calm card with weather and her first meeting, nods, gets up and pulls open the curtains letting golden sunrise light flood the room; a clock shows 6:48. Warm golden grade, liberating wide shot, cinematic, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">1:12–1:22</span><h3>結尾 CTA</h3><span class="shot-cam">正面定機</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>產品正面置中於暖灰底，螢幕顯示「Good morning」。標語浮現。安靜收尾，最後一個音符。</dd>
+        <dt>旁白</dt><dd class="vo">"PadClaw. The calm screen. On Kickstarter now — from $299, six months of compute included."<span class="zh">PadClaw，平靜的螢幕。現正於 Kickstarter 募資——299 美元起，內含半年算力。</span></dd>
+        <dt>字卡</dt><dd><code>PadClaw — The Calm Screen</code><br><code>No feed. No ads. No doomscroll.</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Minimal end card: the tablet centered on a seamless warm light-grey studio background, screen showing a serene 'Good morning' page, one soft shadow, extremely clean composition with generous negative space, very slow almost imperceptible push-in. Calm premium product commercial, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="prod-notes"><strong>B 版製作備註：</strong>這支片 50% 的效果在聲音設計——前段通知音要疊到「生理不適」的臨界（參考 Apple「Fumble」廣告），0:16 抽屜關上的瞬間全部靜音是全片最重要的一秒。BGM 從 0:25 才進、只用鋼琴單音與環境音。開場與 1:04 鏡位務必完全相同（同機位重拍），對照才成立。適合投放：Instagram Reels／TikTok 的 wellness 受眾（可剪 30 秒版：0:00–0:16 + 0:25–0:34 + CTA）。</div>
+  </div>
+
+  <!-- ============ SCRIPT C ============ -->
+  <div class="script" id="script-c">
+    <div class="script-head"><span class="script-tag tag-c">版本 C</span><h2>「Peace of Mind」— 情感紀實型</h2></div>
+    <p class="script-meta">總長約 90 秒 · 12 鏡 · 節奏：紀錄片式，靠一條「9:02 的通知」敘事線貫穿</p>
+    <div class="tone-box"><strong>調性：</strong>溫暖紀實，像 Google「Loretta」超級盃廣告。手持但穩、自然光、真實生活質感。配樂是溫柔的原聲吉他＋弦樂，情緒在 0:52 通知到達那一刻推到頂。旁白是女兒的第一人稱獨白（女聲，低而親密）。<br><strong>核心論述：</strong>牽掛的重量 → 一個按鈕的簡單 → 9:02 的checkmark → 這不是監控是尊嚴 → Duo Pack CTA。</div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:00–0:08</span><h3>開場 — 未撥出的電話</h3><span class="shot-cam">特寫，淺景深</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>清晨辦公室或廚房。女子（40s）盯著手機通訊錄裡「Mom」的名字，拇指懸在撥號鍵上，猶豫，最後鎖上螢幕放下。窗外天色未亮透。</dd>
+        <dt>旁白</dt><dd class="vo">"Eight a.m. is too early to call. Again."<span class="zh">早上八點打過去，太早了。又是這樣。</span></dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Intimate close-up in soft early morning light: an American woman in her 40s at a kitchen counter stares at her smartphone contact screen showing the name "Mom", her thumb hovers over the call button, hesitates, then she locks the phone and sets it down with a quiet sigh. Shallow depth of field, warm but subdued documentary grade, handheld but steady, 4K, photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:08–0:16</span><h3>獨白 — 牽掛的重量</h3><span class="shot-cam">生活切片 × 3</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>她的日常穿插：開車等紅燈時瞥手機、開會中走神、給孩子做便當時停頓。每個畫面裡「掛念」都只有一瞬間，但都在。</dd>
+        <dt>旁白</dt><dd class="vo">"When you love someone who lives an hour away, worry doesn't ring like a phone. It hums. All day."<span class="zh">當你愛的人住在一小時車程外，擔心不會像電話那樣響起。它是低鳴，一整天都在。</span></dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Three brief documentary vignettes of a woman in her 40s mid-life: glancing at her silent phone at a red light; momentarily distracted in a bright office meeting; pausing while packing a child's lunchbox, looking out the window. Each moment subtle and honest, natural light, muted warm grade, cinematic realism, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:16–0:26</span><h3>場景轉換 — 媽媽的早晨</h3><span class="shot-cam">溫暖廣角 → 中景</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>切到媽媽家：陽光灑進客廳，70 多歲的 Barbara 澆花、燒水，愜意哼歌。邊桌上的 PadClaw 輕聲說「Good morning, Barbara」，她像回應老朋友一樣「Morning!」。</dd>
+        <dt>旁白</dt><dd class="vo">"So we put a small screen in Mom's living room. She didn't have to learn a thing."<span class="zh">所以我們在媽媽的客廳放了一塊小螢幕。她什麼都不用學。</span></dd>
+        <dt>字卡</dt><dd><code>Setup: plug in, say hello.</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Golden morning light floods a cozy American living room: a cheerful silver-haired woman in her 70s waters a plant and hums; on the side table a 10-inch tablet on a fabric stand gently displays "Good morning, Barbara" with a soft chime, and she replies "Morning!" over her shoulder like greeting an old friend. Heartwarming documentary realism, warm natural grade, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:26–0:36</span><h3>核心互動 — 一個按鈕</h3><span class="shot-cam">過肩 → 手部特寫</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>Barbara 在早餐桌坐下，PadClaw 顯示超大字「Good morning, Barbara」與一顆綠色大按鈕「I'm OK today」。她邊喝咖啡邊自然地按下去。大打勾動畫，螢幕顯示小字「Emily will see this」。</dd>
+        <dt>旁白</dt><dd class="vo">"Every morning, one button. That's the whole job."<span class="zh">每天早上，一顆按鈕。這就是它全部的工作。</span></dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Over-the-shoulder then close-up: an elderly woman's hand with a thin gold ring taps a huge rounded green button labeled "I'm OK today" on a 10-inch tablet showing very large text "Good morning, Barbara"; a big friendly checkmark animates and a small line reads "Emily will see this". Morning sun across the breakfast table, toast and coffee nearby, dignified and unhurried, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:36–0:44</span><h3>順帶的美好 — 她真的喜歡用</h3><span class="shot-cam">輕快小蒙太奇 × 3</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>Barbara 的一天：看大字版星座讀到笑出來；天氣頻道提醒「人行道結冰，下午再出門買菜」；孫子照片輪播她伸手摸螢幕。</dd>
+        <dt>旁白</dt><dd class="vo">"The horoscope's for her. The icy-sidewalk warning's for her. The grandkids' photos — definitely for her."<span class="zh">星座是給她的、結冰路面提醒是給她的、孫子的照片——絕對是給她的。</span></dd>
+        <dt>字卡</dt><dd><code>Not a monitor. A companion.</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Three warm vignettes of a silver-haired woman in her 70s enjoying a 10-inch tablet: laughing at a large-text horoscope page; nodding at a weather warning "Icy sidewalk — errands this afternoon?"; gently touching the screen as it shows a slideshow of her grandchildren's photos. Cozy home light, joyful and dignified, documentary warmth, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:44–0:52</span><h3>平行剪接 — 兩個世界靠近</h3><span class="shot-cam">交叉剪接，節奏漸快</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>交叉剪接：媽媽按下按鈕的手 ↔ 女兒在通勤/會議間隙。剪接越來越近，音樂漸強然後——瞬間安靜。</dd>
+        <dt>旁白</dt><dd class="vo">（無旁白，音樂敘事）</dd>
+        <dt>字卡</dt><dd>無</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Cross-cut sequence accelerating: an elderly woman's finger pressing a green check-in button on a tablet — an adult daughter walking through a bright office lobby with her phone in hand — the button press completing — the daughter's phone screen about to light up. Rising musical tension then sudden stillness, cinematic parallel editing, warm tones on both sides, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">0:52–1:00</span><h3>全片情緒頂點 — 9:02 的通知</h3><span class="shot-cam">手機特寫 → 她的臉</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>女兒的手機亮起：「Mom finished her morning check-in ✓ 9:02 AM」。鏡頭從手機搖到她的臉——肩膀放鬆、閉眼半秒、呼出一口氣、微笑。這 0.5 秒的「exhale」就是整支影片。</dd>
+        <dt>旁白</dt><dd class="vo">"Nine oh-two. One quiet buzz. And the hum... stops."<span class="zh">九點零二分，一聲輕震。那個低鳴……停了。</span></dd>
+        <dt>字卡</dt><dd>無（讓通知卡自己當字卡）</dd>
+        <dt>Prompt</dt><dd><div class="prompt">Emotional peak shot: a smartphone in a woman's hand lights up with a single notification "Mom finished her morning check-in ✓ 9:02 AM" with a small green heart; camera tilts up to her face — shoulders drop, eyes close for half a second, a slow exhale, then a soft genuine smile. Bright office window light, intimate close-up, cinematic realism, subtle slow motion at 60fps conformed to 24fps, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">1:00–1:08</span><h3>尊嚴宣言</h3><span class="shot-cam">定機雙景</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>媽媽對著平板上的分享設定頁（大字顯示「Emily can see: your daily check-in ✓ — and nothing else」），滿意點頭。畫面安定、正面。</dd>
+        <dt>旁白</dt><dd class="vo">"No cameras. No tracking. She sees exactly what I see. It's not surveillance — it's a postcard."<span class="zh">沒有攝影機、沒有追蹤。她看得到我能看到的一切。這不是監控——是一張明信片。</span></dd>
+        <dt>字卡</dt><dd><code>Dignity is a feature.</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">A silver-haired woman in her 70s reviews a large-text privacy screen on a 10-inch tablet reading "Emily can see: your daily check-in ✓ — and nothing else", nods with a satisfied smile and settles back into her armchair with tea. Calm steady frame, warm afternoon light, respectful and dignified tone, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">1:08–1:16</span><h3>Duo Pack — 週末的臉</h3><span class="shot-cam">溫暖廣角收束</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>週末，女兒帶孩子回媽媽家，門打開擁抱。桌上兩台 PadClaw 並排（她家一台、媽媽家一台的視覺暗示）。全家在餐桌上笑鬧。</dd>
+        <dt>旁白</dt><dd class="vo">"We didn't buy a gadget. We bought back our Sunday phone calls — for the good stuff."<span class="zh">我們買的不是一台裝置。我們買回的是週日的電話——留給真正想聊的事。</span></dd>
+        <dt>字卡</dt><dd><code>Duo Pack — yours &amp; theirs, linked out of the box</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Warm weekend homecoming: an adult daughter and her kids arrive at grandma's front door, big hugs, then a wide cozy shot of three generations laughing around a dining table, golden afternoon light; on the sideboard a 10-inch tablet on a fabric stand glows quietly with a family photo. Documentary warmth, genuine emotion, cinematic 35mm feel, 4K.</div></dd>
+      </dl>
+    </div>
+
+    <div class="shot">
+      <div class="shot-head"><span class="shot-tc">1:16–1:26</span><h3>結尾 CTA</h3><span class="shot-cam">正面定機</span></div>
+      <dl>
+        <dt>分鏡</dt><dd>產品正面置中，螢幕顯示「Hi, Barbara! 👋 / Say hello to begin」歡迎頁。標語與 Kickstarter 資訊浮現。最後一顆音符收在通知「叮」的變奏。</dd>
+        <dt>旁白</dt><dd class="vo">"PadClaw. The simplest way to stay close. On Kickstarter now — the Duo Pack ships to two homes."<span class="zh">PadClaw，與所愛之人保持連結的最簡單方式。現正於 Kickstarter 募資——Duo Pack 可寄送到兩個家。</span></dd>
+        <dt>字卡</dt><dd><code>PadClaw — Peace of mind, included.</code><br><code>Duo Pack $549 · from $299 · 6 months compute included</code></dd>
+        <dt>Prompt</dt><dd><div class="prompt">Clean end card: the tablet centered on a seamless warm cream studio background, screen showing a friendly welcome page "Hi, Barbara!" with one green button "Say hello to begin", soft single shadow, gentle almost imperceptible push-in, generous negative space for closing titles. Warm minimal product commercial, 4K photorealistic.</div></dd>
+      </dl>
+    </div>
+
+    <div class="prod-notes"><strong>C 版製作備註：</strong>全片成敗在 0:52 那顆「exhale」鏡頭——AI 生成臉部微表情仍不穩定，建議這一顆多生成 8–10 個 take 挑選，或用真人補拍（僅此一顆成本極低）。旁白錄音指導：像對朋友說話、不像唸稿，句尾放鬆下墜。媽媽角色兩鏡（0:16、1:00）務必用同一組 seed／參考圖維持長相一致（Kling 的 face reference 或 Veo 的 ingredient 功能）。這支是三版中最適合當 Kickstarter 主影片的：情感完整、產品清楚、CTA 對到最高客單的 Duo Pack。</div>
+  </div>
+
+  <!-- ============ GLOBAL NOTES ============ -->
+  <div class="global-notes">
+    <h2>三版共用製作規範</h2>
+    <p><strong>規格：</strong>16:9、4K 交付（Kickstarter 播放器）；同素材裁 9:16 直式版供 Reels/TikTok 投放。24fps、電影感調色；每鏡 5–8 秒生成後在剪接軟體組裝（AI 影片單鏡生成品質 &gt; 長鏡頭生成）。</p>
+    <p><strong>工具建議：</strong>寫實人物與手部互動用 <code>Veo 3</code>（配音對嘴最穩）；產品特寫與 UI 螢幕用 <code>Runway Gen-4</code> 的 image-to-video——直接餵本專案已生成的 gpt-image-2 圖片當首幀，確保產品與 UI 一致；角色跨鏡一致性用 <code>Kling 2.x</code> face/element reference。所有螢幕 UI 若生成不穩，改為後製合成：先生成「黑屏」版鏡頭，再把 UI 圖層 track 上去（After Effects corner-pin），這是業界標準做法、也最能保證 UI 正確。</p>
+    <p><strong>音樂／音效：</strong>A 版 90–100 BPM funk-pop；B 版前段純音效設計＋後段極簡鋼琴；C 版原聲吉他＋弦樂。旁白一律美式英語，A 版中性活潑、B 版低沉緩慢、C 版女聲第一人稱親密感。可用 ElevenLabs 生成 scratch 版，正式上架前換專業錄音。</p>
+    <p><strong>Kickstarter 影片規範（重要）：</strong>①硬體專案影片<strong>必須包含真實原型機的實拍演示</strong>——三支腳本的「信任／團隊」段落請在成片時替換為實機拍攝素材，AI 生成版僅供內部 pitch 與廣告投放；②影片中的 AI 生成片段需在專案頁揭露（我們的頁面已含揭露聲明，影片描述欄再註明一次）；③不得展示未實作的功能當作已完成——所有 UI 演示以「planned software」口徑呈現；④片頭 3 秒內出現產品、片尾必含「Back us on Kickstarter」CTA 與價格錨點。</p>
+    <p><strong>投放剪輯版本：</strong>每支各出 30s 精華版（廣告用）與 15s hook 版（前測素材）。建議先用三支 15s 版小額投放測 CTR，贏家再做完整版精修。</p>
+  </div>
+
+</div>
+</body>
+</html>

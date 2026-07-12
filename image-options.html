@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PadClaw — B/C 版圖片變體比較</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter','PingFang TC',system-ui,sans-serif;background:#0c0f14;color:#e8eaed;padding:40px 24px 80px}
+    .wrap{max-width:1200px;margin:0 auto}
+    h1{font-size:26px;font-weight:800;margin-bottom:8px}
+    .sub{color:#8a919c;font-size:14px;margin-bottom:14px;line-height:1.7}
+    .sub strong{color:#05CE78}
+    .legend{display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap}
+    .legend span{font-size:12px;color:#8a919c;background:#161b23;border:1px solid #232b36;border-radius:999px;padding:6px 14px}
+    .slot{background:#12161d;border:1px solid #222a35;border-radius:16px;padding:26px;margin-bottom:30px}
+    .slot-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;flex-wrap:wrap}
+    .slot-tag{font-size:11px;font-weight:800;letter-spacing:.1em;padding:4px 10px;border-radius:6px}
+    .tag-b{background:rgba(94,155,255,.15);color:#7fb0ff}
+    .tag-c{background:rgba(255,158,94,.15);color:#ffb27f}
+    .slot-head h2{font-size:18px;font-weight:700}
+    .slot-usage{color:#666e79;font-size:12.5px;margin-bottom:16px}
+    .variants{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .variant{background:#0e1218;border:1px solid #1e2631;border-radius:12px;overflow:hidden}
+    .variant.current{border-color:rgba(5,206,120,.45)}
+    .variant img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+    .v-body{padding:12px 14px}
+    .v-name{font-size:12.5px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+    .v-badge{font-size:10px;font-weight:800;letter-spacing:.06em;color:#05CE78;background:rgba(5,206,120,.1);border-radius:5px;padding:2px 7px}
+    .v-note{font-size:12px;color:#8a919c;line-height:1.55}
+    @media(max-width:900px){.variants{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>B / C 版圖片變體 × 3 選 1</h1>
+    <p class="sub">六個關鍵圖位，每個提供 <strong>現行版 + 兩個不同創意方向</strong>。挑好後告訴我（例如「b-hero 用 v3、c-connect 用 v2」），我會直接替換頁面並重新部署。</p>
+    <div class="legend">
+      <span>🟦 版本 B · The Calm Screen</span>
+      <span>🟧 版本 C · Peace of Mind</span>
+      <span>綠框 = 目前頁面使用中</span>
+    </div>
+
+    <!-- B HERO -->
+    <div class="slot">
+      <div class="slot-head"><span class="slot-tag tag-b">版本 B</span><h2>主視覺 Hero — b-hero</h2></div>
+      <p class="slot-usage">頁面第一印象，也是 og:image 社群分享圖。</p>
+      <div class="variants">
+        <div class="variant current">
+          <img loading="lazy" src="web-b-hero.jpg" alt="b-hero current">
+          <div class="v-body"><div class="v-name">現行版 <span class="v-badge">使用中</span></div><p class="v-note">窗邊晨光＋人物側臉＋日出漸層 UI。溫度與產品清晰度平衡。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-b-hero-v2.jpg" alt="b-hero v2">
+          <div class="v-body"><div class="v-name">v2 — 俯拍早餐桌</div><p class="v-note">雜誌風 flat-lay：可頌、咖啡、筆記本、平板。構圖最精緻。注意：底部 chips 生成為 News/Sports/Finance，選用時建議重生或後製改為四頻道。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-b-hero-v3.jpg" alt="b-hero v3">
+          <div class="v-body"><div class="v-name">v3 — 破曉前的廚房</div><p class="v-note">深藍晨暮中平板是唯一的平靜光源。最有電影感、最「Calm」的詮釋。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B CONTRAST -->
+    <div class="slot">
+      <div class="slot-head"><span class="slot-tag tag-b">版本 B</span><h2>混亂 vs 平靜 — b-contrast</h2></div>
+      <p class="slot-usage">核心論述圖：一張圖講完產品哲學。</p>
+      <div class="variants">
+        <div class="variant current">
+          <img loading="lazy" src="web-b-contrast.jpg" alt="b-contrast current">
+          <div class="v-body"><div class="v-name">現行版 <span class="v-badge">使用中</span></div><p class="v-note">左右分割：通知爆炸的手機 vs「Today: 3 things」。最直白的對比論述。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-b-contrast-v2.jpg" alt="b-contrast v2">
+          <div class="v-body"><div class="v-name">v2 — 同室同框</div><p class="v-note">手機面朝下漏出混亂彩光、平板端正發著綠光。同一空間的對比，更含蓄高級。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-b-contrast-v3.jpg" alt="b-contrast v3">
+          <div class="v-body"><div class="v-name">v3 — 把手機收進抽屜</div><p class="v-note">敘事型：手把手機放進抽屜的動作，背景平板安靜待命。有故事、有儀式感。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B RITUAL -->
+    <div class="slot">
+      <div class="slot-head"><span class="slot-tag tag-b">版本 B</span><h2>日常儀式 — b-ritual</h2></div>
+      <p class="slot-usage">「一天」段落配圖：人在生活裡，螢幕在背景。</p>
+      <div class="variants">
+        <div class="variant current">
+          <img loading="lazy" src="web-b-ritual.jpg" alt="b-ritual current">
+          <div class="v-body"><div class="v-name">現行版 <span class="v-badge">使用中</span></div><p class="v-note">女子捧茶望窗、平板顯示 62° 與公車時間。「螢幕等人、不是人等螢幕」。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-b-ritual-v2.jpg" alt="b-ritual v2">
+          <div class="v-body"><div class="v-name">v2 — 週末雙人早餐</div><p class="v-note">夫妻專注聊天吃鬆餅，平板在桌尾當「家具」。人是主角，適合強調關係。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-b-ritual-v3.jpg" alt="b-ritual v3">
+          <div class="v-body"><div class="v-name">v3 — 夜讀場景</div><p class="v-note">檯燈下讀實體書，平板夜間模式微光顯示明日三件事。呼應「一天的結束」段落。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C HERO -->
+    <div class="slot">
+      <div class="slot-head"><span class="slot-tag tag-c">版本 C</span><h2>主視覺 Hero — c-hero</h2></div>
+      <p class="slot-usage">整個版本 C 的情感核心：「媽媽完成簽到」那一刻。</p>
+      <div class="variants">
+        <div class="variant current">
+          <img loading="lazy" src="web-c-hero.jpg" alt="c-hero current">
+          <div class="v-body"><div class="v-name">現行版 <span class="v-badge">使用中</span></div><p class="v-note">女兒看手機通知＋桌上媽媽的相框＋自家 PadClaw 同步顯示。資訊最完整。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-c-hero-v2.jpg" alt="c-hero v2">
+          <div class="v-body"><div class="v-name">v2 — 通知特寫</div><p class="v-note">手持手機大特寫，通知卡就是主角。縮圖可讀性最強，最適合當廣告素材。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-c-hero-v3.jpg" alt="c-hero v3">
+          <div class="v-body"><div class="v-name">v3 — 同一秒雙畫面</div><p class="v-note">左：媽媽按下 I'm OK；右：通勤中的女兒看到通知微笑。「同一秒，相隔六十哩」。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C CONNECT -->
+    <div class="slot">
+      <div class="slot-head"><span class="slot-tag tag-c">版本 C</span><h2>兩個家的連結 — c-connect</h2></div>
+      <p class="slot-usage">「三明治世代」段落配圖：距離與牽掛的視覺化。</p>
+      <div class="variants">
+        <div class="variant current">
+          <img loading="lazy" src="web-c-connect.jpg" alt="c-connect current">
+          <div class="v-body"><div class="v-name">現行版 <span class="v-badge">使用中</span></div><p class="v-note">室內雙景：奶奶客廳 ↔ 兒子的城市公寓，綠色光線橫跨串聯。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-c-connect-v2.jpg" alt="c-connect v2">
+          <div class="v-body"><div class="v-name">v2 — 窗前夜景＋光弧</div><p class="v-note">女子在窗前，窗外兩棟房子被綠光弧線相連。詩意格局最大；注意：平板 UI 生成為溫控介面，選用時需重生 UI 或後製替換。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-c-connect-v3.jpg" alt="c-connect v3">
+          <div class="v-body"><div class="v-name">v3 — 視訊揮手</div><p class="v-note">奶奶對著平板上的孫子們揮手。最直接的溫情，適合偏好具象畫面的受眾。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C CHECKIN -->
+    <div class="slot">
+      <div class="slot-head"><span class="slot-tag tag-c">版本 C</span><h2>每日簽到 — c-checkin</h2></div>
+      <p class="slot-usage">產品核心互動的特寫：一個按鈕的尊嚴設計。</p>
+      <div class="variants">
+        <div class="variant current">
+          <img loading="lazy" src="web-c-checkin.jpg" alt="c-checkin current">
+          <div class="v-body"><div class="v-name">現行版 <span class="v-badge">使用中</span></div><p class="v-note">長輩手指按下「I'm OK today」大按鈕的特寫。UI 與動作最清楚。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-c-checkin-v2.jpg" alt="c-checkin v2">
+          <div class="v-body"><div class="v-name">v2 — 完成狀態</div><p class="v-note">奶奶捧茶滿足微笑，螢幕顯示「All done, Barbara! Emily can see you're OK ✓」。賣的是完成後的安心。</p></div>
+        </div>
+        <div class="variant">
+          <img loading="lazy" src="web-c-checkin-v3.jpg" alt="c-checkin v3">
+          <div class="v-body"><div class="v-name">v3 — 爺爺的早餐桌</div><p class="v-note">過肩視角，Frank 在吐司咖啡旁按下按鈕。男性長輩版本，更不擺拍。</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
