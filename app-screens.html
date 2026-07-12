@@ -51,7 +51,7 @@
 <body>
 <div class="wrap">
   <h1>APP 介面與功能細節總覽</h1>
-  <p class="sub">PadClaw 裝置端軟體的 <strong>14 個核心畫面</strong>，以純 UI mockup 呈現（規劃中軟體 · planned software）。設計語言：深炭底 <strong>#111418</strong>、品牌綠 <strong>#05CE78</strong>、超大字級與大型觸控目標（senior-friendly）、每個畫面只做一件事。</p>
+  <p class="sub">PadClaw 裝置端軟體的 <strong>15 個核心畫面</strong>，以純 UI mockup 呈現（規劃中軟體 · planned software）。設計語言分兩層：<strong>瀏覽型畫面比照 Netflix／Apple tvOS</strong>（billboard 大看板、shelf 卡列、焦點放大＋高光的 focus model、毛玻璃 chrome），<strong>任務型畫面</strong>維持深炭底、品牌綠 <strong>#05CE78</strong>、超大字級的單任務設計（senior-friendly）。</p>
   <div class="toc">
     <a href="#s-ds">設計規範</a>
     <a href="#s-core">01 系統核心</a>
@@ -101,6 +101,17 @@
         </table>
       </div>
       <div class="ds-card">
+        <h4>Focus Model（比照 tvOS / 串流平台）</h4>
+        <table>
+          <tr><td>焦點卡</td><td>放大 110% · 2px 白色高光邊 · 深柔陰影＋微光暈；鄰卡降至 70% 亮度並輕微去飽和</td></tr>
+          <tr><td>Billboard</td><td>首頁頂部 55% 為全幅大看板：作品級圖像＋左下漸層 scrim 承載標籤／標題／主按鈕</td></tr>
+          <tr><td>Shelf</td><td>橫向卡列 · 13px ALL-CAPS 列標題 · 內容圖像即介面，chrome 退居半透明</td></tr>
+          <tr><td>Scrim</td><td>圖上文字一律墊底部黑色漸層；頂部 tab 列用毛玻璃</td></tr>
+          <tr><td>Ambient glow</td><td>背景隨焦點內容染色（tvOS ambient 反應）</td></tr>
+          <tr><td>適用範圍</td><td><strong>瀏覽型畫面</strong>（launcher／頻道首頁）用串流語言；<strong>任務型畫面</strong>（簽到／用藥／隱私）維持大字單任務——不做成海報牆</td></tr>
+        </table>
+      </div>
+      <div class="ds-card">
         <h4>Principles</h4>
         <table>
           <tr><td>一屏一事</td><td>每畫面只有一個主要動作；永不出現第二層選單</td></tr>
@@ -121,7 +132,7 @@
     <div class="screen">
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-welcome.jpg" alt="Welcome screen"></div></div>
       <div class="scr-copy">
-        <div class="scr-kicker">Core 1/5 · 首次開機</div>
+        <div class="scr-kicker">Core 1/6 · 首次開機</div>
         <h3>Welcome — 唯一的設定畫面</h3>
         <ul>
           <li><strong>一句話設定</strong>：插電後顯示「Hi, Barbara!」與單一按鈕「Say hello to begin」，說一聲哈囉即完成啟用</li>
@@ -134,13 +145,27 @@
     <div class="screen flip">
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-launcher.jpg" alt="Channel launcher"></div></div>
       <div class="scr-copy">
-        <div class="scr-kicker">Core 2/5 · 主畫面</div>
-        <h3>Channel Launcher — 頻道式首頁</h3>
+        <div class="scr-kicker">Core 2/6 · 主畫面</div>
+        <h3>Channel Launcher — Billboard＋Shelf 首頁</h3>
         <ul>
-          <li><strong>四張頻道大磁貼</strong>（Health／Horoscope／Weather／Learning），像串流電視首頁，焦點磁貼帶綠色高亮環</li>
-          <li><strong>個人化問候列</strong>：依時段顯示「Good morning, Sarah」＋日期＋天氣 chip</li>
-          <li><strong>Coming soon 列</strong>：未來頻道（Recipes／Stories／Finance）以降暗磁貼預告，OTA 免費解鎖</li>
-          <li>無 app 抽屜、無資料夾、無徽章數字</li>
+          <li><strong>Billboard 大看板</strong>（上 55%）：當下最相關的內容當主角——早晨即天氣簡報，scrim 上承載 FEATURED 標籤、標題與 Open 主按鈕</li>
+          <li><strong>YOUR CHANNELS shelf</strong>：四張作品級橫卡，焦點卡放大＋白色高光邊＋鄰卡降暗（tvOS focus model）</li>
+          <li><strong>毛玻璃頂部 tab 列</strong>：Home／Channels／Family／Settings＋個人頭像</li>
+          <li><strong>COMING SOON 列</strong>於畫面底緣露出一角——暗示可下捲，未來頻道 OTA 免費解鎖</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="screen flip">
+      <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-launcher-focus.jpg" alt="Focus state — Horoscope card focused"></div></div>
+      <div class="scr-copy">
+        <div class="scr-kicker">Core 3/6 · 焦點狀態</div>
+        <h3>Focus State — 焦點互動示範</h3>
+        <ul>
+          <li><strong>焦點移到 Horoscope</strong>：卡片放大 112%、白色高光邊、深柔陰影、藝術圖上有 parallax 光澤掃過</li>
+          <li><strong>metadata 浮現</strong>：焦點卡下方出現「Today for Leo · 2 min read」與綠色底線</li>
+          <li><strong>環境反應</strong>：背景 ambient glow 隨焦點內容轉為暖金色、billboard 降暗讓位——與 tvOS 行為一致</li>
+          <li>此畫面供設計師理解互動規格，非獨立頁面（註：草稿中 billboard 溫度誤為 °C，正式稿一律用 °F）</li>
         </ul>
       </div>
     </div>
@@ -148,7 +173,7 @@
     <div class="screen">
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-voice.jpg" alt="Voice overlay"></div></div>
       <div class="scr-copy">
-        <div class="scr-kicker">Core 3/5 · 語音</div>
+        <div class="scr-kicker">Core 4/6 · 語音</div>
         <h3>Voice Overlay — 跨房間語音</h3>
         <ul>
           <li><strong>遠場收音</strong>：雙麥克風陣列，煮菜時隔著流理台喊即可</li>
@@ -161,7 +186,7 @@
     <div class="screen flip">
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-night.jpg" alt="Night mode"></div></div>
       <div class="scr-copy">
-        <div class="scr-kicker">Core 4/5 · 夜間模式</div>
+        <div class="scr-kicker">Core 5/6 · 夜間模式</div>
         <h3>Night Mode — Tomorrow 簡報</h3>
         <ul>
           <li><strong>日落後自動降到耳語亮度</strong>，色溫轉暖、藍光最小化</li>
@@ -174,7 +199,7 @@
     <div class="screen">
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-privacy.jpg" alt="Privacy sharing"></div></div>
       <div class="scr-copy">
-        <div class="scr-kicker">Core 5/5 · 隱私</div>
+        <div class="scr-kicker">Core 6/6 · 隱私</div>
         <h3>Sharing &amp; Privacy — 尊嚴設計</h3>
         <ul>
           <li><strong>被分享者看得到分享內容</strong>：「What Emily can see」逐項列出，Everything else 永遠標示 Never shared</li>
@@ -253,12 +278,12 @@
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-astro-daily.jpg" alt="Daily reading"></div></div>
       <div class="scr-copy">
         <div class="scr-kicker">Horoscope 2/2 · 每日讀本</div>
-        <h3>Today for Leo — 每日運勢</h3>
+        <h3>Today for Leo — 串流級頻道頁</h3>
         <ul>
-          <li><strong>金色星盤視覺</strong>：本命盤＋當日行運的即時繪製，不是裝飾圖</li>
-          <li><strong>Career／Love／Energy 三卡</strong>：各兩行讀本＋五星能量指標</li>
-          <li><strong>語氣可調</strong>：從「cosmic」到「practical」，由 AI 依當日星象重新撰寫，永不重複</li>
-          <li>可語音追問：「為什麼今天適合談判？」</li>
+          <li><strong>全幅星空 billboard</strong>：金線星盤藝術圖佔滿背景，右側黑色 scrim 承載內容——像串流平台的作品頁</li>
+          <li><strong>metadata 列</strong>：「May 24 · ☉ Leo season · 2 min」，閱讀時長比照影片時長的資訊習慣</li>
+          <li><strong>毛玻璃讀本卡 × 3</strong>：Career／Love／Energy，20% 透明度＋hairline 邊框＋五星能量指標</li>
+          <li><strong>Read aloud 主按鈕</strong>＋「Ask a question」次按鈕：可語音追問「為什麼今天適合談判？」</li>
         </ul>
       </div>
     </div>
@@ -273,12 +298,12 @@
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-weather-brief.jpg" alt="Weather briefing"></div></div>
       <div class="scr-copy">
         <div class="scr-kicker">Weather 1/1 · 晨間簡報</div>
-        <h3>Morning Briefing — 四合一決策畫面</h3>
+        <h3>Morning Briefing — 電影感全幅天氣頁</h3>
         <ul>
-          <li><strong>巨型溫度＋城市</strong>：三公尺外可讀（玄關情境）</li>
-          <li><strong>行動建議卡</strong>：「Rain at 8 AM — take an umbrella」，把預報翻譯成動作</li>
-          <li><strong>逐時強度條</strong>：7AM–1PM 每小時圖示與溫度</li>
-          <li><strong>通勤卡</strong>「Leave by 8:10 · 24 min」＋<strong>穿搭卡</strong>「Light jacket weather」——學校路線與週末行程納入運算</li>
+          <li><strong>實況即背景</strong>：整頁是西雅圖雨雲天際線的全幅動態藝術圖——天氣本身就是 billboard（Apple TV 作品頁的資訊結構）</li>
+          <li><strong>176px 超細體溫度</strong>疊在 scrim 上，三公尺外可讀（玄關情境）</li>
+          <li><strong>毛玻璃行動卡</strong>：「Rain at 8 AM — take an umbrella」，把預報翻譯成動作</li>
+          <li><strong>毛玻璃逐時 shelf</strong>（8AM 帶綠色焦點底線）＋通勤卡「Leave by 8:10」＋穿搭卡「Light jacket weather」</li>
         </ul>
       </div>
     </div>
@@ -293,11 +318,11 @@
       <div class="scr-media"><div class="frame"><img loading="lazy" src="web-ui-learning-home.jpg" alt="Learning home"></div></div>
       <div class="scr-copy">
         <div class="scr-kicker">Learning 1/3 · 頻道首頁</div>
-        <h3>Subject Picker — 科目選擇</h3>
+        <h3>Subject Picker — 串流級學習首頁</h3>
         <ul>
-          <li><strong>四大科目卡</strong>：Math／Reading／Spanish／Science，各帶等級與進度條</li>
-          <li><strong>連續學習 streak</strong>：正向激勵、無懲罰機制（斷了不歸零、不推播羞辱）</li>
-          <li><strong>Parent view</strong> 入口固定在角落——家長隨時可看，孩子知道家長看得到</li>
+          <li><strong>CONTINUE LEARNING billboard</strong>：像「繼續觀看」——上次的乘法練習配吉祥物藝術圖、72% 進度條與 Continue 主按鈕</li>
+          <li><strong>SUBJECTS shelf</strong>：四張直式科目卡（Netflix Kids 的卡列語言），焦點卡放大＋白色高光邊，各帶進度與百分比</li>
+          <li><strong>streak chip 與 Parent view</strong> 固定在毛玻璃頂列——家長隨時可看，孩子知道家長看得到；斷 streak 不歸零、不推播羞辱</li>
         </ul>
       </div>
     </div>
