@@ -467,15 +467,42 @@
           </div>
 
           <!-- ============================================ -->
-          <!-- S6: PRIVACY                                   -->
+          <!-- S6: SECURITY ARCHITECTURE                     -->
           <!-- ============================================ -->
           <div class="story-section" style="margin-top:48px;">
-            <h2>Private by Business Model</h2>
+            <h2>The AI Knows What to Do. It Never Sees Your Passwords.</h2>
+            <p>Every AI assistant before PadClaw worked the same way: hand your accounts and your data to a cloud, and hope. We built the opposite architecture — <strong>we separate the brain from the hands.</strong></p>
             <ul class="feature-list">
-              <li><strong>We don't sell ads.</strong> Your horoscope, your parents' medication list, your kid's math scores — none of it feeds an advertising profile, because we don't have one.</li>
-              <li><strong>Your data lives in one place you can point to.</strong> Encrypted end-to-end between your PadClaw and our own racks. Sensitive routines (reminders, check-ins, timers) run on-device and keep working offline.</li>
-              <li><strong>Delete means delete.</strong> One tap wipes your family's data from the device and our servers. We're a hardware company — we make money when you buy the product, not when we harvest your life.</li>
+              <li><strong>The brain only gets the task.</strong> The AI model — whichever one — receives "order this week's groceries" and reasons about how. That's all it ever sees.</li>
+              <li><strong>The hands stay in your house.</strong> Your passwords, logins, and sessions live in the tablet's secure element and never leave it. The agent on the device does the actual clicking and signing-in — locally.</li>
+              <li><strong>So even a cloud model can't leak what it never had.</strong> No credentials in any prompt. No files uploaded for "context." The AI knows <em>what</em> to do for you — it never sees your accounts or your documents.</li>
             </ul>
+          </div>
+
+          <div class="story-section" style="margin-top:32px;">
+            <h2>Safer Than the Phone It Replaces</h2>
+            <ul class="feature-list">
+              <li><strong>A locked-down device is a smaller target.</strong> No sideloaded apps, no random downloads, one signed update channel. For a parent who fears the wrong tap, a phishing text, or a "virus" — that's not a limitation, it's the protection.</li>
+              <li><strong>Every outside action asks first.</strong> Before PadClaw acts beyond the device, it shows a plain-language card: what it's about to do, which model is running it, and where the data goes. Approve or deny — one tap, final say, every time.</li>
+              <li><strong>Nothing gets lost, nothing gets locked.</strong> Read-only system partition, controlled backups, and restore points. A wrong tap — or ransomware that never gets a foothold — can't take the family photos with it. One tap rolls back.</li>
+              <li><strong>Every action is on the record.</strong> A human-readable activity log shows everything PadClaw did, when, and with which model — with per-action undo.</li>
+            </ul>
+          </div>
+
+          <div class="story-section" style="margin-top:32px;">
+            <h2>One Switch, Not a Model Menu</h2>
+            <p>Under the hood PadClaw routes every task to the right AI. On the surface, there's exactly one control a grandmother understands:</p>
+            <div style="background:rgba(5,206,120,.06);border:1px solid rgba(5,206,120,.25);border-radius:var(--ks-radius-lg);padding:24px 28px;margin:18px 0;">
+              <p style="font-size:18px;font-weight:700;margin-bottom:6px;">"Sensitive tasks only use PadClaw AI" — <span style="color:#04965a;">ON by default</span></p>
+              <p style="font-size:14.5px;color:var(--ks-text-secondary);line-height:1.7;margin:0;">Anything touching your private files or accounts runs on our own GPU racks in Taiwan — your data never leaves. General questions and writing can use stronger third-party models, with no personal data attached.</p>
+            </div>
+            <ul class="feature-list">
+              <li><strong>When unsure, it stays home.</strong> The router is deliberately conservative: if a task <em>might</em> be sensitive, it's treated as sensitive and runs on our racks.</li>
+              <li><strong>You see it before it happens.</strong> The approve/deny card always names the model and the destination — your last line of control, on every action.</li>
+              <li><strong>Honest trade-off, managed.</strong> Our own models are tuned hard for the sensitive task categories they own; frontier cloud models handle the open-ended rest. Right tool, right lane.</li>
+              <li><strong>Advanced mode for the tinkerers.</strong> Engineers can pick models, bring their own API keys, and tune routing rules — tucked in settings, invisible to everyone else.</li>
+            </ul>
+            <p style="margin-top:16px;"><strong>And the business model backs it all:</strong> we sell hardware, not ads. Delete means delete — one tap wipes the device and our servers.</p>
           </div>
 
           <!-- ============================================ -->
@@ -537,6 +564,15 @@
               <li><strong>Our factory ships for top-10 brands.</strong> Our Tier-1 manufacturing partner has built tablets for three of the world's ten biggest electronics brands. Four years of working relationship.</li>
               <li><strong>The datacenter is not a promise.</strong> Our GPU racks in Taiwan are live today — they're what generated the channel demos on this page.</li>
             </ul>
+          </div>
+
+          <div class="story-section" style="margin-top:32px;">
+            <h2>The People Behind the Security Architecture</h2>
+            <ul class="feature-list">
+              <li><strong>Frank Fu — Tech Lead.</strong> As CTO of AegisCustody, Frank built a hardware-based, semi-online crypto custody system — infrastructure where a single key leak means losing everything, and nothing leaked. Before that, as a senior manager at QCT (a Quanta Computer company), he helped deliver <strong>Taiwania 2, Taiwan's first GPU-based supercomputer</strong>. Keys that never leave the hardware, and GPU clusters at national scale — those two careers are exactly the two halves of PadClaw.</li>
+              <li><strong>Wei-Che Lei — Senior Architect.</strong> At AegisCustody, Wei-Che owned and built every front-end computing module of the same custody system — the layer where security architecture either becomes usable or gets bypassed. He's the reason our approve/deny cards read like plain English instead of a firewall log.</li>
+            </ul>
+            <p style="font-size:14px;color:var(--ks-text-secondary);">Custody-grade security habits, applied to a family tablet: credentials sealed in hardware, every action gated and logged, and recovery you can trust. This team has shipped that before — with other people's money on the line.</p>
           </div>
 
           <div class="image-actual">
