@@ -903,9 +903,10 @@
   /* ══════════════════════ 詳情層（第二層）══════════════════════
      tvOS 風格的資訊卡:任何可點的東西都通到這裡。Esc / 點背景關閉。 */
   function openSheet({ art, svg, pos, pill, pillColor, title, sub, body, list, listTitle, actions, foot }) {
+    document.body.classList.add("has-layer");
     $("#layer").innerHTML = `
-      <div class="scrim-full scrim-full--sheet" data-act="closeLayer">
-        <div class="sheet" onclick="event.stopPropagation()">
+      <div class="scrim-full scrim-full--sheet" data-act="scrim">
+        <div class="sheet">
           <div class="sheet__hero">
             ${artLayer(art, svg || "", pos)}
             <div class="sheet__scrim"></div>
@@ -1039,6 +1040,7 @@
   function openPractice(subj) {
     const Q = D.QUIZ[subj] || D.QUIZ.math;
     S.quizState = { subj, answered: -1 };
+    document.body.classList.add("has-layer");
     $("#layer").innerHTML = `
       <div class="scrim-full">
         <div class="quiz">
@@ -1083,6 +1085,7 @@
   function openVoice() {
     const v = D.VOICE[voiceIdx++ % D.VOICE.length];
     const q = t(v.q), a = t(v.a);
+    document.body.classList.add("has-layer");
     $("#layer").innerHTML = `
       <div class="scrim-full" data-act="closeLayer">
         <div class="voice">
@@ -1115,6 +1118,7 @@
   function openGate() {
     const G = D.GATE;
     speak(G.clip, t(G.title), t(G.label));
+    document.body.classList.add("has-layer");
     $("#layer").innerHTML = `
       <div class="scrim-full">
         <div class="gate">
@@ -1132,7 +1136,11 @@
       </div>`;
   }
 
-  function closeLayer() { clearInterval(voiceTimer); stopSpeak(); $("#layer").innerHTML = ""; }
+  function closeLayer() {
+    clearInterval(voiceTimer); stopSpeak();
+    $("#layer").innerHTML = "";
+    document.body.classList.remove("has-layer");
+  }
 
   /* ══════════════════════ 焦點引擎（tvOS） ══════════════════════ */
   let items = [], rows = [];
@@ -1267,6 +1275,8 @@
     const act = hit.dataset.act, id = hit.dataset.id;
 
     if (act === "closeLayer") return closeLayer();
+    // 詳情層背景:只有「直接點到背景」才關閉;卡片內的點擊照常往下傳給各按鈕
+    if (act === "scrim") { if (e.target === hit) closeLayer(); return; }
     if (act === "stopSpeak") return stopSpeak();
     if (act === "voice") return openVoice();
     if (act === "read") {

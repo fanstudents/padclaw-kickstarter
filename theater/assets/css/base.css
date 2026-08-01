@@ -556,3 +556,10 @@ body:not(.is-speaking) .voice__wave i{animation-play-state:paused;height:5px}
   box-shadow:0 0 10px rgba(24,223,166,.7);
   transition:width .6s var(--ease);
 }
+
+/* ══ 開層時的效能保護:背景特效停播,避免 backdrop-blur 疊動畫造成凍結 ══ */
+body.has-layer .fx{display:none}
+body.has-layer .billboard__art,
+body.has-layer .chan__art{animation-play-state:paused}
+body.has-layer .art__svg svg *{animation-play-state:paused}
+.scrim-full{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}

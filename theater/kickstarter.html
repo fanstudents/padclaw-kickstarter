@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PadClaw — The screen that helps, then leaves you alone</title>
-<meta name="description" content="A 12-inch home assistant tablet for the people you love. $500 · 3,000 founding units · Made in Taiwan · 6 months of AI included.">
+<meta name="description" content="A 12-inch home assistant for the people you love. $500 founding price, 3,000 numbered units, assembled in Taiwan, six months of AI included.">
 <link rel="icon" href="assets/img/padclaw-appicon.svg" type="image/svg+xml">
 <style>
 :root{
-  --bg:#0E1116;--bg2:#14181F;--surface:#1A1F27;--hairline:rgba(255,255,255,.08);
-  --accent:#05CE78;--aurora:linear-gradient(90deg,#05CE78,#3BEBFF);
+  --bg:#0E1116;--bg2:#14181F;--surface:#1A1F27;--surface2:#20262F;--hairline:rgba(255,255,255,.08);
+  --accent:#05CE78;--cyan:#3BEBFF;--aurora:linear-gradient(90deg,#05CE78,#3BEBFF);
   --text:#F2F4F7;--t2:#98A2B3;--t3:#5B6472;--ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -21,49 +21,68 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 .micro{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 h2{font-size:clamp(30px,4.6vw,44px);font-weight:650;letter-spacing:-.025em;line-height:1.1}
-.lede{margin-top:14px;font-size:19px;color:var(--t2);max-width:640px}
-section{padding:96px 0}
+h2 em{font-style:normal;background:var(--aurora);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin-top:14px;font-size:19px;color:var(--t2);max-width:660px}
+section{padding:92px 0}
+p.body{margin-top:16px;font-size:17.5px;color:rgba(242,244,247,.84)}
 .btn{display:inline-flex;align-items:center;gap:10px;height:58px;padding:0 30px;border-radius:999px;
   font-size:17.5px;font-weight:650;transition:transform .2s var(--ease),box-shadow .2s;cursor:pointer;border:none}
 .btn:hover{transform:translateY(-2px)}
 .btn--go{background:var(--accent);color:#06210F;box-shadow:0 14px 40px -12px rgba(5,206,120,.6)}
 .btn--ghost{border:1.5px solid #2A313C;color:var(--text)}
 
-/* nav */
-nav{position:sticky;top:0;z-index:50;background:rgba(10,13,17,.7);backdrop-filter:blur(18px);border-bottom:1px solid var(--hairline)}
+nav{position:sticky;top:0;z-index:50;background:rgba(10,13,17,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--hairline)}
 .nav-in{max-width:1080px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:14px}
 .nav-in img{width:30px;height:30px}
 .nav-in b{font-size:17px}
 .nav-in b i{font-style:normal;font-weight:400;color:var(--t2)}
+.nav-links{margin-left:26px;display:flex;gap:20px}
+.nav-links a{font-size:14px;color:var(--t2)}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:880px){.nav-links{display:none}}
 .nav-cta{margin-left:auto;height:42px;padding:0 20px;font-size:15px}
 
-/* hero */
-.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;padding:0 0 72px;overflow:hidden}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero{position:relative;min-height:90vh;display:flex;align-items:flex-end;padding:0 0 72px;overflow:hidden}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
 .hero::after{content:"";position:absolute;inset:0;background:
   linear-gradient(180deg,rgba(14,17,22,.55),transparent 30%,rgba(14,17,22,.5) 70%,var(--bg) 100%),
-  linear-gradient(90deg,rgba(14,17,22,.82),rgba(14,17,22,.3) 46%,transparent 70%)}
+  linear-gradient(90deg,rgba(14,17,22,.84),rgba(14,17,22,.3) 46%,transparent 70%)}
 .hero .wrap{position:relative;z-index:2;width:100%}
-.hero h1{font-size:clamp(40px,6.4vw,72px);font-weight:660;letter-spacing:-.03em;line-height:1.04;max-width:640px}
+.hero h1{font-size:clamp(40px,6.4vw,72px);font-weight:660;letter-spacing:-.03em;line-height:1.04;max-width:660px}
 .hero h1 em{font-style:normal;background:var(--aurora);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{margin-top:18px;font-size:21px;color:rgba(242,244,247,.85);max-width:540px}
+.hero .sub{margin-top:18px;font-size:21px;color:rgba(242,244,247,.86);max-width:560px}
 .hero-ctas{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
-.facts{margin-top:38px;display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--hairline);border-radius:18px;
-  overflow:hidden;background:rgba(10,13,17,.55);backdrop-filter:blur(14px);max-width:760px}
+.facts{margin-top:38px;display:flex;flex-wrap:wrap;border:1px solid var(--hairline);border-radius:18px;
+  overflow:hidden;background:rgba(10,13,17,.55);backdrop-filter:blur(14px);max-width:780px}
 .fact{flex:1 1 25%;min-width:170px;padding:16px 20px;border-right:1px solid var(--hairline)}
 .fact:last-child{border-right:0}
 .fact b{display:block;font-size:21px;font-weight:700;letter-spacing:-.01em}
 .fact span{display:block;margin-top:2px;font-size:13px;color:var(--t2)}
 
-/* story */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 @media(max-width:880px){.split{grid-template-columns:1fr}}
 .split img{border-radius:22px;border:1px solid var(--hairline)}
 .quote{margin-top:22px;padding-left:18px;border-left:3px solid var(--accent);font-size:19px;color:rgba(242,244,247,.9);font-style:italic}
 .byline{margin-top:8px;font-size:14px;color:var(--t3)}
-p.body{margin-top:16px;font-size:17.5px;color:rgba(242,244,247,.82)}
 
-/* channels */
+.stats3{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:880px){.stats3{grid-template-columns:1fr}}
+.stat{padding:26px;border-radius:18px;background:var(--surface);border:1px solid var(--hairline)}
+.stat b{display:block;font-size:40px;font-weight:700;letter-spacing:-.02em}
+.stat b i{font-style:normal;background:var(--aurora);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{display:block;margin-top:8px;font-size:15px;color:var(--t2);line-height:1.5}
+
+.day{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:880px){.day{grid-template-columns:1fr 1fr}}
+.daycard{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/4;border:1px solid var(--hairline)}
+.daycard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.daycard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,9,13,.45),transparent 34%,rgba(6,9,13,.94) 78%)}
+.daycard b{position:absolute;top:14px;left:16px;z-index:2;font-size:13px;font-weight:800;letter-spacing:.08em;
+  color:#fff;background:rgba(6,9,13,.55);border-radius:999px;padding:5px 12px;backdrop-filter:blur(8px)}
+.daycard div{position:absolute;left:16px;right:16px;bottom:14px;z-index:2}
+.daycard strong{display:block;font-size:17px;font-weight:650;line-height:1.25}
+.daycard span{display:block;margin-top:4px;font-size:13.5px;color:rgba(242,244,247,.72);line-height:1.4}
+
 .chgrid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:880px){.chgrid{grid-template-columns:1fr 1fr}}
 .chcard{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/10;border:1px solid var(--hairline)}
@@ -74,12 +93,10 @@ p.body{margin-top:16px;font-size:17.5px;color:rgba(242,244,247,.82)}
 .chcard b{display:block;font-size:20px;font-weight:650;letter-spacing:-.01em}
 .chcard span{display:block;margin-top:3px;font-size:14px;color:rgba(242,244,247,.72)}
 
-/* demo band */
 .demo{background:linear-gradient(180deg,var(--bg2),var(--bg));border-block:1px solid var(--hairline);text-align:center}
 .demo .btn{margin-top:28px}
 .demo small{display:block;margin-top:14px;font-size:13.5px;color:var(--t3)}
 
-/* privacy */
 .twocol{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:880px){.twocol{grid-template-columns:1fr}}
 .pcard{padding:28px;border-radius:20px;background:var(--surface);border:1px solid var(--hairline)}
@@ -91,13 +108,30 @@ p.body{margin-top:16px;font-size:17.5px;color:rgba(242,244,247,.82)}
 .pcard li{display:flex;gap:9px;font-size:15px;color:rgba(242,244,247,.85)}
 .pcard li::before{content:"✓";color:var(--accent);font-weight:800}
 
-/* pledge */
-.tier{margin-top:44px;display:grid;grid-template-columns:1.15fr .85fr;gap:0;border-radius:24px;overflow:hidden;
+table{width:100%;border-collapse:collapse;margin-top:36px;font-size:15.5px}
+th,td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--hairline);vertical-align:top}
+thead th{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)}
+tbody th{font-weight:600;color:var(--t2);width:220px}
+td b{color:var(--accent)}
+td.no{color:var(--t3)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:18px;background:var(--surface)}
+.tbl-wrap table{margin:0}
+.tbl-wrap thead th:first-child{width:200px}
+td.hl{background:rgba(5,206,120,.06)}
+
+.mit{position:relative;border-radius:24px;overflow:hidden;margin-top:44px;min-height:460px;display:flex;align-items:flex-end;border:1px solid var(--hairline)}
+.mit img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mit::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,17,22,.2),rgba(14,17,22,.9) 78%)}
+.mit div{position:relative;z-index:2;padding:36px 40px;max-width:680px}
+.mit h3{font-size:28px;font-weight:650;letter-spacing:-.015em}
+.mit p{margin-top:10px;font-size:16.5px;color:rgba(242,244,247,.86)}
+
+.tier{margin-top:44px;display:grid;grid-template-columns:1.15fr .85fr;border-radius:24px;overflow:hidden;
   border:1px solid rgba(5,206,120,.35);background:
-  radial-gradient(120% 150% at 90% -20%,rgba(5,206,120,.16),transparent 55%),var(--surface)}
+  radial-gradient(120% 150% at 90% -20%,rgba(5,206,120,.15),transparent 55%),var(--surface)}
 @media(max-width:880px){.tier{grid-template-columns:1fr}}
 .tier-main{padding:36px 40px}
-.tier-price{display:flex;align-items:baseline;gap:14px}
+.tier-price{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .tier-price b{font-size:56px;font-weight:700;letter-spacing:-.03em}
 .tier-price s{color:var(--t3);font-size:20px}
 .tier-price em{font-style:normal;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
@@ -112,33 +146,41 @@ p.body{margin-top:16px;font-size:17.5px;color:rgba(242,244,247,.82)}
 .tier-side::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--surface),transparent 40%)}
 .tier-note{margin-top:14px;font-size:13.5px;color:var(--t3)}
 
-/* timeline */
-.tl{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stretch{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:880px){.stretch{grid-template-columns:1fr}}
+.sg{padding:24px;border-radius:18px;background:var(--surface);border:1px solid var(--hairline);position:relative;overflow:hidden}
+.sg.hit{border-color:rgba(5,206,120,.35)}
+.sg b{font-size:26px;font-weight:700;letter-spacing:-.015em}
+.sg strong{display:block;margin-top:8px;font-size:17px;font-weight:650}
+.sg span{display:block;margin-top:6px;font-size:14px;color:var(--t2);line-height:1.5}
+
+.tl{margin-top:40px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
 @media(max-width:880px){.tl{grid-template-columns:1fr 1fr}}
 .tlc{padding:22px;border-radius:18px;background:var(--surface);border:1px solid var(--hairline)}
 .tlc b{display:block;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-.tlc strong{display:block;margin-top:8px;font-size:18px;font-weight:650}
-.tlc span{display:block;margin-top:5px;font-size:14px;color:var(--t2)}
+.tlc strong{display:block;margin-top:8px;font-size:17px;font-weight:650}
+.tlc span{display:block;margin-top:5px;font-size:13.5px;color:var(--t2);line-height:1.45}
 
-/* made in taiwan */
-.mit{position:relative;border-radius:24px;overflow:hidden;margin-top:44px;min-height:420px;display:flex;align-items:flex-end;border:1px solid var(--hairline)}
-.mit img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.mit::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,17,22,.25),rgba(14,17,22,.88) 78%)}
-.mit div{position:relative;z-index:2;padding:36px 40px;max-width:640px}
-.mit h3{font-size:28px;font-weight:650;letter-spacing:-.015em}
-.mit p{margin-top:10px;font-size:16.5px;color:rgba(242,244,247,.85)}
+.team{margin-top:40px;padding:34px 38px;border-radius:22px;background:var(--surface);border:1px solid var(--hairline);
+  display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+@media(max-width:880px){.team{grid-template-columns:1fr}}
+.team img{width:76px;height:76px;border-radius:20px}
+.team h3{font-size:22px;font-weight:650}
+.team p{margin-top:10px;font-size:16px;color:rgba(242,244,247,.84)}
 
-/* risks / faq / footer */
-.risk{margin-top:36px;padding:28px;border-radius:20px;background:var(--surface);border:1px solid var(--hairline)}
-.risk p{font-size:16px;color:rgba(242,244,247,.84)}
-.risk p + p{margin-top:12px}
+.risk{margin-top:36px;padding:30px;border-radius:20px;background:var(--surface);border:1px solid var(--hairline)}
+.risk h4{font-size:16px;font-weight:700;margin-top:20px}
+.risk h4:first-child{margin-top:0}
+.risk p{margin-top:8px;font-size:15.5px;color:rgba(242,244,247,.82)}
+
 details{margin-top:12px;border:1px solid var(--hairline);border-radius:14px;background:var(--surface);overflow:hidden}
-summary{padding:18px 22px;font-size:16.5px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
-summary::after{content:"+";color:var(--t2);font-size:20px}
+summary{padding:18px 22px;font-size:16.5px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--t2);font-size:20px;flex:0 0 auto}
 details[open] summary::after{content:"–"}
 details p{padding:0 22px 18px;font-size:15.5px;color:var(--t2)}
+
 footer{padding:56px 0 72px;border-top:1px solid var(--hairline);text-align:center}
-footer p{font-size:13px;color:var(--t3);max-width:640px;margin:10px auto 0}
+footer p{font-size:13px;color:var(--t3);max-width:660px;margin:10px auto 0}
 .mock{border:1px solid var(--hairline);background:#0A0D12;border-radius:14px;padding:10px 14px;display:inline-flex;gap:8px;
   align-items:center;font-size:12.5px;color:var(--t3);margin-top:20px}
 </style>
@@ -148,203 +190,378 @@ footer p{font-size:13px;color:var(--t3);max-width:640px;margin:10px auto 0}
 <nav><div class="nav-in">
   <img src="assets/img/padclaw-appicon.svg" alt="PadClaw">
   <b>Pad<i>Claw</i></b>
+  <div class="nav-links">
+    <a href="#story">Story</a><a href="#channels">Channels</a><a href="#privacy">Privacy</a>
+    <a href="#hardware">Hardware</a><a href="#pledge">Pledge</a><a href="#faq">FAQ</a>
+  </div>
   <a class="btn btn--go nav-cta" href="#pledge">Back this project — $500</a>
 </div></nav>
 
-<!-- HERO -->
+<!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
-  <img src="assets/img/ks/hero-product.jpg" alt="" onerror="this.src='assets/img/hero/family.jpg'">
+  <img src="assets/img/ks/hero-product.jpg" alt="PadClaw One on a kitchen counter">
   <div class="wrap">
-    <p class="micro">Kickstarter campaign · planned software shown</p>
+    <p class="micro">Kickstarter campaign preview · planned software shown</p>
     <h1 style="margin-top:14px">The screen that helps.<br><em>Then leaves you alone.</em></h1>
-    <p>PadClaw is a 12-inch home tablet with a calm AI inside — weather that tells you when to leave,
-       health check-ins your daughter can trust, and a voice that waits while you find the word.</p>
+    <p class="sub">PadClaw is a 12-inch home assistant that answers out loud, shows one thing at a time,
+       and goes quiet when it's done. We built it for our own parents. Now we're building 3,000 more.</p>
     <div class="hero-ctas">
       <a class="btn btn--go" href="#pledge">Back this project</a>
       <a class="btn btn--ghost" href="theater/" target="_blank">▶ Try the live demo</a>
     </div>
     <div class="facts">
-      <div class="fact"><b>$500</b><span>founding price · MSRP $699</span></div>
-      <div class="fact"><b>3,000</b><span>founding units, numbered</span></div>
-      <div class="fact"><b>6 months</b><span>AI included · monthly cap</span></div>
-      <div class="fact"><b>Taiwan 🇹🇼</b><span>designed &amp; assembled</span></div>
+      <div class="fact"><b>$500</b><span>founding price · planned retail $699</span></div>
+      <div class="fact"><b>3,000</b><span>numbered units, one batch</span></div>
+      <div class="fact"><b>6 months</b><span>of PadClaw Care included</span></div>
+      <div class="fact"><b>Taoyuan, Taiwan</b><span>designed &amp; assembled</span></div>
     </div>
   </div>
 </header>
 
-<!-- STORY -->
-<section><div class="wrap">
+<!-- ═══════════ THE PROBLEM ═══════════ -->
+<section id="story"><div class="wrap">
+  <p class="micro">The problem</p>
+  <h2>Who answers your mother's questions?</h2>
+  <p class="lede">We spent a year asking American families that question. The answer was never a device.
+     It was always a person: a daughter in another city reading the weather over the phone,
+     a grandson resetting a router on a video call, a neighbor writing the Wi-Fi password on a sticky note.</p>
+  <p class="body" style="max-width:660px">Every "smart" screen we tested assumed things Barbara doesn't have:
+     patience for menus, eyesight for 12-point type, and an account for everything.
+     The devices weren't dumb. They were built for someone else.</p>
+  <div class="stats3">
+    <div class="stat"><b>214</b><span>US households interviewed between March 2025 and February 2026,
+      ages 61 to 84, together with their adult children.</span></div>
+    <div class="stat"><b><i>83%</i></b><span>of the "tech support" calls families described were questions
+      a single spoken sentence could have answered.</span></div>
+    <div class="stat"><b>40 min</b><span>median time per week adult children spent as phone-based
+      tech support for a parent. Every week.</span></div>
+  </div>
+</div></section>
+
+<!-- ═══════════ BARBARA'S STORY ═══════════ -->
+<section style="padding-top:0"><div class="wrap">
   <div class="split">
     <div>
       <p class="micro">Why we built it</p>
-      <h2>Barbara has a smartphone.<br>She hates it.</h2>
-      <p class="body">Her daughter Emily set up every app, every account, every reminder. Barbara still calls
-        to ask about the weather — because the phone answers with forty icons and a login screen.</p>
-      <p class="body">So we built a screen that answers with a sentence. It sits on the counter, hears her
-        from across the kitchen, and shows exactly one thing at a time — in letters she can read from the doorway.</p>
+      <h2>Barbara owns a smartphone. She calls Emily instead.</h2>
+      <p class="body">Emily set up her mother's phone the right way. Big icons, emergency contacts,
+         a weather app on the first screen. Barbara still calls her at 7:40 most mornings,
+         because the app answers with radar maps and an umbrella icon, and Emily answers with
+         "wear the light jacket, Mom."</p>
+      <p class="body">That call is the entire product brief. A machine that answers the way Emily does:
+         one sentence, about your actual day, in a voice that isn't in a hurry.</p>
       <p class="quote">"I don't need another app. I need something that just works without me having to think about it."</p>
-      <p class="byline">— from 214 interviews with US families, 2025–2026</p>
+      <p class="byline">Interview #37, retired teacher, 67, Scottsdale AZ</p>
     </div>
-    <img src="assets/img/people/barbara.jpg" alt="Barbara laughing in her kitchen">
+    <img src="assets/img/people/barbara.jpg" alt="A woman in her late sixties laughing in her kitchen">
   </div>
 </div></section>
 
-<!-- VOICE -->
+<!-- ═══════════ VOICE ═══════════ -->
 <section style="padding-top:0"><div class="wrap">
   <div class="split">
-    <img src="assets/img/ks/hands.jpg" alt="Hands touching the PadClaw tablet" onerror="this.src='assets/img/people/emily.jpg'">
+    <img src="assets/img/ks/hands.jpg" alt="Hands resting on the edge of the PadClaw tablet">
     <div>
-      <p class="micro">Not an app. A conversation.</p>
-      <h2>Say it out loud.<br>That's the whole manual.</h2>
-      <p class="body">"What should I wear today?" — "Light jacket. Rain at eight." The microphones are tuned for
-        a voice from four meters away, over a running faucet. The screen shows what it heard, in big type,
-        so Barbara knows it got it right.</p>
-      <p class="body">And when it's done, it goes quiet. No feed to scroll, no autoplay, no red badges.
-        PadClaw is designed to be <b>finished with</b>.</p>
+      <p class="micro">How you use it</p>
+      <h2>Say it out loud. That's the whole manual.</h2>
+      <p class="body">Four far-field microphones pick up a conversational voice from about four meters,
+         over a running faucet. Ask "what should I wear today?" from the stove and it answers in eight words.
+         The screen prints what it heard in 24-point type, so you know it got it right.</p>
+      <p class="body">There is one design rule in the entire operating system: every screen has exactly
+         one thing to do next. No second-level menus exist. Not one.</p>
+      <p class="body">And when the answer is delivered, PadClaw does something no other screen in your house does.
+         It stops. No feed, no autoplay, no red badge asking to be tapped.</p>
     </div>
   </div>
 </div></section>
 
-<!-- CHANNELS -->
+<!-- ═══════════ A DAY ═══════════ -->
 <section style="padding-top:0"><div class="wrap">
+  <p class="micro">A day on the counter</p>
+  <h2>Four moments. Maybe five minutes of screen time.</h2>
+  <p class="lede">PadClaw is designed around the rhythm of a household, not around engagement.
+     A good day looks like this.</p>
+  <div class="day">
+    <div class="daycard"><img src="assets/img/hero/weather.jpg" alt="">
+      <b>6:55 AM</b><div><strong>The briefing</strong>
+      <span>"Rain at eight. Take the big umbrella. Leave by 8:10 — the bridge is slow."</span></div></div>
+    <div class="daycard"><img src="assets/img/hero/health.jpg" alt="">
+      <b>8:00 AM</b><div><strong>Three pills, one button</strong>
+      <span>Meds checked off in large type. One green press and Emily knows Mom is fine.</span></div></div>
+    <div class="daycard"><img src="assets/img/hero/learning.jpg" alt="">
+      <b>3:40 PM</b><div><strong>Chloe's ten questions</strong>
+      <span>Multiplication, level 3. Ten questions, then it says goodbye. No ads, ever.</span></div></div>
+    <div class="daycard"><img src="assets/img/hero/evening.jpg" alt="">
+      <b>9:30 PM</b><div><strong>Tomorrow, on one card</strong>
+      <span>Weather, the first appointment, one thing to remember. Then the screen goes dark.</span></div></div>
+  </div>
+</div></section>
+
+<!-- ═══════════ CHANNELS ═══════════ -->
+<section id="channels" style="padding-top:0"><div class="wrap">
   <p class="micro">Six channels on day one</p>
-  <h2>One screen. One thing. Done well.</h2>
-  <p class="lede">Channels take over the whole display like a broadcast — then hand it back. New channels arrive
-     free, over the air, voted on by backers.</p>
+  <h2>Channels are broadcasts, not apps.</h2>
+  <p class="lede">A channel takes over the whole display, does its one job, and hands the screen back.
+     You never install, update, or arrange anything. New channels arrive over the air, free,
+     and founding backers vote on which we build next.</p>
   <div class="chgrid">
     <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/weather.jpg" alt=""><div><b>Weather</b><span>Not the forecast. The decision.</span></div></a>
     <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/health.jpg" alt=""><div><b>Family Health</b><span>One button. Your daughter stops worrying.</span></div></a>
-    <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/learning.jpg" alt=""><div><b>Learning</b><span>Ten minutes. Then it says goodbye.</span></div></a>
-    <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/horoscope.jpg" alt=""><div><b>Horoscope</b><span>A real chart, computed daily.</span></div></a>
+    <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/learning.jpg" alt=""><div><b>Learning</b><span>Ten minutes a session, with a parent report.</span></div></a>
+    <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/horoscope.jpg" alt=""><div><b>Horoscope</b><span>A real birth chart, computed every morning.</span></div></a>
     <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/news.jpg" alt=""><div><b>Local News</b><span>Three things on your street. Then it stops.</span></div></a>
-    <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/market.jpg" alt=""><div><b>Markets</b><span>A glance, not a habit.</span></div></a>
+    <a class="chcard" href="theater/" target="_blank"><img src="assets/img/hero/market.jpg" alt=""><div><b>Markets</b><span>A glance at your accounts, not a habit.</span></div></a>
   </div>
+  <p class="body" style="max-width:720px">Health deserves a specific note: PadClaw sends medication reminders
+     and shares a done / not-yet signal with one chosen family member. It is not a medical device, it doesn't
+     diagnose anything, and it never shares more than that signal. The privacy screen shows the full list of
+     what your family can see, in plain words, at all times.</p>
 </div></section>
 
-<!-- DEMO -->
+<!-- ═══════════ DEMO ═══════════ -->
 <section class="demo"><div class="wrap">
   <p class="micro">Don't take our word for it</p>
   <h2>Click through the real interface</h2>
-  <p class="lede" style="margin-inline:auto">We published the full device UI as an interactive demo —
-    every channel, the store, family sharing, even the boot sequence. Runs in your browser.</p>
+  <p class="lede" style="margin-inline:auto">We published the entire device UI as a working demo:
+     every channel, the store, family sharing, settings, even the boot sequence.
+     It runs in your browser, in English and Chinese.</p>
   <a class="btn btn--go" href="theater/" target="_blank">▶ Launch the interactive demo</a>
-  <small>Demo shows planned software with sample data · English &amp; 中文</small>
+  <small>Planned software with sample data · nothing is collected, nothing is tracked</small>
 </div></section>
 
-<!-- PRIVACY -->
-<section><div class="wrap">
+<!-- ═══════════ PRIVACY ═══════════ -->
+<section id="privacy"><div class="wrap">
   <p class="micro">The brain / hands split</p>
-  <h2>The AI knows what to do.<br>It never sees your passwords.</h2>
+  <h2>The AI plans the work.<br>It never holds your keys.</h2>
+  <p class="lede">Most assistants have one soul. PadClaw has two, on purpose, and they are not allowed to merge.</p>
   <div class="twocol">
     <div class="pcard">
       <h3><s>🧠</s> The brain — decides</h3>
-      <p>Understands what you asked and plans the steps. Runs on-device for everyday things, or in our own
-         racks in Oregon for hard ones. Never a third-party model for sensitive tasks.</p>
+      <p>Understands the request and plans the steps. Everyday requests run on the device itself.
+         Harder ones run on our own servers in Oregon. Sensitive topics never leave that boundary.</p>
       <ul>
-        <li>78% of requests processed on the device itself</li>
-        <li>Health, money &amp; family messages stay on PadClaw AI</li>
-        <li>Bring your own OpenAI / Gemini / Claude key if you want</li>
+        <li>Roughly 4 of 5 requests are handled on-device</li>
+        <li>Health, money and family messages stay on PadClaw infrastructure</li>
+        <li>Optional: plug in your own OpenAI, Gemini or Anthropic key</li>
       </ul>
     </div>
     <div class="pcard">
       <h3><s>🤝</s> The hands — act, with permission</h3>
-      <p>Credentials and files live only in the secure element on this device. Before anything leaves the
-         house — an order, a message, a booking — PadClaw asks you first, in plain words.</p>
+      <p>Logins, card numbers and files live in a dedicated secure element on the device.
+         The brain can request an action; only the hands can perform it, and only after you approve
+         it on screen, written in plain words.</p>
       <ul>
-        <li>Every outward action passes an approval gate</li>
-        <li>90-day on-device log of everything it did</li>
-        <li>One button deletes all data, device and servers</li>
+        <li>Every outward action stops at an approval gate first</li>
+        <li>A 90-day log of every action, kept on the device</li>
+        <li>One button erases everything, device and servers both</li>
       </ul>
     </div>
   </div>
+
+  <div class="tbl-wrap" style="margin-top:36px"><table>
+    <thead><tr><th>When you…</th><th>What leaves the house</th><th>What never does</th></tr></thead>
+    <tbody>
+      <tr><th>Ask about the weather</th><td>Your city, nothing else</td><td class="no">Your address, your calendar contents</td></tr>
+      <tr><th>Do a health check-in</th><td>A single done / not-yet signal, to one person you chose</td><td class="no">Readings, notes, history</td></tr>
+      <tr><th>Order groceries</th><td>The order, to your store, after you approve it</td><td class="no">Your login — it stays in the secure element</td></tr>
+      <tr><th>Talk to it</th><td>The request text, only if it needs the private cloud</td><td class="no">Raw audio — speech is transcribed on-device</td></tr>
+      <tr><th>Do nothing at all</th><td>Nothing. There is no telemetry by default.</td><td class="no">Diagnostics unless you switch them on</td></tr>
+    </tbody>
+  </table></div>
+  <p class="body">There is also a physical answer: a hardware switch on the top edge cuts power to the
+     microphones. Not software mute. Copper, physically open.</p>
 </div></section>
 
-<!-- HARDWARE / TAIWAN -->
+<!-- ═══════════ COMPARISON ═══════════ -->
 <section style="padding-top:0"><div class="wrap">
+  <p class="micro">An honest comparison</p>
+  <h2>We know what's already on your counter.</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>PadClaw One</th><th>Smart displays</th><th>Consumer tablets</th></tr></thead>
+    <tbody>
+      <tr><th>Built for</th><td class="hl">One household, across the room</td><td>Kitchen timers and shopping lists</td><td>Everyone, which means no one over 65</td></tr>
+      <tr><th>What the screen shows</th><td class="hl">One thing at a time, 24-pt type</td><td>Rotating photos, ads, suggestions</td><td>Forty app icons</td></tr>
+      <tr><th>After it helps</th><td class="hl">Goes quiet</td><td>Recommends products</td><td>Pushes notifications</td></tr>
+      <tr><th>Voice pickup</th><td class="hl">Conversational, ~4 m</td><td>Command phrases</td><td>Hold a button, speak clearly</td></tr>
+      <tr><th>Family sharing</th><td class="hl">One signal, listed on screen</td><td>Whole-account access</td><td>Screen-time dashboards</td></tr>
+      <tr><th>Ads</th><td class="hl">None. We sell hardware.</td><td>Yes</td><td>In most free apps</td></tr>
+      <tr><th>Without a subscription</th><td class="hl">Works forever, on-device AI included</td><td>Features shrink</td><td>Fine, but see above</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- ═══════════ HARDWARE ═══════════ -->
+<section id="hardware" style="padding-top:0"><div class="wrap">
   <p class="micro">Hardware</p>
-  <h2>Boring on purpose. Built to last.</h2>
-  <p class="lede">12.4" 2K laminated display · far-field mic array · 8 GB / 128 GB · secure element ·
-     hardware mic kill-switch · full Android underneath. No subscriptions required to keep working, ever.</p>
+  <h2>Boring on purpose. Screwed, not glued.</h2>
+  <p class="lede">No folding hinge, no rotating camera, no experiment you'll pay for later.
+     Mature parts, sourced from more than one supplier, assembled into a device meant to sit
+     on the same counter for ten years.</p>
+  <div class="tbl-wrap"><table>
+    <tbody>
+      <tr><th>Display</th><td>12.4" laminated IPS, 2000 × 1200, 500 nits, anti-glare etch</td></tr>
+      <tr><th>Voice</th><td>4-microphone far-field array, ~4 m conversational pickup · hardware mic kill switch</td></tr>
+      <tr><th>Sound</th><td>Two 5 W front-firing speakers, tuned for speech first</td></tr>
+      <tr><th>Camera</th><td>13 MP with a sliding physical shutter, for family video calls only</td></tr>
+      <tr><th>Compute</th><td>8-core platform with NPU for on-device speech and language · 8 GB RAM · 128 GB storage</td></tr>
+      <tr><th>Security</th><td>Dedicated secure element for credentials; keys never leave the chip</td></tr>
+      <tr><th>Connectivity</th><td>Wi-Fi 6 · Bluetooth 5.3 · USB-C</td></tr>
+      <tr><th>Power</th><td>USB-C PD, ~10 h off the dock · wedge stand with charging contacts</td></tr>
+      <tr><th>Serviceability</th><td>Torx screws, replaceable battery, spare parts stocked for 5 years</td></tr>
+      <tr><th>Also</th><td>A full Android tablet underneath, one tap away, for the family that wants it</td></tr>
+    </tbody>
+  </table></div>
+  <p class="body"><b style="color:var(--accent)">In the box:</b> PadClaw One · wedge stand · braided 2 m USB-C cable ·
+     30 W charger · a one-page quick card set in 18-point type. The setup step is saying hello.</p>
+
   <div class="mit">
-    <img src="assets/img/ks/taiwan.jpg" alt="Assembly line in Taiwan" onerror="this.src='assets/img/hero/guardian.jpg'">
+    <img src="assets/img/ks/taiwan.jpg" alt="Electronics assembly line in Taoyuan, Taiwan">
     <div>
-      <h3>Made in Taiwan, deliberately</h3>
-      <p>Our devices are assembled 40 minutes from our engineering office, on the island that builds the
-         world's most advanced silicon. Short supply lines, senior line engineers, and tariff-planned US
-         fulfilment — that's how a two-person hardware team ships on time.</p>
+      <h3>Assembled 40 minutes from our desks</h3>
+      <p>PadClaw is designed in Taoyuan, Taiwan, and assembled at a line we can drive to before lunch.
+         That's not a romantic detail; it's the operating plan. When a fixture needs adjusting or a batch
+         of gaskets comes in wrong, we're standing at the station the same afternoon, not writing emails
+         across twelve time zones.</p>
+      <p>One batch, 3,000 units, each one numbered and burned in for 24 hours before it ships.
+         US-bound stock clears customs under a tariff plan we priced into the $500, so the number
+         you pledge is the number you pay.</p>
     </div>
   </div>
 </div></section>
 
-<!-- PLEDGE -->
+<!-- ═══════════ PLEDGE ═══════════ -->
 <section id="pledge" style="padding-top:0"><div class="wrap">
   <p class="micro">The pledge</p>
-  <h2>One tier. Numbered. That's it.</h2>
+  <h2>One tier. Numbered. When they're gone, they're gone.</h2>
   <div class="tier">
     <div class="tier-main">
-      <div class="tier-price"><b>$500</b><s>MSRP $699</s><em>Founding unit</em></div>
+      <div class="tier-price"><b>$500</b><s>planned retail $699</s><em>Founding unit</em></div>
       <h3>PadClaw One — Founding Edition</h3>
       <ul>
-        <li>PadClaw One 12.4" device, numbered <b>1–3,000</b>, engraved</li>
-        <li>6 months of PadClaw Care Family — 5 seats, unlimited on-device AI, up to 5,000 private-cloud requests / month</li>
-        <li>Founding price locked for life: $14/mo if you ever renew (no auto-renew)</li>
-        <li>Every future channel free, forever, over the air</li>
-        <li>Backer vote on which channel we build next</li>
+        <li>PadClaw One, serial-numbered 0001–3000, engraved on the stand</li>
+        <li>Six months of PadClaw Care Family: 5 people, unlimited on-device AI, up to 5,000 private-cloud requests a month</li>
+        <li>Founding price locked for life — $14/month if you ever choose to renew, and we ask you first, 14 days ahead. Nothing auto-renews.</li>
+        <li>Every future channel, free, over the air, forever</li>
+        <li>A founding-backer vote on each channel we build next</li>
       </ul>
-      <a class="btn btn--go" href="#" onclick="alert('This is a campaign preview page — the pledge button activates on Kickstarter launch day.');return false">Pledge $500</a>
-      <p class="tier-note">Ships Feb 2027 · US &amp; Canada first · device keeps working forever, plan or no plan</p>
+      <a class="btn btn--go" href="#" onclick="alert('This is a campaign preview page. The pledge button goes live on Kickstarter launch day.');return false">Pledge $500</a>
+      <p class="tier-note">Ships February 2027, US &amp; Canada first · the device keeps working forever, plan or no plan · not a medical device</p>
     </div>
-    <div class="tier-side"><img src="assets/img/ks/hero-product.jpg" alt="" onerror="this.src='assets/img/hero/evening.jpg'"></div>
+    <div class="tier-side"><img src="assets/img/ks/hero-product.jpg" alt=""></div>
+  </div>
+
+  <div class="stretch">
+    <div class="sg hit"><b>$250k</b><strong>Recipe Coach at launch</strong>
+      <span>The seventh channel ships with the device instead of arriving later: step-by-step cooking,
+      read aloud, hands stay floury.</span></div>
+    <div class="sg"><b>$400k</b><strong>Aluminum stand, every backer</strong>
+      <span>The wedge stand upgrades from polycarbonate to anodized aluminum for all 3,000 units.
+      Same charging contacts, more heft.</span></div>
+    <div class="sg"><b>$650k</b><strong>Spanish &amp; Mandarin voices</strong>
+      <span>Two full voice packs at launch, tuned with the same patience as English. Grandparents
+      switch languages mid-sentence; so should the machine.</span></div>
   </div>
 </div></section>
 
-<!-- TIMELINE -->
+<!-- ═══════════ TIMELINE ═══════════ -->
 <section style="padding-top:0"><div class="wrap">
   <p class="micro">Timeline</p>
-  <h2>Where your pledge goes</h2>
+  <h2>Where your pledge goes, month by month</h2>
   <div class="tl">
-    <div class="tlc"><b>Aug 2026</b><strong>Campaign</strong><span>Funding closes · backer survey · channel vote #1</span></div>
-    <div class="tlc"><b>Oct 2026</b><strong>Tooling</strong><span>Final molds &amp; certifications (FCC / UL)</span></div>
-    <div class="tlc"><b>Dec 2026</b><strong>Production</strong><span>3,000 units, one line, Taoyuan Taiwan</span></div>
-    <div class="tlc"><b>Feb 2027</b><strong>Shipping</strong><span>US &amp; Canada via regional warehouses</span></div>
+    <div class="tlc"><b>Aug 2026</b><strong>Campaign</strong><span>Funding closes, backer survey, channel vote #1 opens.</span></div>
+    <div class="tlc"><b>Sep–Oct</b><strong>Tooling</strong><span>Final molds cut; FCC and UL testing begins on pre-screened units.</span></div>
+    <div class="tlc"><b>Nov</b><strong>Pilot run</strong><span>First 50 units built, torn down, and rebuilt. Fixture adjustments happen here.</span></div>
+    <div class="tlc"><b>Dec 2026</b><strong>Production</strong><span>3,000 units on one line in Taoyuan, each burned in for 24 hours.</span></div>
+    <div class="tlc"><b>Feb 2027</b><strong>Shipping</strong><span>US &amp; Canada via regional warehouses. Tracking for every serial number.</span></div>
+  </div>
+  <p class="body">We'll publish a build log every month from funding to delivery, including the weeks
+     where something breaks. If you've backed hardware before, you know those weeks are coming.
+     You'll hear about them from us first.</p>
+</div></section>
+
+<!-- ═══════════ TEAM ═══════════ -->
+<section style="padding-top:0"><div class="wrap">
+  <p class="micro">Who's building this</p>
+  <h2>A small team with shipped software and short supply lines</h2>
+  <div class="team">
+    <img src="assets/img/padclaw-appicon.svg" alt="">
+    <div>
+      <h3>Yuanteng Technology 原騰科技 · Taoyuan, Taiwan</h3>
+      <p>We're the studio behind MixAgent, an AI agent platform that Taiwanese businesses run their daily
+         marketing operations on. That work taught us the two skills this product needs: making language
+         models behave reliably, and making software calm enough that non-technical people trust it every day.</p>
+      <p>For PadClaw we've paired that software team with a hardware lead who has taken three tablet-class
+         devices through Taoyuan production lines, and an assembly partner 40 minutes from our office.
+         Small team, short distances, one batch. That's the plan, and it's also the risk-management strategy.</p>
+    </div>
   </div>
 </div></section>
 
-<!-- RISKS + FAQ -->
+<!-- ═══════════ RISKS ═══════════ -->
 <section style="padding-top:0"><div class="wrap">
   <p class="micro">Risks &amp; challenges</p>
   <h2>The honest part</h2>
   <div class="risk">
-    <p>Hardware is hard, and we won't pretend otherwise. Our biggest risks are certification timing (FCC/UL can
-       add 4–6 weeks) and display panel allocation. We've mitigated both: certifications begin during the
-       campaign with pre-screened test units, and our panel is a mature, multi-source part — not a custom cut.</p>
-    <p>The software you saw in the demo is planned software: real design, real voice pipeline, sample data.
-       If a channel slips, the device still ships on time — channels arrive over the air. We will publish a
-       monthly build log, including the ugly weeks.</p>
+    <h4>Certification timing</h4>
+    <p>FCC and UL testing can add four to six weeks when a revision is required. We start testing during
+       the campaign on pre-screened units, and the February date already includes one re-test cycle.
+       If we clear on the first pass, units ship early. We won't promise that; it has happened to us once.</p>
+    <h4>Component supply</h4>
+    <p>The display is a mature 12.4" panel available from two suppliers; the SoC platform has been in
+       volume production for over two years. We deliberately chose no custom-cut, single-source parts.
+       Battery cells carry UN38.3 certification for air freight.</p>
+    <h4>Software scope</h4>
+    <p>Everything you clicked in the demo is planned software: the design is final, the voice pipeline works,
+       and the data is sample data. If a channel isn't ready in February, the device still ships on
+       time and the channel arrives over the air. Hardware waits for nothing.</p>
+    <h4>The uncomfortable one</h4>
+    <p>We're a small company. If PadClaw the service ever shut down, the device would keep working:
+       on-device speech, reminders, check-ins and the Android tablet underneath don't depend on our servers.
+       We designed for our own absence. We'd rather tell you that now than have you wonder.</p>
   </div>
-  <div style="margin-top:36px">
-    <p class="micro">FAQ</p>
-    <details open><summary>What happens after the 6 free months?</summary>
-      <p>Nothing bad. The device keeps working forever — on-device AI stays unlimited and free. If you want the
-         private-cloud extras (long reasoning, chart maths, translation), the Family plan is $14/month,
-         locked for life for founders. No auto-renew; we ask you 14 days before.</p></details>
-    <details><summary>Is my data used to train AI?</summary>
-      <p>No. Sensitive tasks run on-device or in our own Oregon racks, logs stay on your device for 90 days,
-         and one button wipes everything — device and servers. We sell hardware, not attention.</p></details>
-    <details><summary>Can it use my own AI account?</summary>
-      <p>Yes — bring your own OpenAI, Gemini or Anthropic key in Settings. Sensitive tasks still stay on
-         PadClaw AI unless you explicitly turn that off.</p></details>
+</div></section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section id="faq" style="padding-top:0"><div class="wrap">
+  <p class="micro">FAQ</p>
+  <h2>Asked constantly, answered plainly</h2>
+  <div style="margin-top:28px">
+    <details open><summary>What happens when the six free months end?</summary>
+      <p>The device keeps working, full stop. On-device AI — speech, reminders, check-ins, timers — stays
+         unlimited and free forever. The optional Family plan ($14/month, price locked for founders) adds
+         private-cloud requests for long reasoning, chart math and translation. We ask you 14 days before
+         the free period ends. Nothing renews by itself.</p></details>
+    <details><summary>Is my family's data used to train AI models?</summary>
+      <p>No. Speech is transcribed on the device, sensitive requests stay on our own servers in Oregon,
+         nothing is sold or shared, and a 90-day activity log lives on the device where you can read it.
+         One button erases everything, on the device and on our servers.</p></details>
+    <details><summary>Can it use my own AI account instead of yours?</summary>
+      <p>Yes. Settings accepts an OpenAI, Google Gemini or Anthropic key, stored in the secure element.
+         Health, money and family messages still route to PadClaw infrastructure unless you explicitly
+         turn that protection off.</p></details>
+    <details><summary>Does it need Wi-Fi?</summary>
+      <p>Reminders, check-ins, alarms and voice control work offline. Channels that describe the outside
+         world — weather, news, markets — need a connection, for the obvious reason.</p></details>
+    <details><summary>Is it a real tablet too?</summary>
+      <p>Yes. A full Android system sits one tap away for the family members who want a browser or a
+         streaming app. It never interrupts the assistant, and the assistant never rearranges it.</p></details>
     <details><summary>Why only 3,000 units?</summary>
-      <p>One production line, one batch, every unit numbered and hand-checked. Small enough for a two-person
-         hardware team to do properly; large enough to fund the tooling. When they're gone, they're gone.</p></details>
+      <p>One line, one batch, every unit burned in for 24 hours and numbered. It's the largest quantity
+         our team can hand-check and the smallest that pays for the tooling. Retail comes later, at $699.</p></details>
+    <details><summary>What about repairs and parts?</summary>
+      <p>The back comes off with Torx screws, the battery is a replaceable module, and we're stocking
+         spare parts for five years. One-year warranty with a US return address.</p></details>
+    <details><summary>Grandma speaks Mandarin. Her grandkids answer in English.</summary>
+      <p>So does the demo — try the language toggle. English ships first; Mandarin and Spanish voice packs
+         are the $650k stretch goal, and they're first in line either way.</p></details>
   </div>
 </div></section>
 
 <footer>
   <img src="assets/img/padclaw-appicon.svg" alt="" width="44" style="margin:0 auto">
-  <p><b style="color:var(--text)">PadClaw</b> · a Kickstarter campaign preview</p>
-  <p>All interface imagery shows planned software with sample data. Not a medical device. Prices in USD.
-     Campaign preview page — not yet live on Kickstarter.</p>
+  <p><b style="color:var(--text)">PadClaw</b> · a Kickstarter campaign preview by Yuanteng Technology, Taoyuan</p>
+  <p>This is a pre-launch preview. Interface imagery shows planned software with sample data; interview figures
+     are from our own research notes. Not a medical device. Prices in USD. The pledge button activates on launch day.</p>
   <div class="mock">🐾 Interactive device demo: <a href="theater/" style="color:var(--accent)">padclaw theater&nbsp;→</a></div>
 </footer>
 

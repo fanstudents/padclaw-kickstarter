@@ -642,13 +642,13 @@
 
 .mk__idx{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .idx{position:relative;padding:16px 18px 0;overflow:hidden;min-height:128px}
-.idx__k{display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
-.idx__v{display:block;margin-top:6px;font-size:26px;font-weight:640;letter-spacing:-.018em;font-variant-numeric:tabular-nums}
-.idx__d{position:absolute;top:16px;right:18px;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.idx__k{position:relative;z-index:2;display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.idx__v{position:relative;z-index:2;display:block;margin-top:6px;font-size:26px;font-weight:640;letter-spacing:-.018em;font-variant-numeric:tabular-nums}
+.idx__d{position:absolute;z-index:2;top:16px;right:18px;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
 .idx.up .idx__d{color:var(--accent)}
 .idx.dn .idx__d{color:#F0728F}
-.spark{display:block;width:100%;height:52px}
-.idx .spark{position:absolute;left:0;right:0;bottom:0}
+.spark{display:block;width:100%;height:52px;pointer-events:none}
+.idx .spark{position:absolute;left:0;right:0;bottom:0;height:40px;opacity:.9}
 
 .mk__body{margin-top:20px;flex:1;display:grid;grid-template-columns:1fr 336px;gap:22px;align-items:start}
 .hold{margin-top:12px;display:grid;gap:2px}
@@ -669,7 +669,8 @@
 .mk__acct{padding:20px 22px 0;overflow:hidden}
 .acct__today{display:block;margin-top:8px;font-size:30px;font-weight:660;letter-spacing:-.02em;color:var(--accent)}
 .acct__ytd{display:block;margin-top:4px;font-size:16px;color:var(--text-2)}
-.mk__acct .spark{margin-top:10px;height:70px}
+.mk__acct .spark{margin-top:10px;height:64px}
+.mk__acct .micro,.acct__today,.acct__ytd{position:relative;z-index:2}
 .acct__note{
   display:flex;align-items:center;gap:8px;margin:0 -22px;padding:12px 22px;
   font-size:13.5px;color:var(--text-3);border-top:1px solid var(--hairline);
@@ -739,7 +740,7 @@
 .mk__why b{color:var(--text)}
 .mk__why-ico{flex:0 0 auto;color:#5BC0BE}
 .mk__idx{margin-top:16px}
-.idx{min-height:104px}
+.idx{min-height:122px;padding-bottom:44px}
 .mk__body{margin-top:14px}
 
 /* ══════════════ 詳情層（第二層） ══════════════ */
