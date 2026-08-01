@@ -675,7 +675,7 @@
   "use strict";
   const A = global.Art;
   const BRANDS = {
-    padclaw: { bg: "#062B1C", fg: "#05CE78", svg:
+    padclaw: { bg: "#0B1420", fg: "#18DFA6", svg:
       '<rect x="3.2" y="3.2" width="25.6" height="25.6" rx="8.2" fill="none" stroke="currentColor" stroke-width="2"/>' +
       '<ellipse cx="11" cy="13.8" rx="1.9" ry="2.5" transform="rotate(-20 11 13.8)"/>' +
       '<ellipse cx="16" cy="12.5" rx="2" ry="2.65"/>' +

@@ -335,6 +335,25 @@
     ],
   };
 
+  /* 商城詳情頁:各分類的標準能力清單 */
+  const STORE_FEAT = {
+    scenes: [
+      L("Takes over the whole screen — one scene, one purpose", "接管整個螢幕——一個場景，只做一件事"),
+      L("Voice-first: everything can be asked out loud", "語音優先：所有內容都能用說的"),
+      L("Leaves quietly when it's done — no feeds, no autoplay", "做完就安靜退場——沒有動態、不自動續播"),
+    ],
+    skills: [
+      L("Drafts the work, then asks before anything leaves the device", "先把事情擬好，任何東西要離開裝置前都先問你"),
+      L("Every action is logged on this device for 90 days", "每個動作都記錄在本機，保留 90 天"),
+      L("Can be turned off any time with one switch", "隨時一個開關就能整個關掉"),
+    ],
+    apps: [
+      L("Big-type interface tuned for across-the-room reading", "大字介面，隔著房間也讀得到"),
+      L("Runs as a standard Android app in a safe frame", "以標準 Android App 在安全框架中執行"),
+      L("No ads, no tracking, no account required", "沒有廣告、不追蹤、不需要帳號"),
+    ],
+  };
+
   const STORE_SPOTLIGHT = {
     scenes: ["sc5", "sc7", "sc6"],
     skills: ["sk5", "sk3", "sk2"],
@@ -460,9 +479,9 @@
       { i: "clock", v: L("Best window · 10–12 AM", "黃金時段 · 上午 10–12") },
     ],
     cards: [
-      { k: L("Career", "事業"), v: L("Say the number first. Mercury clears your 3rd house at noon — the conversation you've been putting off goes better than you expect.", "先開口說出數字。水星正午行經第三宮，那個一直拖著的對話會比你預期順利。"), e: 5 },
-      { k: L("Love", "感情"), v: L("Someone is waiting for you to ask, not to guess. Keep the evening simple.", "有人在等你開口問，而不是等你猜。今晚別安排太滿。"), e: 3 },
-      { k: L("Energy", "能量"), v: L("Strong until about 4 PM, then plan nothing. The nap is not laziness today.", "下午 4 點前狀態很好，之後別再排事。今天的午睡不是偷懶。"), e: 4 },
+      { k: L("Career", "事業"), v: L("Say the number first. Mercury clears your 3rd house at noon — the conversation you've been putting off goes better than you expect.", "先開口說出數字。水星正午行經第三宮，那個一直拖著的對話會比你預期順利。"), e: 5, more: L("Mercury sits beside the Sun in your house of conversations until mid-June, which is why words land easier than usual. The window is the late morning — after that, let the other side talk.", "水星與太陽同守你的溝通宮直到六月中，所以這陣子開口特別順。黃金時段在接近中午前——之後就換對方說。") },
+      { k: L("Love", "感情"), v: L("Someone is waiting for you to ask, not to guess. Keep the evening simple.", "有人在等你開口問，而不是等你猜。今晚別安排太滿。"), e: 3, more: L("Venus squares your Moon tonight — that is not tension, just honesty wanting out. Ask the small question directly instead of circling it.", "金星今晚與你的月亮呈刑相——那不是衝突，是誠實想被說出口。與其繞圈，不如直接問那個小問題。") },
+      { k: L("Energy", "能量"), v: L("Strong until about 4 PM, then plan nothing. The nap is not laziness today.", "下午 4 點前狀態很好，之後別再排事。今天的午睡不是偷懶。"), e: 4, more: L("Mars is finishing its pass through your sixth house, so the body asks for rest earlier than the mind does. Honour the 4 PM dip; the evening is for slippers, not plans.", "火星正走完你的第六宮，所以身體會比腦子更早喊累。尊重下午四點的低潮；晚上留給拖鞋，不留給行程。") },
     ],
   };
 
@@ -477,6 +496,17 @@
               "第 7 / 10 題。Chloe 最近四題都答對——這節做完就解鎖 Level 4。"),
       pct: 72,
     },
+    remList: [
+      { icon: "pill", t: L("Morning medications", "早晨用藥"), s: L("Every day · 8:00 AM · speaks twice, then tells Emily", "每天 · 上午 8:00 · 語音提醒兩次後通知 Emily") },
+      { icon: "heart", t: L("Blood pressure", "量血壓"), s: L("Mon & Thu · 9:00 AM · logged for Dr. Alvarez", "週一、四 · 上午 9:00 · 記錄給 Alvarez 醫師") },
+      { icon: "sun", t: L("Afternoon walk", "下午散步"), s: L("Every day · 4:00 PM · only when it isn't raining", "每天 · 下午 4:00 · 下雨天自動略過") },
+    ],
+    histList: [
+      { d: L("Sat", "週六"), t: L("All meds · check-in 8:44 AM · BP 122/78", "用藥完成 · 8:44 簽到 · 血壓 122/78") },
+      { d: L("Fri", "週五"), t: L("All meds · check-in 8:31 AM · 24 min walk", "用藥完成 · 8:31 簽到 · 散步 24 分鐘") },
+      { d: L("Thu", "週四"), t: L("All meds · check-in 9:02 AM · BP 125/80", "用藥完成 · 9:02 簽到 · 血壓 125/80") },
+      { d: L("Wed", "週三"), t: L("All meds · check-in 8:12 AM", "用藥完成 · 8:12 簽到") },
+    ],
     week: {
       label: L("Parent report · this week", "家長週報 · 本週"),
       stats: [
@@ -494,6 +524,46 @@
       { id: "science", t: L("Science", "自然"), p: 18, n: L("Just started", "剛開始") },
       { id: "spanish", t: L("Spanish", "西班牙文"), p: 55, n: L("Marcus · 4 day streak", "Marcus · 連續 4 天") },
     ],
+  };
+
+  /* ── 學習:練習題（每科一題示範,點答案有即時回饋） ── */
+  const QUIZ = {
+    math: {
+      title: L("Multiplication · Level 3", "乘法 · Level 3"),
+      no: L("Question 7 of 10", "第 7 / 10 題"),
+      q: "7 × 8 = ?",
+      opts: ["54", "56", "63", "48"], correct: 1,
+      explain: L("7 × 8 is 56 — think 7 × 4 = 28, then double it.", "7 × 8 是 56——先想 7 × 4 = 28，再乘兩倍。"),
+      retry: L("Close! Let's try it a different way.", "差一點！我們換個方法想。"),
+    },
+    reading: {
+      title: L("Reading · Level 2", "閱讀 · Level 2"),
+      no: L("Question 10 of 20", "第 10 / 20 題"),
+      q: L("Which word rhymes with “light”?", "哪個字和 light 押韻？"),
+      opts: ["kite", "lamp", "lion", "leaf"], correct: 0,
+      explain: L("kite and light share the same “-ite” sound.", "kite 和 light 都有一樣的 -ite 音。"),
+      retry: L("Say them out loud — which one sounds the same?", "念出聲音看看——哪個聽起來一樣？"),
+    },
+    science: {
+      title: L("Science · Level 1", "自然 · Level 1"),
+      no: L("Question 2 of 10", "第 2 / 10 題"),
+      q: L("Which planet is closest to the Sun?", "哪顆行星離太陽最近？"),
+      opts: [L("Venus", "金星"), L("Mercury", "水星"), L("Earth", "地球"), L("Mars", "火星")], correct: 1,
+      explain: L("Mercury orbits closest — a year there is just 88 days.", "水星最靠近太陽——它的一年只有 88 天。"),
+      retry: L("Think of the smallest, fastest one.", "想想最小、跑最快的那顆。"),
+    },
+    spanish: {
+      title: L("Spanish · Greetings", "西班牙文 · 問候"),
+      no: L("Question 3 of 10", "第 3 / 10 題"),
+      q: L("How do you say “good morning”?", "「早安」的西班牙文是？"),
+      opts: ["Buenas noches", "Hola", "Buenos días", "Adiós"], correct: 2,
+      explain: L("Buenos días — literally “good days”.", "Buenos días——字面意思是「美好的日子」。"),
+      retry: L("Noches is night. Try again!", "noches 是晚上喔，再試一次！"),
+    },
+    doneT: L("That's the spirit!", "就是這樣！"),
+    doneS: L("The real session keeps going on the device — ten questions, then it says goodbye.",
+             "實機上的課程會繼續——十題做完，就說再見。"),
+    back: L("Back to Learning", "回到學習頻道"),
   };
 
   /* ── 健康頻道 ── */
@@ -515,6 +585,17 @@
       doneNote: L("Emily can see you're OK", "Emily 已經知道你一切都好"),
       sub: L("I need help", "我需要幫忙"),
     },
+    remList: [
+      { icon: "pill", t: L("Morning medications", "早晨用藥"), s: L("Every day · 8:00 AM · speaks twice, then tells Emily", "每天 · 上午 8:00 · 語音提醒兩次後通知 Emily") },
+      { icon: "heart", t: L("Blood pressure", "量血壓"), s: L("Mon & Thu · 9:00 AM · logged for Dr. Alvarez", "週一、四 · 上午 9:00 · 記錄給 Alvarez 醫師") },
+      { icon: "sun", t: L("Afternoon walk", "下午散步"), s: L("Every day · 4:00 PM · only when it isn't raining", "每天 · 下午 4:00 · 下雨天自動略過") },
+    ],
+    histList: [
+      { d: L("Sat", "週六"), t: L("All meds · check-in 8:44 AM · BP 122/78", "用藥完成 · 8:44 簽到 · 血壓 122/78") },
+      { d: L("Fri", "週五"), t: L("All meds · check-in 8:31 AM · 24 min walk", "用藥完成 · 8:31 簽到 · 散步 24 分鐘") },
+      { d: L("Thu", "週四"), t: L("All meds · check-in 9:02 AM · BP 125/80", "用藥完成 · 9:02 簽到 · 血壓 125/80") },
+      { d: L("Wed", "週三"), t: L("All meds · check-in 8:12 AM", "用藥完成 · 8:12 簽到") },
+    ],
     week: {
       label: L("This week", "這一週"),
       note: L("6 days in a row. Emily hasn't had to call once.", "連續 6 天。Emily 一通電話都不用打。"),
@@ -546,17 +627,29 @@
         t: L("Fremont Bridge closed until noon", "Fremont 大橋中午前封閉"),
         s: L("Deck repairs. Take Aurora instead — about 6 minutes longer.",
              "橋面維修。改走 Aurora，大約多 6 分鐘。"),
-        src: L("Seattle DOT · 5:40 AM", "西雅圖交通局 · 上午 5:40") },
+        src: L("Seattle DOT · 5:40 AM", "西雅圖交通局 · 上午 5:40"),
+        body: [
+          L("Crews found worn expansion joints during last week's inspection, so the deck is getting same-day repairs while the weather holds. Both directions reopen at noon.", "上週檢查時發現伸縮縫磨損，趁天候允許今天當日修復。中午雙向恢復通行。"),
+          L("PadClaw checked your calendar — your 9:30 across town is the only trip affected. Leaving by 8:10 via Aurora keeps you on time.", "PadClaw 對過你的行事曆——只有 9:30 那趟會受影響。8:10 前改走 Aurora 就不會遲到。"),
+        ] },
       { tag: L("This weekend", "這個週末"), col: "#05CE78", icon: "calendar",
         t: L("Farmers market moves indoors Saturday", "週六農夫市集改到室內"),
         s: L("Rain forecast, so it's at the community center on 45th, same hours.",
              "因為預報有雨，改到 45 街的社區中心，時間不變。"),
-        src: L("Wallingford Chamber · 6:00 AM", "Wallingford 商會 · 上午 6:00") },
+        src: L("Wallingford Chamber · 6:00 AM", "Wallingford 商會 · 上午 6:00"),
+        body: [
+          L("The forecast calls for steady rain through Saturday afternoon, so the market moves inside for the first time this season.", "預報週六下午前都有雨，市集本季第一次移到室內。"),
+          L("Same vendors, same hours, 10 to 2 — just indoors at the community center on 45th. The flower stand Barbara likes will be by the main door.", "攤商、時間都不變，10 點到 2 點——只是改在 45 街社區中心。Barbara 喜歡的花攤就在大門旁。"),
+        ] },
       { tag: L("Worth knowing", "值得知道"), col: "#E0A94B", icon: "book",
         t: L("Free tax help at the library through April", "圖書館免費報稅諮詢，到四月為止"),
         s: L("Walk-in desk, Tuesdays and Thursdays, 10 to 2. No appointment.",
              "現場排隊，每週二、四上午 10 點到下午 2 點，不用預約。"),
-        src: L("Seattle Public Library · Yesterday", "西雅圖公立圖書館 · 昨天") },
+        src: L("Seattle Public Library · Yesterday", "西雅圖公立圖書館 · 昨天"),
+        body: [
+          L("AARP volunteers staff the walk-in desk on the second floor — they handle federal and state returns for free, no income limit.", "AARP 志工駐點在二樓櫃檯——聯邦與州報稅都免費協助，沒有收入限制。"),
+          L("Bring last year's return and a photo ID. Barbara's Tuesday morning is free this week, and the 44 bus stops right outside.", "帶去年的報稅單和證件就好。Barbara 這週二上午有空，44 路公車就停在門口。"),
+        ] },
     ],
     foot: L("Sources are named on every story. Nothing is written by AI — it only summarises and reads aloud.",
             "每一則都標明出處。內容不是 AI 寫的，AI 只負責摘要與念出來。"),
@@ -578,10 +671,10 @@
            "聯準會中午宣布利率不變——今天的漲幅大多出現在那之後的一小時。") },
     holdLabel: L("Your watchlist", "你的追蹤清單"),
     holdings: [
-      { s: "AAPL", n: L("Apple", "蘋果"), p: "212.49", d: +1.21, sh: L("40 shares", "40 股") },
-      { s: "KO", n: L("Coca-Cola", "可口可樂"), p: "63.18", d: +0.34, sh: L("120 shares", "120 股") },
-      { s: "JNJ", n: L("Johnson & Johnson", "嬌生"), p: "146.02", d: +0.08, sh: L("60 shares", "60 股") },
-      { s: "T", n: L("AT&T", "AT&T"), p: "18.77", d: -0.42, sh: L("300 shares", "300 股") },
+      { s: "AAPL", n: L("Apple", "蘋果"), p: "212.49", d: +1.21, sh: L("40 shares", "40 股"), pos: "$8,499.60", day: "211.20 · 210.15 – 213.40", spark: [40,42,41,45,44,48,47,51,50,54,57,55,60,63], why: L("Rose with the rest of big tech after the Fed held rates steady.", "聯準會利率不變後，跟著大型科技股一起上漲。") },
+      { s: "KO", n: L("Coca-Cola", "可口可樂"), p: "63.18", d: +0.34, sh: L("120 shares", "120 股"), pos: "$7,581.60", day: "62.95 · 62.80 – 63.30", spark: [50,51,49,52,51,53,52,54,53,55,54,56,55,57], why: L("Steady — dividend stocks liked the rate pause.", "走勢平穩——升息暫停對配息股是好消息。") },
+      { s: "JNJ", n: L("Johnson & Johnson", "嬌生"), p: "146.02", d: +0.08, sh: L("60 shares", "60 股"), pos: "$8,761.20", day: "145.90 · 145.30 – 146.60", spark: [52,53,52,54,53,52,54,53,55,54,53,55,54,55], why: L("Flat ahead of Thursday's earnings call.", "週四財報前觀望，變動不大。") },
+      { s: "T", n: L("AT&T", "AT&T"), p: "18.77", d: -0.42, sh: L("300 shares", "300 股"), pos: "$5,631.00", day: "18.85 · 18.70 – 18.92", spark: [58,57,58,56,57,55,56,54,55,53,54,52,53,51], why: L("Slipped after an analyst downgrade this morning.", "今早遭分析師調降評等後小跌。") },
     ],
     account: {
       label: L("Retirement account", "退休帳戶"),
@@ -615,5 +708,5 @@
     yes: L("Approve", "同意"), no: L("Not now", "先不要"),
   };
 
-  global.DATA = { L, TABS, SETTINGS, CHANNELS, NEWS, MARKET, BILLBOARDS, CONTINUE, SOON, STORE_TABS, STORE, STORE_SPOTLIGHT, PEOPLE, WEATHER, HOROSCOPE, LEARNING, HEALTH, VOICE, GATE };
+  global.DATA = { L, TABS, SETTINGS, CHANNELS, NEWS, MARKET, QUIZ, STORE_FEAT, BILLBOARDS, CONTINUE, SOON, STORE_TABS, STORE, STORE_SPOTLIGHT, PEOPLE, WEATHER, HOROSCOPE, LEARNING, HEALTH, VOICE, GATE };
 })(window);

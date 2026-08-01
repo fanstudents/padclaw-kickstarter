@@ -16,6 +16,7 @@
     channel: "overview",
     storeTab: "scenes",
     setTab: "usage",
+    heTab: "today",
     provider: "padclaw",
     switches: {},
     person: "emily",
@@ -672,7 +673,7 @@
         <span class="chip">${A.icon(x.i, 13)}${t(x.v)}</span>`).join("")}</div>
       <div class="ho__cards">
         ${H.cards.map((c, i) => `
-          <div class="hocard glass focusable" ${F("hoc", { fid: "ho-" + i, color: "#E0A94B" })} data-act="voice">
+          <div class="hocard glass focusable" ${F("hoc", { fid: "ho-" + i, color: "#E0A94B" })} data-act="horo" data-id="${i}">
             <span class="hocard__k"><b>${t(c.k)}</b><span>${t(c.v)}</span></span>
             <span class="energy">${[1, 2, 3, 4, 5].map((n) => `<i class="${n <= c.e ? "on" : ""}"></i>`).join("")}</span>
           </div>`).join("")}
@@ -703,10 +704,10 @@
         <div class="le__prog"><div class="bar"><i style="width:${LE.cont.pct}%"></i></div><span>${LE.cont.pct}%</span></div>
         <div class="le__actions">
           <button class="btn btn--primary focusable" ${F("lea", { fid: "le-go", color: "#B47CF0" })}
-                  data-act="read" data-id="learning">
+                  data-act="practice" data-id="math">
             ${A.icon("play", 20)}${S.lang === "en" ? "Continue" : "繼續"}</button>
-          <button class="btn btn--ghost focusable" ${F("lea", { fid: "le-restart", color: "#B47CF0" })} data-act="none">
-            ${S.lang === "en" ? "Start over" : "重新開始"}</button>
+          <button class="btn btn--ghost focusable" ${F("lea", { fid: "le-restart", color: "#B47CF0" })} data-act="read" data-id="learning">
+            ${A.icon("speak", 18)}${S.lang === "en" ? "Progress report" : "念進度給我聽"}</button>
         </div>
       </div>
       <div class="le__report glass">
@@ -722,7 +723,7 @@
         <div class="shelf__label"><span class="micro">${S.lang === "en" ? "Subjects" : "科目"}</span></div>
         <div class="shelf__track" data-shelf="subj">
           ${LE.subjects.map((s) => `
-            <div class="subj focusable" ${F("subj", { fid: "su-" + s.id, cap: t(s.n), color: "#B47CF0" })} data-act="none">
+            <div class="subj focusable" ${F("subj", { fid: "su-" + s.id, cap: t(s.n), color: "#B47CF0" })} data-act="practice" data-id="${s.id}">
               <div class="subj__art">${A.subject(s.id, 356, 472)}</div>
               <div class="subj__scrim"></div>
               <div class="subj__body">
@@ -755,7 +756,7 @@
         <span class="chip">${A.icon(q.i, 13)}${t(q.v)}</span>`).join("")}</div>
       <div class="nw__list">
         ${N.items.map((it, i) => `
-          <article class="nwcard glass focusable" ${F("nwi", { fid: "nw-" + i, color: it.col })} data-act="read" data-id="news">
+          <article class="nwcard glass focusable" ${F("nwi", { fid: "nw-" + i, color: it.col })} data-act="news-item" data-id="${i}">
             <span class="nwcard__n">${i + 1}</span>
             <span class="nwcard__k">
               <span class="nwcard__tag" style="color:${it.col};background:${it.col}1f;border-color:${it.col}44">
@@ -789,7 +790,7 @@
 
       <div class="mk__idx">
         ${M.indices.map((x, i) => `
-          <div class="idx glass focusable ${x.d >= 0 ? "up" : "dn"}" ${F("mki", { fid: "mk-i" + i, color: "#5BC0BE" })} data-act="none">
+          <div class="idx glass focusable ${x.d >= 0 ? "up" : "dn"}" ${F("mki", { fid: "mk-i" + i, color: "#5BC0BE" })} data-act="idx" data-id="${i}">
             <span class="idx__k">${x.k}</span>
             <span class="idx__v">${x.v}</span>
             <span class="idx__d">${pct(x.d)}</span>
@@ -806,7 +807,7 @@
           <span class="micro">${t(M.holdLabel)}</span>
           <ul class="hold">
             ${M.holdings.map((h, i) => `
-              <li class="holdrow focusable ${h.d >= 0 ? "up" : "dn"}" ${F("mkh", { fid: "mk-h" + i, color: "#5BC0BE" })} data-act="none">
+              <li class="holdrow focusable ${h.d >= 0 ? "up" : "dn"}" ${F("mkh", { fid: "mk-h" + i, color: "#5BC0BE" })} data-act="stock" data-id="${i}">
                 <span class="hold__s">${h.s}</span>
                 <span class="hold__n">${t(h.n)}<em>${t(h.sh)}</em></span>
                 <span class="hold__p">$${h.p}</span>
@@ -835,9 +836,11 @@
     return `<div class="he">
       <div>
         <div class="he__tabs">
-          ${HE.tabs.map((x, i) => `<button class="subrail__btn ${i === 0 ? "is-active" : ""}"
-            ${F("het", { fid: "he-t" + i, color: "#05CE78" })} data-act="none">${t(x)}</button>`).join("")}
+          ${[["today", HE.tabs[0]], ["rem", HE.tabs[1]], ["hist", HE.tabs[2]]].map(([tid, x]) => `
+            <button class="subrail__btn ${S.heTab === tid ? "is-active" : ""}"
+              ${F("het", { fid: "he-t-" + tid, color: "#05CE78" })} data-act="hetab" data-id="${tid}">${t(x)}</button>`).join("")}
         </div>
+        ${S.heTab === "today" ? `
         <div class="he__list">
           ${HE.meds.map((m) => `
             <div class="med ${S.meds[m.id] ? "is-done" : ""} focusable" ${F("hem", { fid: "he-" + m.id, color: "#05CE78" })}
@@ -846,7 +849,23 @@
               <span class="med__k"><b>${t(m.t)}</b><span>${t(m.d)}</span></span>
               <span class="med__t">${t(m.time)}</span>
             </div>`).join("")}
-        </div>
+        </div>` : S.heTab === "rem" ? `
+        <div class="he__list">
+          ${HE.remList.map((r, i) => `
+            <div class="med focusable" ${F("hem", { fid: "he-r" + i, color: "#05CE78" })} data-act="gate">
+              <span class="box box--ico">${A.icon(r.icon, 24)}</span>
+              <span class="med__k"><b>${t(r.t)}</b><span>${t(r.s)}</span></span>
+              <span class="med__t">${A.icon("plus", 18)}</span>
+            </div>`).join("")}
+        </div>` : `
+        <div class="he__list">
+          ${HE.histList.map((h, i) => `
+            <div class="med med--hist focusable" ${F("hem", { fid: "he-h" + i, color: "#05CE78" })} data-act="none">
+              <span class="box box--day">${t(h.d)}</span>
+              <span class="med__k"><b style="font-size:20px">${t(h.t)}</b></span>
+              <span class="med__t" style="color:var(--accent)">${A.icon("check", 22)}</span>
+            </div>`).join("")}
+        </div>`}
         <div class="week">
           <div class="week__head">
             <span class="micro">${t(HE.week.label)}</span>
@@ -879,6 +898,185 @@
       </div>
     </div>`;
   }
+
+
+  /* ══════════════════════ 詳情層（第二層）══════════════════════
+     tvOS 風格的資訊卡:任何可點的東西都通到這裡。Esc / 點背景關閉。 */
+  function openSheet({ art, svg, pos, pill, pillColor, title, sub, body, list, listTitle, actions, foot }) {
+    $("#layer").innerHTML = `
+      <div class="scrim-full scrim-full--sheet" data-act="closeLayer">
+        <div class="sheet" onclick="event.stopPropagation()">
+          <div class="sheet__hero">
+            ${artLayer(art, svg || "", pos)}
+            <div class="sheet__scrim"></div>
+            ${pill ? `<span class="card__pill" style="color:${pillColor || "#fff"}">${pill}</span>` : ""}
+            <button class="sheet__x" data-act="closeLayer" title="Close">${A.icon("plus", 18)}</button>
+            <div class="sheet__head">
+              <h2>${title}</h2>
+              ${sub ? `<p>${sub}</p>` : ""}
+            </div>
+          </div>
+          <div class="sheet__body">
+            ${body ? body.map((x) => `<p class="sheet__p">${x}</p>`).join("") : ""}
+            ${list ? `
+              ${listTitle ? `<span class="micro">${listTitle}</span>` : ""}
+              <ul class="sheet__list">${list.map((x) => `<li><span>${A.icon("check", 15)}</span>${x}</li>`).join("")}</ul>` : ""}
+            ${actions ? `<div class="sheet__actions">${actions}</div>` : ""}
+            ${foot ? `<p class="sheet__foot">${A.icon("shield", 13)} ${foot}</p>` : ""}
+          </div>
+        </div>
+      </div>`;
+    hydrateArt();
+  }
+
+  /* 商城商品詳情 */
+  function sheetStore(id) {
+    for (const [tab, items] of Object.entries(D.STORE)) {
+      const it = items.find((x) => x.id === id);
+      if (!it) continue;
+      const tabDef = D.STORE_TABS.find((x) => x.id === tab);
+      const owned = it.price === "own" || S.installed.has(it.id);
+      openSheet({
+        art: it.hero, svg: A.poster(it.id + it.t.en, it.pal, 880, 330),
+        pill: t(tabDef.label), pillColor: paletteColor(it.pal),
+        title: t(it.t),
+        sub: `${t(it.m)} · ★ ${it.r.toFixed(1)}`,
+        body: [t(it.d)],
+        listTitle: S.lang === "en" ? "Every " + tabDef.label.en.toLowerCase().replace(/s$/, "") + " on PadClaw" : `PadClaw 上的每個${t(tabDef.label)}`,
+        list: D.STORE_FEAT[tab].map(t),
+        actions: `
+          <button class="btn btn--primary btn--sm" data-act="closeLayer">
+            ${owned ? (S.lang === "en" ? "Open" : "打開") : it.price === "free" ? (S.lang === "en" ? "Get — free" : "免費取得") : `${S.lang === "en" ? "Get" : "取得"} · ${it.price}`}</button>
+          <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Not now" : "先不要"}</button>`,
+        foot: S.lang === "en" ? "Outward actions always pass the approval gate first." : "所有對外動作都會先經過同意閘門。",
+      });
+    }
+  }
+
+  /* 即將推出 */
+  function sheetSoon(id) {
+    const x = D.SOON.find((k) => k.id === id);
+    if (!x) return;
+    openSheet({
+      art: null, svg: A.poster(x.id + x.title.en, x.pal, 880, 330),
+      pill: S.lang === "en" ? "Coming soon" : "即將推出", pillColor: "#fff",
+      title: t(x.title), sub: t(x.cap),
+      body: [t(x.sub) + (S.lang === "en"
+        ? ". Channels arrive as free over-the-air updates — no new hardware, ever."
+        : "。所有頻道都以 OTA 免費更新送達——永遠不用換機。")],
+      actions: `
+        <button class="btn btn--primary btn--sm" data-act="closeLayer">${A.icon("bell", 17)}${S.lang === "en" ? "Notify me" : "上線通知我"}</button>
+        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${A.icon("star", 17)}${S.lang === "en" ? "Vote for this" : "投它一票"}</button>`,
+      foot: S.lang === "en" ? "Founding backers vote on what we build next." : "創始贊助者投票決定我們下一個做什麼。",
+    });
+  }
+
+  /* 新聞全文 */
+  function sheetNews(i) {
+    const it = D.NEWS.items[i];
+    if (!it) return;
+    openSheet({
+      art: "assets/img/hero/news.jpg", svg: A.news(880, 330), pos: "center 40%",
+      pill: t(it.tag), pillColor: it.col,
+      title: t(it.t), sub: t(it.src),
+      body: it.body.map(t),
+      actions: `
+        <button class="btn btn--primary btn--sm" data-act="read" data-id="news">${A.icon("speak", 17)}${S.lang === "en" ? "Read aloud" : "念給我聽"}</button>
+        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Done" : "看完了"}</button>`,
+      foot: t(D.NEWS.foot),
+    });
+  }
+
+  /* 個股 / 指數 */
+  function sheetStock(i) {
+    const h = D.MARKET.holdings[i];
+    if (!h) return;
+    const up = h.d >= 0;
+    openSheet({
+      art: null, svg: A.poster("stock" + h.s, up ? "green" : "rose", 880, 330),
+      pill: h.s, pillColor: up ? "#05CE78" : "#F0728F",
+      title: `${t(h.n)} · $${h.p}`,
+      sub: `${pct(h.d)} ${S.lang === "en" ? "today" : "今天"} · ${t(h.sh)} · ${S.lang === "en" ? "position" : "持有市值"} ${h.pos}`,
+      body: [t(h.why), `${S.lang === "en" ? "Open · day range" : "開盤 · 當日區間"}: ${h.day}`],
+      actions: `<div class="sheet__spark">${A.spark(h.spark, up, 780, 120)}</div>
+        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Done" : "看完了"}</button>`,
+      foot: t(D.MARKET.disclaimer),
+    });
+  }
+  function sheetIndex(i) {
+    const x = D.MARKET.indices[i];
+    if (!x) return;
+    const up = x.d >= 0;
+    openSheet({
+      art: null, svg: A.poster("idx" + x.k, up ? "teal" : "rose", 880, 330),
+      pill: S.lang === "en" ? "Index" : "指數", pillColor: "#5BC0BE",
+      title: `${x.k} · ${x.v}`, sub: `${pct(x.d)} ${S.lang === "en" ? "today" : "今天"}`,
+      body: [t(D.MARKET.why.s)],
+      actions: `<div class="sheet__spark">${A.spark(x.spark, up, 780, 120)}</div>
+        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Done" : "看完了"}</button>`,
+      foot: t(D.MARKET.disclaimer),
+    });
+  }
+
+  /* 命理單類深讀 */
+  function sheetHoro(i) {
+    const c = D.HOROSCOPE.cards[i];
+    if (!c) return;
+    openSheet({
+      art: "assets/img/hero/horoscope.jpg", svg: A.horoscope(880, 330), pos: "center 30%",
+      pill: t(c.k), pillColor: "#E0A94B",
+      title: t(D.HOROSCOPE.title) + " · " + t(c.k),
+      sub: t(D.HOROSCOPE.meta),
+      body: [t(c.v), t(c.more)],
+      actions: `
+        <button class="btn btn--primary btn--sm" data-act="read" data-id="horoscope">${A.icon("speak", 17)}${S.lang === "en" ? "Read aloud" : "念給我聽"}</button>
+        <button class="btn btn--ghost btn--sm" data-act="voice">${A.icon("ask", 17)}${S.lang === "en" ? "Ask why" : "問為什麼"}</button>`,
+      foot: S.lang === "en" ? "Computed from Barbara's real birth chart, on this device." : "以 Barbara 的真實本命盤在本機運算。",
+    });
+  }
+
+  /* ══════════════════════ 學習:互動練習 ══════════════════════ */
+  function openPractice(subj) {
+    const Q = D.QUIZ[subj] || D.QUIZ.math;
+    S.quizState = { subj, answered: -1 };
+    $("#layer").innerHTML = `
+      <div class="scrim-full">
+        <div class="quiz">
+          <div class="quiz__top">
+            <span class="chip chip--accent">${A.icon("book", 14)}${t(Q.title)}</span>
+            <span class="quiz__no">${t(Q.no)}</span>
+            <button class="sheet__x" data-act="closeLayer">${A.icon("plus", 18)}</button>
+          </div>
+          <h2 class="quiz__q">${t(Q.q)}</h2>
+          <div class="quiz__opts">
+            ${Q.opts.map((o, i) => `
+              <button class="quiz__opt" data-act="answer" data-id="${i}">${t(o)}</button>`).join("")}
+          </div>
+          <div class="quiz__fb" id="quizFb"></div>
+        </div>
+      </div>`;
+  }
+
+  function answerQuiz(i) {
+    const st = S.quizState; if (!st) return;
+    const Q = D.QUIZ[st.subj];
+    const ok = +i === Q.correct;
+    $$(".quiz__opt").forEach((el, k) => {
+      el.classList.toggle("is-right", k === Q.correct && ok);
+      el.classList.toggle("is-wrong", k === +i && !ok);
+      if (ok) el.disabled = true;
+    });
+    $("#quizFb").innerHTML = ok
+      ? `<div class="quiz__done anim-up">
+           <span class="quiz__star">${A.icon("star", 30)}</span>
+           <b>${t(D.QUIZ.doneT)}</b>
+           <p>${t(Q.explain)}</p>
+           <p class="quiz__note">${t(D.QUIZ.doneS)}</p>
+           <button class="btn btn--primary btn--sm" data-act="closeLayer">${t(D.QUIZ.back)}</button>
+         </div>`
+      : `<p class="quiz__retry anim-up">${t(Q.retry)}</p>`;
+  }
+
 
   /* ══════════════════════ 疊層 ══════════════════════ */
   let voiceTimer = null, voiceIdx = 0;
@@ -1075,7 +1273,15 @@
       const c = chan(id);
       return speak(c && c.clip, c && t(c.desc), c && t(c.title));
     }
-    if (act === "gate" || act === "soon") return openGate();
+    if (act === "gate") return openGate();
+    if (act === "soon") return sheetSoon(id);
+    if (act === "news-item") return sheetNews(+id);
+    if (act === "stock") return sheetStock(+id);
+    if (act === "idx") return sheetIndex(+id);
+    if (act === "horo") return sheetHoro(+id);
+    if (act === "practice") return openPractice(id);
+    if (act === "answer") return answerQuiz(id);
+    if (act === "hetab") { S.heTab = id; S.focus = "he-t-" + id; return render(true); }
     if (act === "none") { setFocus(hit); return; }
 
     if (act === "tab") { S.tab = id; if (id === "channels") S.channel = "overview"; S.focus = "tab-" + id; return render(true); }
@@ -1094,7 +1300,7 @@
       S.switches[id] = !cur; S.focus = id; return render(true);
     }
     if (act === "person") { S.person = id; S.focus = "pp-" + id; return render(true); }
-    if (act === "item") { setFocus(hit); return openGate(); }
+    if (act === "item") { setFocus(hit); return sheetStore(id); }
     if (act === "med") { S.meds[id] = !S.meds[id]; S.focus = "he-" + id; return render(true); }
     if (act === "checkin") {
       S.checkedIn = !S.checkedIn; S.focus = "he-in";
@@ -1148,33 +1354,71 @@
   function playBoot() {
     const b = $("#boot");
     b.classList.remove("is-off");
-    // 片頭:光暈醒來 → 掌印逐一亮起 → 字標收攏 + 光帶掃過 → 淡出
+    // 片頭 v3（約 8 秒）:星空 → 掃描線 → 外框描邊+軌道點 → 掌印組裝 → 字標 → 系統狀態 → Ready
+    const stars = Array.from({ length: 46 }, (_, i) => {
+      const x = (i * 137.5) % 100, y = (i * 61.8 + 13) % 100;
+      const d = (2 + (i % 5)).toFixed(1), dl = ((i % 9) * 0.4).toFixed(1);
+      return `<i style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;animation-duration:${d}s;animation-delay:${dl}s"></i>`;
+    }).join("");
     b.innerHTML = `
+      <div class="boot3__stars">${stars}</div>
+      <div class="boot3__scan"></div>
       <div class="boot2__glow"></div>
-      <svg class="boot2__mark" viewBox="0 0 128 128" width="132" height="132" aria-hidden="true">
+      <svg class="boot2__mark" viewBox="0 0 128 128" width="138" height="138" aria-hidden="true">
         <defs>
-          <linearGradient id="bt-paw" x1="0" y1="0" x2=".3" y2="1">
-            <stop offset="0" stop-color="#0FF598"/><stop offset=".55" stop-color="#05CE78"/><stop offset="1" stop-color="#04A05E"/>
+          <linearGradient id="bt3-paw" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3BEBFF"/><stop offset=".5" stop-color="#18DFA6"/><stop offset="1" stop-color="#05CE78"/>
           </linearGradient>
         </defs>
         <rect class="bt-tile" x="7" y="7" width="114" height="114" rx="26" fill="none"
-              stroke="rgba(255,255,255,.32)" stroke-width="2" pathLength="1"/>
-        <g fill="url(#bt-paw)">
+              stroke="rgba(255,255,255,.34)" stroke-width="1.8" pathLength="1"/>
+        <circle class="bt-orbit" r="2.6" fill="#3BEBFF"/>
+        <g fill="url(#bt3-paw)">
           <ellipse class="bt-p bt-p1" cx="44.2" cy="50.8" rx="8.2" ry="11.1" transform="rotate(-18 44.2 50.8)"/>
           <ellipse class="bt-p bt-p2" cx="64" cy="45.8" rx="8.7" ry="11.7"/>
           <ellipse class="bt-p bt-p3" cx="83.8" cy="50.8" rx="8.2" ry="11.1" transform="rotate(18 83.8 50.8)"/>
           <path class="bt-p bt-p4" d="M64 68.4c17.2 0 27.8 10.4 27.8 20.5 0 8.1-7.8 12.1-15.4 9.9-8-2.3-16.8-2.3-24.8 0-7.6 2.2-15.4-1.8-15.4-9.9 0-10.1 10.6-20.5 27.8-20.5Z"/>
         </g>
+        <circle class="bt-pulse" cx="64" cy="72" r="30" fill="none" stroke="#18DFA6" stroke-width="1.6"/>
       </svg>
       <div class="boot2__word"><span>Pad</span><b>Claw</b><i class="boot2__sheen"></i></div>
-      <p class="boot2__sub">${S.lang === "en" ? "Your assistant is ready" : "你的助理準備好了"}</p>
+      <div class="boot3__sys">
+        <p class="boot3__line" id="bootLine"></p>
+        <div class="boot3__bar"><i id="bootBar"></i></div>
+      </div>
       <p class="boot__skip">${S.lang === "en" ? "Tap anywhere to begin" : "點擊任意處開始"}</p>`;
     b.style.animation = "none";
     void b.offsetWidth;
     b.style.animation = "";
+
+    // 終端風格的系統狀態列（打字節奏）+ 進度條
+    const LINES = S.lang === "en"
+      ? ["Waking the secure element …", "Keys verified — nothing left the device",
+         "Loading 6 channels …", "Voices ready · EN / 中文", "Ready."]
+      : ["喚醒安全晶片 …", "金鑰驗證完成——沒有任何東西離開裝置",
+         "載入 6 個頻道 …", "語音就緒 · EN / 中文", "Ready."];
+    clearInterval(playBoot._sys);
+    let li = 0;
+    const lineEl = () => $("#bootLine"), barEl = () => $("#bootBar");
+    const tick = () => {
+      if (!lineEl() || li >= LINES.length) return clearInterval(playBoot._sys);
+      lineEl().textContent = LINES[li];
+      lineEl().classList.toggle("is-ready", li === LINES.length - 1);
+      if (barEl()) barEl().style.width = `${Math.round(((li + 1) / LINES.length) * 100)}%`;
+      li++;
+    };
+    playBoot._sys = setInterval(tick, 880);
+    setTimeout(tick, 3400);          // 第一行在字標亮相後才開始
+    clearInterval(playBoot._sys);
+    playBoot._sys = null;
+    setTimeout(() => {
+      playBoot._sys = setInterval(tick, 880);
+      tick();
+    }, 3400);
+
     clearTimeout(playBoot._t);
-    playBoot._t = setTimeout(() => b.classList.add("is-off"), 4700);
-    b.onclick = () => { clearTimeout(playBoot._t); b.classList.add("is-off"); };
+    playBoot._t = setTimeout(() => { b.classList.add("is-off"); clearInterval(playBoot._sys); }, 8600);
+    b.onclick = () => { clearTimeout(playBoot._t); clearInterval(playBoot._sys); b.classList.add("is-off"); };
   }
 
   /* ── 依視窗縮放整台平板 ── */

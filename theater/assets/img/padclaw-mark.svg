@@ -1,21 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="256" height="256" role="img" aria-label="PadClaw">
   <title>PadClaw</title>
   <defs>
-    <linearGradient id="pcm-t" x1="0" y1="0" x2=".3" y2="1">
-      <stop offset="0" stop-color="#0BE98A"/>
-      <stop offset=".55" stop-color="#05CE78"/>
-      <stop offset="1" stop-color="#04A05E"/>
+    <linearGradient id="pcm3-a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2EE6FF"/>
+      <stop offset=".5" stop-color="#18DFA6"/>
+      <stop offset="1" stop-color="#05CE78"/>
     </linearGradient>
+    <radialGradient id="pcm3-g" cx=".5" cy=".55" r=".62">
+      <stop offset="0" stop-color="#18DFA6" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#18DFA6" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <!-- 綠色 squircle 磚 + 頂部亮邊 -->
-  <rect x="2.5" y="2.5" width="27" height="27" rx="8.8" fill="url(#pcm-t)"/>
-  <rect x="2.5" y="2.5" width="27" height="27" rx="8.8" fill="none"
-        stroke="#fff" stroke-opacity=".26" stroke-width=".9"/>
-  <!-- 掌印:負空間切出 -->
-  <g fill="#0B1512">
-    <ellipse cx="11.05" cy="12.7" rx="2.02" ry="2.72" transform="rotate(-18 11.05 12.7)"/>
-    <ellipse cx="16" cy="11.45" rx="2.12" ry="2.86"/>
-    <ellipse cx="20.95" cy="12.7" rx="2.02" ry="2.72" transform="rotate(18 20.95 12.7)"/>
-    <path d="M16 16.9c4.18 0 6.75 2.52 6.75 4.98 0 2-1.89 2.97-3.73 2.42-1.94-.58-4.1-.58-6.04 0-1.84.55-3.73-.42-3.73-2.42 0-2.46 2.57-4.98 6.75-4.98Z"/>
+  <!-- 光暈 -->
+  <rect x="1" y="1" width="30" height="30" rx="9.6" fill="url(#pcm3-g)"/>
+  <!-- 平板外框:跟著文字色走,深淺底通用 -->
+  <rect x="2.6" y="2.6" width="26.8" height="26.8" rx="8.8"
+        fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="1.7"/>
+  <!-- 極光漸層掌印 -->
+  <g fill="url(#pcm3-a)">
+    <ellipse cx="11.05" cy="12.6" rx="2.04" ry="2.74" transform="rotate(-18 11.05 12.6)"/>
+    <ellipse cx="16" cy="11.35" rx="2.14" ry="2.88"/>
+    <ellipse cx="20.95" cy="12.6" rx="2.04" ry="2.74" transform="rotate(18 20.95 12.6)"/>
+    <path d="M16 16.85c4.2 0 6.8 2.54 6.8 5.02 0 2.02-1.9 3-3.76 2.44-1.95-.59-4.13-.59-6.08 0-1.86.56-3.76-.42-3.76-2.44 0-2.48 2.6-5.02 6.8-5.02Z"/>
   </g>
 </svg>

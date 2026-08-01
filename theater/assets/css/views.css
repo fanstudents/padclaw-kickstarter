@@ -741,3 +741,78 @@
 .mk__idx{margin-top:16px}
 .idx{min-height:104px}
 .mk__body{margin-top:14px}
+
+/* ══════════════ 詳情層（第二層） ══════════════ */
+.scrim-full--sheet{align-items:center}
+.sheet{
+  width:880px;max-height:704px;overflow:hidden;
+  border-radius:24px;background:var(--surface);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 60px 120px -40px rgba(0,0,0,.95);
+  display:flex;flex-direction:column;
+  animation:pop .42s var(--ease) both;
+}
+.sheet__hero{position:relative;height:264px;flex:0 0 auto}
+.sheet__hero .art{position:absolute;inset:0}
+.sheet__hero .art__img,.sheet__hero .art__svg svg{width:100%;height:100%;object-fit:cover}
+.sheet__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,13,18,.25) 0%,transparent 32%,rgba(16,20,26,.68) 68%,var(--surface) 100%)}
+.sheet__hero .card__pill{top:16px;left:18px}
+.sheet__x{
+  position:absolute;top:14px;right:14px;z-index:3;
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(10,13,18,.6);backdrop-filter:blur(10px);
+  color:rgba(242,244,247,.8);transform:rotate(45deg);
+  transition:background .18s;
+}
+.sheet__x:hover{background:rgba(255,255,255,.18);color:#fff}
+.sheet__head{position:absolute;left:28px;right:28px;bottom:14px;z-index:2}
+.sheet__head h2{font-size:31px;font-weight:640;letter-spacing:-.02em;line-height:1.12;text-shadow:0 2px 22px rgba(0,0,0,.55)}
+.sheet__head p{margin-top:5px;font-size:15px;color:rgba(242,244,247,.75)}
+.sheet__body{padding:20px 28px 24px;overflow-y:auto;scrollbar-width:none}
+.sheet__body::-webkit-scrollbar{display:none}
+.sheet__p{font-size:17px;line-height:1.55;color:rgba(242,244,247,.88)}
+.sheet__p + .sheet__p{margin-top:12px}
+.sheet__body .micro{display:block;margin-top:18px}
+.sheet__list{margin-top:10px;display:grid;gap:8px}
+.sheet__list li{display:flex;align-items:flex-start;gap:10px;font-size:15.5px;line-height:1.45;color:rgba(242,244,247,.84)}
+.sheet__list li span{color:var(--accent);flex:0 0 auto;margin-top:2px}
+.sheet__actions{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.sheet__spark{flex-basis:100%;padding:6px 2px 2px}
+.sheet__spark .spark{height:120px}
+.sheet__foot{margin-top:16px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-3)}
+
+/* ══════════════ 練習題（互動） ══════════════ */
+.quiz{
+  width:880px;border-radius:24px;padding:30px 36px 34px;
+  background:var(--surface);border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 60px 120px -40px rgba(0,0,0,.95);
+  animation:pop .42s var(--ease) both;
+}
+.quiz__top{display:flex;align-items:center;gap:14px}
+.quiz__no{flex:1;font-size:14px;color:var(--text-2)}
+.quiz__top .sheet__x{position:static}
+.quiz__q{margin-top:24px;font-size:52px;font-weight:640;letter-spacing:-.02em;text-align:center;line-height:1.15}
+.quiz__opts{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quiz__opt{
+  height:88px;border-radius:20px;font-size:29px;font-weight:640;
+  background:rgba(255,255,255,.05);border:2.5px solid var(--stroke);
+  transition:all .2s var(--ease);
+}
+.quiz__opt:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
+.quiz__opt.is-right{background:var(--accent);border-color:var(--accent);color:#06210F;transform:scale(1.03)}
+.quiz__opt.is-wrong{background:rgba(240,114,143,.16);border-color:#F0728F;color:#F0728F;animation:quiz-shake .4s}
+@keyframes quiz-shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.quiz__fb{min-height:56px;margin-top:18px}
+.quiz__retry{text-align:center;font-size:19px;color:#F0B87C}
+.quiz__done{text-align:center}
+.quiz__star{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:50%;
+  background:rgba(224,169,75,.16);color:#F2B33D;animation:bt-pop .5s cubic-bezier(.34,1.56,.64,1) both}
+.quiz__done b{display:block;margin-top:10px;font-size:24px;font-weight:650}
+.quiz__done p{margin-top:7px;font-size:17px;color:rgba(242,244,247,.85)}
+.quiz__note{font-size:14.5px !important;color:var(--text-2) !important}
+.quiz__done .btn{margin-top:16px}
+
+/* 健康歷史列 */
+.box--ico{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.box--day{background:transparent;border-color:var(--stroke);color:var(--text-2);font-size:15px;font-weight:700}
+.med--hist{cursor:default}
