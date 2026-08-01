@@ -563,3 +563,52 @@ body.has-layer .billboard__art,
 body.has-layer .chan__art{animation-play-state:paused}
 body.has-layer .art__svg svg *{animation-play-state:paused}
 .scrim-full{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+
+/* ══════════════════════════════════════════════════════════════
+   行動裝置:手機直向 → 轉向引導;手機橫向 → 裝置吃滿螢幕
+   ══════════════════════════════════════════════════════════════ */
+/* iOS 動態工具列:用 dvh 取代靠不住的 100% */
+@supports (height:100dvh){
+  html,body{height:100dvh}
+}
+
+/* 轉向引導(預設隱藏;只在小螢幕直向出現) */
+.rotate{
+  display:none;position:fixed;inset:0;z-index:120;
+  background:radial-gradient(120% 90% at 50% 8%,rgba(24,223,166,.1),transparent 55%),var(--bg-a);
+  color:var(--text);text-align:center;
+  padding:32px;
+}
+.rotate img{border-radius:20px;box-shadow:0 20px 50px -18px rgba(5,206,120,.45)}
+.rotate b{font-size:24px;font-weight:650;letter-spacing:-.015em}
+.rotate span{font-size:15.5px;line-height:1.6;color:var(--text-2)}
+.rotate i{font-style:normal;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.rotate__icon{color:var(--text-2);animation:rotate-nudge 2.2s var(--ease) infinite}
+@keyframes rotate-nudge{0%,55%,100%{transform:rotate(0)}25%,35%{transform:rotate(-90deg)}}
+
+@media (max-width:920px) and (orientation:portrait){
+  .rotate{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+}
+
+/* 小螢幕共用:拔掉展示外框裝飾,效能優先 */
+@media (max-width:920px), (max-height:560px){
+  .room,.screen__grain,.screen__gloss,.hud__note,.remote__hint{display:none}
+  :root{--bezel:10px}
+  .hud{padding:8px 14px}
+  .hud--bottom{padding-bottom:10px}
+  .hud__brand{font-size:12px}
+  .remote{padding:4px 6px;gap:4px}
+  .remote__btn{padding:6px 10px}
+  .device__shell{border-radius:22px}
+  .device__shell::before{border-radius:20px}
+  .device__stand,.device__shadow,.device__grille,.device__btn{display:none}
+  .tabbar__glass{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+}
+
+/* 手機橫向:HUD 全部讓位——上方收起、遙控列浮到角落,高度全給裝置 */
+@media (max-height:560px) and (orientation:landscape){
+  .hud--top{display:none}
+  .hud--bottom{position:fixed;left:6px;bottom:5px;z-index:60;padding:0}
+  .remote{background:rgba(10,13,17,.6);border-color:rgba(255,255,255,.12)}
+  #btnNight,#btnReplay{display:none}
+}

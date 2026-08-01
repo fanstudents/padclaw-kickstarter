@@ -6,8 +6,8 @@
 <title>PadClaw OS — Theater Mode 平板顯示劇院</title>
 <meta name="description" content="PadClaw 平板顯示劇院：Netflix / Apple TV 等級的 billboard + shelf 介面示範，含首頁、商城、家庭成員與四大場景頻道。">
 <link rel="icon" href="assets/img/padclaw-appicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/base.css?v5">
-<link rel="stylesheet" href="assets/css/views.css?v5">
+<link rel="stylesheet" href="assets/css/base.css?v6">
+<link rel="stylesheet" href="assets/css/views.css?v6">
 </head>
 <body>
 
@@ -83,6 +83,19 @@
   </div>
 </main>
 
+<!-- ══ 手機直向:轉橫向引導 ══ -->
+<div class="rotate" id="rotateHint">
+  <img src="assets/img/padclaw-appicon.svg" width="76" height="76" alt="">
+  <b>把手機轉成橫的</b>
+  <span>PadClaw 是一台 12.4 吋的橫向裝置，<br>轉過來才看得到完整的劇院模式。</span>
+  <i>Rotate your phone to landscape</i>
+  <svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true" class="rotate__icon">
+    <rect x="14" y="6" width="20" height="36" rx="4.5" fill="none" stroke="currentColor" stroke-width="2.4"/>
+    <path d="M40 20a16 16 0 0 0-9-12" fill="none" stroke="#05CE78" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M31.5 4.5 31 9l4.4-.9z" fill="#05CE78"/>
+  </svg>
+</div>
+
 <!-- ══ 底部遙控列 ══ -->
 <footer class="hud hud--bottom">
   <div class="remote">
@@ -105,8 +118,8 @@
   </div>
 </footer>
 
-<script src="assets/js/art.js?v5"></script>
-<script src="assets/js/data.js?v5"></script>
-<script src="assets/js/app.js?v5"></script>
+<script src="assets/js/art.js?v6"></script>
+<script src="assets/js/data.js?v6"></script>
+<script src="assets/js/app.js?v6"></script>
 </body>
 </html>

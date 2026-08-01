@@ -1555,7 +1555,10 @@
     const stage = $("#stage"), dev = $("#device");
     const dw = dev.offsetWidth, dh = dev.offsetHeight;
     if (!dw || !dh) return;
-    const s = Math.min((stage.clientWidth - 24) / dw, (stage.clientHeight - 56) / dh);
+    // 手機/小螢幕:邊距縮到最小,把面積全讓給裝置
+    const small = Math.min(innerWidth, innerHeight) < 560 || innerWidth < 920;
+    const padW = small ? 6 : 24, padH = small ? 8 : 56;
+    const s = Math.min((stage.clientWidth - padW) / dw, (stage.clientHeight - padH) / dh);
     document.documentElement.style.setProperty("--scale", Math.min(s, 1).toFixed(4));
   }
 
@@ -1566,5 +1569,7 @@
   playBoot();
   fit();
   window.addEventListener("resize", fit);
+  window.addEventListener("orientationchange", () => setTimeout(fit, 120));
+  if (window.visualViewport) visualViewport.addEventListener("resize", fit);
   setTimeout(fit, 120);
 })();
