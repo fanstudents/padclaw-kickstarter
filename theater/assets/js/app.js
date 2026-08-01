@@ -1566,10 +1566,31 @@
   document.documentElement.style.setProperty("--ambient", "#4A8FD4");
   render();
   startBillboard();
-  playBoot();
-  fit();
-  window.addEventListener("resize", fit);
-  window.addEventListener("orientationchange", () => setTimeout(fit, 120));
-  if (window.visualViewport) visualViewport.addEventListener("resize", fit);
-  setTimeout(fit, 120);
+
+  /* 截圖模式:?shot=<screen>&lang=en|zh — 無頭瀏覽器用,輸出乾淨的 1280×800 畫面 */
+  const Q = new URLSearchParams(location.search);
+  const SHOT = Q.get("shot");
+  if (SHOT) {
+    document.body.classList.add("is-shot");
+    if (Q.get("lang")) S.lang = Q.get("lang");
+    clearInterval(bbTimer);
+    $("#boot").classList.add("is-off");
+    const chan5 = ["weather", "learning", "horoscope", "health", "news", "market"];
+    if (SHOT === "family" || SHOT === "store" || SHOT === "settings") S.tab = SHOT;
+    else if (chan5.includes(SHOT)) { S.tab = "channels"; S.channel = SHOT; }
+    else if (SHOT === "channels") { S.tab = "channels"; S.channel = "overview"; }
+    if (SHOT === "health-done") { S.tab = "channels"; S.channel = "health"; S.checkedIn = true; }
+    render();
+    if (SHOT === "quiz") { S.tab = "channels"; S.channel = "learning"; render(); openPractice("math"); }
+    if (SHOT === "stock") { S.tab = "channels"; S.channel = "market"; render(); sheetStock(0); }
+    if (SHOT === "gate") openGate();
+    document.documentElement.style.setProperty("--scale", "1");
+  } else {
+    playBoot();
+    fit();
+    window.addEventListener("resize", fit);
+    window.addEventListener("orientationchange", () => setTimeout(fit, 120));
+    if (window.visualViewport) visualViewport.addEventListener("resize", fit);
+    setTimeout(fit, 120);
+  }
 })();

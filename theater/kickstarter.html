@@ -195,6 +195,33 @@ details p{padding:0 22px 18px;font-size:15.5px;color:var(--t2)}
   th,td{padding:12px 12px;font-size:14px}
   tbody th{width:120px}
 }
+/* 介面畫廊 */
+.shots{display:grid;gap:56px;margin-top:48px}
+.shot{display:grid;grid-template-columns:1.35fr .65fr;gap:36px;align-items:center}
+.shot:nth-child(even){grid-template-columns:.65fr 1.35fr}
+.shot:nth-child(even) .shot__frame{order:2}
+@media(max-width:880px){.shot,.shot:nth-child(even){grid-template-columns:1fr}
+  .shot:nth-child(even) .shot__frame{order:0}}
+.shot__frame{position:relative;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);background:#0A0D12;
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.08);
+  padding:10px}
+.shot__frame img{border-radius:10px;width:100%}
+.shot__tag{position:absolute;top:18px;right:18px;z-index:2;
+  font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:#BFF6DA;background:rgba(6,33,20,.75);border:1px solid rgba(5,206,120,.35);
+  border-radius:999px;padding:5px 11px;backdrop-filter:blur(8px)}
+.shot__cap .micro{display:block}
+.shot__cap h3{margin-top:8px;font-size:23px;font-weight:650;letter-spacing:-.015em}
+.shot__cap p{margin-top:9px;font-size:15.5px;line-height:1.6;color:var(--t2)}
+.shot__cap p b{color:rgba(242,244,247,.92);font-weight:600}
+
+/* 場景照片圖說 */
+figure{margin:0}
+figcaption{margin-top:12px;font-size:13.5px;line-height:1.55;color:var(--t3);
+  padding-left:14px;border-left:2px solid rgba(5,206,120,.4)}
+figcaption b{color:var(--t2);font-weight:600}
+
 footer{padding:56px 0 72px;border-top:1px solid var(--hairline);text-align:center}
 footer p{font-size:13px;color:var(--t3);max-width:660px;margin:10px auto 0}
 .mock{border:1px solid var(--hairline);background:#0A0D12;border-radius:14px;padding:10px 14px;display:inline-flex;gap:8px;
@@ -207,7 +234,7 @@ footer p{font-size:13px;color:var(--t3);max-width:660px;margin:10px auto 0}
   <img src="assets/img/padclaw-appicon.svg" alt="PadClaw">
   <b>Pad<i>Claw</i></b>
   <div class="nav-links">
-    <a href="#story">Story</a><a href="#channels">Channels</a><a href="#privacy">Privacy</a>
+    <a href="#story">Story</a><a href="#screens">Screens</a><a href="#channels">Channels</a><a href="#privacy">Privacy</a>
     <a href="#hardware">Hardware</a><a href="#pledge">Pledge</a><a href="#faq">FAQ</a>
   </div>
   <a class="btn btn--go nav-cta" href="#pledge">Back this project — $500</a>
@@ -269,14 +296,22 @@ footer p{font-size:13px;color:var(--t3);max-width:660px;margin:10px auto 0}
       <p class="quote">"I don't need another app. I need something that just works without me having to think about it."</p>
       <p class="byline">Interview #37, retired teacher, 67, Scottsdale AZ</p>
     </div>
-    <img src="assets/img/people/barbara.jpg" alt="A woman in her late sixties laughing in her kitchen">
+    <figure>
+      <img src="assets/img/people/barbara.jpg" alt="A woman in her late sixties laughing in her kitchen">
+      <figcaption><b>Scottsdale, Arizona, 7:40 AM.</b> Barbara, 68 — retired teacher, iPad owner, phone face-down.
+        Most of our interviews happened in kitchens like this one, coffee on, questions asked out loud.</figcaption>
+    </figure>
   </div>
 </div></section>
 
 <!-- ═══════════ VOICE ═══════════ -->
 <section style="padding-top:0"><div class="wrap">
   <div class="split">
-    <img src="assets/img/ks/hands.jpg" alt="Hands resting on the edge of the PadClaw tablet">
+    <figure>
+      <img src="assets/img/ks/hands.jpg" alt="Hands resting on the edge of the PadClaw tablet">
+      <figcaption><b>Pre-production unit, first touch.</b> There is no setup wizard behind that glass.
+        The first thing PadClaw ever asks a new owner to do is say hello.</figcaption>
+    </figure>
     <div>
       <p class="micro">How you use it</p>
       <h2>Say it out loud. That's the whole manual.</h2>
@@ -332,6 +367,88 @@ footer p{font-size:13px;color:var(--t3);max-width:660px;margin:10px auto 0}
      and shares a done / not-yet signal with one chosen family member. It is not a medical device, it doesn't
      diagnose anything, and it never shares more than that signal. The privacy screen shows the full list of
      what your family can see, in plain words, at all times.</p>
+</div></section>
+
+<!-- ═══════════ REAL SCREENS ═══════════ -->
+<section id="screens" style="padding-top:0"><div class="wrap">
+  <p class="micro">Straight from the demo build</p>
+  <h2>The software, exactly as you'll see it</h2>
+  <p class="lede">These aren't mockups or renders. Every frame below is captured from the working demo build —
+     the same one you can click through in your browser, in English or Chinese.</p>
+
+  <div class="shots">
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/home.jpg" alt="PadClaw home screen with weather billboard"></div>
+      <div class="shot__cap"><span class="micro">Home</span>
+        <h3>One featured thing, not forty icons</h3>
+        <p>The morning billboard already made the decision: <b>"Rain at 8 AM. Take an umbrella."</b>
+           Below it, your channels wait in a single row. Nothing blinks, nothing counts, nothing asks to be cleared.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/weather.jpg" alt="Weather channel with rain over Seattle"></div>
+      <div class="shot__cap"><span class="micro">Weather channel</span>
+        <h3>176-point digits, readable from the doorway</h3>
+        <p>Live rain falls over a real view of the city. The cards answer the only three questions that matter:
+           <b>take an umbrella, leave by 8:10, wear the light jacket.</b> The hourly strip is there if you're curious. Most mornings, nobody is.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/health.jpg" alt="Family Health screen with medication list and check-in button"></div>
+      <div class="shot__cap"><span class="micro">Family Health</span>
+        <h3>Three pills and one enormous green button</h3>
+        <p>Checkboxes sized for arthritic thumbs. The week strip shows <b>six green days in a row</b> —
+           and the button says exactly who will see the press: "Emily will see this." Not a medical device; a peace-of-mind device.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/quiz.jpg" alt="Learning practice question with four large answer buttons"></div>
+      <div class="shot__cap"><span class="micro">Learning session</span>
+        <h3>One question per screen. Ten per session.</h3>
+        <p>7 × 8, four big buttons, no timer bar rushing anyone. Get it wrong and it re-teaches a different way;
+           get it right and the star celebrates. <b>Then it says goodbye</b> — the session ends on purpose.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/stock.jpg" alt="Apple stock detail with chart, statistics and range tabs"></div>
+      <div class="shot__cap"><span class="micro">Markets · detail</span>
+        <h3>A brokerage-grade card that can't trade</h3>
+        <p>Range tabs, day stats, after-hours, your position — everything a glance needs, spoken aloud on request.
+           The one thing it will never have is a buy button. <b>PadClaw shows money; it never moves it.</b></p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/family.jpg" alt="Family screen listing members and exactly what each can see"></div>
+      <div class="shot__cap"><span class="micro">Family</span>
+        <h3>Who sees what, written where Barbara can read it</h3>
+        <p>Every connected person, and next to each: what they can see, and what is <b>"Never shared."</b>
+           Emily gets a done / not-yet signal. Conversations, photos and location aren't dimmed options — they're listed as never leaving.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/settings.jpg" alt="Settings screen with founding backer credit and usage meters"></div>
+      <div class="shot__cap"><span class="micro">Settings · your pledge, on screen</span>
+        <h3>The founding credit lives in the product</h3>
+        <p>Six month-bars for your included PadClaw Care, a counter of private-cloud requests, and a chart of
+           <b>where the thinking happened</b> — most of it on the device itself. No auto-renew; it asks you 14 days ahead.</p>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="shot__frame"><span class="shot__tag">Demo build</span><img src="assets/img/ui/news.jpg" alt="Local news screen with three neighborhood stories"></div>
+      <div class="shot__cap"><span class="micro">Local News</span>
+        <h3>Three stories from your street. Then it stops.</h3>
+        <p>Bridge closed until noon, the market moves indoors, free tax help at the library. Every story names its
+           source and time. <b>No national politics, no outrage, no infinite feed</b> — the bottom of the page exists.</p>
+      </div>
+    </div>
+  </div>
 </div></section>
 
 <!-- ═══════════ DEMO ═══════════ -->
@@ -576,8 +693,9 @@ footer p{font-size:13px;color:var(--t3);max-width:660px;margin:10px auto 0}
 <footer>
   <img src="assets/img/padclaw-appicon.svg" alt="" width="44" style="margin:0 auto">
   <p><b style="color:var(--text)">PadClaw</b> · a Kickstarter campaign preview by Yuanteng Technology, Taoyuan</p>
-  <p>This is a pre-launch preview. Interface imagery shows planned software with sample data; interview figures
-     are from our own research notes. Not a medical device. Prices in USD. The pledge button activates on launch day.</p>
+  <p>This is a pre-launch preview. Interface frames are captured from the working demo build with sample data;
+     scene photography is pre-production visualisation. Interview figures are from our own research notes.
+     Not a medical device. Prices in USD. The pledge button activates on launch day.</p>
   <div class="mock">🐾 Interactive device demo: <a href="theater/" style="color:var(--accent)">padclaw theater&nbsp;→</a></div>
 </footer>
 

@@ -612,3 +612,12 @@ body.has-layer .art__svg svg *{animation-play-state:paused}
   .remote{background:rgba(10,13,17,.6);border-color:rgba(255,255,255,.12)}
   #btnNight,#btnReplay{display:none}
 }
+
+/* ══ 截圖模式:只輸出 1280×800 的螢幕本體 ══ */
+body.is-shot .hud,body.is-shot .rotate{display:none!important}
+body.is-shot .stage{display:block}
+body.is-shot .device{position:fixed;left:0;top:0;width:1280px;transform:none;animation:none}
+body.is-shot .device__shell{padding:0;border-radius:0;background:none;box-shadow:none}
+body.is-shot .device__shell::before,body.is-shot .device__cam,body.is-shot .device__grille,
+body.is-shot .device__btn,body.is-shot .device__stand,body.is-shot .device__shadow{display:none}
+body.is-shot .screen{border-radius:0;box-shadow:none}
