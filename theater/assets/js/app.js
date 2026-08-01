@@ -902,7 +902,7 @@
 
   /* ══════════════════════ 詳情層（第二層）══════════════════════
      tvOS 風格的資訊卡:任何可點的東西都通到這裡。Esc / 點背景關閉。 */
-  function openSheet({ art, svg, pos, pill, pillColor, title, sub, body, list, listTitle, actions, foot }) {
+  function openSheet({ art, svg, pos, pill, pillColor, title, sub, body, list, listTitle, extra, actions, foot }) {
     document.body.classList.add("has-layer");
     $("#layer").innerHTML = `
       <div class="scrim-full scrim-full--sheet" data-act="scrim">
@@ -922,6 +922,7 @@
             ${list ? `
               ${listTitle ? `<span class="micro">${listTitle}</span>` : ""}
               <ul class="sheet__list">${list.map((x) => `<li><span>${A.icon("check", 15)}</span>${x}</li>`).join("")}</ul>` : ""}
+            ${extra || ""}
             ${actions ? `<div class="sheet__actions">${actions}</div>` : ""}
             ${foot ? `<p class="sheet__foot">${A.icon("shield", 13)} ${foot}</p>` : ""}
           </div>
@@ -931,25 +932,54 @@
   }
 
   /* 商城商品詳情 */
+  function ratingBars(r) {
+    // 由平均分數推一組看起來合理的星等分佈
+    const five = Math.max(38, Math.min(88, Math.round((r - 3.7) / 1.3 * 100)));
+    const four = Math.round((100 - five) * 0.62);
+    const three = Math.round((100 - five - four) * 0.6);
+    const two = Math.max(1, Math.round((100 - five - four - three) * 0.55));
+    const one = Math.max(1, 100 - five - four - three - two);
+    return [five, four, three, two, one].map((v, i) => `
+      <div class="rb"><span>${5 - i}</span><i><b style="width:${v}%"></b></i><em>${v}%</em></div>`).join("");
+  }
+
   function sheetStore(id) {
     for (const [tab, items] of Object.entries(D.STORE)) {
       const it = items.find((x) => x.id === id);
       if (!it) continue;
       const tabDef = D.STORE_TABS.find((x) => x.id === tab);
+      const meta = D.STORE_META[tab];
       const owned = it.price === "own" || S.installed.has(it.id);
+      const en = S.lang === "en";
       openSheet({
         art: it.hero, svg: A.poster(it.id + it.t.en, it.pal, 880, 330),
         pill: t(tabDef.label), pillColor: paletteColor(it.pal),
         title: t(it.t),
-        sub: `${t(it.m)} · ★ ${it.r.toFixed(1)}`,
+        sub: `${t(it.m)} · ★ ${it.r.toFixed(1)} · ${en ? "1.2k ratings" : "1.2k 則評分"}`,
         body: [t(it.d)],
-        listTitle: S.lang === "en" ? "Every " + tabDef.label.en.toLowerCase().replace(/s$/, "") + " on PadClaw" : `PadClaw 上的每個${t(tabDef.label)}`,
-        list: D.STORE_FEAT[tab].map(t),
+        extra: `
+          ${statGrid([
+            [en ? "Version" : "版本", meta.ver], [en ? "Updated" : "更新", t(meta.upd)],
+            [en ? "Languages" : "語言", meta.langs], [en ? "Age" : "分級", "4+"],
+          ])}
+          <span class="micro" style="display:block;margin-top:16px">${en ? "What's new in " + meta.ver : meta.ver + " 更新內容"}</span>
+          <p class="sheet__p" style="margin-top:8px">${t(meta.whatsnew)}</p>
+          <div class="ratewrap">
+            <div class="ratebig"><b>${it.r.toFixed(1)}</b><span>${en ? "out of 5" : "滿分 5"}</span></div>
+            <div class="ratebars">${ratingBars(it.r)}</div>
+          </div>
+          ${meta.reviews.map((rv) => `
+            <div class="review">
+              <div class="review__hd"><b>${rv.n}</b><span class="review__stars">${"★".repeat(rv.r)}${"☆".repeat(5 - rv.r)}</span><span>${t(rv.d)}</span></div>
+              <p>${t(rv.t)}</p>
+            </div>`).join("")}
+          <span class="micro" style="display:block;margin-top:16px">${en ? "Every " + tabDef.label.en.toLowerCase().replace(/s$/, "") + " on PadClaw" : "PadClaw 上的每個" + t(tabDef.label)}</span>
+          <ul class="sheet__list" style="margin-top:10px">${D.STORE_FEAT[tab].map(t).map((x) => `<li><span>${A.icon("check", 15)}</span>${x}</li>`).join("")}</ul>`,
         actions: `
           <button class="btn btn--primary btn--sm" data-act="closeLayer">
-            ${owned ? (S.lang === "en" ? "Open" : "打開") : it.price === "free" ? (S.lang === "en" ? "Get — free" : "免費取得") : `${S.lang === "en" ? "Get" : "取得"} · ${it.price}`}</button>
-          <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Not now" : "先不要"}</button>`,
-        foot: S.lang === "en" ? "Outward actions always pass the approval gate first." : "所有對外動作都會先經過同意閘門。",
+            ${owned ? (en ? "Open" : "打開") : it.price === "free" ? (en ? "Get — free" : "免費取得") : `${en ? "Get" : "取得"} · ${it.price}`}</button>
+          <button class="btn btn--ghost btn--sm" data-act="closeLayer">${en ? "Not now" : "先不要"}</button>`,
+        foot: en ? "Outward actions always pass the approval gate first." : "所有對外動作都會先經過同意閘門。",
       });
     }
   }
@@ -976,45 +1006,121 @@
   function sheetNews(i) {
     const it = D.NEWS.items[i];
     if (!it) return;
+    const en = S.lang === "en";
+    const others = D.NEWS.items.map((o, k) => [o, k]).filter(([, k]) => k !== i);
     openSheet({
       art: "assets/img/hero/news.jpg", svg: A.news(880, 330), pos: "center 40%",
       pill: t(it.tag), pillColor: it.col,
-      title: t(it.t), sub: t(it.src),
-      body: it.body.map(t),
+      title: t(it.t),
+      sub: `${t(it.src)} · ${en ? "90-second read · summarised on device" : "90 秒 · 本機摘要"}`,
+      body: [t(it.body[0])],
+      extra: `
+        <div class="foryou">
+          <span class="micro">${A.icon("sparkle", 13)} ${en ? "What this means for your day" : "對你今天的影響"}</span>
+          <p>${t(it.body[1])}</p>
+        </div>
+        <span class="micro" style="display:block;margin-top:16px">${en ? "Also near you" : "你家附近的其他消息"}</span>
+        <ul class="newslist newslist--link">${others.map(([o, k]) => `
+          <li data-act="news-item" data-id="${k}"><b>${t(o.t)}</b><span>${t(o.src)}</span></li>`).join("")}</ul>`,
       actions: `
-        <button class="btn btn--primary btn--sm" data-act="read" data-id="news">${A.icon("speak", 17)}${S.lang === "en" ? "Read aloud" : "念給我聽"}</button>
-        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Done" : "看完了"}</button>`,
+        <button class="btn btn--primary btn--sm" data-act="read" data-id="news">${A.icon("speak", 17)}${en ? "Read aloud" : "念給我聽"}</button>
+        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${en ? "Done" : "看完了"}</button>`,
       foot: t(D.NEWS.foot),
     });
   }
+
+  /* 依種子產生決定性的走勢(區間切換用;同種子永遠同一條線) */
+  function walkSpark(seed, n, trend) {
+    let sd = 0;
+    for (let i = 0; i < seed.length; i++) sd = (sd * 31 + seed.charCodeAt(i)) >>> 0;
+    const rnd = () => ((sd = (sd * 1664525 + 1013904223) >>> 0) / 4294967296);
+    const pts = []; let v = 50;
+    for (let i = 0; i < n; i++) { v += (rnd() - 0.5) * 7; pts.push(v); }
+    const lift = (trend / 100) * 46;
+    return pts.map((y, i) => y + (i / (n - 1)) * lift);
+  }
+  const RANGES = [
+    ["1D", null], ["1W", "w"], ["1M", "m"], ["3M", "q"], ["1Y", "y"],
+  ];
+  const rangeLabel = (key) => ({
+    "1D": S.lang === "en" ? "today" : "今天",
+    "1W": S.lang === "en" ? "past week" : "近一週",
+    "1M": S.lang === "en" ? "past month" : "近一月",
+    "3M": S.lang === "en" ? "past 3 months" : "近三月",
+    "1Y": S.lang === "en" ? "past year" : "近一年",
+  }[key]);
+  const statGrid = (cells) => `<div class="sgrid">${cells.map(([k, v]) => `
+    <div class="sg-cell"><span>${k}</span><b>${v}</b></div>`).join("")}</div>`;
 
   /* 個股 / 指數 */
   function sheetStock(i) {
     const h = D.MARKET.holdings[i];
     if (!h) return;
-    const up = h.d >= 0;
+    S.sheetIdx = i;
+    const rk = S.mkRange || "1D";
+    const rdef = RANGES.find((r) => r[0] === rk) || RANGES[0];
+    const chg = rdef[1] ? h.x.r[rdef[1]] : h.d;
+    const up = chg >= 0;
+    const spark = rk === "1D" ? h.spark : walkSpark(h.s + rk, 40, chg * 3);
+    const en = S.lang === "en";
     openSheet({
       art: null, svg: A.poster("stock" + h.s, up ? "green" : "rose", 880, 330),
       pill: h.s, pillColor: up ? "#05CE78" : "#F0728F",
       title: `${t(h.n)} · $${h.p}`,
-      sub: `${pct(h.d)} ${S.lang === "en" ? "today" : "今天"} · ${t(h.sh)} · ${S.lang === "en" ? "position" : "持有市值"} ${h.pos}`,
-      body: [t(h.why), `${S.lang === "en" ? "Open · day range" : "開盤 · 當日區間"}: ${h.day}`],
-      actions: `<div class="sheet__spark">${A.spark(h.spark, up, 780, 120)}</div>
-        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Done" : "看完了"}</button>`,
+      sub: `<b class="${up ? "chg-up" : "chg-dn"}">${chg > 0 ? "+" : ""}${chg.toFixed(2)}%</b> ${rangeLabel(rk)}
+            · ${en ? "at close 4:00 PM ET" : "美東 16:00 收盤"} · ${en ? "after hours" : "盤後"} $${h.x.ah}`,
+      extra: `
+        <div class="rtabs">${RANGES.map(([k]) => `
+          <button class="rtab ${k === rk ? "is-on" : ""}" data-act="mkrange" data-id="${k}">${k}</button>`).join("")}</div>
+        <div class="sheet__spark">${A.spark(spark, up, 780, 118)}</div>
+        ${statGrid([
+          [en ? "Open" : "開盤", h.x.open], [en ? "Day range" : "當日區間", h.x.range],
+          [en ? "Volume" : "成交量", h.x.vol], [en ? "Market cap" : "市值", h.x.cap],
+          [en ? "P/E" : "本益比", h.x.pe], [en ? "Div yield" : "殖利率", h.x.div],
+          [en ? "52-wk range" : "52 週區間", h.x.w52], [en ? "After hours" : "盤後", "$" + h.x.ah.split(" ")[0]],
+        ])}
+        <span class="micro" style="display:block;margin-top:14px">${en ? "Why it moved" : "為什麼會動"}</span>
+        <p class="sheet__p" style="margin-top:6px">${t(h.why)}</p>
+        <div class="poscard">
+          <span class="micro">${A.icon("lock", 12)} ${en ? "Your position · Barbara only" : "你的持股 · 只有 Barbara 看得到"}</span>
+          <div class="poscard__row">
+            <div><span>${en ? "Shares" : "股數"}</span><b>${h.x.pos.sh}</b></div>
+            <div><span>${en ? "Avg cost" : "平均成本"}</span><b>${h.x.pos.avg}</b></div>
+            <div><span>${en ? "Market value" : "市值"}</span><b>${h.x.pos.val}</b></div>
+            <div><span>${en ? "Total return" : "總報酬"}</span><b class="${h.x.pos.up ? "chg-up" : "chg-dn"}">${h.x.pos.ret}</b></div>
+            <div><span>${en ? "Today" : "今天"}</span><b>${h.x.pos.today}</b></div>
+          </div>
+        </div>
+        <span class="micro" style="display:block;margin-top:16px">${en ? "Related" : "相關消息"}</span>
+        <ul class="newslist">${h.x.news.map((nw) => `
+          <li><b>${t(nw.t)}</b><span>${t(nw.src)} · ${t(nw.time)}</span></li>`).join("")}</ul>`,
+      actions: `<button class="btn btn--ghost btn--sm" data-act="closeLayer">${en ? "Done" : "看完了"}</button>`,
       foot: t(D.MARKET.disclaimer),
     });
   }
+
   function sheetIndex(i) {
     const x = D.MARKET.indices[i];
     if (!x) return;
     const up = x.d >= 0;
+    const en = S.lang === "en";
     openSheet({
       art: null, svg: A.poster("idx" + x.k, up ? "teal" : "rose", 880, 330),
-      pill: S.lang === "en" ? "Index" : "指數", pillColor: "#5BC0BE",
-      title: `${x.k} · ${x.v}`, sub: `${pct(x.d)} ${S.lang === "en" ? "today" : "今天"}`,
-      body: [t(D.MARKET.why.s)],
-      actions: `<div class="sheet__spark">${A.spark(x.spark, up, 780, 120)}</div>
-        <button class="btn btn--ghost btn--sm" data-act="closeLayer">${S.lang === "en" ? "Done" : "看完了"}</button>`,
+      pill: en ? "Index" : "指數", pillColor: "#5BC0BE",
+      title: `${x.k} · ${x.v}`,
+      sub: `<b class="${up ? "chg-up" : "chg-dn"}">${pct(x.d)}</b> ${en ? "today · at close 4:00 PM ET" : "今天 · 美東 16:00 收盤"}`,
+      extra: `
+        <div class="sheet__spark">${A.spark(x.spark, up, 780, 118)}</div>
+        ${statGrid([
+          [en ? "Open" : "開盤", x.x.open], [en ? "Day range" : "當日區間", x.x.range],
+          [en ? "Year to date" : "今年以來", x.x.ytd], [en ? "52-wk range" : "52 週區間", x.x.w52],
+          [en ? "Advancers" : "上漲家數", x.x.adv], [en ? "Decliners" : "下跌家數", x.x.dec],
+        ])}
+        <span class="micro" style="display:block;margin-top:14px">${en ? "Sectors today" : "今日類股"}</span>
+        <div class="sectors">${x.x.sectors.map(([k, v]) => `
+          <span class="sector ${v.startsWith("−") ? "dn" : "up"}">${k} <b>${v}</b></span>`).join("")}</div>
+        <p class="sheet__p" style="margin-top:14px">${t(D.MARKET.why.s)}</p>`,
+      actions: `<button class="btn btn--ghost btn--sm" data-act="closeLayer">${en ? "Done" : "看完了"}</button>`,
       foot: t(D.MARKET.disclaimer),
     });
   }
@@ -1023,16 +1129,28 @@
   function sheetHoro(i) {
     const c = D.HOROSCOPE.cards[i];
     if (!c) return;
+    const H = D.HOROSCOPE;
+    const en = S.lang === "en";
     openSheet({
       art: "assets/img/hero/horoscope.jpg", svg: A.horoscope(880, 330), pos: "center 30%",
       pill: t(c.k), pillColor: "#E0A94B",
-      title: t(D.HOROSCOPE.title) + " · " + t(c.k),
-      sub: t(D.HOROSCOPE.meta),
+      title: t(H.title) + " · " + t(c.k),
+      sub: t(H.meta) + " · " + (en ? "computed from Barbara's birth chart" : "以 Barbara 的本命盤運算"),
       body: [t(c.v), t(c.more)],
+      extra: `
+        <span class="micro" style="display:block;margin-top:14px">${en ? "Today's aspects" : "今日相位"}</span>
+        <ul class="aspects">${H.aspects.map((a) => `
+          <li><i>${a.g}</i><span><b>${t(a.t)}</b><em>${t(a.s)}</em></span></li>`).join("")}</ul>
+        <div class="weekbar">
+          <span class="micro">${en ? "Energy this week" : "本週能量"}</span>
+          <div class="weekbar__cols">${H.week.e.map((v, k) => `
+            <span class="wcol ${k === H.week.today ? "is-today" : ""}">
+              <i style="height:${v * 20}%"></i><em>${t(H.week.days[k])}</em></span>`).join("")}</div>
+        </div>`,
       actions: `
-        <button class="btn btn--primary btn--sm" data-act="read" data-id="horoscope">${A.icon("speak", 17)}${S.lang === "en" ? "Read aloud" : "念給我聽"}</button>
-        <button class="btn btn--ghost btn--sm" data-act="voice">${A.icon("ask", 17)}${S.lang === "en" ? "Ask why" : "問為什麼"}</button>`,
-      foot: S.lang === "en" ? "Computed from Barbara's real birth chart, on this device." : "以 Barbara 的真實本命盤在本機運算。",
+        <button class="btn btn--primary btn--sm" data-act="read" data-id="horoscope">${A.icon("speak", 17)}${en ? "Read aloud" : "念給我聽"}</button>
+        <button class="btn btn--ghost btn--sm" data-act="voice">${A.icon("ask", 17)}${en ? "Ask why" : "問為什麼"}</button>`,
+      foot: en ? "For reflection, not prediction. Data never leaves this device." : "供沉澱參考，非預言。資料不離開這台裝置。",
     });
   }
 
@@ -1286,7 +1404,8 @@
     if (act === "gate") return openGate();
     if (act === "soon") return sheetSoon(id);
     if (act === "news-item") return sheetNews(+id);
-    if (act === "stock") return sheetStock(+id);
+    if (act === "stock") { S.mkRange = "1D"; return sheetStock(+id); }
+    if (act === "mkrange") { S.mkRange = id; return sheetStock(S.sheetIdx); }
     if (act === "idx") return sheetIndex(+id);
     if (act === "horo") return sheetHoro(+id);
     if (act === "practice") return openPractice(id);

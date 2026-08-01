@@ -354,6 +354,40 @@
     ],
   };
 
+  /* 商城詳情:版本資訊與評論(依分類共用,顯示時像各商品自己的) */
+  const STORE_META = {
+    scenes: {
+      ver: "2.4.1", upd: L("Updated May 12", "5 月 12 日更新"), langs: "EN · 中文 · ES",
+      whatsnew: L("Larger tap targets on the hourly strip; two new voices for read-aloud.", "逐時列的觸控目標加大；朗讀新增兩種聲線。"),
+      reviews: [
+        { n: "Margaret H.", d: L("May 18", "5 月 18 日"), r: 5,
+          t: L("My mother stopped calling me about the weather. She calls about other things now. Worth every penny.", "我媽不再打來問天氣了，現在打來聊別的。每一分錢都值得。") },
+        { n: "Dave R.", d: L("Apr 30", "4 月 30 日"), r: 4,
+          t: L("Wish the evening brief came 30 minutes earlier. Setting exists, took me a while to find it.", "希望晚間簡報早半小時。其實有這個設定，只是我找了一陣子。") },
+      ],
+    },
+    skills: {
+      ver: "1.9.0", upd: L("Updated May 3", "5 月 3 日更新"), langs: "EN · 中文",
+      whatsnew: L("Approval cards now read the total out loud before asking.", "同意卡片在詢問前會先把總金額念出來。"),
+      reviews: [
+        { n: "Elaine C.", d: L("May 21", "5 月 21 日"), r: 5,
+          t: L("It drafts the grocery order and my father just presses the green button. He feels in charge, because he is.", "它把訂單擬好，我爸只要按綠色按鈕。他覺得一切在他掌控中——因為確實是。") },
+        { n: "Sam W.", d: L("May 9", "5 月 9 日"), r: 4,
+          t: L("Solid. I'd like a weekly cap option on spending approvals.", "很穩。希望能加每週核准金額上限的選項。") },
+      ],
+    },
+    apps: {
+      ver: "3.1.2", upd: L("Updated Apr 26", "4 月 26 日更新"), langs: "EN · 中文 · ES · FR",
+      whatsnew: L("Startup is about a second faster on first launch of the day.", "每天第一次開啟的速度快了約一秒。"),
+      reviews: [
+        { n: "Priya N.", d: L("May 15", "5 月 15 日"), r: 5,
+          t: L("Big type, no clutter, no ads. My grandmother uses this daily without help.", "字大、乾淨、沒廣告。我奶奶每天自己用，不用人幫。") },
+        { n: "Tom B.", d: L("May 2", "5 月 2 日"), r: 4,
+          t: L("Does exactly one thing. On this device, that's a compliment.", "只做一件事。在這台裝置上，這是稱讚。") },
+      ],
+    },
+  };
+
   const STORE_SPOTLIGHT = {
     scenes: ["sc5", "sc7", "sc6"],
     skills: ["sk5", "sk3", "sk2"],
@@ -478,6 +512,16 @@
       { i: "star", v: L("Lucky number · 7", "幸運數字 · 7") },
       { i: "clock", v: L("Best window · 10–12 AM", "黃金時段 · 上午 10–12") },
     ],
+    aspects: [
+      { g: "☿", t: L("Mercury conjunct Sun · 3rd house", "水星合相太陽 · 第三宮"),
+        s: L("Words come easier than usual until mid-June. Contracts favor the morning.", "到六月中之前，言語表達特別順。合約事宜宜在上午。") },
+      { g: "♀", t: L("Venus square Moon · tonight", "金星刑月亮 · 今晚"),
+        s: L("Not friction — honesty looking for a door. Ask the small question directly.", "不是摩擦，是誠實在找出口。直接問那個小問題。") },
+      { g: "♂", t: L("Mars leaving 6th house", "火星離開第六宮"),
+        s: L("The body clocks out at four. Schedule nothing after.", "身體四點就下班了。之後別排事。") },
+    ],
+    week: { days: [L("M","一"),L("T","二"),L("W","三"),L("T","四"),L("F","五"),L("S","六"),L("S","日")],
+            e: [3, 4, 5, 4, 2, 3, 4], today: 3 },
     cards: [
       { k: L("Career", "事業"), v: L("Say the number first. Mercury clears your 3rd house at noon — the conversation you've been putting off goes better than you expect.", "先開口說出數字。水星正午行經第三宮，那個一直拖著的對話會比你預期順利。"), e: 5, more: L("Mercury sits beside the Sun in your house of conversations until mid-June, which is why words land easier than usual. The window is the late morning — after that, let the other side talk.", "水星與太陽同守你的溝通宮直到六月中，所以這陣子開口特別順。黃金時段在接近中午前——之後就換對方說。") },
       { k: L("Love", "感情"), v: L("Someone is waiting for you to ask, not to guess. Keep the evening simple.", "有人在等你開口問，而不是等你猜。今晚別安排太滿。"), e: 3, more: L("Venus squares your Moon tonight — that is not tension, just honesty wanting out. Ask the small question directly instead of circling it.", "金星今晚與你的月亮呈刑相——那不是衝突，是誠實想被說出口。與其繞圈，不如直接問那個小問題。") },
@@ -662,19 +706,50 @@
     headline: L("Markets Today", "今日行情"),
     calm: L("Nothing here needs you to do anything today.", "今天這裡沒有任何一件事需要你做決定。"),
     indices: [
-      { k: "S&P 500", v: "5,431.60", d: +0.41, spark: [38,41,39,44,42,47,45,52,49,55,58,54,61,66] },
-      { k: "Dow", v: "38,905.66", d: +0.25, spark: [44,42,45,43,47,46,49,48,52,50,54,53,56,58] },
-      { k: "Nasdaq", v: "17,192.53", d: -0.12, spark: [58,60,57,59,55,57,54,52,55,51,49,52,48,50] },
+      { k: "S&P 500", v: "5,431.60", d: +0.41, spark: [38,41,39,44,42,47,45,52,49,55,58,54,61,66],
+        x: { open: "5,412.30", range: "5,408.75 – 5,438.90", ytd: "+13.9%", w52: "4,103 – 5,447", adv: "312", dec: "188",
+             sectors: [["Tech", "+0.8%"], ["Financials", "+0.4%"], ["Health", "+0.3%"], ["Energy", "−0.6%"]] } },
+      { k: "Dow", v: "38,905.66", d: +0.25, spark: [44,42,45,43,47,46,49,48,52,50,54,53,56,58],
+        x: { open: "38,822.10", range: "38,790 – 38,960", ytd: "+3.2%", w52: "32,327 – 40,077", adv: "19", dec: "11",
+             sectors: [["Industrials", "+0.5%"], ["Consumer", "+0.3%"], ["Retail", "+0.1%"], ["Telecom", "−0.4%"]] } },
+      { k: "Nasdaq", v: "17,192.53", d: -0.12, spark: [58,60,57,59,55,57,54,52,55,51,49,52,48,50],
+        x: { open: "17,240.80", range: "17,105 – 17,268", ytd: "+14.5%", w52: "12,544 – 17,341", adv: "1,402", dec: "1,873",
+             sectors: [["Semis", "+0.4%"], ["Software", "−0.2%"], ["Biotech", "−0.5%"], ["EV", "−1.1%"]] } },
     ],
     why: { i: "ask", t: L("Why it moved", "為什麼會動"),
       s: L("The Fed held rates steady at lunch — most of today's gain came in the hour after.",
            "聯準會中午宣布利率不變——今天的漲幅大多出現在那之後的一小時。") },
     holdLabel: L("Your watchlist", "你的追蹤清單"),
     holdings: [
-      { s: "AAPL", n: L("Apple", "蘋果"), p: "212.49", d: +1.21, sh: L("40 shares", "40 股"), pos: "$8,499.60", day: "211.20 · 210.15 – 213.40", spark: [40,42,41,45,44,48,47,51,50,54,57,55,60,63], why: L("Rose with the rest of big tech after the Fed held rates steady.", "聯準會利率不變後，跟著大型科技股一起上漲。") },
-      { s: "KO", n: L("Coca-Cola", "可口可樂"), p: "63.18", d: +0.34, sh: L("120 shares", "120 股"), pos: "$7,581.60", day: "62.95 · 62.80 – 63.30", spark: [50,51,49,52,51,53,52,54,53,55,54,56,55,57], why: L("Steady — dividend stocks liked the rate pause.", "走勢平穩——升息暫停對配息股是好消息。") },
-      { s: "JNJ", n: L("Johnson & Johnson", "嬌生"), p: "146.02", d: +0.08, sh: L("60 shares", "60 股"), pos: "$8,761.20", day: "145.90 · 145.30 – 146.60", spark: [52,53,52,54,53,52,54,53,55,54,53,55,54,55], why: L("Flat ahead of Thursday's earnings call.", "週四財報前觀望，變動不大。") },
-      { s: "T", n: L("AT&T", "AT&T"), p: "18.77", d: -0.42, sh: L("300 shares", "300 股"), pos: "$5,631.00", day: "18.85 · 18.70 – 18.92", spark: [58,57,58,56,57,55,56,54,55,53,54,52,53,51], why: L("Slipped after an analyst downgrade this morning.", "今早遭分析師調降評等後小跌。") },
+      { s: "AAPL", n: L("Apple", "蘋果"), p: "212.49", d: +1.21, sh: L("40 shares", "40 股"), pos: "$8,499.60", day: "211.20 · 210.15 – 213.40", spark: [40,42,41,45,44,48,47,51,50,54,57,55,60,63], why: L("Rose with the rest of big tech after the Fed held rates steady.", "聯準會利率不變後，跟著大型科技股一起上漲。"),
+        x: { open: "211.20", range: "210.15 – 213.40", vol: "48.2M", cap: "$3.24T", pe: "33.1", div: "0.44%", w52: "164.08 – 218.62", ah: "212.61 · +0.06%",
+             pos: { sh: "40", avg: "$148.20", val: "$8,499.60", ret: "+$2,571.60 · +43.4%", today: "+$101.60", up: true },
+             r: { w: 2.1, m: 4.8, q: 9.5, y: 38.2 },
+             news: [
+               { t: L("Apple sets September 9 date for fall event", "蘋果宣布秋季發表會定於 9 月 9 日"), src: "Bloomberg", time: L("11:20 AM", "上午 11:20") },
+               { t: L("Services revenue tops estimates for eighth straight quarter", "服務營收連續第八季優於預期"), src: "Reuters", time: L("Yesterday", "昨天") },
+             ] } },
+      { s: "KO", n: L("Coca-Cola", "可口可樂"), p: "63.18", d: +0.34, sh: L("120 shares", "120 股"), pos: "$7,581.60", day: "62.95 · 62.80 – 63.30", spark: [50,51,49,52,51,53,52,54,53,55,54,56,55,57], why: L("Steady — dividend stocks liked the rate pause.", "走勢平穩——升息暫停對配息股是好消息。"),
+        x: { open: "62.95", range: "62.80 – 63.30", vol: "11.6M", cap: "$272.4B", pe: "26.8", div: "2.89%", w52: "51.55 – 64.10", ah: "63.20 · +0.03%",
+             pos: { sh: "120", avg: "$54.10", val: "$7,581.60", ret: "+$1,089.60 · +16.8%", today: "+$25.80", up: true },
+             r: { w: 0.8, m: 2.2, q: 5.1, y: 19.4 },
+             news: [
+               { t: L("Coca-Cola lifts full-year outlook on pricing", "可口可樂因定價策略上調全年展望"), src: "WSJ", time: L("9:05 AM", "上午 9:05") },
+             ] } },
+      { s: "JNJ", n: L("Johnson & Johnson", "嬌生"), p: "146.02", d: +0.08, sh: L("60 shares", "60 股"), pos: "$8,761.20", day: "145.90 · 145.30 – 146.60", spark: [52,53,52,54,53,52,54,53,55,54,53,55,54,55], why: L("Flat ahead of Thursday's earnings call.", "週四財報前觀望，變動不大。"),
+        x: { open: "145.90", range: "145.30 – 146.60", vol: "6.8M", cap: "$351.7B", pe: "14.9", div: "3.32%", w52: "139.77 – 168.85", ah: "146.02 · 0.00%",
+             pos: { sh: "60", avg: "$151.35", val: "$8,761.20", ret: "−$319.80 · −3.5%", today: "+$7.00", up: false },
+             r: { w: -0.4, m: 1.1, q: -2.3, y: -6.1 },
+             news: [
+               { t: L("Earnings call scheduled Thursday, 8:30 AM ET", "財報電話會議訂於週四美東上午 8:30"), src: L("Company IR", "公司投資人關係"), time: L("Today", "今天") },
+             ] } },
+      { s: "T", n: L("AT&T", "AT&T"), p: "18.77", d: -0.42, sh: L("300 shares", "300 股"), pos: "$5,631.00", day: "18.85 · 18.70 – 18.92", spark: [58,57,58,56,57,55,56,54,55,53,54,52,53,51], why: L("Slipped after an analyst downgrade this morning.", "今早遭分析師調降評等後小跌。"),
+        x: { open: "18.85", range: "18.70 – 18.92", vol: "29.4M", cap: "$134.5B", pe: "9.4", div: "6.02%", w52: "16.02 – 19.63", ah: "18.75 · −0.11%",
+             pos: { sh: "300", avg: "$17.90", val: "$5,631.00", ret: "+$261.00 · +4.9%", today: "−$23.70", up: true },
+             r: { w: -1.2, m: -0.6, q: 3.4, y: -2.4 },
+             news: [
+               { t: L("Analyst cuts to Hold, citing fiber build-out costs", "分析師以光纖建置成本為由調降至持有"), src: "Barron's", time: L("7:44 AM", "上午 7:44") },
+             ] } },
     ],
     account: {
       label: L("Retirement account", "退休帳戶"),
@@ -708,5 +783,5 @@
     yes: L("Approve", "同意"), no: L("Not now", "先不要"),
   };
 
-  global.DATA = { L, TABS, SETTINGS, CHANNELS, NEWS, MARKET, QUIZ, STORE_FEAT, BILLBOARDS, CONTINUE, SOON, STORE_TABS, STORE, STORE_SPOTLIGHT, PEOPLE, WEATHER, HOROSCOPE, LEARNING, HEALTH, VOICE, GATE };
+  global.DATA = { L, TABS, SETTINGS, CHANNELS, NEWS, MARKET, QUIZ, STORE_FEAT, STORE_META, BILLBOARDS, CONTINUE, SOON, STORE_TABS, STORE, STORE_SPOTLIGHT, PEOPLE, WEATHER, HOROSCOPE, LEARNING, HEALTH, VOICE, GATE };
 })(window);
