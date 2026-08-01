@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PadClaw OS — Theater Mode 平板顯示劇院</title>
+<meta name="description" content="PadClaw 平板顯示劇院：Netflix / Apple TV 等級的 billboard + shelf 介面示範，含首頁、商城、家庭成員與四大場景頻道。">
+<link rel="icon" href="assets/img/padclaw-appicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/views.css">
+</head>
+<body>
+
+<!-- ══ 背景舞台：環境光暈隨焦點內容染色（tvOS ambient） ══ -->
+<div class="room" id="room" aria-hidden="true">
+  <div class="room__glow room__glow--a"></div>
+  <div class="room__glow room__glow--b"></div>
+  <div class="room__vignette"></div>
+</div>
+
+<!-- ══ 外框 HUD：裝置外的展示控制列（不屬於產品 UI） ══ -->
+<header class="hud hud--top">
+  <div class="hud__brand">
+    <img class="mark" src="assets/img/padclaw-mark.svg" width="22" height="22" alt="">
+    <span>Pad<b>Claw</b> OS</span>
+    <em class="hud__tag">Theater Mode</em>
+  </div>
+  <p class="hud__note">規劃中軟體 · UI mockup · 全部為示範資料</p>
+</header>
+
+<!-- ══ 平板電腦本體 ══ -->
+<main class="stage" id="stage">
+  <div class="device" id="device">
+    <div class="device__shell">
+      <div class="device__cam" aria-hidden="true"><i></i></div>
+
+      <div class="screen" id="screen">
+        <!-- 內容層 -->
+        <div class="view" id="view"></div>
+
+        <!-- 系統 chrome：狀態列 + 毛玻璃 tab 列 -->
+        <div class="chrome" id="chrome">
+          <div class="statusbar">
+            <span class="statusbar__word"><img class="mark" src="assets/img/padclaw-mark.svg" width="17" height="17" alt=""><span>Pad<b>Claw</b></span></span>
+            <span class="statusbar__right">
+              <span class="statusbar__time">9:41 AM</span>
+              <svg viewBox="0 0 20 16" width="18" height="15" aria-hidden="true" class="ic-wifi">
+                <path d="M1 5.2a13.5 13.5 0 0 1 18 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M4.2 8.4a9 9 0 0 1 11.6 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M7.4 11.6a4.5 4.5 0 0 1 5.2 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <circle cx="10" cy="14.2" r="1.2" fill="currentColor"/>
+              </svg>
+              <span class="battery"><i style="width:78%"></i></span>
+            </span>
+          </div>
+
+          <nav class="tabbar" id="tabbar" aria-label="Primary">
+            <div class="tabbar__glass"></div>
+            <div class="tabbar__items" id="tabbarItems"></div>
+            <button class="tabbar__avatar" id="tabAvatar" type="button" data-focusable data-row="nav" title="Barbara"></button>
+          </nav>
+        </div>
+
+        <!-- 播放中提示 -->
+        <div class="nowplaying" id="nowPlaying"></div>
+
+        <!-- 疊層：語音 / 同意閘門 / 開機片頭 -->
+        <div class="layer" id="layer"></div>
+        <div class="boot" id="boot"></div>
+
+        <!-- 螢幕質感：顆粒 + 玻璃反光 -->
+        <div class="screen__grain" aria-hidden="true"></div>
+        <div class="screen__gloss" aria-hidden="true"></div>
+      </div>
+
+      <div class="device__grille device__grille--l" aria-hidden="true"></div>
+      <div class="device__grille device__grille--r" aria-hidden="true"></div>
+    </div>
+    <div class="device__btn device__btn--power" aria-hidden="true"></div>
+    <div class="device__btn device__btn--vol" aria-hidden="true"></div>
+    <div class="device__stand" aria-hidden="true"></div>
+    <div class="device__shadow" aria-hidden="true"></div>
+  </div>
+</main>
+
+<!-- ══ 底部遙控列 ══ -->
+<footer class="hud hud--bottom">
+  <div class="remote">
+    <button class="remote__btn" id="btnLang" type="button" title="切換介面語言">
+      <span class="remote__key">EN</span><span class="remote__label">中文 / English</span>
+    </button>
+    <button class="remote__btn" id="btnVoice" type="button" title="語音疊層">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3.5a3 3 0 0 1 3 3v5a3 3 0 1 1-6 0v-5a3 3 0 0 1 3-3Z" fill="currentColor"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <span class="remote__label">語音</span>
+    </button>
+    <button class="remote__btn" id="btnNight" type="button" title="夜間模式">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20 14.2A8.4 8.4 0 0 1 9.8 4 8.5 8.5 0 1 0 20 14.2Z" fill="currentColor"/></svg>
+      <span class="remote__label">夜間</span>
+    </button>
+    <button class="remote__btn" id="btnReplay" type="button" title="重播開機片頭">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5a7 7 0 1 0 6.7 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 1.8 12 8l5-3.1z" fill="currentColor"/></svg>
+      <span class="remote__label">片頭</span>
+    </button>
+    <span class="remote__hint"><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> 移動焦點 · <kbd>Enter</kbd> 選取 · <kbd>Esc</kbd> 返回</span>
+  </div>
+</footer>
+
+<script src="assets/js/art.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

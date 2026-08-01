@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PadClaw — Logo 提案</title>
+<style>
+:root{--bg:#0E1116;--surface:#1A1F27;--line:rgba(255,255,255,.08);--t:#F2F4F7;--t2:#98A2B3;--g:#05CE78}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:Inter,-apple-system,system-ui,"PingFang TC",sans-serif;padding:48px}
+h1{font-size:34px;font-weight:640;letter-spacing:-.02em}
+.lede{margin-top:10px;font-size:17px;color:var(--t2);max-width:760px;line-height:1.55}
+.note{margin-top:14px;font-size:14px;color:var(--g);background:rgba(5,206,120,.1);border:1px solid rgba(5,206,120,.22);
+      border-radius:12px;padding:12px 16px;max-width:760px;line-height:1.5}
+.grid{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:18px}
+.hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.key{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
+.nm{font-size:19px;font-weight:640}
+.dsc{font-size:14px;color:var(--t2);line-height:1.5}
+.big{border-radius:16px;overflow:hidden;background:#000;aspect-ratio:1;max-width:240px}
+.big img{width:100%;display:block}
+.row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.sz{display:flex;flex-direction:column;align-items:center;gap:6px}
+.sz span{font-size:10px;color:#5B6472}
+.sz img{border-radius:22%;display:block}
+.lock{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;background:#000}
+.lock.lt{background:#F2F4F7;color:#0E1116}
+.lock img{border-radius:22%}
+.wm{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.wm b{font-weight:800}
+</style></head><body>
+
+<h1>PadClaw — Logo 提案（gpt-image-2）</h1>
+<p class="lede">五個方向，全部由 gpt-image-2 生成。每一格都同時看大圖、實際使用尺寸（96 / 40 / 20 px）與深淺底的字標組合——
+小尺寸與淺底才是 logo 真正的考題。</p>
+<p class="note">這些是 <b>設計方向</b>，不是可上線的檔案：AI 產出的是點陣圖，放到 17px 的狀態列會糊，也沒辦法跟著介面換色。
+選定方向後，我會照著它手工描成 SVG，才是真正能用在產品與募資頁上的版本。</p>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const OPTS = [
+  ["a-negative-paw", "A · 負空間掌印", "綠底實心方塊，掌印以純負空間切出。最直白、辨識度最高，但也最接近市面上的通用寵物圖標。"],
+  ["b-outline-tablet", "B · 平板外框 ＋ 掌印", "細線平板外框裡放一枚小掌印，直接說出「Pad ＋ Claw」。資訊量最完整，但小尺寸容易糊成一團。"],
+  ["c-claw-arc", "C · 爪痕訊號", "三道漸細的爪痕排成上升弧線，同時讀作爪子與訊號。最抽象、最有科技感，但需要字標才說得清楚。"],
+  ["d-monogram-p", "D · P 字掌墊", "字母 P 的字碗直接變成掌墊。單一連續形狀，最像成熟品牌的作法，也最難一眼讀懂。"],
+  ["e-soft-square-paw", "E · 漸層方塊掌印", "綠色漸層 squircle ＋ 深色掌印。最貼近 App Store 上架圖示的樣子，溫暖、好親近。"],
+];
+document.getElementById("grid").innerHTML = OPTS.map(([f, n, d], i) => {
+  const src = `assets/img/logo-options/${f}.png`;
+  return `<div class="card">
+    <div class="hd"><span class="nm">${n}</span><span class="key">${f}</span></div>
+    <div class="big"><img src="${src}" alt="" onerror="this.parentElement.innerHTML='<p style=&quot;padding:40px;color:#5B6472;font-size:13px&quot;>尚未生成</p>'"></div>
+    <p class="dsc">${d}</p>
+    <div class="row">
+      ${[96,40,20].map(s=>`<span class="sz"><img src="${src}" width="${s}" height="${s}"><span>${s}px</span></span>`).join("")}
+    </div>
+    <div class="row">
+      <span class="lock"><img src="${src}" width="38" height="38"><span class="wm">Pad<b>Claw</b></span></span>
+      <span class="lock lt"><img src="${src}" width="38" height="38"><span class="wm">Pad<b>Claw</b></span></span>
+    </div>
+  </div>`;
+}).join("");
+</script>
+</body></html>

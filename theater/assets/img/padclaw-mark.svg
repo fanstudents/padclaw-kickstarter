@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="256" height="256" role="img" aria-label="PadClaw">
+  <title>PadClaw</title>
+  <defs>
+    <linearGradient id="pcm-t" x1="0" y1="0" x2=".3" y2="1">
+      <stop offset="0" stop-color="#0BE98A"/>
+      <stop offset=".55" stop-color="#05CE78"/>
+      <stop offset="1" stop-color="#04A05E"/>
+    </linearGradient>
+  </defs>
+  <!-- 綠色 squircle 磚 + 頂部亮邊 -->
+  <rect x="2.5" y="2.5" width="27" height="27" rx="8.8" fill="url(#pcm-t)"/>
+  <rect x="2.5" y="2.5" width="27" height="27" rx="8.8" fill="none"
+        stroke="#fff" stroke-opacity=".26" stroke-width=".9"/>
+  <!-- 掌印:負空間切出 -->
+  <g fill="#0B1512">
+    <ellipse cx="11.05" cy="12.7" rx="2.02" ry="2.72" transform="rotate(-18 11.05 12.7)"/>
+    <ellipse cx="16" cy="11.45" rx="2.12" ry="2.86"/>
+    <ellipse cx="20.95" cy="12.7" rx="2.02" ry="2.72" transform="rotate(18 20.95 12.7)"/>
+    <path d="M16 16.9c4.18 0 6.75 2.52 6.75 4.98 0 2-1.89 2.97-3.73 2.42-1.94-.58-4.1-.58-6.04 0-1.84.55-3.73-.42-3.73-2.42 0-2.46 2.57-4.98 6.75-4.98Z"/>
+  </g>
+</svg>
